@@ -1,5 +1,17 @@
+import { useState } from "react";
 import Link from "next/link";
 import { settings } from "../lib/host.js";
+
+// Quick filters over the listing: price bands and "Ready to ship", each with its count on this page; one at a time,
+// applied instantly in the browser to the page's products (the store's sort and facets stay as they are).
+const QUICK_FILTERS: { id: string; label: string; test: (product: IListProduct) => boolean }[] = [
+  { id: "all", label: "All", test: () => true },
+  { id: "under5", label: "Under $5", test: (product) => priceOf(product) < 5 },
+  { id: "5to25", label: "$5 – $25", test: (product) => priceOf(product) >= 5 && priceOf(product) <= 25 },
+  { id: "over25", label: "$25 and up", test: (product) => priceOf(product) > 25 },
+  { id: "ready", label: "Ready to ship", test: (product) => (product.quantity ?? 0) > 0 },
+];
+const priceOf = (product: IListProduct) => Number(product.salesPrice || product.retailPrice || 0);
 
 // productList.layout: the category / search listing with the theme's own product card. On this store's built-in theme
 // the listing card has no product.card slot, so the theme draws the grid itself from the listing's data and keeps the
@@ -63,16 +75,40 @@ export function ProductCard(props: { product: IListProduct; customizable: boolea
 }
 
 export function ProductListing(props: IListingProps) {
+  const [quick, setQuick] = useState("all");
   const products = Array.isArray(props.productData?.productList) ? props.productData.productList : [];
   const total = Number(props.productData?.totalProducts ?? products.length);
   if (settings.themeCards === false || !products.length || total > products.length) return <>{props.children as never}</>;
   const skus = Array.isArray(settings.customizableSkus) ? (settings.customizableSkus as unknown[]).map((sku) => String(sku).toLowerCase()) : [];
+  const active = QUICK_FILTERS.find((filter) => filter.id === quick) || QUICK_FILTERS[0];
+  const shown = products.filter(active.test);
   return (
     <div className="spp-customization-listing" data-test-selector="divSppListing">
       <div ref={props.part("productList.filter")} />
       <div ref={props.part("productList.facets")} />
+      <div className="spp-customization-quick" role="group" aria-label="Quick filters" data-test-selector="divQuickFilters">
+        {QUICK_FILTERS.map((filter) => {
+          const count = products.filter(filter.test).length;
+          return (
+            <button
+              key={filter.id}
+              type="button"
+              className="spp-customization-quick__chip"
+              aria-pressed={quick === filter.id}
+              disabled={!count}
+              onClick={() => setQuick(filter.id)}
+              data-test-selector={`btnQuickFilter-${filter.id}`}
+            >
+              {filter.label} <span>({count})</span>
+            </button>
+          );
+        })}
+      </div>
+      <p className="spp-customization-quick__status" aria-live="polite">
+        {quick === "all" ? `${products.length} products` : `${shown.length} of ${products.length} products: ${active.label}`}
+      </p>
       <div className="spp-customization-listing__grid">
-        {products.map((product) => (
+        {shown.map((product) => (
           <ProductCard key={String(product.znodeProductId || product.publishProductId)} product={product} customizable={skus.includes(String(product.sku).toLowerCase())} />
         ))}
       </div>

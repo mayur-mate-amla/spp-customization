@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 42 |
+| ✅ Done | 43 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 92 |
+| ⬜ Not started | 91 |
 | ⛔ Blocked | 41 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -140,7 +140,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | --- | --- | --- | --- | --- | --- | --- |
 | 52 | Can I change the layout code? | Partial | UI | Result: **Yes** (header to footer). Example: skip link + server-rendered dated holiday notice (layout.root) | ✅ Done | [notes](docs/scenarios/052-change-layout-code/) |
 | 53 | Can I change the root layout (html/head, global scripts)? | No | Base | Result: **Yes** for head tags and global scripts (layout.head). Example: theme-color, favicon, preconnect, analytics dataLayer | ✅ Done | [notes](docs/scenarios/053-root-layout-head/) |
-| 54 | Can I change the listing layout? | Yes | UI | `productList.layout` slot | ⬜ Not started | |
+| 54 | Can I change the listing layout? | Yes | UI | Example: quick price / ready-to-ship filters above the grid (productList.layout) | ✅ Done | [notes](docs/scenarios/054-change-listing-layout/) |
 | 55 | Can I change the product page layout? | Yes | UI | `product.layout` slot | ⬜ Not started | |
 | 56 | Can I change the cart page layout? | No | Base | | ⛔ Blocked | |
 | 57 | Can I change the checkout layout? | Partial | UI | `checkout.address` / `checkout.shippingOptions` slots | ⬜ Not started | |

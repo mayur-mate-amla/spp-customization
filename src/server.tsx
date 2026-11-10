@@ -5,6 +5,7 @@ import { ThemeLayout } from "./server/ThemeLayout.js";
 import { shippingCutoff } from "./server/shipping.js";
 import { storeStatus } from "./server/status.js";
 import { WelcomePage } from "./server/WelcomePage.js";
+import { LoginPage } from "./server/LoginPage.js";
 
 // Spp Customization, server part: runs only on the store's server, never in the browser.
 //   serverSlots: server components around a part of a store page (layout.root = every page, header to footer)
@@ -28,6 +29,8 @@ const plugin: IRuntimePlugin = {
   routes: { highlights, "shipping-cutoff": shippingCutoff, "store-status": storeStatus },
   serverSlots: {
     "layout.root": (props: { children?: ReactNode }, context: IServerSlotContext) => <ThemeLayout settings={context.settings}>{props.children}</ThemeLayout>,
+    // the sign-in page in the store's B2B voice, around the store's own forms (row 130)
+    "login.page": (props: { children?: ReactNode }, context: IServerSlotContext) => <LoginPage settings={context.settings}>{props.children}</LoginPage>,
   },
   serverPages: {
     "/spp-customization-welcome": {

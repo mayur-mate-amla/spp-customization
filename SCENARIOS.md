@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 94 |
+| ✅ Done | 95 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 41 |
+| ⬜ Not started | 40 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -272,7 +272,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 130 | Can I change the login and registration pages? | Partial | UI | `login.layout` / `login.page` server slots | ⬜ Not started | |
+| 130 | Can I change the login and registration pages? | Partial | UI | login: theme login.page server slot (B2B frame, in HTML); signup has no slot: CSS only | ✅ Done | [notes](130-login-page/) |
 | 131 | Can I add a custom login provider (SSO)? | No | Base | | ⛔ Blocked | |
 | 132 | Can I change password rules? | No | Base | | ⛔ Blocked | |
 

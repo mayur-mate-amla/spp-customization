@@ -51,3 +51,16 @@
 .spp-customization-welcome__list { display: grid; gap: 16px; margin: 0 0 24px; padding: 0; list-style: none; grid-template-columns: 1fr; }
 @media (min-width: 768px) { .spp-customization-welcome__list { grid-template-columns: repeat(3, 1fr); } }
 .spp-customization-welcome__list li { display: flex; flex-direction: column; gap: 4px; padding: 16px; border-top: 3px solid var(--theme-accent, var(--accent, #f26b1d)); background: #f9fafb; }
+
+/* sign-in page (server slot login.page, row 130) */
+.spp-customization-login { max-width: 1200px; margin: 0 auto; }
+.spp-customization-login__intro { margin: 28px 0 8px; padding: 26px 28px; color: #fff; background: var(--primary, #0b2545); border-radius: 14px; }
+.spp-customization-login__intro h1 { margin: 0 0 4px; font-size: 30px; font-weight: 800; }
+.spp-customization-login__intro p { margin: 0 0 18px; opacity: 0.85; }
+.spp-customization-login__benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.spp-customization-login__benefits li { padding: 14px 16px; background: rgba(255, 255, 255, 0.08); border-left: 3px solid var(--accent, #f26b1d); border-radius: 8px; }
+.spp-customization-login__benefits strong { display: block; margin-bottom: 2px; }
+.spp-customization-login__benefits span { font-size: 14px; opacity: 0.85; }
+.spp-customization-login__business { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; margin: 8px 0 40px; padding: 16px 20px; background: rgb(244, 246, 249); border-radius: 10px; }
+.spp-customization-login__business p { margin: 0; }
+.spp-customization-login__call { font-weight: 700; color: var(--primary, #0b2545); text-decoration: underline; }

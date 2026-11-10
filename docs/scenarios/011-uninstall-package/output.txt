@@ -1,0 +1,35 @@
+$ npx znode   (the SDK's commands: no uninstall)
+znode-package: usage: znode <build|pack|check|install|deploy|dev> <dir|zip> [storeDir], znode create <kind> <name> [dir], znode link-store <storeRepoDir>
+
+$ npx znode install releases/spp-customization-1.0.0.zpkg.zip <scratch>; then 1.0.1
+installed theme spp-customization@1.0.0: 8 files, disabled for []
+installed theme spp-customization@1.0.1 (was 1.0.0): 8 files, disabled for []
+$ ls <scratch>
+  plugins.json
+  spp-customization-1.0.0-font-inter-8e66b3c3-1.woff2
+  spp-customization-1.0.0.browser.mjs.map
+  spp-customization-1.0.0.server.mjs.map
+  spp-customization-1.0.1-font-inter-8e66b3c3-1.woff2
+  spp-customization-1.0.1.browser.mjs
+  spp-customization-1.0.1.browser.mjs.map
+  spp-customization-1.0.1.css
+  spp-customization-1.0.1.labels.json
+  spp-customization-1.0.1.server.mjs
+  spp-customization-1.0.1.server.mjs.map
+  spp-customization-hero.svg
+
+$ (uninstall by hand: remove the spp-customization entry from plugins.json)
+plugins.json entries: 0
+$ ls <scratch>   (what is left on disk)
+  plugins.json
+  spp-customization-1.0.0-font-inter-8e66b3c3-1.woff2
+  spp-customization-1.0.0.browser.mjs.map
+  spp-customization-1.0.0.server.mjs.map
+  spp-customization-1.0.1-font-inter-8e66b3c3-1.woff2
+  spp-customization-1.0.1.browser.mjs
+  spp-customization-1.0.1.browser.mjs.map
+  spp-customization-1.0.1.css
+  spp-customization-1.0.1.labels.json
+  spp-customization-1.0.1.server.mjs
+  spp-customization-1.0.1.server.mjs.map
+  spp-customization-hero.svg

@@ -50,9 +50,9 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 10 |
+| ✅ Done | 11 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 124 |
+| ⬜ Not started | 123 |
 | ⛔ Blocked | 41 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -71,7 +71,7 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 | 8 | Can I install or update a package without a build or restart? | Yes | UI | Change the announcement text, `npm run deploy`, refresh: new text, no store restart | ✅ Done | [notes](docs/scenarios/008-install-update-without-restart/) |
 | 9 | Are older package versions kept on disk for rollback? | Yes | Check | Result: **Partial**. Old zip (releases/) and registry history kept; old code files removed on install | ✅ Done | [notes](docs/scenarios/009-older-versions-kept/) |
 | 10 | Is there a one-command rollback? | No | Base | Result: **Yes** for this package: `npm run rollback -- <version>` (needs the older zip in releases/) | ✅ Done | [notes](docs/scenarios/010-rollback-with-one-command/) |
-| 11 | Can a package be uninstalled cleanly (files removed)? | Partial | Check | Record what removing the entry leaves behind | ⬜ Not started | |
+| 11 | Can a package be uninstalled cleanly (files removed)? | Partial | Check | Result: **Partial**, confirmed. No uninstall command; removing the entry leaves every file | ✅ Done | [notes](docs/scenarios/011-uninstall-package/) |
 | 12 | Can a package be switched on or off without uninstalling it? | Yes | Config | `"enabled": true/false` for the test store | ⬜ Not started | |
 | 13 | Can a package be installed for some stores only? | Yes | Config | `"stores": ["<one store>"]`: on there, not on another store | ⬜ Not started | |
 | 14 | Can the same package be installed twice with different settings? | No | Base | | ⛔ Blocked | |

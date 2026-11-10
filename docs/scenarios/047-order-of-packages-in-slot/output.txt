@@ -1,0 +1,9 @@
+$ npm run deploy -- spp-promos.znode-package.json
+packed spp-promos-1.0.0.zpkg.zip (3617 bytes)
+installed plugin spp-promos@1.0.0: 3 files, disabled for []
+kept spp-promos-1.0.0.zpkg.zip in .versions\spp-promos (1 version on disk: 1.0.0)
+$ (spp-promos placed for POCSppDemo and switched on; it was installed after spp-commerce, so it comes after it)
+order: spp-base > spp-customization > artifi > countdown-banner > delivery-preference > spp-commerce > spp-promos
+
+$ node scripts/registry.mjs before spp-commerce --package spp-promos   (spp-promos first)
+order: spp-base > spp-customization > artifi > countdown-banner > delivery-preference > spp-promos > spp-commerce

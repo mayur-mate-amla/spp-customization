@@ -1,0 +1,31 @@
+{
+  "name": "spp-promos",
+  "version": "1.0.0",
+  "kind": "plugin",
+  "apiVersion": 1,
+  "label": "SPP promotions bar",
+  "publisher": "Spp Customization team",
+  "description": "A sale countdown bar above the store header (\"Holiday sale ends in 2d 04h 12m\"), from settings.",
+  "license": "proprietary",
+  "keywords": ["plugin", "promotion"],
+  "permissions": [],
+  "compatibility": { "webstore": ">=10.0.0" },
+  "build": {
+    "browser": "src/promos/browser.tsx"
+  },
+  "styles": ["src/promos/*.css"],
+  "settingsSchema": {
+    "saleText": {
+      "type": "string",
+      "label": "Sale text before the countdown",
+      "browser": true,
+      "default": "Holiday sale: 20% off drinkware"
+    },
+    "saleEndsAt": {
+      "type": "string",
+      "label": "Sale end (ISO date and time, e.g. 2026-11-15T23:59:00-05:00); past or empty: no bar",
+      "browser": true,
+      "default": "2026-11-15T23:59:00-05:00"
+    }
+  }
+}

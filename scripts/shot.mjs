@@ -91,6 +91,12 @@ try {
     await page.waitForSelector(String(click), { timeout: 20000 });
     await page.click(String(click));
     await new Promise((resolve) => setTimeout(resolve, Number(arg("after", 4000))));
+    // --then <path>: go on to another page of the same store after the click (e.g. the cart after Add to cart)
+    const then = arg("then");
+    if (then && then !== true) {
+      await page.goto(new URL(String(then), page.url()).toString(), { waitUntil: "load", timeout: 120000 });
+      await new Promise((resolve) => setTimeout(resolve, wait));
+    }
   }
   const hover = arg("hover");
   if (hover && hover !== true) {

@@ -61,10 +61,10 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 44 |
+| ✅ Done | 45 |
 | 🟡 In progress | 0 |
 | ⬜ Not started | 90 |
-| ⛔ Blocked | 41 |
+| ⛔ Blocked | 40 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
 
@@ -142,7 +142,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 53 | Can I change the root layout (html/head, global scripts)? | No | Base | Result: **Yes** for head tags and global scripts (layout.head). Example: theme-color, favicon, preconnect, analytics dataLayer | ✅ Done | [notes](docs/scenarios/053-root-layout-head/) |
 | 54 | Can I change the listing layout? | Yes | UI | Example: quick price / ready-to-ship filters above the grid (productList.layout) | ✅ Done | [notes](docs/scenarios/054-change-listing-layout/) |
 | 55 | Can I change the product page layout? | Yes | UI | Example: sticky B2B buy box + Key details / volume pricing panel | ✅ Done | [notes](docs/scenarios/055-change-product-page-layout/) |
-| 56 | Can I change the cart page layout? | No | Base | | ⛔ Blocked | |
+| 56 | Can I change the cart page layout? | No | Base | Result: **Yes** for layout and look (CSS on the cart's hooks); no cart slot for components. Example: sticky summary card, item cards | ✅ Done | [notes](docs/scenarios/056-cart-page-layout/) |
 | 57 | Can I change the checkout layout? | Partial | UI | `checkout.address` / `checkout.shippingOptions` slots | ⬜ Not started | |
 | 58 | Can I change the account section layout? | No | Base | | ⛔ Blocked | |
 

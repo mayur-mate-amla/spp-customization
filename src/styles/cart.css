@@ -1,0 +1,43 @@
+/* Cart page layout (the store has no cart slot; CSS on its own markup, found through its data-test-selector hooks):
+   line items as cards on the left, the order summary as a sticky sidebar card with a full-width checkout button. */
+
+@media (min-width: 1024px) {
+  /* the two columns: items (2/3) and summary (1/3), with room between them */
+  html[data-theme] div:has(> div > div > div > [data-test-selector="divCartOrderSummaryContainer"]) {
+    grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+    align-items: start;
+    gap: 32px;
+  }
+  html[data-theme] div:has(> div > div > div > [data-test-selector="divCartOrderSummaryContainer"]) > * { grid-column: auto; }
+  /* the summary card stays in view while the shopper reviews a long cart */
+  html[data-theme] div:has(> div > div > [data-test-selector="divCartOrderSummaryContainer"]) {
+    position: sticky;
+    top: 150px;
+  }
+}
+
+/* the summary card */
+html[data-theme] div:has(> div > div > [data-test-selector="divCartOrderSummaryContainer"]) {
+  padding: 20px 24px 24px;
+  background: #fff;
+  border: 1px solid var(--card-border, rgb(226, 232, 240));
+  border-top: 4px solid var(--accent, #f26b1d);
+  border-radius: 12px;
+  box-shadow: 0 14px 34px rgba(11, 37, 69, 0.09);
+}
+html[data-theme] [data-test-selector="hdgOrderSummary"] { font-size: 20px; font-weight: 700; color: var(--primary, #0b2545); }
+html[data-theme] [data-test-selector="paraOrderTotalAmount"],
+html[data-theme] [data-test-selector="paraOrderTotalLabel"] { font-size: 18px; font-weight: 800; color: var(--primary, #0b2545); }
+html[data-theme] [data-test-selector="btnCheckout"] { width: 100%; padding-top: 14px; padding-bottom: 14px; font-size: 17px; font-weight: 700; }
+html[data-theme] [data-test-selector="btnCheckout"]::after { content: " 🔒"; }
+
+/* each line item as a card */
+html[data-theme] .grid.items-start:has([data-test-selector^="txtProductRowQuantity"]) {
+  margin-bottom: 12px;
+  padding: 14px 12px;
+  background: #fff;
+  border: 1px solid var(--card-border, rgb(226, 232, 240));
+  border-radius: 10px;
+}
+html[data-theme] [data-test-selector^="linkProductName"] { font-weight: 700; color: var(--primary, #0b2545); }
+html[data-theme] [data-test-selector^="paraOrderRowTotal"] { font-weight: 800; color: var(--primary, #0b2545); }

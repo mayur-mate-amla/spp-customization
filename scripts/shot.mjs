@@ -57,6 +57,17 @@ try {
   const start = theme === "none" ? `${store}/api/extensions/preview?to=${encodeURIComponent(pagePath)}` : `${store}/api/extensions/preview?theme=${encodeURIComponent(theme)}&to=${encodeURIComponent(pagePath)}`;
   await page.goto(start, { waitUntil: "load", timeout: 120000 });
   await new Promise((resolve) => setTimeout(resolve, wait));
+  // --scroll <px>: scroll the page first (lazy parts load); --hover <selector>: hold the mouse over an element
+  const scroll = Number(arg("scroll", 0));
+  if (scroll) {
+    await page.evaluate((y) => window.scrollTo(0, y), scroll);
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+  }
+  const hover = arg("hover");
+  if (hover && hover !== true) {
+    await page.hover(hover);
+    await new Promise((resolve) => setTimeout(resolve, 600));
+  }
   fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
   if (selector && selector !== true) {
     const element = await page.waitForSelector(selector, { timeout: 15000 });

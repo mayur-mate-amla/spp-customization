@@ -1,0 +1,59 @@
+/* Category and search listing: a CSS-only refresh of the store's own product card (no component change).
+   Targets the card's classes and data-test-selector attributes, which stay stable across store releases. */
+
+/* the card: a quiet border at rest, lifted with a shadow and the accent border on hover / keyboard focus */
+html[data-theme] .product-card.card {
+  border: 1px solid var(--card-border, rgb(226, 232, 240));
+  border-radius: var(--card-radius, 8px);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+html[data-theme] .product-card.card:hover,
+html[data-theme] .product-card.card:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--accent, rgb(242, 107, 29));
+  box-shadow: 0 14px 28px rgba(11, 37, 69, 0.14);
+}
+
+/* image: rounded corners, a light backdrop for product shots with white edges */
+html[data-theme] .product-card [data-test-selector^="divProductImage"] {
+  overflow: hidden;
+  border-radius: 6px;
+  background: rgb(244, 246, 249);
+}
+
+/* name: two lines at most, so every card in a row lines up */
+html[data-theme] .product-card [data-test-selector^="hdgProductName"] {
+  display: -webkit-box;
+  overflow: hidden;
+  font-weight: 600;
+  line-height: 1.3;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* price: the thing shoppers scan for, larger and in the brand color */
+html[data-theme] .product-card [data-test-selector^="spnRetailPrice"] {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--primary, rgb(11, 37, 69));
+}
+
+/* stock: a green pill instead of the grey box */
+html[data-theme] .product-card [data-test-selector^="divInStockMessage"] {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: rgb(21, 128, 61);
+  background: rgb(220, 252, 231);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] .product-card.card {
+    transition: none;
+  }
+  html[data-theme] .product-card.card:hover,
+  html[data-theme] .product-card.card:focus-within {
+    transform: none;
+  }
+}

@@ -1,0 +1,11 @@
+/* Compact header on scroll (desktop): past the top of the page (html[data-spp-scrolled], set by HeaderScrollState) the
+   parent theme's tall two-row brand header (.spp-header-wide: utility bar + logo/menu row, 120 px) gives way to its
+   compact row (.spp-header-compact: logo, menu, search, account, cart), which spp-base otherwise only uses on phones.
+   At the top of the page nothing changes. */
+
+@media (min-width: 1024px) {
+  html[data-spp-scrolled] .spp-header .spp-header-wide { display: none; }
+  html[data-spp-scrolled] .spp-header .spp-header-compact { display: block; padding-top: 4px; padding-bottom: 4px; background: var(--header-bg, #fff); box-shadow: 0 6px 16px rgba(11, 37, 69, 0.12); }
+  html[data-spp-scrolled] .spp-header .spp-header-compact-row { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  html[data-spp-scrolled] .spp-header .spp-compact-logo { display: block; }
+}

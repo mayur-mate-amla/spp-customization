@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 21 |
+| ✅ Done | 22 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 112 |
+| ⬜ Not started | 111 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -108,7 +108,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 29 | Can I update the CSS? | Yes | UI | Example: listing card refresh (hover lift, price, stock pill), CSS only, on POCSppDemo | ✅ Done | [notes](docs/scenarios/029-update-css/) |
 | 30 | Can I change fonts and colors per theme? | Yes | UI | Example: accentColor and headingFont settings (store attributes) drive the brand; no code change | ✅ Done | [notes](docs/scenarios/030-fonts-and-colors-per-theme/) |
 | 31 | Is a theme's CSS kept from clashing with the store's own CSS? | Yes | Check | Example: trust strip with copied live-site CSS; dedupeStyles drops the 8 rules the store has | ✅ Done | [notes](docs/scenarios/031-css-does-not-clash/) |
-| 32 | Can I change labels and messages per theme? | Yes | UI | `src/i18n/labels.json`: "Add to Cart" → "Add to bag" | ⬜ Not started | |
+| 32 | Can I change labels and messages per theme? | Yes | UI | Example: B2B wording (Item #, Availability, Ready to ship, Add to order) | ✅ Done | [notes](docs/scenarios/032-labels-per-theme/) |
 | 33 | Can I change logos and images per store? | Yes | UI | Logo from a setting bound to a store attribute | ⬜ Not started | |
 | 34 | Can I assign a theme per store? | Yes | Config | `"stores"` on the theme entry | ⬜ Not started | |
 | 35 | Can I switch a store's theme without a deploy? | Yes | Config | Change the store's theme in `plugins.json`, refresh | ⬜ Not started | |

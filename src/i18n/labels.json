@@ -1,1 +1,14 @@
-{}
+{
+  "Product": {
+    "sku": "Item #",
+    "readReviews": "See what buyers say",
+    "inventory": "Availability",
+    "labelInventory": "Availability",
+    "inStock": "Ready to ship",
+    "textInStock": "Ready to ship",
+    "addToCart": "Add to order"
+  },
+  "Common": {
+    "addToCart": "Add to order"
+  }
+}

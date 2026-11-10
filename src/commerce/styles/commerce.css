@@ -92,3 +92,7 @@
 .spp-commerce-kits__actions button { padding: 10px 20px; font-weight: 700; color: #fff; background: rgb(15, 23, 42); border-radius: 8px; }
 .spp-commerce-kits__actions button:disabled { opacity: 0.5; }
 .spp-commerce-kits__actions span { font-weight: 600; color: rgb(21, 128, 61); }
+
+/* checkout shipping methods (checkout.shippingOptions slot, row 117) */
+.spp-commerce-shipping { flex: 1; }
+.spp-commerce-shipping__note { margin: 10px 0 0; font-size: 13px; color: rgb(120, 53, 15); }

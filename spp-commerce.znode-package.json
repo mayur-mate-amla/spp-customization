@@ -149,7 +149,8 @@
       "label": "Production days of decorated items: { \"<SKU>\": <days> } (added to their delivery dates)",
       "default": {
         "80RXL_986": 3
-      }
+      },
+      "browser": true
     },
     "searchSynonyms": {
       "type": "object",
@@ -226,6 +227,18 @@
             }
           ]
         }
+      ]
+    },
+    "rushShipping": {
+      "type": "list",
+      "label": "Words that mark a rush shipping method (name, code or description); hidden for carts with decorated items",
+      "browser": true,
+      "default": [
+        "overnight",
+        "next day",
+        "2nd day",
+        "2 day",
+        "express"
       ]
     }
   }

@@ -5,6 +5,7 @@ import { EventKits } from "./slots/EventKits.js";
 import { RuleTags } from "./slots/RuleTags.js";
 import { DeliveryEstimate } from "./slots/DeliveryEstimate.js";
 import { CheckoutAddress } from "./slots/CheckoutAddress.js";
+import { CheckoutShipping } from "./slots/CheckoutShipping.js";
 import { pinPromoted, popupQuantity } from "./transforms.js";
 import { AccountManager, ACCOUNT_MANAGER_EDITOR } from "./widgets/AccountManager.js";
 import { QuoteRequest, QUOTE_REQUEST_EDITOR } from "./widgets/QuoteRequest.js";
@@ -30,6 +31,8 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
       "product.addToCart": DeliveryEstimate,
       // the checkout's address step: a PO Box guard and the delivery date (row 116)
       "checkout.address": CheckoutAddress,
+      // the shipping methods: no rush methods for decorated items (row 117)
+      "checkout.shippingOptions": CheckoutShipping,
     },
     transforms: {
       // listings: the promoted SKUs first

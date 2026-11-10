@@ -122,3 +122,19 @@ export function replacedBy(sku: string, replacements: Record<string, unknown>) {
   }
   return current === sku ? "" : current;
 }
+
+type IShippingChoice = { shippingName?: string; shippingCode?: string; description?: string; shippingTypeName?: string };
+
+/**
+ * The shipping methods a cart may use (row 117): a cart with a decorated item (setting productionDays) cannot use a
+ * rush method (setting rushShipping: words matched in a method's name, code or description, e.g. "overnight", "next
+ * day", "2nd day"): its production days alone are longer. Returns the methods kept and the ones removed; a cart without
+ * decorated items keeps them all. Free shipping is never removed.
+ */
+export function shippingChoices<T extends IShippingChoice>(options: T[], cartSkus: string[], productionDays: Record<string, unknown>, rushWords: unknown[]) {
+  const decorated = cartSkus.filter((sku) => forSku(productionDays, sku) > 0);
+  const words = rushWords.map((word) => String(word).toLowerCase()).filter(Boolean);
+  if (!decorated.length || !words.length) return { kept: options, removed: [] as T[], decorated };
+  const isRush = (option: T) => option.shippingTypeName !== "FreeShipping" && words.some((word) => `${option.shippingName || ""} ${option.shippingCode || ""} ${option.description || ""}`.toLowerCase().includes(word));
+  return { kept: options.filter((option) => !isRush(option)), removed: options.filter(isRush), decorated };
+}

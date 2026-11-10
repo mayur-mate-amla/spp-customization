@@ -65,8 +65,8 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | Progress | Rows |
 | --- | --- |
 | ✅ Done | 94 |
-| 🟡 In progress | 0 |
-| ⬜ Not started | 42 |
+| 🟡 In progress | 1 |
+| ⬜ Not started | 41 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -244,7 +244,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | --- | --- | --- | --- | --- | --- | --- |
 | 115 | Can I change the checkout? | Partial | UI | Covered by 116-117 | ⬜ Not started | |
 | 116 | Can I change the checkout address step? | Yes | UI | checkout.address wraps the store's form: PO Box warning + save stopped (capture phase), delivery date for the ZIP | ✅ Done | [notes](116-checkout-address-step/) |
-| 117 | Can I filter or change shipping methods? | Yes | UI | `checkout.shippingOptions` slot | ⬜ Not started | |
+| 117 | Can I filter or change shipping methods? | Yes | UI | slot built and deployed (no rush methods for decorated items), rule tested; live list blocked: guest checkout here gets no user id from Znode, needs a buyer login | 🟡 In progress | [notes](117-shipping-options/) |
 | 118 | Can I change the payment step UI? | No | Base | | ⛔ Blocked | |
 | 119 | Can I change the payment gateway? | No | Base | | ⛔ Blocked | |
 | 120 | Can I add custom data to the order? | Yes | Check | Override of place-order adding custom data | ⬜ Not started | |

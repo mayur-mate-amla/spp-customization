@@ -27,7 +27,8 @@
       "askAlternatives": "Ask us about an alternative",
       "addForMinimum": "add <b>{amount}</b> to reach the {minimum} order minimum",
       "checkoutArrives": "Ships from Milwaukee: arrives by <b>{date}</b> to {place} (decorated items may take longer).",
-      "noPoBox": "<b>We can't deliver to a PO Box.</b> Decorated orders ship by ground freight: please enter a street address."
+      "noPoBox": "<b>We can't deliver to a PO Box.</b> Decorated orders ship by ground freight: please enter a street address.",
+      "rushUnavailable": "Not available for decorated items, which need production days first: {methods}."
     }
   }
 }

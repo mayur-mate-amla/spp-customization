@@ -204,7 +204,8 @@ async function cartTotals(context: IPluginRouteContext, cartNumber: string) {
   }
   const items = lines.reduce((sum, line) => sum + (Number(pick(line, "Quantity", "quantity")) || 0), 0);
   const subtotal = Math.round(lines.reduce((sum, line) => sum + (Number(pick(line, "ExtendedPrice", "extendedPrice", "TotalPrice", "totalPrice")) || 0), 0) * 100) / 100;
-  return { lines: lines.length, items, subtotal };
+  const skus = [...new Set(lines.map((line) => String(pick(line, "SKU", "Sku", "sku") || "")).filter(Boolean))];
+  return { lines: lines.length, items, subtotal, skus };
 }
 
 const money = (value: number) => `$${value.toFixed(2)}`;
@@ -218,7 +219,7 @@ async function myOrder(_request: IPluginRouteRequest, context: IPluginRouteConte
   const freeOver = Number(context.settings.freeShippingOver) || 0;
   const minimum = Number(context.settings.minOrderValue) || 0;
   const user = context.user ? { name: context.user.userName, budget: context.user.budgetAmount || 0, account: context.user.accountCode || "" } : null;
-  const { lines, items, subtotal } = await cartTotals(context, context.cartNumber);
+  const { lines, items, subtotal, skus } = await cartTotals(context, context.cartNumber);
   return {
     cartNumber: context.cartNumber || null,
     lines,
@@ -228,6 +229,7 @@ async function myOrder(_request: IPluginRouteRequest, context: IPluginRouteConte
     remaining: freeOver ? Math.max(0, Math.round((freeOver - subtotal) * 100) / 100) : 0,
     minOrderValue: minimum,
     toMinimum: belowMinimumOrder(subtotal, minimum),
+    skus,
     user,
   };
 }

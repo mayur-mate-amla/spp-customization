@@ -1,0 +1,16 @@
+# 1. the rule, with node alone (src/commerce/rules.ts shippingChoices; rush words: overnight, next day, 2nd day, 2 day, express)
+cart: tote (3 production days)     kept: Ground (3-5 business days) | Free shipping   removed: Next Day Air | 2nd Day Air
+cart: lanyard only                 kept: Ground (3-5 business days) | Next Day Air | 2nd Day Air | Free shipping   removed: -
+no rush words set                  kept: Ground (3-5 business days) | Next Day Air | 2nd Day Air | Free shipping   removed: -
+
+# 2. the cart's SKUs the slot reads (my-order now returns them): a tote (decorated, 3 production days) and a lanyard
+> node scripts/cart-shot.mjs --add 103805:1 --add 103808:1 --route /api/extensions/plugins/spp-commerce/my-order
+{"cartNumber":"C-10112026-1143","lines":2,"items":11,"subtotal":20.4,...,"skus":["80RXL_986","81DRL"],"user":null}
+
+# 3. why the live list cannot be shown here: the store's guest checkout stops before it asks for shipping methods
+#    (test address saved with the user's approval: Test Buyer, Example Health, 100 Test Street, Milwaukee WI 53202, test.buyer@example.com)
+POST /api/checkout-address/save-checkout-address -> 200 {"data":{"status":true,...,"addressId":0,...}}
+POST /api/create-anonymous-user-account -> 200 {"status":"success","data":{"email":"test.buyer@example.com"}}
+   (no userId from Znode's Users API: AddressWrapper cannot create the guest's address ids, so Checkout.updateShippingOptions
+    finds no address and never calls /api/shipping-options; the SHIPPING METHOD section stays empty)
+   the route is not overridden (npm run overrides): store and Znode behaviour, the same in all 4 test runs

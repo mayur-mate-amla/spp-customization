@@ -81,22 +81,26 @@
       "type": "DeliveryDates",
       "props": {
         "id": "DeliveryDates-spp-customization-spring",
-        "heading": "Need it on site? Order by these dates",
-        "text": "Standard ground shipping, in-stock items, contiguous US.",
+        "heading": "Holiday shipping: order by these dates",
+        "text": "Standard ground, in-stock items, contiguous US. Decorated items add 3 business days.",
         "orderByLabel": "Order by:",
         "receiveByLabel": "Receive by:",
         "rows": [
           {
-            "orderBy": "Mon, Mar 9",
-            "receiveBy": "Fri, Mar 13"
+            "orderBy": "Mon, Nov 2",
+            "receiveBy": "Fri, Nov 6"
           },
           {
-            "orderBy": "Mon, Mar 16",
-            "receiveBy": "Fri, Mar 20"
+            "orderBy": "Mon, Dec 7",
+            "receiveBy": "Fri, Dec 11"
           },
           {
-            "orderBy": "Mon, Mar 23",
-            "receiveBy": "Fri, Mar 27"
+            "orderBy": "Mon, Dec 14",
+            "receiveBy": "Fri, Dec 18"
+          },
+          {
+            "orderBy": "Thu, Dec 17",
+            "receiveBy": "Tue, Dec 22"
           }
         ],
         "background": "#f4f6f9",

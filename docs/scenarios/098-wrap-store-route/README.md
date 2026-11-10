@@ -35,7 +35,7 @@ search calls:
 2. Works out the extra entries (`typeaheadExtras`):
    - a word in the `searchSynonyms` setting gets **Search "can cooler" instead**, a link to that search
    - a search with no product and no category gets **Can't find "…"? Ask us to source it** (setting `sourcingLink`,
-     `/contact-us`)
+     `/specialorder`, the store's Custom Orders page; `/contact-us` until row 099 found it is a 404 here)
 3. Puts them first in **both** lists, and leaves everything else in the store's envelope unchanged. A search with
    results and no synonym ("cup") goes back untouched ([output.txt](output.txt)).
 

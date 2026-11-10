@@ -1,0 +1,11 @@
+# the store's own route, POST /api/contact-us, on POCSppDemo: answered by spp-commerce, the store's route is never called
+> POST /api/contact-us  {"firstName":"Test","lastName":"Buyer","emailId":"not-an-email","comments":"x"}
+{"status":"success","message":"","data":{"hasError":true,"errorMessage":"Please enter a valid email address."}}
+> POST /api/contact-us  {"firstName":"Test","lastName":"Buyer","emailId":"test.buyer@example.com","comments":"500 lanyards","quantity":500,"repCode":"JR"}
+{"status":"success","message":"Quote request Q-2611101235-5NXP sent to Jordan Rivera","data":{"hasError":false,"errorMessage":"","reference":"Q-2611101235-5NXP","rep":"Jordan Rivera"}}
+
+# the staff list: closed without the key, open with it (X-Staff-Key = the server-only staffKey setting; test data only)
+> GET /api/extensions/plugins/spp-commerce/quote-requests
+{"error":"Staff only"}  (HTTP 401)
+> GET .../quote-requests  -H 'X-Staff-Key: <staffKey>'
+{"store":"POCSppDemo","requests":[{"reference":"Q-2611101235-0YUL","at":"2026-11-10T12:35:10.208Z","rep":"Maya Patel","name":"Test Buyer","email":"test.buyer@example.com","company":"Example Health","phone":"","quantity":250,"neededBy":"","comments":"Insulated tumblers with our logo for Physicians Week, navy if possible."},{"reference":"Q-2611101235-5NXP","at":"2026-11-10T12:35:28.161Z","rep":"Jordan Rivera","name":"Test Buyer","email":"test.buyer@example.com","company":"","phone":"","quantity":500,"neededBy":"","comments":"500 lanyards"}]}

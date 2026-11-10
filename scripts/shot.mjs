@@ -85,13 +85,14 @@ try {
     await page.keyboard.press(String(press));
     await new Promise((resolve) => setTimeout(resolve, 500));
   }
-  // --type "<selector>=<text>": type into a field first (e.g. a ZIP code), before --click
-  const typed = arg("type");
-  if (typed && typed !== true) {
+  // --type "<selector>=<text>": type into a field first (e.g. a ZIP code), before --click; repeat it to fill a form
+  const typings = args.flatMap((value, index) => (args[index - 1] === "--type" ? [value] : []));
+  for (const typed of typings) {
     const at = String(typed).lastIndexOf("="); // the selector may hold "=" ([type=search]); the text after the last one is typed
     const field = String(typed).slice(0, at);
     await page.waitForSelector(field, { timeout: 20000 });
-    await page.type(field, String(typed).slice(at + 1), { delay: 30 });
+    await page.$eval(field, (element) => element.scrollIntoView({ block: "center" }));
+    await page.type(field, String(typed).slice(at + 1), { delay: 15 });
   }
   // --click <selector>: click an element (e.g. Add to cart), then wait --after ms for what it opens
   const click = arg("click");

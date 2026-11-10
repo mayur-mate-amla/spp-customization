@@ -1,0 +1,60 @@
+// Quote requests: what replaces the store's /api/contact-us (row 099). The store's route forwards a contact form to
+// Znode's customer feedback; this store wants every request as a quote request for the shopper's sales rep. The body is
+// the store's contact form (IContactFormValues: firstName, lastName, emailId, companyName, phoneNumber, comments) plus
+// what the quote form adds (quantity, neededBy, repCode); the answer keeps the store's envelope so any contact form on
+// the store (the base ContactUs widget included) works with it:
+//   { status: "success", message, data: { hasError, errorMessage, reference, rep } }
+// The requests are kept in memory per store (no plugin database, row 087) for the staff route quote-requests.
+
+export type IQuoteRequest = {
+  reference: string;
+  at: string;
+  rep: string;
+  name: string;
+  email: string;
+  company: string;
+  phone: string;
+  quantity: number;
+  neededBy: string;
+  comments: string;
+};
+
+const text = (value: unknown, max: number) => (typeof value === "string" ? value.trim().slice(0, max) : "");
+
+/** The request from the form's body, or the reason it cannot be taken. */
+export function readQuoteRequest(body: unknown, reps: Record<string, unknown>, now = new Date()): { request?: IQuoteRequest; error?: string } {
+  const form = body && typeof body === "object" ? (body as Record<string, unknown>) : {};
+  const first = text(form.firstName, 60);
+  const last = text(form.lastName, 60);
+  const email = text(form.emailId, 120);
+  const comments = text(form.comments, 2000);
+  if (!first || !last) return { error: "Please enter your first and last name." };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { error: "Please enter a valid email address." };
+  if (!comments) return { error: "Please tell us what you need." };
+  const quantity = Math.max(0, Math.min(1_000_000, Math.floor(Number(form.quantity) || 0)));
+  const neededBy = /^\d{4}-\d{2}-\d{2}$/.test(text(form.neededBy, 10)) ? text(form.neededBy, 10) : "";
+  const code = text(form.repCode, 10).toUpperCase();
+  const names = Object.entries(reps).filter(([, name]) => typeof name === "string") as [string, string][];
+  // the shopper's own rep when they came through a rep's link; else the first rep of the store
+  const rep = (typeof reps[code] === "string" ? (reps[code] as string) : names[0]?.[1]) || "Customer service";
+  const stamp = now.toISOString().replace(/\D/g, "").slice(2, 12);
+  return {
+    request: {
+      reference: `Q-${stamp}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`,
+      at: now.toISOString(),
+      rep,
+      name: `${first} ${last}`,
+      email,
+      company: text(form.companyName, 120),
+      phone: text(form.phoneNumber, 30),
+      quantity,
+      neededBy,
+      comments,
+    },
+  };
+}
+
+/** The store's answer envelope (sendSuccess), so the store's own forms read it as they read the original route's. */
+export function envelope(data: Record<string, unknown>, message = "") {
+  return { status: "success", message, data };
+}

@@ -52,3 +52,18 @@
 .spp-commerce-delivery button { padding: 6px 12px; font-weight: 600; border: 1px solid currentColor; border-radius: 4px; background: #fff; }
 .spp-commerce-delivery button:disabled { opacity: 0.6; }
 .spp-commerce-delivery__result { flex-basis: 100%; min-height: 1.4em; margin: 0; color: rgb(21, 128, 61); }
+
+/* SppQuoteRequest widget */
+.spp-commerce-quote { margin: 40px 0; padding: 24px; background: rgb(248, 250, 252); border: 1px solid rgb(226, 232, 240); border-radius: 12px; }
+.spp-commerce-quote__heading { margin: 0 0 6px; font-size: 24px; font-weight: 700; color: rgb(15, 23, 42); }
+.spp-commerce-quote__text { margin: 0 0 18px; color: rgb(71, 85, 105); }
+.spp-commerce-quote__form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 16px; }
+.spp-commerce-quote__form label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 600; color: rgb(30, 41, 59); }
+.spp-commerce-quote__form input, .spp-commerce-quote__form textarea { padding: 8px 10px; font: inherit; font-weight: 400; background: #fff; border: 1px solid rgb(203, 213, 225); border-radius: 6px; }
+.spp-commerce-quote__wide { grid-column: 1 / -1; }
+.spp-commerce-quote__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; grid-column: 1 / -1; }
+.spp-commerce-quote__actions button { padding: 10px 20px; font-weight: 700; color: #fff; background: rgb(15, 23, 42); border-radius: 8px; }
+.spp-commerce-quote__actions button:disabled { opacity: 0.6; }
+.spp-commerce-quote__actions p { margin: 0; font-weight: 600; }
+.spp-commerce-quote__actions p.is-done { color: rgb(21, 128, 61); }
+.spp-commerce-quote__actions p.is-error { color: rgb(185, 28, 28); }

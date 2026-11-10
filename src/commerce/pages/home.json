@@ -35,6 +35,14 @@
       }
     },
     {
+      "type": "SppQuoteRequest",
+      "props": {
+        "id": "SppQuoteRequest-home",
+        "heading": "Request a quote",
+        "text": "Tell us what you need and when. Your sales rep replies within one business day with pricing and a digital proof."
+      }
+    },
+    {
       "type": "CategoryTiles",
       "props": {
         "id": "CategoryTiles-3c42b759-0aac-45dc-8137-62482e9b954d",

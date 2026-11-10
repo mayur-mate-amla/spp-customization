@@ -31,7 +31,8 @@
     "src/commerce/styles/*.css"
   ],
   "widgets": [
-    "SppAccountManager"
+    "SppAccountManager",
+    "SppQuoteRequest"
   ],
   "pages": {
     "/": "src/commerce/pages/home.json"
@@ -40,7 +41,8 @@
     "/ordering-information"
   ],
   "overrides": {
-    "/api/search/search-hydrated-typeahead": "search-typeahead"
+    "/api/search/search-hydrated-typeahead": "search-typeahead",
+    "/api/contact-us": "quote-request"
   },
   "settingsSchema": {
     "casePacks": {
@@ -138,7 +140,12 @@
     "sourcingLink": {
       "type": "string",
       "label": "Where \"Ask us to source it\" goes when a search finds nothing",
-      "default": "/contact-us"
+      "default": "/specialorder"
+    },
+    "staffKey": {
+      "type": "string",
+      "label": "Key staff send (X-Staff-Key) to list quote requests at .../quote-requests; empty: the list is closed",
+      "default": ""
     }
   }
 }

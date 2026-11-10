@@ -346,7 +346,8 @@ repository joins it. Commits are on `main` of this repository.
 | 094 | New BFF API in the theme (store-status) | e52d183 | – | §8 B header slot + §7 B.5 route `Response` | src/server/status.ts, src/slots/TrustStrip.tsx |
 | 095 | Znode API with the store headers (SKU lookup) | 9117950 | agents + `getHeaders` | §7 B.5 `context.znode` | src/commerce/server.ts |
 | 096 | External API from the server (outbound rules) | fb80132 | – | §7 B.5 route; permission checked by `znode check` only | src/commerce/outbound.ts |
-| 098 | Wrap a store route (search typeahead) | (this commit) | §8 A search | §7 B.4 override + `original()` | src/commerce/server.ts |
+| 098 | Wrap a store route (search typeahead) | d521a09 | §8 A search | §7 B.4 override + `original()` | src/commerce/server.ts |
+| 099 | Replace a store route (contact-us as quote requests) | (this commit) | contact-us route + agent | §7 B.4 override without `original()`, §9 B widget | src/commerce/quotes.ts, src/commerce/widgets/QuoteRequest.tsx |
 | 079 | Complex plugin (spp-commerce, the sum of 080-091) | 2c5d1a0 | §1-§9 A | §2 B placement; every B section | src/commerce/* |
 | 080 | Before/after add to cart (case packs) | 1052a6b | §6 | §6 B (request hooks), §7 B.5 route | src/commerce/server.ts |
 | 081 | React to cart changes (order limit) | 6d7c25f | §7 | §7 B.1 (`runCartHooks`) | src/commerce/server.ts, src/commerce/rules.ts |

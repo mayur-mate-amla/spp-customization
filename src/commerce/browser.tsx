@@ -5,6 +5,7 @@ import { RuleTags } from "./slots/RuleTags.js";
 import { DeliveryEstimate } from "./slots/DeliveryEstimate.js";
 import { pinPromoted, popupQuantity } from "./transforms.js";
 import { AccountManager, ACCOUNT_MANAGER_EDITOR } from "./widgets/AccountManager.js";
+import { QuoteRequest, QUOTE_REQUEST_EDITOR } from "./widgets/QuoteRequest.js";
 
 // spp-commerce, browser part: the companion plugin of the spp-customization theme. A plugin runs for the stores it is
 // placed for, whatever their theme.
@@ -29,6 +30,8 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
     widgets: {
       // "Your account manager" card for the page builder
       SppAccountManager: { render: AccountManager, ...ACCOUNT_MANAGER_EDITOR },
+      // "Request a quote": posts to the store's /api/contact-us, which this plugin replaces (row 099)
+      SppQuoteRequest: { render: QuoteRequest, ...QUOTE_REQUEST_EDITOR },
     },
   };
 }

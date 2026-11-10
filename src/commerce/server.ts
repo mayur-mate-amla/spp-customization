@@ -2,6 +2,7 @@ import type { ICartHookContext, IPluginRouteContext, IPluginRouteRequest, IRunti
 import { companionChanges, lineNotes, quantityRule, withNotes } from "./rules";
 import { OrderingInfoPage } from "./OrderingInfoPage";
 import { arrivalDate, lookupZip, transitDays, type IPlace } from "./delivery";
+import { envelope, readQuoteRequest, type IQuoteRequest } from "./quotes";
 
 // spp-commerce, server part (runs on the store's server only).
 //   beforeAddToCart  case packs: an item sold in packs (setting casePacks: { "<sku>": <pack size> }) is rounded up to
@@ -21,6 +22,7 @@ import { arrivalDate, lookupZip, transitDays, type IPlace } from "./delivery";
 //   routes.erp-stock POST, a signed webhook from the ERP: stock holds ("out until Dec 1"); routes.stock-holds lists them
 //   routes.delivery-estimate  GET ?zip=: the delivery date to a ZIP (city and state from a public ZIP API, server side)
 //   overrides        /api/search/search-hydrated-typeahead -> search-typeahead: synonyms and a sourcing link (row 098)
+//   overrides        /api/contact-us -> quote-request: replaced, a quote request for the shopper's rep (row 099)
 //   routes.my-order  GET /api/extensions/plugins/spp-commerce/my-order: the shopper's own cart (context.cartNumber, its
 //                    lines read from Znode with context.znode) and user (context.user): subtotal, the free-shipping
 //                    gap and, for a signed-in buyer, their name and budget; for the account bar
@@ -222,6 +224,40 @@ async function erpStock(request: IPluginRouteRequest, context: IPluginRouteConte
   return json(200, { ok: true, sku: event.sku, onHold: !event.available, holds: holds.size });
 }
 
+// ---- Contact us: a store route replaced (row 099) ------------------------------------------------------------------
+// "overrides": { "/api/contact-us": "quote-request" }: the store's route is never called (no context.original()). The
+// request is checked, given a reference and the shopper's rep, and kept for the staff route; the answer is the store's
+// envelope. GET .../quote-requests lists them for staff, with the X-Staff-Key header equal to the server-only staffKey
+// setting (empty: the list is closed): they hold shoppers' names and emails.
+const quoteRequests = new Map<string, IQuoteRequest[]>();
+
+// a key compared in constant time; an empty configured key never matches
+function sameSecret(given: string, key: string) {
+  if (!key || given.length !== key.length) return false;
+  let diff = 0;
+  for (let index = 0; index < key.length; index++) diff |= given.charCodeAt(index) ^ key.charCodeAt(index);
+  return diff === 0;
+}
+
+async function quoteRequest(request: IPluginRouteRequest, context: IPluginRouteContext) {
+  const json = (status: number, data: unknown) => new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
+  if (request.method !== "POST") return json(405, { error: "POST only" });
+  const reps = context.settings.salesReps && typeof context.settings.salesReps === "object" ? (context.settings.salesReps as Record<string, unknown>) : {};
+  const { request: quote, error } = readQuoteRequest(request.body, reps);
+  if (!quote) return json(200, envelope({ hasError: true, errorMessage: error }));
+  const list = quoteRequests.get(context.store.code) || [];
+  list.push(quote);
+  quoteRequests.set(context.store.code, list.slice(-50));
+  return json(200, envelope({ hasError: false, errorMessage: "", reference: quote.reference, rep: quote.rep }, `Quote request ${quote.reference} sent to ${quote.rep}`));
+}
+
+async function quoteRequestList(request: IPluginRouteRequest, context: IPluginRouteContext) {
+  if (!sameSecret(request.headers["x-staff-key"] || "", String(context.settings.staffKey || ""))) {
+    return new Response(JSON.stringify({ error: "Staff only" }), { status: 401, headers: { "Content-Type": "application/json" } });
+  }
+  return { store: context.store.code, requests: quoteRequests.get(context.store.code) || [] };
+}
+
 // ---- Search typeahead: a store route wrapped (row 098) -------------------------------------------------------------
 // "overrides": { "/api/search/search-hydrated-typeahead": "search-typeahead" }: for the stores this plugin runs on, the
 // proxy sends the header search's typeahead here. The route asks the store's own route (context.original(): the same
@@ -342,6 +378,8 @@ const plugin: IRuntimePlugin = {
     "delivery-estimate": deliveryEstimate,
     "sku-lookup": skuLookup,
     "search-typeahead": searchTypeahead,
+    "quote-request": quoteRequest,
+    "quote-requests": quoteRequestList,
     "stock-holds": async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ holds: [...(stockHolds.get(context.store.code)?.values() || [])] }),
   },
 };

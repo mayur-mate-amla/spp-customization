@@ -1,0 +1,16 @@
+> npm run inventory -- spp-commerce.znode-package.json
+Package                                          spp-commerce@1.0.0 (plugin)   [spp-commerce.znode-package.json]
+Permissions                                      routes, cartHooks, znodeApi
+Settings                                         casePacks (object, browser), orderLimits (object, browser), minimums (object, browser), companions (object), lineNotes (boolean), cardTags (boolean, browser), pinnedSkus (list, browser), freeShippingOver (number, browser), salesReps (object, browser), showAccountBar (boolean, browser), erpWebhookSecret (string)   [settingsSchema]
+Labels                                           Common.*   [src/commerce/i18n/labels.json]
+Styles                                           src/commerce/styles/*.css   [styles]
+Assets                                           –   [assets]
+Pages (page-builder content)                     /   [pages]
+Browser slots                                    layout.header, product.card   [src/commerce/browser.tsx]
+Browser transforms                               productList.data, addToCart.notificationData
+Widgets                                          SppAccountManager
+Server slots                                     –   [src/commerce/server.ts]
+Server pages (own URLs)                          /ordering-information
+Routes (/api/extensions/plugins/<name>/<route>)  activity, my-order, rep, erp-stock, stock-holds
+Cart hooks                                       beforeAddToCart, afterAddToCart, onCartChanged, mapCartItems
+Route overrides                                  –   [overrides]

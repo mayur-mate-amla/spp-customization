@@ -341,7 +341,8 @@ repository joins it. Commits are on `main` of this repository.
 | 086 | Plugin sets cookies (sales-rep link) | 785fa78 | §2 A store cookies | §7 B.5 route `Response`, §6 B hook `cookies.get`, §8 B bar | src/commerce/server.ts, src/commerce/slots/AccountBar.tsx |
 | 088 | Plugin labels (Common.sppCommerce) | 74eac5d | §3 A messages, client namespaces | §3 B.7 `withRuntimeMessages`, `useTranslations` from the store | src/commerce/i18n/labels.json |
 | 089 | Plugin page with its own URL (/ordering-information) | 9b25b9e | §9 A (store not-found) | §9 B.1 `serverPages` | src/commerce/OrderingInfoPage.tsx, src/commerce/server.ts |
-| 091 | Plugin webhook (signed ERP stock holds) | (this commit) | – | §7 B.5 route (`rawBody`, `verifySignature`), §4 B card tag | src/commerce/server.ts, scripts/erp-webhook.mjs |
+| 091 | Plugin webhook (signed ERP stock holds) | c3c088c | – | §7 B.5 route (`rawBody`, `verifySignature`), §4 B card tag | src/commerce/server.ts, scripts/erp-webhook.mjs |
+| 079 | Complex plugin (spp-commerce, the sum of 080-091) | (this commit) | §1-§9 A | §2 B placement; every B section | src/commerce/* |
 | 080 | Before/after add to cart (case packs) | 1052a6b | §6 | §6 B (request hooks), §7 B.5 route | src/commerce/server.ts |
 | 081 | React to cart changes (order limit) | 6d7c25f | §7 | §7 B.1 (`runCartHooks`) | src/commerce/server.ts, src/commerce/rules.ts |
 | 082 | Change cart lines before they are shown | 3ad302b | §7 A.1 | §7 B.1 (`runMapCartItems`) | src/commerce/server.ts, src/commerce/rules.ts |

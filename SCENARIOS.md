@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 77 |
+| ✅ Done | 78 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 59 |
+| ⬜ Not started | 58 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -181,7 +181,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 79 | Can I create a complex plugin? | Yes | UI | Done when 80-91 are: the sum of them | ⬜ Not started | |
+| 79 | Can I create a complex plugin? | Yes | UI | spp-commerce: sum of 080-091 (087, 090 blocked); one cart, plugin off vs on | ✅ Done | [notes](079-complex-plugin/) |
 | 80 | Can a plugin run code before and after add to cart? | Yes | UI | Example: beforeAddToCart rounds to case packs (1 lanyard -> 10); afterAddToCart activity log | ✅ Done | [notes](docs/scenarios/080-before-after-add-to-cart/) |
 | 81 | Can a plugin react when the cart changes? | Yes | UI | onCartChanged: per-order limit (817NK_25 max 5), line removed and re-added at the limit | ✅ Done | [notes](081-on-cart-changed/) |
 | 82 | Can a plugin change cart lines before they are shown? | Yes | UI | mapCartItems: case-pack and order-limit notes under the cart lines | ✅ Done | [notes](082-map-cart-items/) |

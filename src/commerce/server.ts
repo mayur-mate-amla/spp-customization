@@ -1,5 +1,5 @@
 import type { ICartHookContext, IPluginRouteContext, IPluginRouteRequest, IRuntimeData, IRuntimeHookContext, IRuntimePlugin } from "znode-plugin/types/extension-api";
-import { overLimit } from "./rules";
+import { lineNotes, overLimit, withNotes } from "./rules";
 
 // spp-commerce, server part (runs on the store's server only).
 //   beforeAddToCart  case packs: an item sold in packs (setting casePacks: { "<sku>": <pack size> }) is rounded up to
@@ -7,6 +7,8 @@ import { overLimit } from "./rules";
 //   afterAddToCart   order activity: each add (asked, added, cart number, result) is recorded for the store
 //   onCartChanged    per-order limits (setting orderLimits: { "<sku>": <max> }): a line over its limit is brought back
 //                    to the limit when the cart is read (cart page, checkout)
+//   mapCartItems     line notes (setting lineNotes): "Sold in cases of 10", "Limit 5 per order" under the lines they
+//                    apply to, on the cart page and checkout
 //   routes.activity  GET /api/extensions/plugins/spp-commerce/activity: the store's last 20 adds and cart changes
 // The add-to-cart request is { cartId, skuDetails: [{ sku, quantity, customData, personalizedDetails, ... }], localeId,
 // userId }; the response { cartId, addToCartStatus, cartNumber, cartCount }. onCartChanged gets the cart as
@@ -77,10 +79,24 @@ async function onCartChanged({ store, cart, settings, actions }: ICartHookContex
   }
 }
 
+// The cart's lines before the cart page or checkout shows them: { cartNumber, cartItems: [{ sku, productName,
+// productDescription (HTML), quantity, unitPrice, ... }] }. The notes go after Znode's description, which the cart
+// renders as HTML; the object is returned changed.
+async function mapCartItems(cart: IRuntimeData, { settings }: IRuntimeHookContext) {
+  if (settings.lineNotes === false || !Array.isArray(cart.cartItems)) return cart;
+  const casePacks = skuMap(settings, "casePacks");
+  const limits = skuMap(settings, "orderLimits");
+  const cartItems = (cart.cartItems as IRuntimeData[]).map((item) => {
+    const notes = lineNotes(String(item.sku || ""), casePacks, limits);
+    return notes.length ? { ...item, productDescription: withNotes(item.productDescription, notes) } : item;
+  });
+  return { ...cart, cartItems };
+}
+
 const plugin: IRuntimePlugin = {
   name: "spp-commerce",
   apiVersion: 1,
-  hooks: { beforeAddToCart, afterAddToCart, onCartChanged },
+  hooks: { beforeAddToCart, afterAddToCart, onCartChanged, mapCartItems },
   routes: {
     activity: async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ store: context.store.code, adds: activity.get(context.store.code) || [] }),
   },

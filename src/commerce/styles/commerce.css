@@ -16,3 +16,7 @@
 .spp-commerce-rep__ways { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; font-weight: 600; }
 .spp-commerce-rep__ways a { text-decoration: underline; }
 .spp-commerce-rep__quote { padding: 12px 22px; font-weight: 700; color: #fff; background: rgb(15, 23, 42); border-radius: 8px; }
+
+/* cart and checkout lines: the notes mapCartItems adds after Znode's description */
+.spp-line-notes { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; }
+.spp-line-notes li { padding: 2px 8px; font-size: 12px; font-weight: 600; color: rgb(30, 64, 175); background: rgb(219, 234, 254); border-radius: 6px; }

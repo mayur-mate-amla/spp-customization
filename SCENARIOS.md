@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 63 |
+| ✅ Done | 64 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 73 |
+| ⬜ Not started | 72 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -184,7 +184,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 79 | Can I create a complex plugin? | Yes | UI | Done when 80-91 are: the sum of them | ⬜ Not started | |
 | 80 | Can a plugin run code before and after add to cart? | Yes | UI | Example: beforeAddToCart rounds to case packs (1 lanyard -> 10); afterAddToCart activity log | ✅ Done | [notes](docs/scenarios/080-before-after-add-to-cart/) |
 | 81 | Can a plugin react when the cart changes? | Yes | UI | onCartChanged: per-order limit (817NK_25 max 5), line removed and re-added at the limit | ✅ Done | [notes](081-on-cart-changed/) |
-| 82 | Can a plugin change cart lines before they are shown? | Yes | UI | `mapCartItems` hook | ⬜ Not started | |
+| 82 | Can a plugin change cart lines before they are shown? | Yes | UI | mapCartItems: case-pack and order-limit notes under the cart lines | ✅ Done | [notes](082-map-cart-items/) |
 | 83 | Can a plugin fill slots in the page? | Yes | UI | Covered by 48-51 | ⬜ Not started | |
 | 84 | Can a plugin transform data (listing data, popup data)? | Yes | UI | `productList.data` transform | ⬜ Not started | |
 | 85 | Can a plugin read the shopper's cart and user? | Yes | UI | Route using `context.user` / `cartNumber`, shown in a slot | ⬜ Not started | |

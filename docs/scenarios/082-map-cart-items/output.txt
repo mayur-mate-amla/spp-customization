@@ -1,0 +1,12 @@
+# before: lineNotes = false
+> node scripts/cart-shot.mjs --add 103808:1 --add 103809:2 --out docs/scenarios/082-map-cart-items/before.png
+added product 103808 x 1
+added product 103809 x 2
+3/4" Poly Lanyard w/clip | qty 10
+Graphite Deluxe 15" Computer Backpack | qty 2
+
+# after: lineNotes = true
+> node scripts/cart-shot.mjs --add 103808:1 --add 103809:2 --out docs/scenarios/082-map-cart-items/after.png
+(same lines; the description of each now ends with)
+81DRL     <ul class="spp-line-notes"><li>Sold in cases of 10</li></ul>
+817NK_25  <ul class="spp-line-notes"><li>Limit 5 per order</li></ul>

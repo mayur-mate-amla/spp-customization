@@ -19,6 +19,9 @@ export type IQuoteRequest = {
   comments: string;
 };
 
+/** The longest "What do you need?" text taken; far below the store's 64 KB limit for any plugin route body. */
+export const MAX_COMMENTS = 2000;
+
 const text = (value: unknown, max: number) => (typeof value === "string" ? value.trim().slice(0, max) : "");
 
 /** The request from the form's body, or the reason it cannot be taken. */
@@ -27,7 +30,9 @@ export function readQuoteRequest(body: unknown, reps: Record<string, unknown>, n
   const first = text(form.firstName, 60);
   const last = text(form.lastName, 60);
   const email = text(form.emailId, 120);
-  const comments = text(form.comments, 2000);
+  // said, not cut: a longer text is refused with the limit (the form shows a counter and stops at it, row 101)
+  if (typeof form.comments === "string" && form.comments.trim().length > MAX_COMMENTS) return { error: `Please keep "What do you need?" under ${MAX_COMMENTS.toLocaleString("en-US")} characters.` };
+  const comments = text(form.comments, MAX_COMMENTS);
   if (!first || !last) return { error: "Please enter your first and last name." };
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { error: "Please enter a valid email address." };
   if (!comments) return { error: "Please tell us what you need." };

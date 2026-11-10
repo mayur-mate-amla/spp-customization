@@ -67,3 +67,5 @@
 .spp-commerce-quote__actions p { margin: 0; font-weight: 600; }
 .spp-commerce-quote__actions p.is-done { color: rgb(21, 128, 61); }
 .spp-commerce-quote__actions p.is-error { color: rgb(185, 28, 28); }
+.spp-commerce-quote__count { align-self: flex-end; font-size: 12px; font-weight: 400; color: rgb(100, 116, 139); }
+.spp-commerce-quote__count.is-near { font-weight: 700; color: rgb(180, 83, 9); }

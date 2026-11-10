@@ -1,0 +1,35 @@
+# the store's limit for a plugin route's body: 64 KB = 65,536 bytes (routes.server.ts MAX_BODY_BYTES), read as a
+# stream and cut off at the first byte over it: 413 before the route runs, whatever the total size
+# (node body-limit.mjs: JSON bodies of exact sizes, POCSppDemo)
+
+## before this row's change (the quote route cut long comments to 2,000 characters without saying so)
+﻿    1500 bytes  POST /api/contact-us  (store route, taken over by spp-commerce)
+          -> HTTP 200 {"status":"success","message":"Quote request Q-2611101237-9MFB sent to Jordan Rivera","data":{"hasError":false,"errorMessage":"","  [73 ms]
+   61440 bytes  POST /api/contact-us  (store route, taken over by spp-commerce)
+          -> HTTP 200 {"status":"success","message":"Quote request Q-2611101237-M3FR sent to Jordan Rivera","data":{"hasError":false,"errorMessage":"","  [46 ms]
+   65536 bytes  POST /api/contact-us  (store route, taken over by spp-commerce)
+          -> HTTP 200 {"status":"success","message":"Quote request Q-2611101237-4U3E sent to Jordan Rivera","data":{"hasError":false,"errorMessage":"","  [49 ms]
+   65537 bytes  POST /api/contact-us  (store route, taken over by spp-commerce)
+          -> HTTP 413 {"error":"Request body too large"}  [41 ms]
+   65537 bytes  POST /api/extensions/plugins/spp-commerce/quote-request  (plugin route, called directly)
+          -> HTTP 413 {"error":"Request body too large"}  [40 ms]
+  204800 bytes  POST /api/extensions/plugins/spp-commerce/erp-stock  (plugin webhook (row 091))
+          -> HTTP 413 {"error":"Request body too large"}  [67 ms]
+ 5242880 bytes  POST /api/extensions/plugins/spp-commerce/quote-request  (plugin route, 5 MB)
+          -> HTTP 413 {"error":"Request body too large"}  [49 ms]
+
+## after (the quote route says the limit; the form stops at it and shows a counter)
+﻿    1500 bytes  POST /api/contact-us  (store route, taken over by spp-commerce)
+          -> HTTP 200 {"status":"success","message":"Quote request Q-2611101238-WXPT sent to Jordan Rivera","data":{"hasError":false,"errorMessage":"","  [84 ms]
+   61440 bytes  POST /api/contact-us  (store route, taken over by spp-commerce)
+          -> HTTP 200 {"status":"success","message":"","data":{"hasError":true,"errorMessage":"Please keep \"What do you need?\" under 2,000 characters.  [41 ms]
+   65536 bytes  POST /api/contact-us  (store route, taken over by spp-commerce)
+          -> HTTP 200 {"status":"success","message":"","data":{"hasError":true,"errorMessage":"Please keep \"What do you need?\" under 2,000 characters.  [43 ms]
+   65537 bytes  POST /api/contact-us  (store route, taken over by spp-commerce)
+          -> HTTP 413 {"error":"Request body too large"}  [46 ms]
+   65537 bytes  POST /api/extensions/plugins/spp-commerce/quote-request  (plugin route, called directly)
+          -> HTTP 413 {"error":"Request body too large"}  [41 ms]
+  204800 bytes  POST /api/extensions/plugins/spp-commerce/erp-stock  (plugin webhook (row 091))
+          -> HTTP 413 {"error":"Request body too large"}  [55 ms]
+ 5242880 bytes  POST /api/extensions/plugins/spp-commerce/quote-request  (plugin route, 5 MB)
+          -> HTTP 413 {"error":"Request body too large"}  [59 ms]

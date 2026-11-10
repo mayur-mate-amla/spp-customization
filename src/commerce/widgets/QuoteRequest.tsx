@@ -9,6 +9,9 @@ import { useState, type FormEvent } from "react";
 type IQuoteRequestProps = { id?: string; heading?: string; text?: string };
 type IState = { busy: boolean; done: string; error: string };
 
+// the same limit as the route (quotes.ts MAX_COMMENTS): the field stops there and says how much is left
+const MAX_COMMENTS = 2000;
+
 const repCode = () => {
   try {
     return decodeURIComponent(document.cookie.match(/(?:^|;\s*)spp_rep=([^;]*)/)?.[1] || "");
@@ -19,6 +22,7 @@ const repCode = () => {
 
 export function QuoteRequest(props: IQuoteRequestProps) {
   const [state, setState] = useState<IState>({ busy: false, done: "", error: "" });
+  const [length, setLength] = useState(0);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,6 +39,7 @@ export function QuoteRequest(props: IQuoteRequestProps) {
       const data = answer?.data || {};
       if (!response.ok || data.hasError) throw new Error(data.errorMessage || "Your request could not be sent. Please try again.");
       form.reset();
+      setLength(0);
       setState({ busy: false, error: "", done: data.reference ? `Thank you. Your request ${data.reference} is with ${data.rep}, who will reply within one business day.` : "Thank you. We will reply within one business day." });
     } catch (failure) {
       setState({ busy: false, done: "", error: failure instanceof Error ? failure.message : "Your request could not be sent." });
@@ -72,7 +77,10 @@ export function QuoteRequest(props: IQuoteRequestProps) {
         </label>
         <label className="spp-commerce-quote__wide">
           What do you need?
-          <textarea name="comments" rows={3} required placeholder="Item, colors, logo placement, event date..." />
+          <textarea name="comments" rows={3} required maxLength={MAX_COMMENTS} aria-describedby="spp-commerce-quote-count" onChange={(event) => setLength(event.target.value.length)} placeholder="Item, colors, logo placement, event date..." />
+          <span id="spp-commerce-quote-count" className={`spp-commerce-quote__count${length > MAX_COMMENTS * 0.9 ? " is-near" : ""}`} data-test-selector="spanQuoteCommentsCount">
+            {(MAX_COMMENTS - length).toLocaleString("en-US")} characters left
+          </span>
         </label>
         <div className="spp-commerce-quote__actions">
           <button type="submit" disabled={state.busy} data-test-selector="btnSendQuoteRequest">

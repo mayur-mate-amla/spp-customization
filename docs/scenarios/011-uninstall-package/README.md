@@ -1,31 +1,41 @@
 # 011: Can a package be uninstalled cleanly (files removed)?
 
-**Listed:** Partial. **Result here:** Partial, confirmed. There is no uninstall command; removing the package's
-entry from `plugins.json` turns it off for every store, but all of its files stay in the plugin folder.
+**Listed:** Partial. **Result here:** Yes, with `npm run uninstall`.
 
-## What
+## What changed
 
-In an empty **scratch** plugin folder: install 1.0.0, upgrade to 1.0.1, then uninstall by hand (remove the
-`spp-customization` entry from `plugins.json`).
+The `znode` command has no uninstall, and removing a package's entry from `plugins.json` by hand leaves all its files
+behind. The registry does not even list a package's assets (images, fonts). `npm run uninstall` now removes the package
+cleanly:
 
-- The `znode` command has no `uninstall` (its usage line: `build | pack | check | install | deploy | dev`,
-  `create`, `link-store`).
-- After the entry is gone, all 11 files are still on disk: the 1.0.1 code, CSS, labels and maps, the hero image, and
-  what 1.0.0 left behind (its font and maps, see 009).
-- The store serves only files a registry entry names, so the leftovers are not used; they just take space.
+1. Takes the registry lock (as `znode install` does), keeps a copy in `.history/`, removes the package's entry (and any
+   `installations` records for it), and writes `plugins.json` atomically.
+2. Deletes every file the package owns in the plugin folder:
+   - the files its entry names (server, browser, labels, styles, pages) and their `.map` files
+   - every file in its own zips (`.versions/<name>/`, `releases/`), which covers assets the registry does not list
+   - older versions' leftovers, `<name>-<semver>...` (fonts and maps the install leaves)
+3. Never deletes a file another package's entry names.
+4. Keeps `.versions/<name>/` for a reinstall or rollback; `npm run uninstall -- --purge` removes it too.
 
-## Clean uninstall, by hand
+Run on a **scratch copy** of the store's plugin folder (its `plugins.json`, this theme's files, the Apex theme's files
+and `.versions/`), with this project's `releases/` moved away:
 
-1. Switch the package off first (`"enabled": false`) so no page uses it while you work.
-2. Remove its entry from `plugins.json`.
-3. Delete the files the entry named (`file`, `browser`, `styles`, `messages`, `assets`) and their `.map` files, plus
-   older versions' leftovers (`spp-customization-<old version>-*`).
+- entries 25 → 24; the `spp-customization` entry is gone
+- 14 files deleted: 1.0.2's code, CSS, labels and maps, the hero image, and 1.0.0 / 1.0.1 leftovers
+- every Apex file still there
+- `--purge` removes `.versions/spp-customization/`
 
 ## Where
 
-No code change. The test ran in a scratch folder, never the store's plugin folder.
+- `scripts/uninstall.mjs` (new)
+- `package.json`: `"uninstall": "node scripts/uninstall.mjs"`
+- Uses `scripts/lib/store.mjs` (lock, history, atomic write) and `adm-zip` from the SDK to read the zips
 
 ## How to check
 
-`output.txt` / `evidence.png`: the SDK's commands, the install and upgrade, the folder listing, the entry removed and
-the listing again.
+```bash
+RUNTIME_PLUGINS_DIR=<a copy of the plugin folder> npm run uninstall
+RUNTIME_PLUGINS_DIR=<a copy of the plugin folder> npm run uninstall -- --purge
+```
+
+`output.txt` / `evidence.png` hold the run.

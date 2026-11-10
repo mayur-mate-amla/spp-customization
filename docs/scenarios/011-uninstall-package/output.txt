@@ -1,35 +1,80 @@
-$ npx znode   (the SDK's commands: no uninstall)
-znode-package: usage: znode <build|pack|check|install|deploy|dev> <dir|zip> [storeDir], znode create <kind> <name> [dir], znode link-store <storeRepoDir>
-
-$ npx znode install releases/spp-customization-1.0.0.zpkg.zip <scratch>; then 1.0.1
-installed theme spp-customization@1.0.0: 8 files, disabled for []
-installed theme spp-customization@1.0.1 (was 1.0.0): 8 files, disabled for []
+$ (a scratch copy of the store's plugin folder: its plugins.json, this theme's files, the apex theme's files, .versions/;
+   this project's releases/ moved away, so only what is next to the store is used)
+plugins.json entries: 25
 $ ls <scratch>
+  apex-1.0.19-font-inter-c9676a68-1.woff2
+  apex-1.0.19-font-montserrat-50765ab9-1.woff2
+  apex-1.0.19-font-poppins-b5189264-1.woff2
+  apex-1.0.19-font-poppins-b5189264-2.woff2
+  apex-1.0.19-font-poppins-b5189264-3.woff2
+  apex-1.0.19.browser.mjs
+  apex-1.0.19.browser.mjs.map
+  apex-1.0.19.css
+  apex-1.0.19.labels.json
+  apex-1.0.19.server.mjs
+  apex-1.0.19.server.mjs.map
   plugins.json
   spp-customization-1.0.0-font-inter-8e66b3c3-1.woff2
   spp-customization-1.0.0.browser.mjs.map
   spp-customization-1.0.0.server.mjs.map
   spp-customization-1.0.1-font-inter-8e66b3c3-1.woff2
-  spp-customization-1.0.1.browser.mjs
   spp-customization-1.0.1.browser.mjs.map
-  spp-customization-1.0.1.css
-  spp-customization-1.0.1.labels.json
-  spp-customization-1.0.1.server.mjs
   spp-customization-1.0.1.server.mjs.map
+  spp-customization-1.0.2-font-inter-8e66b3c3-1.woff2
+  spp-customization-1.0.2.browser.mjs
+  spp-customization-1.0.2.browser.mjs.map
+  spp-customization-1.0.2.css
+  spp-customization-1.0.2.labels.json
+  spp-customization-1.0.2.server.mjs
+  spp-customization-1.0.2.server.mjs.map
   spp-customization-hero.svg
 
-$ (uninstall by hand: remove the spp-customization entry from plugins.json)
-plugins.json entries: 0
-$ ls <scratch>   (what is left on disk)
+$ npm run uninstall
+
+> spp-customization@1.0.2 uninstall
+> node scripts/uninstall.mjs
+
+uninstalled spp-customization@1.0.2: entry removed, 14 files deleted
+  - spp-customization-1.0.0-font-inter-8e66b3c3-1.woff2
+  - spp-customization-1.0.0.browser.mjs.map
+  - spp-customization-1.0.0.server.mjs.map
+  - spp-customization-1.0.1-font-inter-8e66b3c3-1.woff2
+  - spp-customization-1.0.1.browser.mjs.map
+  - spp-customization-1.0.1.server.mjs.map
+  - spp-customization-1.0.2-font-inter-8e66b3c3-1.woff2
+  - spp-customization-1.0.2.browser.mjs
+  - spp-customization-1.0.2.browser.mjs.map
+  - spp-customization-1.0.2.css
+  - spp-customization-1.0.2.labels.json
+  - spp-customization-1.0.2.server.mjs
+  - spp-customization-1.0.2.server.mjs.map
+  - spp-customization-hero.svg
+kept for a reinstall or rollback: .versions/spp-customization/ (npm run uninstall -- --purge removes it)
+(exit 0)
+
+plugins.json entries: 24   (spp-customization entries: 0)
+$ ls <scratch>   (apex untouched)
+  apex-1.0.19-font-inter-c9676a68-1.woff2
+  apex-1.0.19-font-montserrat-50765ab9-1.woff2
+  apex-1.0.19-font-poppins-b5189264-1.woff2
+  apex-1.0.19-font-poppins-b5189264-2.woff2
+  apex-1.0.19-font-poppins-b5189264-3.woff2
+  apex-1.0.19.browser.mjs
+  apex-1.0.19.browser.mjs.map
+  apex-1.0.19.css
+  apex-1.0.19.labels.json
+  apex-1.0.19.server.mjs
+  apex-1.0.19.server.mjs.map
   plugins.json
-  spp-customization-1.0.0-font-inter-8e66b3c3-1.woff2
-  spp-customization-1.0.0.browser.mjs.map
-  spp-customization-1.0.0.server.mjs.map
-  spp-customization-1.0.1-font-inter-8e66b3c3-1.woff2
-  spp-customization-1.0.1.browser.mjs
-  spp-customization-1.0.1.browser.mjs.map
-  spp-customization-1.0.1.css
-  spp-customization-1.0.1.labels.json
-  spp-customization-1.0.1.server.mjs
-  spp-customization-1.0.1.server.mjs.map
-  spp-customization-hero.svg
+$ ls <scratch>/.versions/spp-customization
+  spp-customization-1.0.1.zpkg.zip
+  spp-customization-1.0.2.zpkg.zip
+
+$ npm run uninstall -- --purge
+
+> spp-customization@1.0.2 uninstall
+> node scripts/uninstall.mjs --purge
+
+spp-customization is not installed in this plugin folder
+  - .versions/spp-customization/ (the kept versions)
+  .versions/spp-customization exists: False

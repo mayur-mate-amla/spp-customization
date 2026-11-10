@@ -8,15 +8,21 @@
   "description": "Companion plugin of the spp-customization theme: B2B account bar, cart and checkout rules, and the store API routes the theme cannot take over.",
   "license": "proprietary",
   "keywords": ["plugin", "b2b", "cart"],
-  "permissions": [],
+  "permissions": ["routes", "cartHooks"],
   "compatibility": { "webstore": ">=10.0.0" },
   "build": {
+    "server": "src/commerce/server.ts",
     "browser": "src/commerce/browser.tsx"
   },
   "styles": ["src/commerce/styles/*.css"],
   "widgets": ["SppAccountManager"],
   "pages": { "/": "src/commerce/pages/home.json" },
   "settingsSchema": {
+    "casePacks": {
+      "type": "object",
+      "label": "Items sold in case packs: { \"<SKU>\": <pack size> } (quantities are rounded up to whole packs)",
+      "default": { "81DRL": 10 }
+    },
     "showAccountBar": {
       "type": "boolean",
       "label": "Show the account bar above the header",

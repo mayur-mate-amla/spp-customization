@@ -1,0 +1,12 @@
+$ npm run check -- (spp-commerce)
+check spp-commerce@1.0.0: 0 errors, 0 warnings
+$ npm run deploy -- spp-commerce.znode-package.json
+packed spp-commerce-1.0.0.zpkg.zip (9700 bytes)
+installed plugin spp-commerce@1.0.0 (was 1.0.0): 6 files, enabled for ["POCSppDemo"]
+kept spp-commerce-1.0.0.zpkg.zip in .versions\spp-commerce (1 version on disk: 1.0.0)
+"casePacks": {
+"81DRL": 10
+},
+
+$ (add 1 x 81DRL on POCSppDemo, then) GET /api/extensions/plugins/spp-commerce/activity
+{"store":"POCSppDemo","adds":[{"at":"2026-11-10T10:48:47.040Z","sku":"81DRL","asked":1,"added":10,"rule":"case pack of 10","cartNumber":"C-10112026-1095","ok":true},{"at":"2026-11-10T10:49:18.839Z","sku":"81DRL","asked":1,"added":10,"rule":"case pack of 10","cartNumber":"C-10112026-1096","ok":true}]}

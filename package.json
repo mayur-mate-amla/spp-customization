@@ -10,7 +10,8 @@
     "pack": "znode pack .",
     "deploy": "znode deploy .",
     "link-store": "znode link-store",
-    "shot": "node scripts/shot.mjs"
+    "shot": "node scripts/shot.mjs",
+    "rollback": "node scripts/rollback.mjs"
   },
   "devDependencies": {
     "@types/react": "19.2.13",

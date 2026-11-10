@@ -1,0 +1,34 @@
+$ npm run rollback
+
+> spp-customization@1.0.1 rollback
+> node scripts/rollback.mjs
+
+packed versions:
+  1.0.0
+  1.0.1
+usage: npm run rollback -- <version>
+
+$ npm run rollback -- 1.0.0
+
+> spp-customization@1.0.1 rollback
+> node scripts/rollback.mjs 1.0.0
+
+installed theme spp-customization@1.0.0 (was 1.0.1): 8 files, disabled for []
+(exit 0)
+plugins.json entry: version 1.0.0, enabled False, settings kept: announcement = 'Free shipping on orders over $100'
+
+$ npm run rollback -- 1.0.1   (forward again)
+
+> spp-customization@1.0.1 rollback
+> node scripts/rollback.mjs 1.0.1
+
+installed theme spp-customization@1.0.1 (was 1.0.0): 8 files, disabled for []
+(exit 0)
+
+$ npm run rollback -- 0.9.0   (a version never packed)
+
+> spp-customization@1.0.1 rollback
+> node scripts/rollback.mjs 0.9.0
+
+releases\spp-customization-0.9.0.zpkg.zip not found; packed versions: spp-customization-1.0.0.zpkg.zip, spp-customization-1.0.1.zpkg.zip
+(exit 1)

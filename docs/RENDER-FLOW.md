@@ -338,7 +338,8 @@ repository joins it. Commits are on `main` of this repository.
 | 083 | Plugin fills a slot (rules on the card) | a3d1bd9 | §4 A card | §4 B `product.card` | src/commerce/slots/RuleTags.tsx |
 | 084 | Plugin transforms (listing pins, popup quantity) | 9736a5b | §4 A listing, §6 A popup | §4 B `productList.data`, §6 B `addToCart.notificationData` | src/commerce/transforms.ts |
 | 085 | Plugin reads the cart and user (free-shipping meter) | 5c38035 | §7 A cart agent, §8 A header | §7 B.5 route context (`cartNumber`, `user`, `znode`), §8 B `layout.header` | src/commerce/server.ts, src/commerce/slots/AccountBar.tsx |
-| 086 | Plugin sets cookies (sales-rep link) | (this commit) | §2 A store cookies | §7 B.5 route `Response`, §6 B hook `cookies.get`, §8 B bar | src/commerce/server.ts, src/commerce/slots/AccountBar.tsx |
+| 086 | Plugin sets cookies (sales-rep link) | 785fa78 | §2 A store cookies | §7 B.5 route `Response`, §6 B hook `cookies.get`, §8 B bar | src/commerce/server.ts, src/commerce/slots/AccountBar.tsx |
+| 088 | Plugin labels (Common.sppCommerce) | (this commit) | §3 A messages, client namespaces | §3 B.7 `withRuntimeMessages`, `useTranslations` from the store | src/commerce/i18n/labels.json |
 | 080 | Before/after add to cart (case packs) | 1052a6b | §6 | §6 B (request hooks), §7 B.5 route | src/commerce/server.ts |
 | 081 | React to cart changes (order limit) | 6d7c25f | §7 | §7 B.1 (`runCartHooks`) | src/commerce/server.ts, src/commerce/rules.ts |
 | 082 | Change cart lines before they are shown | 3ad302b | §7 A.1 | §7 B.1 (`runMapCartItems`) | src/commerce/server.ts, src/commerce/rules.ts |

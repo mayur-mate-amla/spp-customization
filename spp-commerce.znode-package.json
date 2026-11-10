@@ -20,6 +20,7 @@
   "compatibility": {
     "webstore": ">=10.0.0"
   },
+  "messages": "src/commerce/i18n/labels.json",
   "build": {
     "server": "src/commerce/server.ts",
     "browser": "src/commerce/browser.tsx"

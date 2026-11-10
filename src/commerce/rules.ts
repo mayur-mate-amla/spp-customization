@@ -30,6 +30,18 @@ export function quantityRule(sku: string, quantity: number, minimums: Record<str
 
 const escapeHtml = (text: string) => text.replace(/[&<>"']/g, (char) => `&#${char.charCodeAt(0)};`);
 
+/** The ordering rules of a SKU, as facts to word: its case pack, minimum and per-order limit (each when it has one). */
+export function ruleFacts(sku: string, casePacks: Record<string, unknown>, limits: Record<string, unknown>, minimums: Record<string, unknown> = {}) {
+  const facts: { rule: "casePack" | "minimum" | "limit"; count: number }[] = [];
+  const pack = forSku(casePacks, sku);
+  if (pack > 1) facts.push({ rule: "casePack", count: pack });
+  const min = forSku(minimums, sku);
+  if (min > 1) facts.push({ rule: "minimum", count: min });
+  const max = forSku(limits, sku);
+  if (max) facts.push({ rule: "limit", count: max });
+  return facts;
+}
+
 /** The notes a cart line gets (setting casePacks, minimums and orderLimits): shown under the line on the cart page and checkout. */
 export function lineNotes(sku: string, casePacks: Record<string, unknown>, limits: Record<string, unknown>, minimums: Record<string, unknown> = {}) {
   const notes: string[] = [];

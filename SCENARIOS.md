@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 74 |
+| ✅ Done | 75 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 62 |
+| ⬜ Not started | 61 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -190,7 +190,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 85 | Can a plugin read the shopper's cart and user? | Yes | UI | route my-order: context.cartNumber + context.znode cart lines + context.user; free-shipping meter in the account bar | ✅ Done | [notes](085-read-cart-and-user/) |
 | 86 | Can a plugin set cookies? | Partial | Check | routes set cookies (Response + Set-Cookie: spp_rep rep link); hooks and browser read them; routes cannot read cookies | ✅ Done | [notes](086-plugin-sets-cookies/) |
 | 87 | Can a plugin store its own data (database)? | No | Base | | ⛔ Blocked | |
-| 88 | Can a plugin add labels and messages? | Yes | UI | New namespace in `labels.json` | ⬜ Not started | |
+| 88 | Can a plugin add labels and messages? | Yes | UI | Yes under a namespace the store sends (Common.sppCommerce); a new top-level namespace never reaches the browser | ✅ Done | [notes](088-plugin-labels/) |
 | 89 | Can a plugin add a page with its own URL? | Partial | UI | `serverPages` (`/spp-customization-welcome` and a new one) | ⬜ Not started | |
 | 90 | Can plugins send events to each other? | No | Base | | ⛔ Blocked | |
 | 91 | Can a plugin receive webhooks or callbacks? | Yes | Check | Route with `verifySignature`, called with curl | ⬜ Not started | |

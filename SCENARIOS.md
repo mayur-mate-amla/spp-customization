@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 55 |
+| ✅ Done | 56 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 80 |
+| ⬜ Not started | 79 |
 | ⛔ Blocked | 40 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -160,7 +160,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 66 | Does the editor preview a widget live while editing? | Yes | Check | Example: headline typed in the panel shows on the canvas as it is typed | ✅ Done | [notes](docs/scenarios/066-live-preview-while-editing/) |
 | 67 | Can I drag a new package widget onto a page and publish it? | Not tested | Check | Needs the page-builder app running | ⬜ Not started | |
 | 68 | Can I update an existing widget's config (fields, defaults)? | Partial | UI | Result: **Yes** (the package must render the type). Example: Promo code strip + Expires on (auto-hide) and Terms fields | ✅ Done | [notes](docs/scenarios/068-update-existing-widget-config/) |
-| 69 | Can I change an existing widget's design? | Yes | UI | CSS for a store widget | ⬜ Not started | |
+| 69 | Can I change an existing widget's design? | Yes | UI | Example: parent's Card grid fixed and restyled into a 4-column department grid (CSS only) | ✅ Done | [notes](docs/scenarios/069-change-existing-widget-design/) |
 | 70 | Can I replace how an existing widget renders? | Yes | UI | Widget with a store widget's type name | ⬜ Not started | |
 | 71 | Can I hide or remove a base widget from the page builder for a theme? | No | Base | | ⛔ Blocked | |
 | 72 | Can I reorder the editor's widget categories? | No | Base | | ⛔ Blocked | |

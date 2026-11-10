@@ -1,0 +1,37 @@
+/* The parent theme's Card grid widget ("Shop by department"), restyled with CSS only. As shipped, its card width comes
+   from a class computed at runtime (md:w-[calc((100%-72px)/4)]) that the store's compiled CSS does not contain, so every
+   card fell back to 40% of the row: huge square tiles in a side scroller. Here it is a real grid (2 columns on phones,
+   4 from 768 px), 4:3 tiles with the department name over the image, and no scroll arrows (every card fits). */
+
+html[data-theme] .card-grid-widget .overflow-x-auto {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  overflow: visible;
+}
+@media (min-width: 768px) {
+  html[data-theme] .card-grid-widget .overflow-x-auto { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+}
+html[data-theme] .card-grid-widget .overflow-x-auto > div { width: auto; }
+html[data-theme] .card-grid-widget button:is([aria-label="Previous"], [aria-label="Next"]) { display: none; }
+
+/* a card: the tile with the name over a soft gradient */
+html[data-theme] .card-grid-widget [data-test-selector^="divCard"] { position: relative; }
+html[data-theme] .card-grid-widget [data-test-selector^="divCard"] > span:first-child {
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(11, 37, 69, 0.12);
+}
+html[data-theme] .card-grid-widget [data-test-selector^="divCard"] > span:last-child {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 28px 16px 14px;
+  font-size: 17px;
+  color: #fff;
+  background: linear-gradient(to top, rgba(11, 37, 69, 0.85), rgba(11, 37, 69, 0));
+  border-radius: 0 0 14px 14px;
+}
+html[data-theme] .card-grid-widget [data-test-selector^="divCard"]:focus-visible { outline: 3px solid var(--focus-outline-color, #f26b1d); outline-offset: 3px; border-radius: 14px; }

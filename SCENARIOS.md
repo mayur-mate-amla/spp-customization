@@ -6,6 +6,8 @@ scenario that can be shown from here gets **its own commit**, made on top of the
 
 - `README.md`: what changed, where (files) and how, and how to check it
 - `before.png` / `after.png`: the store page before and after the change (taken with `scripts/shot.mjs`)
+- for a **Check** row, which changes nothing on a page: `output.txt` (the commands and what they printed) and
+  `evidence.png` (the same, as an image), plus before/after where a request or page shows the difference
 
 Commit message format: `scenario <nnn>: <use case>`, then what changed, where and how.
 

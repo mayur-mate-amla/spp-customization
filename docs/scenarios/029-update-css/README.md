@@ -24,7 +24,6 @@ A common storefront polish, done without touching a component:
 
 Motion is turned off for shoppers who ask for reduced motion (`prefers-reduced-motion`).
 
-
 ## How it renders
 
 **In the webstore (base):** `category/[id]/page.tsx` → page JSON (agent `getPageByPageCode`) → `preparedContentItem` → agent `categoryProductList` → `GET {API_URL}v2.1/categories/{code}/products` → `ProductListPageRender` → `CategoryProductList` → `ProductList` → `ProductViews` → `ProductCard` ([§4 A](../../RENDER-FLOW.md#4-worked-example-the-product-card-on-a-category-page))

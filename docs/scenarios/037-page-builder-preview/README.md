@@ -30,7 +30,6 @@ delivery-preference; stylesheets spp-base, redpanda, spp-customization.
 The page builder shows a store's **live** theme (it has no preview cookie), so for the "after" shot the theme was put
 live on POCSppDemo and switched back to redpanda afterwards (the "before" shot).
 
-
 ## How it renders
 
 **In the webstore (base):** the page builder renders the store's page JSON in its canvas ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

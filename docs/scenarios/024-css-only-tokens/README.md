@@ -20,7 +20,6 @@ screenshots:
 
 Page-builder content keeps the colors its editor saved (the hero, the green stats strip, the brand headers).
 
-
 ## How it renders
 
 **In the webstore (base):** the root layout writes `<html data-theme="…">` and inlines the portal's theme CSS ([§3 A](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))

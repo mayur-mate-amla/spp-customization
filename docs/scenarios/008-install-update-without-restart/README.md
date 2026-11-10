@@ -12,7 +12,6 @@ The announcement bar gets a **Learn more** link to the theme's welcome page (`/s
 update went live by running `npm run deploy` and refreshing the page: no webstore build, no restart. The webstore
 process listening on port 3000 is the same before and after (pid 21432, started 12:17:11).
 
-
 ## How it renders
 
 **In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))

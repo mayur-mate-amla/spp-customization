@@ -29,7 +29,6 @@ $ node scripts/registry.mjs enable false     ->  1. spp-customization: off   2. 
 $ node scripts/registry.mjs enable true      ->  1. spp-customization: on    2. redpanda: on
 ```
 
-
 ## How it renders
 
 **In the webstore (base):** every request resolves its store from the host (proxy → domain → portal) ([§2 A](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))

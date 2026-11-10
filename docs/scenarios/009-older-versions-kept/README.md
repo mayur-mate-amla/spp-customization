@@ -21,7 +21,6 @@ nothing under `.versions/` is ever sent to a browser.
 
 The theme is now at version 1.0.2.
 
-
 ## How it renders
 
 **In the webstore (base):** No page render: this happens in the build / install step, before any request.

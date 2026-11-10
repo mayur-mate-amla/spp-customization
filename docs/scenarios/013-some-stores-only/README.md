@@ -22,7 +22,6 @@ plugin folder, and placed for one store: `"stores": ["POCSppDemo"]`.
 
 (`/api/extensions` on each host, in `output.txt`.)
 
-
 ## How it renders
 
 **In the webstore (base):** as 012 ([§2 A](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))

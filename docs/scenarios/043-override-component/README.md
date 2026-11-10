@@ -37,7 +37,6 @@ Correction: the first version of this page said `product.image` and the listing 
 The listing probe ran while the cards were still loading, and the image probe's output was replaced by artifi. Order
 matters: a slot's later package (plugins come after the theme) decides what is finally shown.
 
-
 ## How it renders
 
 **In the webstore (base):** `product/[id]/page.tsx` → agent `getProductInformation` → `GET {API_URL}v2/published-products/{id}` → `ProductDetailsPage` → `ProductBasicInfo` (image, name, price, variants, `AddToCart`) ([§5 A](../../RENDER-FLOW.md#5-product-details-page))

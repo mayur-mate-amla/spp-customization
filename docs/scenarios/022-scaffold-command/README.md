@@ -24,7 +24,6 @@ because its placeholder publisher and description are still in place, as intende
 | `npm create znode-plugin@latest <name>` | A full project: npm scripts, TypeScript config, connection to a store, examples (this repo) |
 | `npx znode create <kind> <name> [dir]` | A minimal package of one kind, in any folder |
 
-
 ## How it renders
 
 **In the webstore (base):** No page render: this happens in the build / install step, before any request.

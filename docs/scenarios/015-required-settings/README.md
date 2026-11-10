@@ -14,7 +14,6 @@ shows a **Call 1-800-555-0199** link (`tel:`). While it is empty the bar just le
 The install reports a required setting that is still empty (016). The store itself does not enforce `required`; it is
 for the install report and for whoever configures the package (an admin screen does not exist yet, row 19).
 
-
 ## How it renders
 
 **In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))

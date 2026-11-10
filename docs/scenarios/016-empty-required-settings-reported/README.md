@@ -15,7 +15,6 @@ After the value is set (`node scripts/registry.mjs set supportPhone=1-800-555-01
 report. The install keeps the store's values across upgrades and fills new settings from their defaults; a required
 setting has no default, so it is listed until someone fills it in.
 
-
 ## How it renders
 
 **In the webstore (base):** No page render: this happens in the build / install step, before any request.

@@ -20,7 +20,6 @@ B2B storefronts put the buyer's account manager on the home and account pages. *
 Because it ships in a plugin, every store the plugin is placed for offers it, whatever its theme
 (`/api/extensions?store=POCSppDemo` on the page builder: `... spp-commerce ...`, theme redpanda).
 
-
 ## How it renders
 
 **In the webstore (base):** the page builder for a store ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

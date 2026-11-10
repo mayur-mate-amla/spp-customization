@@ -20,7 +20,6 @@ The checkout pattern most storefronts use:
 
 The store's checkout keeps all its behavior (address validation, shipping rates, payment, place order).
 
-
 ## How it renders
 
 **In the webstore (base):** checkout page → `Checkout` → `AddressWrapper`, `ShippingOptions`, payment, summary ([§7 A](../../RENDER-FLOW.md#7-cart-checkout-place-order))

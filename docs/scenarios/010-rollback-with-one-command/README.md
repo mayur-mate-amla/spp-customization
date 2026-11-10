@@ -15,7 +15,6 @@ installed theme spp-customization@1.0.0 (was 1.0.1): 8 files, disabled for []
 
 Without a version it lists the versions it can go back to; an unknown version stops with exit code 1.
 
-
 ## How it renders
 
 **In the webstore (base):** No page render: this happens in the build / install step, before any request.

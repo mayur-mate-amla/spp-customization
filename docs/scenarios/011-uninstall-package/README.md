@@ -25,7 +25,6 @@ and `.versions/`), with this project's `releases/` moved away:
 - every Apex file still there
 - `--purge` removes `.versions/spp-customization/`
 
-
 ## How it renders
 
 **In the webstore (base):** No page render: this happens in the build / install step, before any request.

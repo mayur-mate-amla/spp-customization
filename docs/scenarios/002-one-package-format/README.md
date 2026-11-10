@@ -8,7 +8,6 @@ One manifest, `znode-package.json`, describes every package. Its `kind` says wha
 `widget` or `content`. Everything else (build entry points, styles, assets, labels, widgets, pages, settings,
 permissions) uses the same fields whatever the kind; `parent` is the one field only a theme may have.
 
-
 ## How it renders
 
 **In the webstore (base):** No page render: this happens in the build / install step, before any request.

@@ -30,7 +30,6 @@ Each list item carries a stable drag-and-drop id, `data-rfd-draggable-id="compon
 (listed for this store in `output.txt`); the theme's CSS hides the ones it leaves out. The selectors never match on the
 storefront.
 
-
 ## How it renders
 
 **In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

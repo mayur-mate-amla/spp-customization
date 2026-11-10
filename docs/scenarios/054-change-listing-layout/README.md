@@ -21,7 +21,6 @@ between the store's sort/view bar and the grid:
 
 The layout keeps the parts from 050 (the store's sort / count / view bar and facet chips) and the theme's cards.
 
-
 ## How it renders
 
 **In the webstore (base):** `category/[id]/page.tsx` → page JSON (agent `getPageByPageCode`) → `preparedContentItem` → agent `categoryProductList` → `GET {API_URL}v2.1/categories/{code}/products` → `ProductListPageRender` → `CategoryProductList` → `ProductList` → `ProductViews` → `ProductCard` ([§4 A](../../RENDER-FLOW.md#4-worked-example-the-product-card-on-a-category-page))

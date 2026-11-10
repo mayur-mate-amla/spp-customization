@@ -13,7 +13,6 @@ The package says which extension API it is built for in two places, and each is 
 
 The store's version is `EXTENSION_API_VERSION = 1` (`packages/extensions/src/types.ts` in the store repo).
 
-
 ## How it renders
 
 **In the webstore (base):** No page render: this happens in the build / install step, before any request.

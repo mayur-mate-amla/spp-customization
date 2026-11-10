@@ -22,7 +22,6 @@ In the screenshots only the settings changed (`#f26b1d` → `#0f766e`, `brand` �
 page refresh. The heading's computed font is `ui-sans-serif, system-ui, -apple-system, "Segoe UI"` (checked in the
 browser; it looks close to the brand font at this weight).
 
-
 ## How it renders
 
 **In the webstore (base):** the root layout renders header to footer inside `<RuntimeServerSlot name="layout.root">` ([§3 A](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))

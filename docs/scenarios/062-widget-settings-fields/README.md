@@ -22,7 +22,6 @@ is a field in the editor's right-hand panel:
 
 063 adds the remaining field types to this widget.
 
-
 ## How it renders
 
 **In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

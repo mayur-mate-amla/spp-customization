@@ -18,7 +18,6 @@ changes one thing in this theme's real zip:
 | folder | adds `nested/evil.css` | a package is flat, no folders |
 | too-big | adds an 11 MB file | package is 11611473 bytes; the limit is 10485760 |
 
-
 ## How it renders
 
 **In the webstore (base):** No page render: this happens in the build / install step, before any request.

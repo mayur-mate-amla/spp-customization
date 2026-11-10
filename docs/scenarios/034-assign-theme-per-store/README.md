@@ -33,7 +33,6 @@ What the store then runs (`/api/extensions`): packages spp-base, spp-customizati
 delivery-preference; stylesheets `spp-base-1.2.1.css`, `redpanda-1.0.0.css`, `spp-customization-1.0.2.css` (redpanda
 still applies, as the parent).
 
-
 ## How it renders
 
 **In the webstore (base):** as 012 ([§2 A](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))

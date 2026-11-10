@@ -18,7 +18,6 @@ page uses it with sample quotes (placeholder content for this demo, to be replac
 
 Accessibility: the stars are one image with `aria-label="5 out of 5 stars"`; quotes are `<blockquote>`.
 
-
 ## How it renders
 
 **In the webstore (base):** `[locale]/page.tsx` → `getPage({ url: "home" })` → agent `getPageByPageCode` → `GET {API_URL}v2/visual-editor/pages/…` → `preparedContentItem` → `<PageRender>` ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

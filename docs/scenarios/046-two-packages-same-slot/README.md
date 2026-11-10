@@ -28,7 +28,6 @@ plugins in `plugins.json` order (`spp-base > spp-customization > artifi > countd
 spp-commerce` on this store). Each keeps the children, so everything shows; spp-commerce comes last, so its bar wraps
 the rest and sits on top. A package that fails to render is skipped and the others still show (185).
 
-
 ## How it renders
 
 **In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))

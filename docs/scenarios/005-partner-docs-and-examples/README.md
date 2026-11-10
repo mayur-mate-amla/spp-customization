@@ -13,7 +13,6 @@
   (`Hero.tsx`), a Google font (`fonts.ts`), styles, labels and an asset.
 - **Starters by kind**: `znode create <kind> <name>` (see 022).
 
-
 ## How it renders
 
 **In the webstore (base):** No page render: this happens in the build / install step, before any request.

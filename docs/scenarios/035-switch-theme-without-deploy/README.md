@@ -28,7 +28,6 @@ stylesheets spp-base-1.2.1.css, redpanda-1.0.0.css
   the start of 034 (redpanda for POCSppDemo). Only the entries' order differs: spp-customization now comes before
   redpanda, which changes nothing while it has no stores.
 
-
 ## How it renders
 
 **In the webstore (base):** as 012 ([§2 A](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))

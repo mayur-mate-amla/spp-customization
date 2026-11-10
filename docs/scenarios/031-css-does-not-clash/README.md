@@ -25,7 +25,6 @@ How each kind of clash is kept away:
 | Overriding the store's tokens by accident | Token and element rules are scoped to `html[data-theme]` (024, 029) | `tokens.css`, `listing.css` |
 | The theme's CSS reaching other stores | Only the active theme chain's stylesheets are linked: POCStaplesPromo loads spp-base, artifi and countdown-banner, never `spp-customization` | `/api/extensions` on `staplespromo.localhost:3000` |
 
-
 ## How it renders
 
 **In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))

@@ -20,7 +20,6 @@ GET /api/extensions/files/spp-customization-geist-latin.woff2
 200  font/woff2  28356 bytes  Cache-Control: public, max-age=31536000, immutable
 ```
 
-
 ## How it renders
 
 **In the webstore (base):** as 024 ([§3 A](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))

@@ -23,7 +23,6 @@ The banner's defaults now depend on when it is placed:
 Every value is still a field the merchandiser can change; defaults only apply to a newly placed block (saved blocks
 keep their values).
 
-
 ## How it renders
 
 **In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

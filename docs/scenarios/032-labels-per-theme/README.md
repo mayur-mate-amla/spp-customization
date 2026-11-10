@@ -23,7 +23,6 @@ wording:
 
 Only the keys listed change; every other label stays the store's. Stores not on this theme keep the defaults.
 
-
 ## How it renders
 
 **In the webstore (base):** `apps/webstore/src/i18n/request.ts` loads `messages/<locale>.json`; components read labels through next-intl (`Product.sku`, …) ([§3 B.7](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))

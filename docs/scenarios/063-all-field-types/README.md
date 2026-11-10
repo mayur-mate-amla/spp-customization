@@ -20,7 +20,6 @@ tall so the whole panel shows.
 | Perks (list) | `array` (list) | "✓ Free logo setup ✓ Ships in 5 days", rows added, removed and reordered in the panel |
 | Button | `object` | Label + Link: the "Shop the sale" button |
 
-
 ## How it renders
 
 **In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

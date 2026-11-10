@@ -22,7 +22,6 @@ The common B2B cart pattern:
 
 The store's cart keeps all its behavior (quantity, remove, totals, checkout): only its styles change.
 
-
 ## How it renders
 
 **In the webstore (base):** cart page → `GET /api/cart/get-cart-items` → agent `getCartItems` → `GET {API_URL}commerceapi/v1/{classType}/item-list/{classNumber}` → `Cart` ([§7 A](../../RENDER-FLOW.md#7-cart-checkout-place-order))

@@ -23,7 +23,6 @@ The child's own parts still apply on top: its design tokens (024) color the navi
 announcement bar stays. On a page the parent renders, the child's CSS loads **after** the parent's
 (`spp-base-1.2.1.css`, then `spp-customization-1.0.2.css`), so the child wins where both set something.
 
-
 ## How it renders
 
 **In the webstore (base):** `[locale]/page.tsx` → `getPage({ url: "home" })` → agent `getPageByPageCode` → `GET {API_URL}v2/visual-editor/pages/…` → `preparedContentItem` → `<PageRender>` ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

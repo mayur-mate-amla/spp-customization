@@ -31,7 +31,6 @@ MaxwellsHardware  apex, spp-widgets
 spp-customization was live on POCSppDemo only for this check and switched back afterwards; spp-widgets stays placed
 for every store.
 
-
 ## How it renders
 
 **In the webstore (base):** the page builder for a store ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

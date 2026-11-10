@@ -20,7 +20,6 @@ logo, and each client's store needs its own. The theme gets a **`logoUrl`** sett
   brand header (`.spp-logo`, `.spp-compact-logo`), on desktop and phone.
 - Only site paths (`/...`) and `https://` URLs are accepted, so a setting cannot inject CSS.
 
-
 ## How it renders
 
 **In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))

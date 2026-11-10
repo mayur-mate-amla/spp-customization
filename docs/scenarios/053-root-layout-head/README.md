@@ -21,7 +21,6 @@ Checked: none of the four in the server-rendered `<head>` before, all four after
 holds the `page_view` and the script marked the page ready. The analytics script sends nothing anywhere: a real tag
 manager's script is added the same way.
 
-
 ## How it renders
 
 **In the webstore (base):** the root layout's `<head>` ([§3 A](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))

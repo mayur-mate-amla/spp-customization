@@ -101,8 +101,9 @@ for (const folder of fs.readdirSync(root)) {
   if (!flow || !fs.existsSync(file)) continue; // null: written by hand in the README
   const section = `## How it renders\n\n**In the webstore (base):** ${flow[0]}\n\n**How this customization joins it:** ${flow[1]}\n\nEnd-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](${DOC}).\n`;
   let text = fs.readFileSync(file, "utf8").replace(/\n## How it renders\n[\s\S]*?(?=\n## |\s*$)/, "\n").trimEnd();
-  // before "## Where" when there is one, else at the end
-  text = text.includes("\n## Where") ? text.replace("\n## Where", `\n${section}\n## Where`) : `${text}\n\n${section}`;
+  // before "## Where" when there is one, else at the end; exactly one blank line around it, so a rerun changes nothing
+  text = text.includes("\n## Where") ? text.replace("\n## Where", `\n\n${section}\n## Where`) : `${text}\n\n${section}`;
+  text = text.replace(/\n{3,}/g, "\n\n");
   fs.writeFileSync(file, text.endsWith("\n") ? text : `${text}\n`);
   count++;
 }

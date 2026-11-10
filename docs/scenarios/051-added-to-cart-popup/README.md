@@ -22,7 +22,6 @@ are not sure it worked. The theme's popup, standard on most storefronts:
 It **replaces** the store's popup (the slot's children are not rendered), so the two never show together on stores
 where the store's own does appear.
 
-
 ## How it renders
 
 **In the webstore (base):** click → `useAddToCart` → `POST /api/add-to-cart` → agent `addToCartProduct` → `POST {API_URL}commerceapi/v1/carts/add-to-cart` → cart count and popup data in the store's state ([§6 A](../../RENDER-FLOW.md#6-add-to-cart))

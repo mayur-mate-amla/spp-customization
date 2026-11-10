@@ -24,7 +24,6 @@ element** (checked in the browser: `[data-runtime-slot="layout.footer"]` inside 
 mounted, the band now moves its slot container to just before the visible store footer (or the end of the page),
 which also places it consistently on every store.
 
-
 ## How it renders
 
 **In the webstore (base):** the layout JSON's footer → `FooterRender` (`<footer>` with page-builder content) ([§8 A.3](../../RENDER-FLOW.md#8-header-footer-search))

@@ -20,7 +20,6 @@ this"**, with **Exit preview**, which clears the cookie and comes back to the sa
 (`/api/extensions/preview?to=<this page>`). It renders nothing on the server and for shoppers, so it costs nothing on
 the live store.
 
-
 ## How it renders
 
 **In the webstore (base):** as 012 ([§2 A](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))

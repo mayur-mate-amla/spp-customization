@@ -8,7 +8,6 @@ This whole repository is the proof: the `spp-customization` theme lives in its o
 (`mayur-mate-amla/spp-customization`), separate from the webstore repo. It builds with the published SDK
 (`znode-plugin` from npm) and installs into the store's plugin folder without a store build.
 
-
 ## How it renders
 
 **In the webstore (base):** No page render: this happens in the build / install step, before any request.

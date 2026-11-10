@@ -20,7 +20,6 @@ Answers to the questions buyers ask before ordering, on home and help pages. **F
 - editor fields: Heading (text), Open the first answer (radio), Questions (a list of question / answer)
 - new blocks start with three sample questions about minimums, decoration proofs and purchase orders
 
-
 ## How it renders
 
 **In the webstore (base):** `[locale]/page.tsx` → `getPage({ url: "home" })` → agent `getPageByPageCode` → `GET {API_URL}v2/visual-editor/pages/…` → `preparedContentItem` → `<PageRender>` ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

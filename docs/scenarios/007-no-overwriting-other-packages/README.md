@@ -25,7 +25,6 @@ In `znode-plugin/lib/znode-package.mjs`:
 
 This repo's `npm run uninstall` (011) already works around the missing record by reading the package's own zips.
 
-
 ## How it renders
 
 **In the webstore (base):** No page render: this happens in the build / install step, before any request.

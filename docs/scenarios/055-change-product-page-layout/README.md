@@ -27,7 +27,6 @@ the theme. Changing the layout with CSS on the store's own markup (the info colu
 it holds) plus a slot for the new panel keeps every store piece, Artifi's image included, with its own logic. (An
 earlier version gave a different reason, that the image is not a part here; it is, see the correction in 043.)
 
-
 ## How it renders
 
 **In the webstore (base):** `product/[id]/page.tsx` → agent `getProductInformation` → `GET {API_URL}v2/published-products/{id}` → `ProductDetailsPage` → `ProductBasicInfo` (image, name, price, variants, `AddToCart`) ([§5 A](../../RENDER-FLOW.md#5-product-details-page))

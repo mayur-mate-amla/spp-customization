@@ -26,7 +26,6 @@ GET /api/extensions/plugins/spp-customization/shipping-cutoff
   theme, `404`. The strip then keeps its fixed text "Ships in 24 hours".
 - Checked at five moments (before cutoff, one minute before, at cutoff, Friday evening, Saturday): `output.txt`.
 
-
 ## How it renders
 
 **In the webstore (base):** no page: an API route of the theme

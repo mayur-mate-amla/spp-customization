@@ -21,7 +21,6 @@ The theme's stylesheet turns it into the department grid shoppers expect:
 - the department name **over** the tile on a navy gradient, instead of under it
 - a visible focus outline for keyboard users
 
-
 ## How it renders
 
 **In the webstore (base):** `[locale]/page.tsx` → `getPage({ url: "home" })` → agent `getPageByPageCode` → `GET {API_URL}v2/visual-editor/pages/…` → `preparedContentItem` → `<PageRender>` ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

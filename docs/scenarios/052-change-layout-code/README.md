@@ -24,7 +24,6 @@ Two things almost every serious storefront has in its page layout:
 Both are in the server-rendered HTML (`output.txt`), and the date rule was checked at both edges (Oct 31 none, Nov 1
 and Dec 26 shown, Dec 27 none).
 
-
 ## How it renders
 
 **In the webstore (base):** the root layout renders header to footer inside `<RuntimeServerSlot name="layout.root">` ([§3 A](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))

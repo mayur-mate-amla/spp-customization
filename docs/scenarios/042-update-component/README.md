@@ -19,7 +19,6 @@ is (typeahead, barcode scan, its own submit); the theme **adds to it** through i
 - The terms are the **`popularSearches`** setting (a list), so merchandisers change them without code; default
   "Cordless drill, Safety glasses, Work gloves, Extension cord".
 
-
 ## How it renders
 
 **In the webstore (base):** `Header` → `Search.tsx` renders `<SearchBox>` inside `<RuntimeSlot name="header.search">` ([§8 A.2, B](../../RENDER-FLOW.md#8-header-footer-search))

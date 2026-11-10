@@ -21,7 +21,6 @@ regrouped by what a merchandiser is doing:
 The other packages keep theirs: "SPP commerce" (the plugin's account manager), "SPP shared" (the shared showroom
 widget), "Artifi", "Promotions" (countdown banner).
 
-
 ## How it renders
 
 **In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

@@ -25,7 +25,6 @@ Each category is a component list containing a drop zone with a stable id,
 categories a negative `order`. Class names are matched by their stable prefix (`[class*="_ComponentList_"]`), since the
 suffix is a build hash.
 
-
 ## How it renders
 
 **In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

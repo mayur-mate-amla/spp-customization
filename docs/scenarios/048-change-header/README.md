@@ -18,7 +18,6 @@ row with logo, menu, search, account and cart, and a soft shadow. Scrolling back
 The compact row is the parent theme's own (spp-base uses it on phones), so every control keeps working; the theme
 only decides **when** it shows on desktop.
 
-
 ## How it renders
 
 **In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))

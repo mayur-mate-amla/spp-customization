@@ -23,7 +23,6 @@ store. Here **Red Panda** is the family style (Montserrat, square corners, dark 
 The stylesheets load in that order, so the nearest theme wins: `spp-base-1.2.1.css`, `redpanda-1.0.0.css`,
 `spp-customization-1.0.2.css` (`output.txt`).
 
-
 ## How it renders
 
 **In the webstore (base):** as 024 ([§3 A](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))

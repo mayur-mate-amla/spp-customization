@@ -25,7 +25,6 @@ $ node scripts/registry.mjs stores POCSppDemo --package spp-widgets
 a widget in a theme is offered where the theme runs, a widget in a plugin or widget package where that package is
 placed.
 
-
 ## How it renders
 
 **In the webstore (base):** the page builder for a store ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))

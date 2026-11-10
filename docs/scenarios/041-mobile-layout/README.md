@@ -31,7 +31,6 @@ page's content started about **340 px** down a 844 px screen.
 Content now starts at about **225 px**. The listing (one card per row, the theme's card styles from 029/032) needed no
 change.
 
-
 ## How it renders
 
 **In the webstore (base):** the store's responsive layout ([§3 A](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))

@@ -50,9 +50,9 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 0 |
+| ✅ Done | 1 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 133 |
+| ⬜ Not started | 132 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -61,7 +61,7 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Can a partner build a theme, plugin or widget outside our repo? | Yes | Check | This repo: built and deployed with no store-repo checkout edits | ⬜ Not started | |
+| 1 | Can a partner build a theme, plugin or widget outside our repo? | Yes | Check | This repo: built and deployed with no store-repo checkout edits | ✅ Done | [notes](docs/scenarios/001-partner-builds-outside-store-repo/) |
 | 2 | Is there one package format (znode-package.json)? | Yes | Check | `znode-package.json` with `kind`; `znode check` passes | ⬜ Not started | |
 | 3 | Is there an SDK to build, pack and install a package? | Yes | Check | `npm run build`, `pack`, `deploy` output | ⬜ Not started | |
 | 4 | Is the public API documented for partners (extension-api.d.ts)? | Yes | Check | Build type-checks `src/` against `extension-api.d.ts` | ⬜ Not started | |

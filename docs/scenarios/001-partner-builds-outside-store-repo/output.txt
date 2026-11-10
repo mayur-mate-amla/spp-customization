@@ -1,0 +1,23 @@
+$ git remote -v
+origin	https://github.com/mayur-mate-amla/spp-customization.git (fetch)
+origin	https://github.com/mayur-mate-amla/spp-customization.git (push)
+
+$ npm ls --depth=0
+spp-customization@1.0.0 D:\spp-customization
++-- @types/react-dom@19.2.3
++-- @types/react@19.2.13
++-- next@16.1.6
++-- puppeteer-core@23.11.1
++-- react-dom@19.2.4
++-- react@19.2.4
+`-- znode-plugin@0.1.2
+
+
+$ npm run deploy
+
+> spp-customization@1.0.0 deploy
+> znode deploy .
+
+built theme spp-customization@1.0.0: 9 files
+packed spp-customization-1.0.0.zpkg.zip (59604 bytes)
+installed theme spp-customization@1.0.0 (was 1.0.0): 8 files, disabled for []

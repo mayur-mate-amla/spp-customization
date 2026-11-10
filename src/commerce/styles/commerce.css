@@ -77,3 +77,18 @@
 /* checkout address step (checkout.address slot, row 116) */
 .spp-commerce-checkout-address__eta { margin: 0 0 14px; padding: 10px 12px; font-size: 14px; color: rgb(21, 128, 61); background: rgb(240, 253, 244); border: 1px solid rgb(187, 247, 208); border-radius: 8px; }
 .spp-commerce-checkout-address__warning { margin: 12px 0 0; padding: 10px 12px; font-size: 14px; color: rgb(153, 27, 27); background: rgb(254, 242, 242); border: 1px solid rgb(254, 202, 202); border-radius: 8px; }
+
+/* /event-kits (server page, row 121) */
+.spp-commerce-kits { color: rgb(30, 41, 59); }
+.spp-commerce-kits__body { max-width: 900px; margin: 32px auto 56px; }
+.spp-commerce-kits__title { margin: 0 0 6px; font-size: 32px; font-weight: 800; color: rgb(15, 23, 42); }
+.spp-commerce-kits__lead { margin: 0 0 24px; font-size: 17px; color: rgb(71, 85, 105); }
+.spp-commerce-kits__kit { margin: 0 0 28px; padding: 20px 22px; background: #fff; border: 1px solid rgb(226, 232, 240); border-radius: 12px; }
+.spp-commerce-kits__kit h2 { margin: 0 0 4px; font-size: 21px; font-weight: 700; color: rgb(15, 23, 42); }
+.spp-commerce-kits__kit > p { margin: 0 0 12px; color: rgb(71, 85, 105); }
+.spp-commerce-kits__kit small { font-weight: 400; color: rgb(100, 116, 139); }
+.spp-commerce-kits__kit tfoot th, .spp-commerce-kits__kit tfoot td { font-weight: 800; border-bottom: 0; }
+.spp-commerce-kits__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+.spp-commerce-kits__actions button { padding: 10px 20px; font-weight: 700; color: #fff; background: rgb(15, 23, 42); border-radius: 8px; }
+.spp-commerce-kits__actions button:disabled { opacity: 0.5; }
+.spp-commerce-kits__actions span { font-weight: 600; color: rgb(21, 128, 61); }

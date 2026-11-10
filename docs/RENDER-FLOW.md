@@ -362,6 +362,7 @@ repository joins it. Commits are on `main` of this repository.
 | 112 | Change the cart page (per-line delivery dates) | 6e949b5 | §7 A cart page (no slot) | §7 B.1 `mapCartItems` with cookies | src/commerce/server.ts, src/commerce/slots/DeliveryEstimate.tsx |
 | 113 | Add or remove cart items automatically | 68703da | §7 A.1 | §7 B.1 (`runCartHooks` actions) | src/commerce/server.ts, src/commerce/rules.ts |
 | 114 | Cart rules (minimum order quantity) | 180df50 | §7 A.1 | §7 B.1 (`runCartHooks`, `runMapCartItems`) | src/commerce/rules.ts, src/commerce/server.ts |
-| 116 | Checkout address step (PO Box guard, delivery date) | (this commit) | §7 A.3 address form | §7 B.2 `checkout.address` | src/commerce/slots/CheckoutAddress.tsx |
+| 116 | Checkout address step (PO Box guard, delivery date) | 9aa46da | §7 A.3 address form | §7 B.2 `checkout.address` | src/commerce/slots/CheckoutAddress.tsx |
+| 121 | A new module: Event kits | (this commit) | – (404) | §9 B.1 server page + `layout.header` browser part, §7 B.5 route, §6 store add-to-cart | src/commerce/EventKitsPage.tsx, src/commerce/slots/EventKits.tsx |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

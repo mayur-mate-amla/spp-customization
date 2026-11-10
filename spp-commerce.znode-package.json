@@ -38,7 +38,8 @@
     "/": "src/commerce/pages/home.json"
   },
   "serverPages": [
-    "/ordering-information"
+    "/ordering-information",
+    "/event-kits"
   ],
   "overrides": {
     "/api/search/search-hydrated-typeahead": "search-typeahead",
@@ -176,6 +177,56 @@
       "label": "Refuse PO Box shipping addresses at checkout (ground freight)",
       "browser": true,
       "default": true
+    },
+    "eventKits": {
+      "type": "json",
+      "label": "Event kits: [{ id, name, text, items: [{ sku, quantity, label }] }] (simple products; shown at /event-kits)",
+      "default": [
+        {
+          "id": "trade-show",
+          "name": "Trade show booth kit",
+          "text": "Badges, bags and giveaways for a 100-visitor day at the booth.",
+          "items": [
+            {
+              "sku": "81DRL",
+              "quantity": 100,
+              "label": "Lanyards"
+            },
+            {
+              "sku": "Y1448_001",
+              "quantity": 100,
+              "label": "Can coolers"
+            },
+            {
+              "sku": "80RXL_986",
+              "quantity": 25,
+              "label": "Totes"
+            }
+          ]
+        },
+        {
+          "id": "new-hire",
+          "name": "New-hire welcome kit",
+          "text": "For five new team members: a backpack, a tote and a lanyard each.",
+          "items": [
+            {
+              "sku": "817NK_25",
+              "quantity": 5,
+              "label": "Backpacks"
+            },
+            {
+              "sku": "80RXL_986",
+              "quantity": 5,
+              "label": "Totes"
+            },
+            {
+              "sku": "81DRL",
+              "quantity": 10,
+              "label": "Lanyards"
+            }
+          ]
+        }
+      ]
     }
   }
 }

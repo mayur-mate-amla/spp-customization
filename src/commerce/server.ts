@@ -1,6 +1,7 @@
 import type { ICartHookContext, IPluginRouteContext, IPluginRouteRequest, IRuntimeData, IRuntimeHookContext, IRuntimePlugin } from "znode-plugin/types/extension-api";
 import { companionChanges, lineNotes, quantityRule, replacedBy, withNotes } from "./rules";
 import { OrderingInfoPage } from "./OrderingInfoPage";
+import { EventKitsPage } from "./EventKitsPage";
 import { arrivalDate, lookupZip, transitDays, type IPlace } from "./delivery";
 import { envelope, readQuoteRequest, type IQuoteRequest } from "./quotes";
 
@@ -15,7 +16,7 @@ import { envelope, readQuoteRequest, type IQuoteRequest } from "./quotes";
 //                      removed again with it
 //   mapCartItems     line notes (setting lineNotes), and each line's delivery date with the shopper's ZIP (row 112): "Sold in cases of 10", "Minimum order 25", "Limit 5 per order"
 //                    under the lines they apply to, on the cart page and checkout
-//   serverPages      /ordering-information: the ordering policies, written from these settings (OrderingInfoPage.tsx)
+//   serverPages      /event-kits: kits for events (row 121); /ordering-information: the ordering policies, written from these settings (OrderingInfoPage.tsx)
 //   routes.activity  GET /api/extensions/plugins/spp-commerce/activity: the store's last 20 adds and cart changes
 //   routes.rep       GET .../rep?code=JR&to=/category/1674: a sales rep's link. Sets the spp_rep cookie (30 days) for a
 //                    known rep (setting salesReps) and redirects; the account bar names the rep, adds are credited
@@ -483,6 +484,11 @@ const plugin: IRuntimePlugin = {
       // this file is .ts (no JSX): the page element is made with the store's React from the context
       render: (_props, context) => context.React.createElement(OrderingInfoPage, { settings: context.settings, storeCode: context.store.code }),
       metadata: { title: "Ordering information", description: "Case packs, minimums, order limits, free shipping and sales reps." },
+    },
+    // a module of its own (row 121): kits for events, interactive through the browser part (slots/EventKits.tsx)
+    "/event-kits": {
+      render: (_props, context) => context.React.createElement(EventKitsPage, { settings: context.settings }),
+      metadata: { title: "Event kits", description: "Ready-made kits for trade shows and new hires, added to your cart in one click." },
     },
   },
   routes: {

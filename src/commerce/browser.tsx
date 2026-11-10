@@ -1,6 +1,7 @@
 import type { IBrowserHost, IBrowserPlugin } from "znode-plugin/types/extension-api";
 import { bindHost } from "./host.js";
 import { AccountBar } from "./slots/AccountBar.js";
+import { EventKits } from "./slots/EventKits.js";
 import { RuleTags } from "./slots/RuleTags.js";
 import { DeliveryEstimate } from "./slots/DeliveryEstimate.js";
 import { CheckoutAddress } from "./slots/CheckoutAddress.js";
@@ -16,7 +17,13 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
   return {
     slots: {
       // B2B account bar above the header (the theme fills the same slot)
-      "layout.header": AccountBar,
+      // the account bar; and on /event-kits only, the kits page's browser part (row 121)
+      "layout.header": (props) => (
+        <>
+          <EventKits />
+          <AccountBar {...props} />
+        </>
+      ),
       // the ordering rules (case packs, minimums, limits) on every product card, from the same settings as the cart rules
       "product.card": RuleTags,
       // "Deliver to [ZIP]" under the add to cart, from the delivery-estimate route

@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 93 |
+| ✅ Done | 94 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 43 |
+| ⬜ Not started | 42 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -248,7 +248,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 118 | Can I change the payment step UI? | No | Base | | ⛔ Blocked | |
 | 119 | Can I change the payment gateway? | No | Base | | ⛔ Blocked | |
 | 120 | Can I add custom data to the order? | Yes | Check | Override of place-order adding custom data | ⬜ Not started | |
-| 121 | Can I add a complete new module (e.g. quick checkout) without touching base? | Partial | UI | Server page + routes (quick-order page) | ⬜ Not started | |
+| 121 | Can I add a complete new module (e.g. quick checkout) without touching base? | Partial | UI | Event kits at /event-kits: server page + routes + settings + browser part via layout.header; adds go through the store's add-to-cart | ✅ Done | [notes](121-new-module-event-kits/) |
 | 122 | Does guest checkout work on the test environment? | No | Outside | Test environment, not this repo | ➖ Outside | |
 
 ## Orders

@@ -1,0 +1,13 @@
+# spp-commerce switched off (node scripts/registry.mjs enable false --package spp-commerce)
+> node scripts/cart-shot.mjs --add 105666:1 --add 103809:8
+3/4" Poly Lanyard w/clip | qty 1
+Graphite Deluxe 15" Computer Backpack | qty 8
+
+# switched on (enable true), nothing rebuilt or restarted
+> node scripts/cart-shot.mjs --add 105666:1 --add 103809:8 --route /api/extensions/plugins/spp-commerce/activity
+3/4" Poly Lanyard w/clip | qty 10
+Graphite Deluxe 15" Computer Backpack | qty 5
+{"sku":"81DRL","asked":1,"added":10,"rule":"replaces 200341843, case pack of 10","cartNumber":"C-10112026-1128","ok":true}
+{"sku":"817NK_25","asked":8,"added":8,"rule":"","cartNumber":"C-10112026-1128","ok":true}
+{"sku":"817NK_25","asked":8,"added":5,"rule":"limit 5 per order","cartNumber":"C-10112026-1128","ok":true}
+(the second line: the add as Znode got it; the third: onCartChanged bringing the line to the limit)

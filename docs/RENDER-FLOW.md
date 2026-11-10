@@ -350,7 +350,8 @@ repository joins it. Commits are on `main` of this repository.
 | 099 | Replace a store route (contact-us as quote requests) | 5646318 | contact-us route + agent | §7 B.4 override without `original()`, §9 B widget | src/commerce/quotes.ts, src/commerce/widgets/QuoteRequest.tsx |
 | 100 | Overrides only where the plugin is enabled | 868861a | store routes | §2 B placement, §7 B.4 `findRouteOverride` | scripts/overrides.mjs |
 | 101 | 64 KB body limit for plugin routes | 97284d9 | – | §7 B.5 `readLimited` (413) | src/commerce/quotes.ts, src/commerce/widgets/QuoteRequest.tsx |
-| 102 | Extend existing agent logic (map) | (this commit) | §6 A, §7 A agents | §6 B, §7 B.1 hooks; §7 B.4 overrides | – |
+| 102 | Extend existing agent logic (map) | c94a9ab | §6 A, §7 A agents | §6 B, §7 B.1 hooks; §7 B.4 overrides | – |
+| 103 | Update an agent with a runtime package (live, no rebuild) | (this commit) | agents compiled in the store | §1-§2 B registry per request, §6 B, §7 B | – |
 | 106 | Change add-to-cart logic (superseded item numbers) | 97a4fcf | §6 A add-to-cart agent | §6 B `beforeAddToCart` | src/commerce/rules.ts, src/commerce/server.ts |
 | 107 | Place-order logic (minimum order value) | fc8a531 | §7 A place-order route + agent | §7 B.4 override, refusal or `original({ body })`; §8 B bar | src/commerce/server.ts, src/commerce/slots/AccountBar.tsx |
 | 109 | Inventory check before the agent (ERP holds) | ea907c3 | §6 A add-to-cart route + agent | §7 B.4 override + `original({ body })`, §5 B notice | src/commerce/server.ts, src/commerce/holds.ts |

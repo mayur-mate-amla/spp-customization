@@ -13,6 +13,15 @@ The package says which extension API it is built for in two places, and each is 
 
 The store's version is `EXTENSION_API_VERSION = 1` (`packages/extensions/src/types.ts` in the store repo).
 
+
+## How it renders
+
+**In the webstore (base):** No page render: this happens in the build / install step, before any request.
+
+**How this customization joins it:** `znode install` refuses another `apiVersion`; the store skips a server bundle whose `apiVersion` differs (`registry.server.ts:89`) ([§1](../../RENDER-FLOW.md#1-from-this-repository-to-the-store-install-registry))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 No code change: `znode-package.json` and `src/server.tsx` already declare version 1. The refused package is the

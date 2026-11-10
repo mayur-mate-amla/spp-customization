@@ -30,6 +30,15 @@ Each list item carries a stable drag-and-drop id, `data-rfd-draggable-id="compon
 (listed for this store in `output.txt`); the theme's CSS hides the ones it leaves out. The selectors never match on the
 storefront.
 
+
+## How it renders
+
+**In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** `linkRuntimeStyles` links the theme's CSS into the editor; `src/styles/editor.css` hides list items by their drag-and-drop ids ([§9 B.4](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/styles/editor.css` (new): `[data-rfd-draggable-id$="::ProductsCarousel"]`, `…::NewsLetter`, `…::AdSpace`

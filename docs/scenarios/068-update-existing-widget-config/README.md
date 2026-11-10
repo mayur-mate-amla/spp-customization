@@ -24,6 +24,15 @@ background, button color, code color) stay, the two new ones follow; defaults li
 and its look. Checked: with yesterday's date the strip is not rendered; with Dec 31 it shows with its end date
 (`output.txt`).
 
+
+## How it renders
+
+**In the webstore (base):** `[locale]/page.tsx` → `getPage({ url: "home" })` → agent `getPageByPageCode` → `GET {API_URL}v2/visual-editor/pages/…` → `preparedContentItem` → `<PageRender>` ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** registering an existing type: `addRuntimeWidgets` merges the fields and defaults into the type's config ([§9 B.4](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets)); on the store `RuntimeWidget` renders the package's component for that type ([§9 B.2](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/widgets/PromoCodeStripPlus.tsx` (new): the strip (the parent's markup and classes, plus the end date and terms;

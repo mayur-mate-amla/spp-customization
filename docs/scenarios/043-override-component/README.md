@@ -37,6 +37,15 @@ Correction: the first version of this page said `product.image` and the listing 
 The listing probe ran while the cards were still loading, and the image probe's output was replaced by artifi. Order
 matters: a slot's later package (plugins come after the theme) decides what is finally shown.
 
+
+## How it renders
+
+**In the webstore (base):** `product/[id]/page.tsx` → agent `getProductInformation` → `GET {API_URL}v2/published-products/{id}` → `ProductDetailsPage` → `ProductBasicInfo` (image, name, price, variants, `AddToCart`) ([§5 A](../../RENDER-FLOW.md#5-product-details-page))
+
+**How this customization joins it:** `AddToCart.tsx` → `RuntimeAddToCart` → `<RuntimeSlot name="product.addToCart">`: `CustomizeToOrder` returns the store's `children` or, for listed SKUs, its own element instead ([§5 B](../../RENDER-FLOW.md#5-product-details-page)); slot order decides what wins (artifi after the theme, [§3](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/slots/CustomizeToOrder.tsx` (new): the `product.addToCart` slot; returns the store's `children` unless the SKU

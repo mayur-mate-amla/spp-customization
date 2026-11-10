@@ -20,6 +20,15 @@ this"**, with **Exit preview**, which clears the cookie and comes back to the sa
 (`/api/extensions/preview?to=<this page>`). It renders nothing on the server and for shoppers, so it costs nothing on
 the live store.
 
+
+## How it renders
+
+**In the webstore (base):** as 012 ([§2 A](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))
+
+**How this customization joins it:** `/api/extensions/preview?theme=` sets the `runtimeThemePreview` cookie; `getRequestStore` passes it and `resolveStoreEntries` uses that theme for this browser only ([§2 B.1, B.4](../../RENDER-FLOW.md#2-which-store-which-packages-every-request)); the `PreviewBanner` in `HeaderRender` → `RuntimeHeader` → `<RuntimeSlot name="layout.header">`: the theme's `AnnouncementBar` slot gets the store's header as `children` and renders its bars around it ([§8 B](../../RENDER-FLOW.md#8-header-footer-search))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/slots/PreviewBanner.tsx` (new): reads the `runtimeThemePreview` cookie after the page loads (`useEffect`, so

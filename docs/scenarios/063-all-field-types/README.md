@@ -20,6 +20,15 @@ tall so the whole panel shows.
 | Perks (list) | `array` (list) | "✓ Free logo setup ✓ Ships in 5 days", rows added, removed and reordered in the panel |
 | Button | `object` | Label + Link: the "Shop the sale" button |
 
+
+## How it renders
+
+**In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** Puck field definitions (incl. a `custom` field's `render`) passed through `addRuntimeWidgets` ([§9 B.4](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/widgets/PromoBanner.tsx`: `accent` (custom field: `render({ value, onChange, readOnly })` returning the

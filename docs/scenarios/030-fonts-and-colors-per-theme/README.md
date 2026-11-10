@@ -22,6 +22,15 @@ In the screenshots only the settings changed (`#f26b1d` → `#0f766e`, `brand` �
 page refresh. The heading's computed font is `ui-sans-serif, system-ui, -apple-system, "Segoe UI"` (checked in the
 browser; it looks close to the brand font at this weight).
 
+
+## How it renders
+
+**In the webstore (base):** the root layout renders header to footer inside `<RuntimeServerSlot name="layout.root">` ([§3 A](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))
+
+**How this customization joins it:** the theme's server part `serverSlots["layout.root"]` (`ThemeLayout.tsx`) gets the store's page as `children` and the settings (registry or store attribute), and wraps it in a `<div>` whose CSS variables override the theme's tokens ([§3 B.4](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout), [§2 B.3](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `znode-package.json`: new `headingFont` setting (attribute `ThemeHeadingFont`); `accentColor` default `#f26b1d`

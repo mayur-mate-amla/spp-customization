@@ -23,6 +23,15 @@ store. Here **Red Panda** is the family style (Montserrat, square corners, dark 
 The stylesheets load in that order, so the nearest theme wins: `spp-base-1.2.1.css`, `redpanda-1.0.0.css`,
 `spp-customization-1.0.2.css` (`output.txt`).
 
+
+## How it renders
+
+**In the webstore (base):** as 024 ([§3 A](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))
+
+**How this customization joins it:** the chain is now spp-base → redpanda → spp-customization ([§2 B.2](../../RENDER-FLOW.md#2-which-store-which-packages-every-request)); `<RuntimeStyles/>` links the three stylesheets in that order, so the nearest theme wins ([§3 B.1](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `znode-package.json`: `"parent": "redpanda"` (was `spp-base`)

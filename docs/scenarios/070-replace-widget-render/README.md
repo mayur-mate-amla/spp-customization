@@ -21,6 +21,15 @@ The widget's saved props are read as they are (heading, text, the two column lab
 that already uses Delivery dates gets the new design with no content change; its editor fields stay the parent's (the
 theme adds none).
 
+
+## How it renders
+
+**In the webstore (base):** `[locale]/page.tsx` → `getPage({ url: "home" })` → agent `getPageByPageCode` → `GET {API_URL}v2/visual-editor/pages/…` → `preparedContentItem` → `<PageRender>` ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** `DeliveryDates` registered by the theme: on the store, the page's widget item of that type is carried as `Text { __runtimeWidget }` → `RuntimeTextCarrier` → `RuntimeWidget` renders the package's component in the browser ([§9 B.2](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets)); the type's saved props are read as they are
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/widgets/DeliveryTimeline.tsx` (new): the rendering; `DELIVERY_TIMELINE_EDITOR` with no extra fields

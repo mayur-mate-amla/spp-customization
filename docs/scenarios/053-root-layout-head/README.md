@@ -21,6 +21,15 @@ Checked: none of the four in the server-rendered `<head>` before, all four after
 holds the `page_view` and the script marked the page ready. The analytics script sends nothing anywhere: a real tag
 manager's script is added the same way.
 
+
+## How it renders
+
+**In the webstore (base):** the root layout's `<head>` ([§3 A](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))
+
+**How this customization joins it:** `RuntimeRoot` renders `<RuntimeSlot name="layout.head" { store, theme }>`; `HeadTags` returns `<meta>`, `<link>`, `<script async src>`, which React places in `<head>` on the server render ([§3 B.3](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/slots/HeadTags.tsx` (new): the `layout.head` slot

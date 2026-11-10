@@ -22,6 +22,15 @@ plugin folder, and placed for one store: `"stores": ["POCSppDemo"]`.
 
 (`/api/extensions` on each host, in `output.txt`.)
 
+
+## How it renders
+
+**In the webstore (base):** as 012 ([§2 A](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))
+
+**How this customization joins it:** only stores listed in the entry's `"stores"` get the package from `resolveStoreEntries` ([§2 B.2](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 No change in this step: the placement from 034 (`"stores": ["POCSppDemo"]` in `plugins.json`). To widen the pilot,

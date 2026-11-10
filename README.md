@@ -20,6 +20,12 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 [`SCENARIOS.md`](SCENARIOS.md) tracks every use case: how this repo proves it and its progress. Each scenario is one
 commit, with `docs/scenarios/<nnn>-<slug>/` holding its notes and before/after screenshots.
 
+[`docs/RENDER-FLOW.md`](docs/RENDER-FLOW.md) traces how a page renders end to end, in two separate parts: the
+webstore's own path (Znode API → agent → BFF / page → base component) and where each package of this repo joins it
+(registry → manifest → slots, widgets, styles, labels, server slots, routes, hooks), with the product card worked
+through in full and every scenario mapped to its commit. Each scenario's README has a "How it renders" section
+(`node scripts/render-flow-sections.mjs` adds it).
+
 The store's plugin folder (its `RUNTIME_PLUGINS_DIR`) comes from `znode.local.json` (`{ "pluginsDir": "…" }`,
 git-ignored), or the `RUNTIME_PLUGINS_DIR` environment variable. After the first deploy, enable the theme for your
 stores in that folder's `plugins.json` (`"enabled": true`, `"stores": ["<store code>"]`).

@@ -24,6 +24,15 @@ because its placeholder publisher and description are still in place, as intende
 | `npm create znode-plugin@latest <name>` | A full project: npm scripts, TypeScript config, connection to a store, examples (this repo) |
 | `npx znode create <kind> <name> [dir]` | A minimal package of one kind, in any folder |
 
+
+## How it renders
+
+**In the webstore (base):** No page render: this happens in the build / install step, before any request.
+
+**How this customization joins it:** `znode create` writes a starter package ([§1](../../RENDER-FLOW.md#1-from-this-repository-to-the-store-install-registry))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 No code change. The starters were made in a scratch folder and not kept.

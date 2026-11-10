@@ -20,6 +20,15 @@ B2B storefronts put the buyer's account manager on the home and account pages. *
 Because it ships in a plugin, every store the plugin is placed for offers it, whatever its theme
 (`/api/extensions?store=POCSppDemo` on the page builder: `... spp-commerce ...`, theme redpanda).
 
+
+## How it renders
+
+**In the webstore (base):** the page builder for a store ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** the spp-commerce plugin is placed for the store, so its widget is in the editor's config: the page builder loads the edited store's manifest (`/api/extensions?store=`), `RuntimePageEditor` → `addRuntimeWidgets` adds the package's widgets (label, category, fields, defaults; fields merged into an existing type) and `linkRuntimeStyles` links the packages' CSS into the editor ([§9 B.4](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/commerce/widgets/AccountManager.tsx` (new): the component and `ACCOUNT_MANAGER_EDITOR`

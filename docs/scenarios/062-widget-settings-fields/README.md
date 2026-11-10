@@ -22,6 +22,15 @@ is a field in the editor's right-hand panel:
 
 063 adds the remaining field types to this widget.
 
+
+## How it renders
+
+**In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** the widget's `fields` become the editor's panel for that block: the page builder loads the edited store's manifest (`/api/extensions?store=`), `RuntimePageEditor` → `addRuntimeWidgets` adds the package's widgets (label, category, fields, defaults; fields merged into an existing type) and `linkRuntimeStyles` links the packages' CSS into the editor ([§9 B.4](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/widgets/PromoBanner.tsx` (new): the component and `PROMO_BANNER_EDITOR` (`fields`, `defaultProps`)

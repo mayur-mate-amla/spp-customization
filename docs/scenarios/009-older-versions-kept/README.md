@@ -21,6 +21,15 @@ nothing under `.versions/` is ever sent to a browser.
 
 The theme is now at version 1.0.2.
 
+
+## How it renders
+
+**In the webstore (base):** No page render: this happens in the build / install step, before any request.
+
+**How this customization joins it:** install replaces the previous version's code files; `scripts/deploy.mjs` also keeps the zip in `<plugin folder>/.versions/` ([§1](../../RENDER-FLOW.md#1-from-this-repository-to-the-store-install-registry))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `scripts/deploy.mjs` (new): `npx znode deploy .`, then copies `releases/<name>-<version>.zpkg.zip` to

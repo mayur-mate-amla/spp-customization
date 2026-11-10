@@ -23,6 +23,15 @@ The child's own parts still apply on top: its design tokens (024) color the navi
 announcement bar stays. On a page the parent renders, the child's CSS loads **after** the parent's
 (`spp-base-1.2.1.css`, then `spp-customization-1.0.2.css`), so the child wins where both set something.
 
+
+## How it renders
+
+**In the webstore (base):** `[locale]/page.tsx` → `getPage({ url: "home" })` → agent `getPageByPageCode` → `GET {API_URL}v2/visual-editor/pages/…` → `preparedContentItem` → `<PageRender>` ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** `resolveStoreEntries` adds the parent chain (spp-base, then the theme) ([§2 B.2](../../RENDER-FLOW.md#2-which-store-which-packages-every-request)); `RuntimePageRender` → `getRuntimePage("/")` uses the theme's `src/pages/home.json` as the page content ([§9 B.1](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets)); the parent's widgets in it render through on the store, the page's widget item of that type is carried as `Text { __runtimeWidget }` → `RuntimeTextCarrier` → `RuntimeWidget` renders the package's component in the browser ([§9 B.2](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `znode-package.json`: `"parent": "spp-base"`; `"pages": { "/": "src/pages/home.json" }`

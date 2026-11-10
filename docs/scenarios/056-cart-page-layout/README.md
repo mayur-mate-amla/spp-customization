@@ -22,6 +22,15 @@ The common B2B cart pattern:
 
 The store's cart keeps all its behavior (quantity, remove, totals, checkout): only its styles change.
 
+
+## How it renders
+
+**In the webstore (base):** cart page → `GET /api/cart/get-cart-items` → agent `getCartItems` → `GET {API_URL}commerceapi/v1/{classType}/item-list/{classNumber}` → `Cart` ([§7 A](../../RENDER-FLOW.md#7-cart-checkout-place-order))
+
+**How this customization joins it:** `<RuntimeStyles/>` in the root layout links the theme's stylesheet (`src/styles/cart.css`, built into `spp-customization-<v>.css`) after the store's CSS, served from the plugin folder by `/api/extensions/files/<file>` ([§3 B.1, B.6](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout)); no cart slot ([§7 B](../../RENDER-FLOW.md#7-cart-checkout-place-order))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/styles/cart.css` (new): rules on the cart's `data-test-selector` hooks (`divCartOrderSummaryContainer`,

@@ -8,6 +8,9 @@ scenario that can be shown from here gets **its own commit**, made on top of the
 - `before.png` / `after.png`: the store page before and after the change (taken with `scripts/shot.mjs`)
 - for a **Check** row, which changes nothing on a page: `output.txt` (the commands and what they printed) and
   `evidence.png` (the same, as an image), plus before/after where a request or page shows the difference
+- a **How it renders** section: where the scenario lands in the webstore's own rendering (Znode API → agent → page /
+  BFF route → base component) and where this repo's package joins it, linked to
+  [`docs/RENDER-FLOW.md`](docs/RENDER-FLOW.md), which traces both end to end and lists every scenario with its commit(s)
 
 Commit message format: `scenario <nnn>: <use case>`, then what changed, where and how.
 

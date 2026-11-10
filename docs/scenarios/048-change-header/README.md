@@ -18,6 +18,15 @@ row with logo, menu, search, account and cart, and a soft shadow. Scrolling back
 The compact row is the parent theme's own (spp-base uses it on phones), so every control keeps working; the theme
 only decides **when** it shows on desktop.
 
+
+## How it renders
+
+**In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))
+
+**How this customization joins it:** `HeaderScrollState` (rendered from the `layout.header` slot) sets `html[data-spp-scrolled]`; `<RuntimeStyles/>` in the root layout links the theme's stylesheet (`src/styles/header.css`, built into `spp-customization-<v>.css`) after the store's CSS, served from the plugin folder by `/api/extensions/files/<file>` ([§3 B.1, B.6](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout)) ([§8 B](../../RENDER-FLOW.md#8-header-footer-search))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/slots/HeaderScrollState.tsx` (new): a passive scroll listener that sets `html[data-spp-scrolled]` past 200 px

@@ -27,6 +27,15 @@ the theme. Changing the layout with CSS on the store's own markup (the info colu
 it holds) plus a slot for the new panel keeps every store piece, Artifi's image included, with its own logic. (An
 earlier version gave a different reason, that the image is not a part here; it is, see the correction in 043.)
 
+
+## How it renders
+
+**In the webstore (base):** `product/[id]/page.tsx` → agent `getProductInformation` → `GET {API_URL}v2/published-products/{id}` → `ProductDetailsPage` → `ProductBasicInfo` (image, name, price, variants, `AddToCart`) ([§5 A](../../RENDER-FLOW.md#5-product-details-page))
+
+**How this customization joins it:** `<RuntimeStyles/>` in the root layout links the theme's stylesheet (`src/styles/pdp.css`, built into `spp-customization-<v>.css`) after the store's CSS, served from the plugin folder by `/api/extensions/files/<file>` ([§3 B.1, B.6](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout)) for the buy box; `product.addToCart` → `ProductFacts` under the store's button ([§5 B](../../RENDER-FLOW.md#5-product-details-page))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/styles/pdp.css` (new): the buy box (`div:has(> h1[data-test-selector="hdgProductName"])`), the details panel

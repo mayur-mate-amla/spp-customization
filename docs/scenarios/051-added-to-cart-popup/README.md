@@ -22,6 +22,15 @@ are not sure it worked. The theme's popup, standard on most storefronts:
 It **replaces** the store's popup (the slot's children are not rendered), so the two never show together on stores
 where the store's own does appear.
 
+
+## How it renders
+
+**In the webstore (base):** click → `useAddToCart` → `POST /api/add-to-cart` → agent `addToCartProduct` → `POST {API_URL}commerceapi/v1/carts/add-to-cart` → cart count and popup data in the store's state ([§6 A](../../RENDER-FLOW.md#6-add-to-cart))
+
+**How this customization joins it:** `AddToCartNotification` → `RuntimeAddToCartNotification` (transform `addToCart.notificationData`) → `<RuntimeSlot name="addToCart.notification" { data }>` → `AddedToCart`, opened by the store's cart count (`host.stores.useCartCount()`) ([§6 B](../../RENDER-FLOW.md#6-add-to-cart))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/slots/AddedToCart.tsx` (new): the `addToCart.notification` slot (props `data`: the store's popup data), opened

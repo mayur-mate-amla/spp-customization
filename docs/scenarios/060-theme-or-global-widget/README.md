@@ -31,6 +31,15 @@ MaxwellsHardware  apex, spp-widgets
 spp-customization was live on POCSppDemo only for this check and switched back afterwards; spp-widgets stays placed
 for every store.
 
+
+## How it renders
+
+**In the webstore (base):** the page builder for a store ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** the editor gets the packages `resolveStoreEntries` returns for that store ([§2 B.2](../../RENDER-FLOW.md#2-which-store-which-packages-every-request)): the theme's widgets where the theme runs, spp-widgets' wherever it is placed; the page builder loads the edited store's manifest (`/api/extensions?store=`), `RuntimePageEditor` → `addRuntimeWidgets` adds the package's widgets (label, category, fields, defaults; fields merged into an existing type) and `linkRuntimeStyles` links the packages' CSS into the editor ([§9 B.4](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `spp-widgets.znode-package.json` (new): the third package of this repo, `"kind": "widget"`, `"widgets":

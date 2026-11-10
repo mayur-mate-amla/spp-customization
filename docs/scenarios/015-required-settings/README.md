@@ -14,6 +14,15 @@ shows a **Call 1-800-555-0199** link (`tel:`). While it is empty the bar just le
 The install reports a required setting that is still empty (016). The store itself does not enforce `required`; it is
 for the install report and for whoever configures the package (an admin screen does not exist yet, row 19).
 
+
+## How it renders
+
+**In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))
+
+**How this customization joins it:** the setting's value comes from the registry entry (or a store attribute) → `getBrowserManifest` passes only `"browser": true` settings to the browser part → `AnnouncementBar` reads `settings.supportPhone` ([§2 B.3](../../RENDER-FLOW.md#2-which-store-which-packages-every-request), [§3 B.2](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout)); `HeaderRender` → `RuntimeHeader` → `<RuntimeSlot name="layout.header">`: the theme's `AnnouncementBar` slot gets the store's header as `children` and renders its bars around it ([§8 B](../../RENDER-FLOW.md#8-header-footer-search))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `znode-package.json` → `settingsSchema.supportPhone`: `"type": "string"`, `"required": true`, `"browser": true`,

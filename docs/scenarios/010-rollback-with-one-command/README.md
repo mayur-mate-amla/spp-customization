@@ -15,6 +15,15 @@ installed theme spp-customization@1.0.0 (was 1.0.1): 8 files, disabled for []
 
 Without a version it lists the versions it can go back to; an unknown version stops with exit code 1.
 
+
+## How it renders
+
+**In the webstore (base):** No page render: this happens in the build / install step, before any request.
+
+**How this customization joins it:** `npm run rollback` installs a kept zip: same install path, registry entry rewritten ([§1](../../RENDER-FLOW.md#1-from-this-repository-to-the-store-install-registry))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `scripts/rollback.mjs` (new): `releases/<name>-<version>.zpkg.zip` → `npx znode install <zip>`

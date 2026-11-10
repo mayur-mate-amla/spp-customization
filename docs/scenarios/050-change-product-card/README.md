@@ -36,6 +36,15 @@ version (which returned `children`) showed an **empty listing**. `StoreListing` 
 listing instead: with `themeCards: false` the 12 store cards are back, each wrapped by the theme's `product.card` slot
 ([fallback-check.txt](fallback-check.txt)).
 
+
+## How it renders
+
+**In the webstore (base):** `category/[id]/page.tsx` → page JSON (agent `getPageByPageCode`) → `preparedContentItem` → agent `categoryProductList` → `GET {API_URL}v2.1/categories/{code}/products` → `ProductListPageRender` → `CategoryProductList` → `ProductList` → `ProductViews` → `ProductCard` ([§4 A](../../RENDER-FLOW.md#4-worked-example-the-product-card-on-a-category-page))
+
+**How this customization joins it:** `ProductViews` → `RuntimeProductViews` → `<RuntimeSlot name="productList.layout" { productData, part }>` → `ProductListing` draws the theme's cards from `productData.productList`; the store's sort bar and facets are portaled in as parts; the store's listing stays mounted, hidden, and is shown again for the fallback ([§4 B](../../RENDER-FLOW.md#4-worked-example-the-product-card-on-a-category-page))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/slots/ProductListing.tsx` (new): `ProductCard` and the `productList.layout` slot

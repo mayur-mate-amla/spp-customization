@@ -15,6 +15,15 @@ The merchandiser changes the banner's headline: the canvas shows the new headlin
 theme's own styles (the badge, the perks, the button), before anything is saved or published. The canvas renders the
 widget with the same component the store uses, so what is previewed is what shoppers will see.
 
+
+## How it renders
+
+**In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** the editor previews a package widget with `RuntimeWidget`, the same component the store renders ([§9 B.2, B.4](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 No code change: the theme's widget (062-064) and the page builder. `scripts/editor.mjs --field <label> --type <text>`

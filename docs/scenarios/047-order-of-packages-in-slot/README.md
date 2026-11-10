@@ -31,6 +31,15 @@ No code change and no deploy between the two shots: one registry change.
 Within a package: render the bar before `props.children` to put it above, after to put it below (the trust strip,
 031, renders after the store's header).
 
+
+## How it renders
+
+**In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))
+
+**How this customization joins it:** plugins fill a slot in `plugins.json` order (`resolveStoreEntries`); the later one wraps the earlier, so its bar is on top ([§2 B.2](../../RENDER-FLOW.md#2-which-store-which-packages-every-request), [§3 slot composition](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `spp-promos.znode-package.json` (new), `src/promos/browser.tsx`, `src/promos/promos.css` (new): the second plugin

@@ -25,6 +25,15 @@ and `.versions/`), with this project's `releases/` moved away:
 - every Apex file still there
 - `--purge` removes `.versions/spp-customization/`
 
+
+## How it renders
+
+**In the webstore (base):** No page render: this happens in the build / install step, before any request.
+
+**How this customization joins it:** `npm run uninstall` removes the registry entry under the lock and the package's files ([§1](../../RENDER-FLOW.md#1-from-this-repository-to-the-store-install-registry))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `scripts/uninstall.mjs` (new)

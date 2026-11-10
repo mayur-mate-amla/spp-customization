@@ -12,6 +12,15 @@ The `znode` command from the `znode-plugin` SDK does the whole cycle:
 | Pack | `npm run pack` (`znode pack .`) | `releases/spp-customization-1.0.0.zpkg.zip` |
 | Install | `npm run deploy` (`znode deploy .`) | Pack, then install into the store's plugin folder and its `plugins.json` |
 
+
+## How it renders
+
+**In the webstore (base):** No page render: this happens in the build / install step, before any request.
+
+**How this customization joins it:** build → pack → install ([§1 steps 1-2](../../RENDER-FLOW.md#1-from-this-repository-to-the-store-install-registry))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `package.json` scripts `build`, `pack`, `deploy`

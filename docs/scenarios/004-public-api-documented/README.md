@@ -8,6 +8,15 @@ The SDK ships `znode-plugin/types/extension-api.d.ts` (228 lines): every type a 
 slot names, their props, hooks, routes, server slots, server pages, widgets and limits documented as comments in the
 same file. This theme's code imports its types from it, so the editor and the build both use it.
 
+
+## How it renders
+
+**In the webstore (base):** No page render: this happens in the build / install step, before any request.
+
+**How this customization joins it:** the build type-checks `src/` against `extension-api.d.ts` ([§1 step 1](../../RENDER-FLOW.md#1-from-this-repository-to-the-store-install-registry))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `node_modules/znode-plugin/types/extension-api.d.ts` (SDK)

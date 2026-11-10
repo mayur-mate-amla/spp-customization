@@ -28,6 +28,15 @@ plugins in `plugins.json` order (`spp-base > spp-customization > artifi > countd
 spp-commerce` on this store). Each keeps the children, so everything shows; spp-commerce comes last, so its bar wraps
 the rest and sits on top. A package that fails to render is skipped and the others still show (185).
 
+
+## How it renders
+
+**In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))
+
+**How this customization joins it:** the theme and the spp-commerce plugin both fill `layout.header`; `RuntimeSlot` passes each one what the earlier rendered (theme chain first, then plugins) ([§3 slot composition](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout), [§8 B](../../RENDER-FLOW.md#8-header-footer-search))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `spp-commerce.znode-package.json` (new): the plugin's manifest, `"kind": "plugin"`, beside the theme's (the SDK

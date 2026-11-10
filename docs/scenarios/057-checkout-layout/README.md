@@ -20,6 +20,15 @@ The checkout pattern most storefronts use:
 
 The store's checkout keeps all its behavior (address validation, shipping rates, payment, place order).
 
+
+## How it renders
+
+**In the webstore (base):** checkout page → `Checkout` → `AddressWrapper`, `ShippingOptions`, payment, summary ([§7 A](../../RENDER-FLOW.md#7-cart-checkout-place-order))
+
+**How this customization joins it:** `<RuntimeStyles/>` in the root layout links the theme's stylesheet (`src/styles/checkout.css`, built into `spp-customization-<v>.css`) after the store's CSS, served from the plugin folder by `/api/extensions/files/<file>` ([§3 B.1, B.6](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout)) ([§7 B](../../RENDER-FLOW.md#7-cart-checkout-place-order))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/styles/checkout.css` (new): rules on the checkout's `data-test-selector` hooks (`divDeliveryPreference`,

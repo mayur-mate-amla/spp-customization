@@ -30,6 +30,15 @@ delivery-preference; stylesheets spp-base, redpanda, spp-customization.
 The page builder shows a store's **live** theme (it has no preview cookie), so for the "after" shot the theme was put
 live on POCSppDemo and switched back to redpanda afterwards (the "before" shot).
 
+
+## How it renders
+
+**In the webstore (base):** the page builder renders the store's page JSON in its canvas ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** the page builder loads the edited store's manifest (`/api/extensions?store=`), `RuntimePageEditor` → `addRuntimeWidgets` adds the package's widgets (label, category, fields, defaults; fields merged into an existing type) and `linkRuntimeStyles` links the packages' CSS into the editor ([§9 B.4](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets)); server slots (`layout.root`) do not run in the editor, hence the CSS fallbacks
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/styles/theme.css`: accent fallbacks `var(--theme-accent, var(--accent, #f26b1d))`

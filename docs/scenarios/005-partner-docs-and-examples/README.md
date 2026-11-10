@@ -13,6 +13,15 @@
   (`Hero.tsx`), a Google font (`fonts.ts`), styles, labels and an asset.
 - **Starters by kind**: `znode create <kind> <name>` (see 022).
 
+
+## How it renders
+
+**In the webstore (base):** No page render: this happens in the build / install step, before any request.
+
+**How this customization joins it:** documentation only
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 `node_modules/znode-plugin/README.md`, `README.md`, `src/`

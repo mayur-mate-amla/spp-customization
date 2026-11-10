@@ -26,6 +26,15 @@ GET /api/extensions/plugins/spp-customization/shipping-cutoff
   theme, `404`. The strip then keeps its fixed text "Ships in 24 hours".
 - Checked at five moments (before cutoff, one minute before, at cutoff, Friday evening, Saturday): `output.txt`.
 
+
+## How it renders
+
+**In the webstore (base):** no page: an API route of the theme
+
+**How this customization joins it:** `GET /api/extensions/plugins/spp-customization/shipping-cutoff` → `runPluginRoute` (enabled-for-store check, limits) → the theme's `routes["shipping-cutoff"](request, context)` with `context.settings` ([§7 B.5](../../RENDER-FLOW.md#7-cart-checkout-place-order)); the trust strip fetches it in the browser ([§8 B](../../RENDER-FLOW.md#8-header-footer-search))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/server/shipping.ts` (new): `shippingCutoffAt(now, cutoffHour, timeZone)` (the rule, with `Intl` time zones)

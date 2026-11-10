@@ -18,6 +18,15 @@ changes one thing in this theme's real zip:
 | folder | adds `nested/evil.css` | a package is flat, no folders |
 | too-big | adds an 11 MB file | package is 11611473 bytes; the limit is 10485760 |
 
+
+## How it renders
+
+**In the webstore (base):** No page render: this happens in the build / install step, before any request.
+
+**How this customization joins it:** `znode install` validates before writing anything ([§1 step 2](../../RENDER-FLOW.md#1-from-this-repository-to-the-store-install-registry))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `scripts/bad-packages.mjs` (new): makes the broken copies from `releases/spp-customization-1.0.0.zpkg.zip`

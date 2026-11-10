@@ -25,6 +25,15 @@ Each category is a component list containing a drop zone with a stable id,
 categories a negative `order`. Class names are matched by their stable prefix (`[class*="_ComponentList_"]`), since the
 suffix is a build hash.
 
+
+## How it renders
+
+**In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** as 071: `linkRuntimeStyles`, then CSS `order` on the categories ([§9 B.4](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/styles/editor.css`: the category order rules (with 071's curated list)

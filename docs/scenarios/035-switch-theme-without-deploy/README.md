@@ -28,6 +28,15 @@ stylesheets spp-base-1.2.1.css, redpanda-1.0.0.css
   the start of 034 (redpanda for POCSppDemo). Only the entries' order differs: spp-customization now comes before
   redpanda, which changes nothing while it has no stores.
 
+
+## How it renders
+
+**In the webstore (base):** as 012 ([§2 A](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))
+
+**How this customization joins it:** one registry change; the next request reads the new `plugins.json` (mtime) and resolves redpanda ([§1 step 3](../../RENDER-FLOW.md#1-from-this-repository-to-the-store-install-registry), [§2 B.2](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 `<plugin folder>/plugins.json` only (spp-customization `"stores": []`, `"enabled": false`). No code change.

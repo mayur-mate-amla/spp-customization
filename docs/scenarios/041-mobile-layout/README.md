@@ -31,6 +31,15 @@ page's content started about **340 px** down a 844 px screen.
 Content now starts at about **225 px**. The listing (one card per row, the theme's card styles from 029/032) needed no
 change.
 
+
+## How it renders
+
+**In the webstore (base):** the store's responsive layout ([§3 A](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))
+
+**How this customization joins it:** `<RuntimeStyles/>` in the root layout links the theme's stylesheet (`src/styles/mobile.css`, built into `spp-customization-<v>.css`) after the store's CSS, served from the plugin folder by `/api/extensions/files/<file>` ([§3 B.1, B.6](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout)); only the theme's own bars (from `layout.header`) change on phones
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/styles/mobile.css` (new): the rules under `@media (max-width: 639px)`

@@ -33,6 +33,15 @@ What the store then runs (`/api/extensions`): packages spp-base, spp-customizati
 delivery-preference; stylesheets `spp-base-1.2.1.css`, `redpanda-1.0.0.css`, `spp-customization-1.0.2.css` (redpanda
 still applies, as the parent).
 
+
+## How it renders
+
+**In the webstore (base):** as 012 ([§2 A](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))
+
+**How this customization joins it:** the store is placed on the theme's entry and removed from redpanda's; `resolveStoreEntries` now returns spp-customization's chain for POCSppDemo ([§2 B.2](../../RENDER-FLOW.md#2-which-store-which-packages-every-request))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `scripts/registry.mjs`: `--package <name>` to change another package's entry (store configuration), and

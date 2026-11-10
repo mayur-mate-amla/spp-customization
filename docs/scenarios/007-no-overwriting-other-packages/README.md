@@ -25,6 +25,15 @@ In `znode-plugin/lib/znode-package.mjs`:
 
 This repo's `npm run uninstall` (011) already works around the missing record by reading the package's own zips.
 
+
+## How it renders
+
+**In the webstore (base):** No page render: this happens in the build / install step, before any request.
+
+**How this customization joins it:** `znode install` checks file ownership from `plugins.json` entries (assets are not recorded there) ([§1 step 2](../../RENDER-FLOW.md#1-from-this-repository-to-the-store-install-registry))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 No code change. Tests: `scripts/bad-packages.mjs` case `other-package-file`, and a two-file `spp-rival` package made in

@@ -21,6 +21,15 @@ regrouped by what a merchandiser is doing:
 The other packages keep theirs: "SPP commerce" (the plugin's account manager), "SPP shared" (the shared showroom
 widget), "Artifi", "Promotions" (countdown banner).
 
+
+## How it renders
+
+**In the webstore (base):** the page builder ([§9 A](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+**How this customization joins it:** `category` decides the component-list group in `addRuntimeWidgets` ([§9 B.4](../../RENDER-FLOW.md#9-home-content-and-package-pages-widgets))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/widgets/Hero.tsx`, `Testimonials.tsx`, `Faq.tsx`: `category: "SPP · Content"`

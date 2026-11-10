@@ -23,6 +23,15 @@ wording:
 
 Only the keys listed change; every other label stays the store's. Stores not on this theme keep the defaults.
 
+
+## How it renders
+
+**In the webstore (base):** `apps/webstore/src/i18n/request.ts` loads `messages/<locale>.json`; components read labels through next-intl (`Product.sku`, …) ([§3 B.7](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))
+
+**How this customization joins it:** `withRuntimeMessages` deep-merges the theme's `src/i18n/labels.json` over the store's messages, so the same components print the theme's wording ([§3 B.7](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/i18n/labels.json`: next-intl namespaces and keys, the same as the store's

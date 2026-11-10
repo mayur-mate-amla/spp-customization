@@ -25,6 +25,15 @@ How each kind of clash is kept away:
 | Overriding the store's tokens by accident | Token and element rules are scoped to `html[data-theme]` (024, 029) | `tokens.css`, `listing.css` |
 | The theme's CSS reaching other stores | Only the active theme chain's stylesheets are linked: POCStaplesPromo loads spp-base, artifi and countdown-banner, never `spp-customization` | `/api/extensions` on `staplespromo.localhost:3000` |
 
+
+## How it renders
+
+**In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))
+
+**How this customization joins it:** the build drops the copied rules the store's page already has (`dedupeStyles`) ([§1](../../RENDER-FLOW.md#1-from-this-repository-to-the-store-install-registry)); `<RuntimeStyles/>` in the root layout links the theme's stylesheet (`src/styles/trust-strip.css`, built into `spp-customization-<v>.css`) after the store's CSS, served from the plugin folder by `/api/extensions/files/<file>` ([§3 B.1, B.6](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout)); `HeaderRender` → `RuntimeHeader` → `<RuntimeSlot name="layout.header">`: the theme's `AnnouncementBar` slot gets the store's header as `children` and renders its bars around it ([§8 B](../../RENDER-FLOW.md#8-header-footer-search)) and adds `TrustStrip` after the header
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `src/slots/TrustStrip.tsx` (new): the strip (three items with inline SVG icons, `aria-label`, `aria-hidden` icons)

@@ -20,6 +20,15 @@ logo, and each client's store needs its own. The theme gets a **`logoUrl`** sett
   brand header (`.spp-logo`, `.spp-compact-logo`), on desktop and phone.
 - Only site paths (`/...`) and `https://` URLs are accepted, so a setting cannot inject CSS.
 
+
+## How it renders
+
+**In the webstore (base):** the layout JSON's header item → agent `getHeaderInitialDetails` (portal logo, mega-menu categories) → `HeaderRender` → `Header` (`<header id="webstore-header">`) ([§8 A](../../RENDER-FLOW.md#8-header-footer-search))
+
+**How this customization joins it:** `layout.root` (`ThemeLayout.tsx`) turns the `logoUrl` setting into `--spp-logo` and `data-logo="custom"` on its wrapper ([§3 B.4](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout)); the theme's CSS makes the header's logo images show that file ([§3 B.1](../../RENDER-FLOW.md#3-the-page-shell-root-layout-head-styles-labels-server-layout))
+
+End-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](../../RENDER-FLOW.md).
+
 ## Where
 
 - `znode-package.json`: new setting `logoUrl` (attribute `ThemeLogoUrl`, default empty)

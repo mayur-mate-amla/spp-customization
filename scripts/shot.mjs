@@ -79,6 +79,13 @@ try {
     }, String(find));
     await new Promise((resolve) => setTimeout(resolve, 800));
   }
+  // --click <selector>: click an element (e.g. Add to cart), then wait --after ms for what it opens
+  const click = arg("click");
+  if (click && click !== true) {
+    await page.waitForSelector(String(click), { timeout: 20000 });
+    await page.click(String(click));
+    await new Promise((resolve) => setTimeout(resolve, Number(arg("after", 4000))));
+  }
   const hover = arg("hover");
   if (hover && hover !== true) {
     await page.hover(hover);

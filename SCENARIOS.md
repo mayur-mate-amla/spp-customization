@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 39 |
+| ✅ Done | 40 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 94 |
+| ⬜ Not started | 93 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -132,7 +132,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 48 | Can I change the header? | Yes | UI | Example: compact sticky header once the shopper scrolls (desktop) | ✅ Done | [notes](docs/scenarios/048-change-header/) |
 | 49 | Can I change the footer? | Yes | UI | Example: Need-help band (phone, email, hours, payments); fixed the footer slot landing in the hidden header | ✅ Done | [notes](docs/scenarios/049-change-footer/) |
 | 50 | Can I change the product card? | Yes | UI | Example: B2B promo card (logo placeholder, price each, Customize) via productList.layout | ✅ Done | [notes](docs/scenarios/050-change-product-card/) |
-| 51 | Can I change the added-to-cart popup? | Yes | UI | `addToCart.notification` slot | ⬜ Not started | |
+| 51 | Can I change the added-to-cart popup? | Yes | UI | Example: Added to your order popup (View order / Keep shopping) from the cart count | ✅ Done | [notes](docs/scenarios/051-added-to-cart-popup/) |
 
 ## Layout
 

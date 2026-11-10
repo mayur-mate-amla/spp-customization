@@ -1,4 +1,4 @@
-import type { IBrowserHost, IBrowserPlugin } from "znode-plugin/types/extension-api";
+﻿import type { IBrowserHost, IBrowserPlugin } from "znode-plugin/types/extension-api";
 import { bindHost } from "./lib/host.js";
 import { AnnouncementBar } from "./slots/AnnouncementBar.js";
 import { ProductBadge } from "./slots/ProductBadge.js";
@@ -6,6 +6,7 @@ import { SearchWithPopular } from "./slots/SearchWithPopular.js";
 import { CustomizeToOrder } from "./slots/CustomizeToOrder.js";
 import { FooterHelp } from "./slots/FooterHelp.js";
 import { ProductListing } from "./slots/ProductListing.js";
+import { AddedToCart } from "./slots/AddedToCart.js";
 import { Hero, HERO_EDITOR } from "./widgets/Hero.js";
 import { Testimonials, TESTIMONIALS_EDITOR } from "./widgets/Testimonials.js";
 
@@ -31,6 +32,8 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
       "layout.footer": FooterHelp,
       // the listing with the theme's own product card (the store's listing card has no slot on this theme)
       "productList.layout": ProductListing,
+      // the added-to-cart popup
+      "addToCart.notification": AddedToCart,
     },
     widgets: {
       SppCustomizationHero: { render: Hero, ...HERO_EDITOR },

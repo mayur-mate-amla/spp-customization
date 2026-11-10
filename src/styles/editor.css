@@ -12,3 +12,10 @@
 [data-rfd-draggable-id$="::AdSpace"] {
   display: none;
 }
+
+/* Category order: the theme's own categories first (what its merchandisers use most), then the rest in the editor's
+   order. Each category is a component list holding a drop zone "component-list:<category>"; their column becomes a
+   flex column so `order` applies. Class names are matched by their stable prefix (the suffix is a build hash). */
+div:has(> [class*="_ComponentList_"]) { display: flex; flex-direction: column; }
+[class*="_ComponentList_"]:has([data-rfd-droppable-id="component-list:SPP · Promotions"]) { order: -2; }
+[class*="_ComponentList_"]:has([data-rfd-droppable-id="component-list:SPP · Content"]) { order: -1; }

@@ -61,10 +61,10 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 58 |
+| ✅ Done | 59 |
 | 🟡 In progress | 0 |
 | ⬜ Not started | 78 |
-| ⛔ Blocked | 39 |
+| ⛔ Blocked | 38 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
 
@@ -163,7 +163,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 69 | Can I change an existing widget's design? | Yes | UI | Example: parent's Card grid fixed and restyled into a 4-column department grid (CSS only) | ✅ Done | [notes](docs/scenarios/069-change-existing-widget-design/) |
 | 70 | Can I replace how an existing widget renders? | Yes | UI | Example: parent's Delivery dates rendered as a holiday shipping timeline (next cutoff, past struck) | ✅ Done | [notes](docs/scenarios/070-replace-widget-render/) |
 | 71 | Can I hide or remove a base widget from the page builder for a theme? | No | Base | Result: **Yes, hide from the list** (theme CSS in the editor); removing a type still needs a page-builder change. Example: curated list for SPP stores | ✅ Done | [notes](docs/scenarios/071-hide-base-widget/) |
-| 72 | Can I reorder the editor's widget categories? | No | Base | | ⛔ Blocked | |
+| 72 | Can I reorder the editor's widget categories? | No | Base | Result: **Yes, visual order** (theme CSS in the editor). Example: SPP · Promotions and SPP · Content first | ✅ Done | [notes](docs/scenarios/072-reorder-editor-categories/) |
 | 73 | Can a widget hold other widgets (nested)? | Partial | Check | Try a slot field in a package widget | ⬜ Not started | |
 | 74 | Can a widget load its data on the server like base widgets? | Partial | Check | Widget calling this theme's route | ⬜ Not started | |
 | 75 | Are package widgets in the server HTML (for SEO)? | No | Base | | ⛔ Blocked | |

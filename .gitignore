@@ -5,3 +5,4 @@ releases/
 # this machine's links: the store repo's types and the store's plugin folder
 tsconfig.store.json
 znode.local.json
+.claude/

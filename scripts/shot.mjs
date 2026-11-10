@@ -54,7 +54,14 @@ try {
     process.exit(0);
   }
   // the preview switch sets its cookie, then redirects to the page; "none" clears it
-  const start = theme === "none" ? `${store}/api/extensions/preview?to=${encodeURIComponent(pagePath)}` : `${store}/api/extensions/preview?theme=${encodeURIComponent(theme)}&to=${encodeURIComponent(pagePath)}`;
+  // --url <absolute URL>: open that page as it is (another app, e.g. the page builder on :3001), no preview switch
+  const url = arg("url");
+  const start =
+    url && url !== true
+      ? String(url)
+      : theme === "none"
+        ? `${store}/api/extensions/preview?to=${encodeURIComponent(pagePath)}`
+        : `${store}/api/extensions/preview?theme=${encodeURIComponent(theme)}&to=${encodeURIComponent(pagePath)}`;
   await page.goto(start, { waitUntil: "load", timeout: 120000 });
   await new Promise((resolve) => setTimeout(resolve, wait));
   // --scroll <px>: scroll the page first (lazy parts load); --hover <selector>: hold the mouse over an element

@@ -21,8 +21,9 @@ export function AnnouncementBar(props: { children?: ReactNode }) {
             Learn more
           </Link>
           {phone && (
-            <a href={`tel:${phone.replace(/[^+0-9]/g, "")}`} className="spp-customization-announcement__link" data-test-selector="linkSupportPhone">
-              Call {phone}
+            <a href={`tel:${phone.replace(/[^+0-9]/g, "")}`} className="spp-customization-announcement__link" data-test-selector="linkSupportPhone" aria-label={`Call ${phone}`}>
+              <span className="spp-customization-announcement__long">Call {phone}</span>
+              <span className="spp-customization-announcement__short">Call us</span>
             </a>
           )}
         </div>

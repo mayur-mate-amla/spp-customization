@@ -1,0 +1,41 @@
+/* Phones (under 640 px): the theme's bars above the page take one line each, so the store's content starts above the
+   fold. The store's own layout is responsive already; these rules only cover what this theme adds. */
+
+.spp-customization-announcement__short,
+.spp-customization-preview__long { display: none; }
+@media (min-width: 640px) {
+  .spp-customization-preview__long { display: inline; }
+}
+
+@media (max-width: 639px) {
+  /* preview bar: "Previewing spp-customization [Exit preview]" on one line */
+  .spp-customization-preview { flex-wrap: nowrap; gap: 8px; padding: 4px 12px; font-size: 12px; white-space: nowrap; }
+
+  /* announcement: the message and a short "Call us"; "Learn more" moves out (the welcome page is in the footer and the
+     trust strip), and long text is cut with an ellipsis rather than wrapping */
+  .spp-customization-announcement { flex-wrap: nowrap; gap: 10px; padding: 6px 12px; font-size: 13px; white-space: nowrap; }
+  .spp-customization-announcement > span:first-child { overflow: hidden; text-overflow: ellipsis; }
+  .spp-customization-announcement [data-test-selector="linkAnnouncement"] { display: none; }
+  .spp-customization-announcement__long { display: none; }
+  .spp-customization-announcement__short { display: inline; }
+
+  /* trust strip: one swipeable row instead of two lines */
+  .spp-customization-trust {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 20px;
+    overflow-x: auto;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 12.5px;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .spp-customization-trust::-webkit-scrollbar { display: none; }
+  .spp-customization-trust__item { flex: none; scroll-snap-align: start; }
+
+  /* welcome page: the title fits two lines at most */
+  .spp-customization-welcome__title { font-size: 26px; line-height: 1.2; }
+}

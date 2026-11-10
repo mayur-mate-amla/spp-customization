@@ -21,7 +21,9 @@ export function PreviewBanner() {
   return (
     <div className="spp-customization-preview" role="status" data-test-selector="divThemePreview">
       <span>
-        Previewing theme <strong>{THEME}</strong>: only you see this
+        Previewing <span className="spp-customization-preview__long">theme </span>
+        <strong>{THEME}</strong>
+        <span className="spp-customization-preview__long">: only you see this</span>
       </span>
       <a href={`/api/extensions/preview?to=${encodeURIComponent(here)}`} className="spp-customization-preview__exit" data-test-selector="linkExitPreview">
         Exit preview

@@ -78,6 +78,20 @@ function SwatchPicker(props: { value?: string; onChange: (value: string) => void
   );
 }
 
+// What a newly placed banner starts with: the campaign of the season it is placed in, so merchandisers start from the
+// current promotion rather than an off-season placeholder (they can change every value).
+export function seasonalDefaults(now = new Date()) {
+  const month = now.getMonth() + 1;
+  const base = { style: "brand", align: "left", accent: "#f26b1d", button: { label: "Shop the sale", url: "/category/1674" } };
+  if (month >= 11)
+    return { ...base, headline: "Holiday gifting sale", details: "Branded gifts for clients and teams, boxed and shipped by Dec 17.", discount: 25, perks: [{ text: "Free gift boxing" }, { text: "Free logo setup" }] };
+  if (month >= 8)
+    return { ...base, headline: "Back-to-work sale", details: "Save on drinkware, bags and apparel for your team. Ends Sunday.", discount: 20, perks: [{ text: "Free logo setup" }, { text: "Ships in 5 days" }] };
+  if (month >= 5)
+    return { ...base, headline: "Summer event season", details: "Tents, tumblers and tees for every company event.", discount: 15, perks: [{ text: "Rush 3-day production" }] };
+  return { ...base, headline: "New year, new gear", details: "Onboarding kits for the people joining your team.", discount: 15, perks: [{ text: "Free logo setup" }] };
+}
+
 export const PROMO_BANNER_EDITOR = {
   label: "Promotion banner",
   category: "Spp Customization",
@@ -128,14 +142,8 @@ export const PROMO_BANNER_EDITOR = {
       },
     },
   },
-  defaultProps: {
-    headline: "Back-to-work sale",
-    details: "Save on drinkware, bags and apparel for your team. Ends Sunday.",
-    discount: 20,
-    style: "brand",
-    align: "left",
-    accent: "#f26b1d",
-    perks: [{ text: "Free logo setup" }, { text: "Ships in 5 days" }],
-    button: { label: "Shop the sale", url: "/category/1674" },
+  // the editor reads these when a merchandiser drops a new banner (seasonalDefaults above)
+  get defaultProps() {
+    return seasonalDefaults();
   },
 };

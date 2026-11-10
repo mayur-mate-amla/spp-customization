@@ -1,32 +1,35 @@
 # 007: Is a package prevented from overwriting another package's files?
 
-**Listed:** Yes. **Result here:** Yes, confirmed.
+**Listed:** Yes. **Result here:** Not fully. Code, styles, labels and pages are protected, but **assets (images,
+fonts) are not**: another package can overwrite them without any error. Fixing it needs a change in the `znode-plugin`
+SDK, so this row is marked ⛔ in `SCENARIOS.md`.
 
-## What
+## What was tested
 
-All packages share one flat plugin folder, so a file name could clash. The install knows which package owns each
-file (from `plugins.json`) and refuses a package that carries a file another package owns.
+All packages share one flat plugin folder. `znode install` knows which package owns each file from `plugins.json`
+and refuses a package carrying one of them, **but only for the files an entry names**: `file`, `browser`,
+`messages`, `styles`, `pages`. Entries do not record `assets` at all.
 
-Test: this theme's zip with an extra file named `apex-1.0.19.css` (the Apex theme's stylesheet), installed into a
-**scratch copy** of the store's `plugins.json`:
+| Test (scratch copies, never the store's folder) | Result |
+| --- | --- |
+| This theme's zip plus a file named `apex-1.0.19.css` (Apex's stylesheet) | Refused: `"apex-1.0.19.css" belongs to package apex` |
+| Another package, `spp-rival`, whose assets include `spp-customization-hero.svg` (this theme's image) | **Installed**; the image went from 551 to 110 bytes (overwritten) |
 
-```
-znode-package: "apex-1.0.19.css" belongs to package apex
-(exit 1)
-```
+## What it needs (outside this repo)
 
-Nothing is written; the Apex file stays as it is.
+In `znode-plugin/lib/znode-package.mjs`:
+
+1. Record the package's assets in its registry entry (`assets: [...]`).
+2. Add them to the owners map (line 428: `...(item.assets || [])`), so the existing `belongs to package` check
+   covers them.
+
+This repo's `npm run uninstall` (011) already works around the missing record by reading the package's own zips.
 
 ## Where
 
-- `scripts/bad-packages.mjs` case `other-package-file`
-- Rule: `node_modules/znode-plugin/lib/znode-package.mjs` (`belongs to package`)
+No code change. Tests: `scripts/bad-packages.mjs` case `other-package-file`, and a two-file `spp-rival` package made in
+a scratch folder.
 
 ## How to check
 
-```bash
-node scripts/bad-packages.mjs releases/spp-customization-1.0.0.zpkg.zip <outDir>
-npx znode install <outDir>/other-package-file.zpkg.zip <folder holding a copy of plugins.json>
-```
-
-`output.txt` / `evidence.png` hold the run.
+`output.txt` / `evidence.png`: both tests and the SDK line that builds the owners map.

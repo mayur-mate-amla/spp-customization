@@ -5,3 +5,15 @@ apex@1.0.19
 $ znode install bad/other-package-file.zpkg.zip <scratch copy>   (spp-customization carrying a file named apex-1.0.19.css)
 znode-package: "apex-1.0.19.css" belongs to package apex
 (exit 1)
+
+--- assets are not protected ---
+$ (scratch copy of plugins.json + this theme's installed files)
+spp-customization-hero.svg before: sha256 A5429FAE45B6..., 551 bytes
+$ npx znode install spp-rival.zip <scratch copy>   (another package whose assets include spp-customization-hero.svg)
+installed plugin spp-rival@1.0.0: 2 files, disabled for []
+(exit 0)
+spp-customization-hero.svg after: sha256 674018F214CF..., 110 bytes   (overwritten)
+
+$ grep -n "owners.set" node_modules/znode-plugin/lib/znode-package.mjs
+428: for (const name of [item.file, item.browser, item.messages, ...(item.styles || []), ...Object.values(item.pages || {})]) if (name) owners.set(name, item.name);
+(file, browser, messages, styles, pages: no assets; and plugins.json entries do not record assets at all)

@@ -1,0 +1,65 @@
+{
+  "root": {
+    "props": {
+      "contentWidth": "store"
+    }
+  },
+  "content": [
+    {
+      "type": "HeroBanner",
+      "props": {
+        "id": "HeroBanner-4ca45601-7886-4365-a6f9-67d946081a4f",
+        "image": "https://cdn-usds-pr.znodecorp.com/znode10/821d08b5-4520-477f-97ad-36ced0c0e65bspotlight-1a.jpg",
+        "imageAlt": "Branded Goods",
+        "height": 480,
+        "title": "Branded Goods",
+        "subtitle": "for wherever your adventure takes you.",
+        "buttonText": "Shop All",
+        "buttonUrl": "/category/1674",
+        "textColor": "#ffffff",
+        "overlay": "none",
+        "contentAlign": "center",
+        "buttonStyle": "outline"
+      }
+    },
+    {
+      "type": "SppAccountManager",
+      "props": {
+        "heading": "Your account manager",
+        "name": "Jordan Rivera",
+        "title": "Senior account manager, promotional products",
+        "phone": "1-800-555-0142",
+        "email": "jordan.rivera@sppbrandedgoods.example",
+        "quoteSubject": "Quote request from my company store",
+        "id": "SppAccountManager-1d975df3-5d44-4013-b6da-fee98ea6adf6"
+      }
+    },
+    {
+      "type": "CategoryTiles",
+      "props": {
+        "id": "CategoryTiles-3c42b759-0aac-45dc-8137-62482e9b954d",
+        "heading": "",
+        "columns": 3,
+        "imageAspect": "1/1",
+        "items": [
+          {
+            "label": "Start Your Day",
+            "image": "https://cdn-usds-pr.znodecorp.com/znode10/dfeec903-e505-44e3-bbf4-48914a7af728adbox1a.jpg",
+            "url": "/category/1701"
+          },
+          {
+            "label": "Face the Elements",
+            "image": "https://cdn-usds-pr.znodecorp.com/znode10/0f083afe-45ab-4a61-bdff-7f370bdf4c88adbox2a.jpg",
+            "url": "/category/1848"
+          },
+          {
+            "label": "Best of the Best",
+            "image": "https://cdn-usds-pr.znodecorp.com/znode10/da60b460-3c8b-404e-8df5-8987eee6597fadbox3a.jpg",
+            "url": "/category/1705"
+          }
+        ]
+      }
+    }
+  ],
+  "zones": {}
+}

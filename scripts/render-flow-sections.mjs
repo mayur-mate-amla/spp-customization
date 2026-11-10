@@ -83,6 +83,7 @@ const FLOWS = {
   "064": [`the page builder ([§9 A](${S.pages}))`, `\`defaultProps\` (a getter here) read by \`addRuntimeWidgets\` when the editor builds its config ([§9 B.4](${S.pages}))`],
   "065": [`the page builder ([§9 A](${S.pages}))`, `\`category\` decides the component-list group in \`addRuntimeWidgets\` ([§9 B.4](${S.pages}))`],
   "066": [`the page builder ([§9 A](${S.pages}))`, `the editor previews a package widget with \`RuntimeWidget\`, the same component the store renders ([§9 B.2, B.4](${S.pages}))`],
+  "067": null,
   "068": [HOME_BASE, `registering an existing type: \`addRuntimeWidgets\` merges the fields and defaults into the type's config ([§9 B.4](${S.pages})); on the store \`RuntimeWidget\` renders the package's component for that type ([§9 B.2](${S.pages}))`],
   "069": [HOME_BASE, `${CSS_HOOK("src/styles/card-grid.css")}; the parent's widget is unchanged`],
   "070": [HOME_BASE, `\`DeliveryDates\` registered by the theme: ${WIDGET_RENDER}; the type's saved props are read as they are`],
@@ -97,7 +98,7 @@ for (const folder of fs.readdirSync(root)) {
   const number = folder.slice(0, 3);
   const flow = FLOWS[number];
   const file = path.join(root, folder, "README.md");
-  if (!flow || !fs.existsSync(file)) continue;
+  if (!flow || !fs.existsSync(file)) continue; // null: written by hand in the README
   const section = `## How it renders\n\n**In the webstore (base):** ${flow[0]}\n\n**How this customization joins it:** ${flow[1]}\n\nEnd-to-end flow, with file and line references in the webstore: [docs/RENDER-FLOW.md](${DOC}).\n`;
   let text = fs.readFileSync(file, "utf8").replace(/\n## How it renders\n[\s\S]*?(?=\n## |\s*$)/, "\n").trimEnd();
   // before "## Where" when there is one, else at the end

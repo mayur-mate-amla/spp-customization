@@ -15,6 +15,7 @@
   },
   "styles": ["src/commerce/styles/*.css"],
   "widgets": ["SppAccountManager"],
+  "pages": { "/": "src/commerce/pages/home.json" },
   "settingsSchema": {
     "showAccountBar": {
       "type": "boolean",

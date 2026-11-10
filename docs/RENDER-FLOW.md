@@ -324,6 +324,7 @@ repository joins it. Commits are on `main` of this repository.
 | 064 | Default values | b143c5b | §9 | §9 B.4 (defaultProps) | PromoBanner.tsx |
 | 065 | Own editor category | 7a139c1 | §9 | §9 B.4 (category) | src/widgets/*.tsx |
 | 066 | Live preview while editing | fcb2a57 | §9 | §9 B.4 (preview = same component) | – |
+| 067 | Drag a widget and publish (locally) | (this commit's scenario 067) | §9 A (editor save, blocked) | §9 B.1 package page + §9 B.2 widget | scripts/editor.mjs, src/commerce/pages/home.json |
 | 068 | Update an existing widget's config | 1fcbc6a | §9 | §9 B.4 (fields merged), §9 B.2 (render) | src/widgets/PromoCodeStripPlus.tsx |
 | 069 | Change a widget's design | 6fb4efd | §9 | §3 B.1 | src/styles/card-grid.css |
 | 070 | Replace a widget's render | 67e61f1 | §9 | §9 B.2 (existing type) | src/widgets/DeliveryTimeline.tsx |

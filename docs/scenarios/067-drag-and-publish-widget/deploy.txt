@@ -1,0 +1,4 @@
+$ npm run deploy -- spp-commerce.znode-package.json   ("pages": { "/": "src/commerce/pages/home.json" })
+packed spp-commerce-1.0.0.zpkg.zip (7012 bytes)
+installed plugin spp-commerce@1.0.0 (was 1.0.0): 4 files, enabled for ["POCSppDemo"]
+kept spp-commerce-1.0.0.zpkg.zip in .versions\spp-commerce (1 version on disk: 1.0.0)

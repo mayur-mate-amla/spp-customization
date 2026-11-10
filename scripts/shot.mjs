@@ -88,7 +88,7 @@ try {
   // --type "<selector>=<text>": type into a field first (e.g. a ZIP code), before --click
   const typed = arg("type");
   if (typed && typed !== true) {
-    const at = String(typed).indexOf("=");
+    const at = String(typed).lastIndexOf("="); // the selector may hold "=" ([type=search]); the text after the last one is typed
     const field = String(typed).slice(0, at);
     await page.waitForSelector(field, { timeout: 20000 });
     await page.type(field, String(typed).slice(at + 1), { delay: 30 });

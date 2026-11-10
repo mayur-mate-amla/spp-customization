@@ -1,0 +1,14 @@
+# POCSppDemo (spp-commerce placed): the store's own route, as the browser calls it; the proxy sends it to the plugin
+> GET /api/search/search-hydrated-typeahead?searchTerm=koozie
+  products:   Search "can cooler" instead -> /search?searchTerm=can%20cooler | Can't find "koozie"? Ask us to source it -> /contact-us
+  categories: Search "can cooler" instead -> /search?searchTerm=can%20cooler | Can't find "koozie"? Ask us to source it -> /contact-us
+> GET /api/search/search-hydrated-typeahead?searchTerm=badge%20holder
+  products:   Search "id holder" instead -> /search?searchTerm=id%20holder | Can't find "badge holder"? Ask us to source it -> /contact-us
+  categories: Search "id holder" instead -> /search?searchTerm=id%20holder | Can't find "badge holder"? Ask us to source it -> /contact-us
+> GET /api/search/search-hydrated-typeahead?searchTerm=cup
+  products:   24 oz. Fluted Stadium Cup | 24 oz. Fluted Stadium Cup
+  categories: Best Sellers -> /category/1674 | Drinkware -> /category/1701
+(cup: nothing to add, the store's answer goes back unchanged)
+
+# the wrapped answer keeps the store's envelope
+{"status":"success","message":"Hydrated search list retrieved successfully","data":{"hydratedSearchProductList":[{"productId":-1,"productName":"Search \"can coo ...

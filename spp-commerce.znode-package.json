@@ -16,7 +16,8 @@
     "routes",
     "cartHooks",
     "znodeApi",
-    "externalNetwork"
+    "externalNetwork",
+    "overrides"
   ],
   "compatibility": {
     "webstore": ">=10.0.0"
@@ -38,6 +39,9 @@
   "serverPages": [
     "/ordering-information"
   ],
+  "overrides": {
+    "/api/search/search-hydrated-typeahead": "search-typeahead"
+  },
   "settingsSchema": {
     "casePacks": {
       "type": "object",
@@ -120,6 +124,21 @@
       "type": "number",
       "label": "Orders placed before this hour (warehouse time, Central) ship the same business day",
       "default": 14
+    },
+    "searchSynonyms": {
+      "type": "object",
+      "label": "Search words the catalog does not use: { \"koozie\": \"can cooler\" } (the typeahead offers the catalog's word)",
+      "default": {
+        "koozie": "can cooler",
+        "koozies": "can cooler",
+        "coozie": "can cooler",
+        "badge holder": "id holder"
+      }
+    },
+    "sourcingLink": {
+      "type": "string",
+      "label": "Where \"Ask us to source it\" goes when a search finds nothing",
+      "default": "/contact-us"
     }
   }
 }

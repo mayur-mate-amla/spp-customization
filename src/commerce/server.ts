@@ -20,6 +20,7 @@ import { arrivalDate, lookupZip, transitDays, type IPlace } from "./delivery";
 //                    known rep (setting salesReps) and redirects; the account bar names the rep, adds are credited
 //   routes.erp-stock POST, a signed webhook from the ERP: stock holds ("out until Dec 1"); routes.stock-holds lists them
 //   routes.delivery-estimate  GET ?zip=: the delivery date to a ZIP (city and state from a public ZIP API, server side)
+//   overrides        /api/search/search-hydrated-typeahead -> search-typeahead: synonyms and a sourcing link (row 098)
 //   routes.my-order  GET /api/extensions/plugins/spp-commerce/my-order: the shopper's own cart (context.cartNumber, its
 //                    lines read from Znode with context.znode) and user (context.user): subtotal, the free-shipping
 //                    gap and, for a signed-in buyer, their name and budget; for the account bar
@@ -221,6 +222,42 @@ async function erpStock(request: IPluginRouteRequest, context: IPluginRouteConte
   return json(200, { ok: true, sku: event.sku, onHold: !event.available, holds: holds.size });
 }
 
+// ---- Search typeahead: a store route wrapped (row 098) -------------------------------------------------------------
+// "overrides": { "/api/search/search-hydrated-typeahead": "search-typeahead" }: for the stores this plugin runs on, the
+// proxy sends the header search's typeahead here. The route asks the store's own route (context.original(): the same
+// request, the shopper's cookies) and changes its answer:
+//   - a trade word the catalog does not use (setting searchSynonyms: "koozie" -> "can cooler") gets a first entry
+//     "Search "can cooler" instead", linking to that search
+//   - a search with no product and no category gets "Can't find "x"? Ask us to source it" (the custom-order page)
+// The entries go first in both the product and the category list (a theme's search may show either); everything else
+// in the answer is the store's, unchanged. If the store's route fails, its answer goes back as it is.
+type ITypeaheadEntry = { categoryId: number; categoryName: string; imagePath: string; seoUrl: string; link: string; type: string };
+
+export function typeaheadExtras(term: string, data: { hydratedSearchProductList?: unknown[]; hydratedSearchCategoryList?: ITypeaheadEntry[]; totalProductCount?: number }, synonyms: Record<string, unknown>, sourcingLink: string) {
+  const key = term.trim().toLowerCase();
+  const extras: ITypeaheadEntry[] = [];
+  const synonym = typeof synonyms[key] === "string" ? String(synonyms[key]) : "";
+  if (synonym) extras.push({ categoryId: -1, categoryName: `Search "${synonym}" instead`, imagePath: "", seoUrl: "", link: `/search?searchTerm=${encodeURIComponent(synonym)}`, type: "Category" });
+  const empty = !(data.hydratedSearchProductList || []).length && !(data.hydratedSearchCategoryList || []).length;
+  if (empty && key.length >= 3) extras.push({ categoryId: -2, categoryName: `Can't find "${term.trim()}"? Ask us to source it`, imagePath: "", seoUrl: "", link: sourcingLink, type: "Category" });
+  return extras;
+}
+
+async function searchTypeahead(request: IPluginRouteRequest, context: IPluginRouteContext) {
+  const answer = await context.original();
+  const json = (status: number, data: unknown) => new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
+  const envelope = answer.data as { data?: Record<string, unknown> } | null;
+  if (answer.status !== 200 || !envelope?.data) return json(answer.status, answer.data);
+  const synonyms = context.settings.searchSynonyms && typeof context.settings.searchSynonyms === "object" ? (context.settings.searchSynonyms as Record<string, unknown>) : {};
+  const extras = typeaheadExtras(String(request.query.searchTerm || ""), envelope.data, synonyms, String(context.settings.sourcingLink || "/contact-us"));
+  if (!extras.length) return json(200, envelope);
+  const categories = (envelope.data.hydratedSearchCategoryList || []) as ITypeaheadEntry[];
+  const products = (envelope.data.hydratedSearchProductList || []) as Record<string, unknown>[];
+  // in both lists: a theme's search may show only products (spp-base links an entry to /<seoUrl>) or also categories
+  const asProducts = extras.map((extra) => ({ productId: extra.categoryId, productName: extra.categoryName, imagePath: "", seoUrl: extra.link.replace(/^\//, "") }));
+  return json(200, { ...envelope, data: { ...envelope.data, hydratedSearchProductList: [...asProducts, ...products], hydratedSearchCategoryList: [...extras, ...categories] } });
+}
+
 // ---- SKU lookup: the Znode API with the store's headers (row 095) ------------------------------------------------
 // GET .../sku-lookup?skus=81DRL,817NK_25 -> { items: [{ sku, found, name, price, inStock, url }] }, at most 20 SKUs.
 // context.znode(path) fetches {API_URL}<path> with the headers the store's own agents send (its API key, portal,
@@ -304,6 +341,7 @@ const plugin: IRuntimePlugin = {
     "erp-stock": erpStock,
     "delivery-estimate": deliveryEstimate,
     "sku-lookup": skuLookup,
+    "search-typeahead": searchTypeahead,
     "stock-holds": async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ holds: [...(stockHolds.get(context.store.code)?.values() || [])] }),
   },
 };

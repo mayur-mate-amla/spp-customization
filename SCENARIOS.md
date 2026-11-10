@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 82 |
+| ✅ Done | 83 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 54 |
+| ⬜ Not started | 53 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -205,7 +205,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 95 | Can a plugin call the Znode API with the store's headers? | Yes | Check | route sku-lookup: context.znode published-products/sku with store headers (direct call without them: 401); portal codes via v2/portals | ✅ Done | [notes](095-znode-api-store-headers/) |
 | 96 | Can a plugin call an external API from the server? | Yes | Check | Yes; externalNetwork is a check-time permission only (install without it works); plugin outbound rules: host allow-list, timeout, size cap | ✅ Done | [notes](096-external-api-server/) |
 | 97 | Can a plugin call an external API from the browser? | No | Base | | ⛔ Blocked | |
-| 98 | Can I wrap an existing store API route (change its input or output)? | Yes | Check | `"overrides"` with `context.original()` | ⬜ Not started | |
+| 98 | Can I wrap an existing store API route (change its input or output)? | Yes | Check | overrides typeahead: original() + synonym and sourcing entries; query cannot be changed through original() | ✅ Done | [notes](098-wrap-store-route/) |
 | 99 | Can I replace an existing store API route completely? | Yes | Check | `"overrides"` without calling the original | ⬜ Not started | |
 | 100 | Is a route override applied only for the stores the plugin is enabled for? | Yes | Check | Same request on a store without the theme | ⬜ Not started | |
 | 101 | Are request bodies to plugin routes size-limited? | Yes | Check | POST over 64 KB: refused | ⬜ Not started | |

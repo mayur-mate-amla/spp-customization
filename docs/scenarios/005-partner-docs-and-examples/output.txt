@@ -1,0 +1,31 @@
+$ grep -n "^#" node_modules/znode-plugin/README.md   (SDK docs: sections)
+1:# znode-plugin
+7:## Getting started
+42:## Connecting a project to a store
+52:## Commands
+69:## After deploying
+77:## Imports in a package
+
+$ grep -n "^#" README.md   (this project: made by create-znode-plugin)
+1:# Spp Customization
+6:## Commands
+18:## Use-case scenarios
+27:## Where each customization goes
+
+$ find src -type f   (working examples of each kind of customization)
+src/assets/spp-customization-hero.svg
+src/browser.tsx
+src/i18n/labels.json
+src/lib/host.ts
+src/server.tsx
+src/server/ThemeLayout.tsx
+src/server/WelcomePage.tsx
+src/server/data.ts
+src/server/fonts.ts
+src/slots/AnnouncementBar.tsx
+src/slots/ProductBadge.tsx
+src/styles/theme.css
+src/widgets/Hero.tsx
+
+$ npx znode create   (starters by kind)
+znode-package: kind must be one of theme, plugin, widget, content

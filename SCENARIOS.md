@@ -50,9 +50,9 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 4 |
+| ✅ Done | 5 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 129 |
+| ⬜ Not started | 128 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -65,7 +65,7 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 | 2 | Is there one package format (znode-package.json)? | Yes | Check | `znode-package.json` with `kind`; `znode check` passes | ✅ Done | [notes](docs/scenarios/002-one-package-format/) |
 | 3 | Is there an SDK to build, pack and install a package? | Yes | Check | `npm run build`, `pack`, `deploy` output | ✅ Done | [notes](docs/scenarios/003-sdk-build-pack-install/) |
 | 4 | Is the public API documented for partners (extension-api.d.ts)? | Yes | Check | Build type-checks `src/` against `extension-api.d.ts` | ✅ Done | [notes](docs/scenarios/004-public-api-documented/) |
-| 5 | Are partner docs and examples available? | Yes | Check | SDK README and this repo's README / examples | ⬜ Not started | |
+| 5 | Are partner docs and examples available? | Yes | Check | SDK README and this repo's README / examples | ✅ Done | [notes](docs/scenarios/005-partner-docs-and-examples/) |
 | 6 | Is a package validated at install? | Yes | Check | Bad version / name / file in a copy of the manifest: install refuses it | ⬜ Not started | |
 | 7 | Is a package prevented from overwriting another package's files? | Yes | Check | An asset named like another package's file: install refuses it | ⬜ Not started | |
 | 8 | Can I install or update a package without a build or restart? | Yes | UI | Change the announcement text, `npm run deploy`, refresh: new text, no store restart | ⬜ Not started | |

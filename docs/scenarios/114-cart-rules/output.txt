@@ -1,0 +1,21 @@
+# before: minimums = {}
+> node scripts/cart-shot.mjs --add 103814:6 --out docs/scenarios/114-cart-rules/before.png
+added product 103814 x 6
+Kan-Tastic Can Cooler | qty 6
+
+# after: minimums = { "Y1448_001": 25 }
+> node scripts/cart-shot.mjs --add 103814:6 --route /api/extensions/plugins/spp-commerce/activity --out docs/scenarios/114-cart-rules/after.png
+added product 103814 x 6
+Kan-Tastic Can Cooler | qty 25
+{"sku":"Y1448_001","asked":6,"added":6,"rule":"","cartNumber":"C-10112026-1110","ok":true}
+{"sku":"Y1448_001","asked":6,"added":25,"rule":"minimum 25","cartNumber":"C-10112026-1110","ok":true}
+
+# the rule functions with node alone
+quantityRule(Y1448_001, 6)   {"quantity":25,"rule":"minimum 25"}
+quantityRule(Y1448_001, 30)  null
+quantityRule(817NK_25, 8)    {"quantity":5,"rule":"limit 5 per order"}
+quantityRule(817NK_25, 5)    null
+lineNotes(y1448_001)         ["Minimum order 25"]
+
+# note: npm run deploy reapplies the manifest defaults over an empty object setting ({}),
+# so the "before" setting was set again after the deploy

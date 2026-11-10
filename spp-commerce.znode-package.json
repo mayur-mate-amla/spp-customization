@@ -28,6 +28,11 @@
       "label": "Per-order limits: { \"<SKU>\": <max quantity> } (a cart line over its limit is brought back to it)",
       "default": { "817NK_25": 5 }
     },
+    "minimums": {
+      "type": "object",
+      "label": "Minimum order quantities: { \"<SKU>\": <min quantity> } (a cart line under its minimum is raised to it)",
+      "default": { "Y1448_001": 25 }
+    },
     "companions": {
       "type": "object",
       "label": "Companion items: { \"<SKU>\": \"<companion SKU>\" } (added with the item, removed with it)",

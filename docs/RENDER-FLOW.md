@@ -334,6 +334,7 @@ repository joins it. Commits are on `main` of this repository.
 | 080 | Before/after add to cart (case packs) | 1052a6b | §6 | §6 B (request hooks), §7 B.5 route | src/commerce/server.ts |
 | 081 | React to cart changes (order limit) | 6d7c25f | §7 | §7 B.1 (`runCartHooks`) | src/commerce/server.ts, src/commerce/rules.ts |
 | 082 | Change cart lines before they are shown | 3ad302b | §7 A.1 | §7 B.1 (`runMapCartItems`) | src/commerce/server.ts, src/commerce/rules.ts |
-| 113 | Add or remove cart items automatically | (this commit) | §7 A.1 | §7 B.1 (`runCartHooks` actions) | src/commerce/server.ts, src/commerce/rules.ts |
+| 113 | Add or remove cart items automatically | 68703da | §7 A.1 | §7 B.1 (`runCartHooks` actions) | src/commerce/server.ts, src/commerce/rules.ts |
+| 114 | Cart rules (minimum order quantity) | (this commit) | §7 A.1 | §7 B.1 (`runCartHooks`, `runMapCartItems`) | src/commerce/rules.ts, src/commerce/server.ts |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

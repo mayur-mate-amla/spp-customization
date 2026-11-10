@@ -13,13 +13,30 @@ export function overLimit(sku: string, quantity: number, limits: Record<string, 
   return max && quantity > max ? max : 0;
 }
 
+/** The minimum order quantity a line is under (setting minimums), or 0 when it meets it or has none. */
+export function belowMinimum(sku: string, quantity: number, minimums: Record<string, unknown>) {
+  const min = forSku(minimums, sku);
+  return min && quantity > 0 && quantity < min ? min : 0;
+}
+
+/** The quantity a line must have by the quantity rules (a minimum first, then a limit), with the rule's name; null when it already does. */
+export function quantityRule(sku: string, quantity: number, minimums: Record<string, unknown>, limits: Record<string, unknown>) {
+  const min = belowMinimum(sku, quantity, minimums);
+  if (min) return { quantity: min, rule: `minimum ${min}` };
+  const max = overLimit(sku, quantity, limits);
+  if (max) return { quantity: max, rule: `limit ${max} per order` };
+  return null;
+}
+
 const escapeHtml = (text: string) => text.replace(/[&<>"']/g, (char) => `&#${char.charCodeAt(0)};`);
 
-/** The notes a cart line gets (setting casePacks and orderLimits): shown under the line on the cart page and checkout. */
-export function lineNotes(sku: string, casePacks: Record<string, unknown>, limits: Record<string, unknown>) {
+/** The notes a cart line gets (setting casePacks, minimums and orderLimits): shown under the line on the cart page and checkout. */
+export function lineNotes(sku: string, casePacks: Record<string, unknown>, limits: Record<string, unknown>, minimums: Record<string, unknown> = {}) {
   const notes: string[] = [];
   const pack = forSku(casePacks, sku);
   if (pack > 1) notes.push(`Sold in cases of ${pack}`);
+  const min = forSku(minimums, sku);
+  if (min > 1) notes.push(`Minimum order ${min}`);
   const max = forSku(limits, sku);
   if (max) notes.push(`Limit ${max} per order`);
   return notes;

@@ -1,15 +1,17 @@
 import type { ICartHookContext, IPluginRouteContext, IPluginRouteRequest, IRuntimeData, IRuntimeHookContext, IRuntimePlugin } from "znode-plugin/types/extension-api";
-import { companionChanges, lineNotes, overLimit, withNotes } from "./rules";
+import { companionChanges, lineNotes, quantityRule, withNotes } from "./rules";
 
 // spp-commerce, server part (runs on the store's server only).
 //   beforeAddToCart  case packs: an item sold in packs (setting casePacks: { "<sku>": <pack size> }) is rounded up to
 //                    whole packs before the request goes to Znode (1 lanyard -> a pack of 10)
 //   afterAddToCart   order activity: each add (asked, added, cart number, result) is recorded for the store
-//   onCartChanged    per-order limits (setting orderLimits: { "<sku>": <max> }): a line over its limit is brought back
-//                    to the limit when the cart is read (cart page, checkout); companions (setting companions:
-//                    { "<sku>": "<companion sku>" }): an ID holder brings its lanyard, removed again with it
-//   mapCartItems     line notes (setting lineNotes): "Sold in cases of 10", "Limit 5 per order" under the lines they
-//                    apply to, on the cart page and checkout
+//   onCartChanged    when the cart is read (cart page, checkout):
+//                    - minimums (setting minimums: { "<sku>": <min> }): a line under its minimum is raised to it
+//                    - per-order limits (setting orderLimits: { "<sku>": <max> }): a line over its limit is brought to it
+//                    - companions (setting companions: { "<sku>": "<companion sku>" }): an ID holder brings its lanyard,
+//                      removed again with it
+//   mapCartItems     line notes (setting lineNotes): "Sold in cases of 10", "Minimum order 25", "Limit 5 per order"
+//                    under the lines they apply to, on the cart page and checkout
 //   routes.activity  GET /api/extensions/plugins/spp-commerce/activity: the store's last 20 adds and cart changes
 // The add-to-cart request is { cartId, skuDetails: [{ sku, quantity, customData, personalizedDetails, ... }], localeId,
 // userId }; the response { cartId, addToCartStatus, cartNumber, cartCount }. onCartChanged gets the cart as
@@ -71,16 +73,18 @@ async function afterAddToCart(response: IRuntimeData, context: IRuntimeHookConte
   );
 }
 
-// A line over its per-order limit is replaced by one at the limit (Znode's cart has no "set quantity" for a plugin:
-// the line is removed and the item added again with the allowed quantity, its personalization kept).
+// A line under its minimum or over its per-order limit is replaced by one at the minimum / limit (Znode's cart has no
+// "set quantity" for a plugin: the line is removed and the item added again with the allowed quantity, its
+// personalization kept).
 async function onCartChanged({ store, cart, settings, actions }: ICartHookContext) {
   const limits = skuMap(settings, "orderLimits");
+  const minimums = skuMap(settings, "minimums");
   for (const line of cart.lines) {
-    const max = overLimit(line.sku, line.quantity, limits);
-    if (!max) continue;
+    const fix = quantityRule(line.sku, line.quantity, minimums, limits);
+    if (!fix) continue;
     const removed = await actions.removeLine(line.id);
-    const added = removed && (await actions.addItem({ sku: line.sku, quantity: max, personalization: line.personalization }));
-    record(store.code, [{ at: new Date().toISOString(), sku: line.sku, asked: line.quantity, added: max, rule: `limit ${max} per order`, cartNumber: cart.cartNumber, ok: Boolean(added) }]);
+    const added = removed && (await actions.addItem({ sku: line.sku, quantity: fix.quantity, personalization: line.personalization }));
+    record(store.code, [{ at: new Date().toISOString(), sku: line.sku, asked: line.quantity, added: fix.quantity, rule: fix.rule, cartNumber: cart.cartNumber, ok: Boolean(added) }]);
   }
 
   // companions: added with their item, removed with it (only the ones this rule added)
@@ -109,8 +113,9 @@ async function mapCartItems(cart: IRuntimeData, { settings }: IRuntimeHookContex
   if (settings.lineNotes === false || !Array.isArray(cart.cartItems)) return cart;
   const casePacks = skuMap(settings, "casePacks");
   const limits = skuMap(settings, "orderLimits");
+  const minimums = skuMap(settings, "minimums");
   const cartItems = (cart.cartItems as IRuntimeData[]).map((item) => {
-    const notes = lineNotes(String(item.sku || ""), casePacks, limits);
+    const notes = lineNotes(String(item.sku || ""), casePacks, limits, minimums);
     return notes.length ? { ...item, productDescription: withNotes(item.productDescription, notes) } : item;
   });
   return { ...cart, cartItems };

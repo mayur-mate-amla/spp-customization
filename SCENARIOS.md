@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 23 |
+| ✅ Done | 24 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 110 |
+| ⬜ Not started | 109 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -110,7 +110,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 31 | Is a theme's CSS kept from clashing with the store's own CSS? | Yes | Check | Example: trust strip with copied live-site CSS; dedupeStyles drops the 8 rules the store has | ✅ Done | [notes](docs/scenarios/031-css-does-not-clash/) |
 | 32 | Can I change labels and messages per theme? | Yes | UI | Example: B2B wording (Item #, Availability, Ready to ship, Add to order) | ✅ Done | [notes](docs/scenarios/032-labels-per-theme/) |
 | 33 | Can I change logos and images per store? | Yes | UI | Example: co-branded header logo from setting logoUrl (store attribute ThemeLogoUrl) | ✅ Done | [notes](docs/scenarios/033-logo-per-store/) |
-| 34 | Can I assign a theme per store? | Yes | Config | `"stores"` on the theme entry | ⬜ Not started | |
+| 34 | Can I assign a theme per store? | Yes | Config | Example: POCSppDemo moved from redpanda to spp-customization (plugins.json only) | ✅ Done | [notes](docs/scenarios/034-assign-theme-per-store/) |
 | 35 | Can I switch a store's theme without a deploy? | Yes | Config | Change the store's theme in `plugins.json`, refresh | ⬜ Not started | |
 | 36 | Can I preview a theme before it goes live? | Yes | Check | Preview link with the theme disabled in `plugins.json` | ⬜ Not started | |
 | 37 | Does the theme show in the page-builder preview? | Yes | Check | Needs the page-builder app running | ⬜ Not started | |

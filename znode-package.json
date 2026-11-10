@@ -19,7 +19,7 @@
   "dedupeStyles": true,
   "assets": ["src/assets/*.svg", "src/assets/fonts/*.woff2"],
   "messages": "src/i18n/labels.json",
-  "widgets": ["SppCustomizationHero"],
+  "widgets": ["SppCustomizationHero", "SppTestimonials"],
   "pages": { "/": "src/pages/home.json" },
   "serverPages": ["/spp-customization-welcome"],
   "settingsSchema": {

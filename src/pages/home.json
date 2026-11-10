@@ -52,10 +52,26 @@
         "columns": 4,
         "accentColor": "#f26b1d",
         "cards": [
-          { "title": "Power tools", "image": "/api/extensions/files/spp-customization-tile-tools.svg", "url": "/tools" },
-          { "title": "Electrical", "image": "/api/extensions/files/spp-customization-tile-electrical.svg", "url": "/electrical" },
-          { "title": "Plumbing", "image": "/api/extensions/files/spp-customization-tile-plumbing.svg", "url": "/plumbing" },
-          { "title": "Workwear", "image": "/api/extensions/files/spp-customization-tile-workwear.svg", "url": "/workwear" }
+          {
+            "title": "Power tools",
+            "image": "/api/extensions/files/spp-customization-tile-tools.svg",
+            "url": "/tools"
+          },
+          {
+            "title": "Electrical",
+            "image": "/api/extensions/files/spp-customization-tile-electrical.svg",
+            "url": "/electrical"
+          },
+          {
+            "title": "Plumbing",
+            "image": "/api/extensions/files/spp-customization-tile-plumbing.svg",
+            "url": "/plumbing"
+          },
+          {
+            "title": "Workwear",
+            "image": "/api/extensions/files/spp-customization-tile-workwear.svg",
+            "url": "/workwear"
+          }
         ]
       }
     },
@@ -68,13 +84,50 @@
         "orderByLabel": "Order by:",
         "receiveByLabel": "Receive by:",
         "rows": [
-          { "orderBy": "Mon, Mar 9", "receiveBy": "Fri, Mar 13" },
-          { "orderBy": "Mon, Mar 16", "receiveBy": "Fri, Mar 20" },
-          { "orderBy": "Mon, Mar 23", "receiveBy": "Fri, Mar 27" }
+          {
+            "orderBy": "Mon, Mar 9",
+            "receiveBy": "Fri, Mar 13"
+          },
+          {
+            "orderBy": "Mon, Mar 16",
+            "receiveBy": "Fri, Mar 20"
+          },
+          {
+            "orderBy": "Mon, Mar 23",
+            "receiveBy": "Fri, Mar 27"
+          }
         ],
         "background": "#f4f6f9",
         "textColor": "#0b2545",
         "tableHeaderBg": "#0b2545"
+      }
+    },
+    {
+      "type": "SppTestimonials",
+      "props": {
+        "id": "SppTestimonials-home",
+        "heading": "What our customers say",
+        "subheading": "Contractors and facility teams who order with us.",
+        "items": [
+          {
+            "quote": "Ordered 40 cordless kits for three crews on Monday, all on site by Thursday.",
+            "name": "Rob T.",
+            "company": "Site lead, general contractor",
+            "rating": 5
+          },
+          {
+            "quote": "Account pricing shows on every item, so purchase orders match the first time.",
+            "name": "Alicia M.",
+            "company": "Procurement, facilities",
+            "rating": 5
+          },
+          {
+            "quote": "Easy reorders for our maintenance stock. Wish the van delivery window was earlier.",
+            "name": "Sam O.",
+            "company": "Maintenance supervisor",
+            "rating": 4
+          }
+        ]
       }
     }
   ],

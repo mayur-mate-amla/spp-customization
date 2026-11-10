@@ -70,6 +70,15 @@ try {
     await page.evaluate((y) => window.scrollTo(0, y), scroll);
     await new Promise((resolve) => setTimeout(resolve, 1200));
   }
+  // --find "<text>": scroll the innermost element showing that text into view (e.g. a widget in the editor's list)
+  const find = arg("find");
+  if (find && find !== true) {
+    await page.evaluate((text) => {
+      const all = [...document.querySelectorAll("body *")].filter((element) => element.children.length === 0 && element.textContent.trim() === text);
+      all[0]?.scrollIntoView({ block: "center" });
+    }, String(find));
+    await new Promise((resolve) => setTimeout(resolve, 800));
+  }
   const hover = arg("hover");
   if (hover && hover !== true) {
     await page.hover(hover);

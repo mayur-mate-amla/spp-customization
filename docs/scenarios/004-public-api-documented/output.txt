@@ -1,0 +1,49 @@
+$ grep -rn "znode-plugin/types/extension-api" src
+src/browser.tsx:1:import type { IBrowserHost, IBrowserPlugin } from "znode-plugin/types/extension-api";
+src/browser.tsx:9://          children (keep it, add to it, or replace it). Slot names: znode-plugin/types/extension-api.d.ts.
+src/lib/host.ts:1:import type { IBrowserHost } from "znode-plugin/types/extension-api";
+src/server.tsx:2:import type { IPluginRouteContext, IPluginRouteRequest, IRuntimePlugin, IServerSlotContext } from "znode-plugin/types/extension-api";
+
+$ grep -c "" node_modules/znode-plugin/types/extension-api.d.ts   (lines)
+227
+
+$ grep -nE "^export (interface|type)" node_modules/znode-plugin/types/extension-api.d.ts
+6:export type IRuntimeData = Record<string, unknown>;
+8:export interface IRuntimeHookContext {
+15:export interface IRuntimeCartLine {
+23:export interface ICartHookContext {
+36:export interface IPluginRouteRequest {
+49:export interface IPluginRouteContext {
+87:export interface IServerSlotContext {
+93:export interface IRuntimePlugin {
+124:export interface IServerPage {
+135:export interface ICheckoutApi {
+147:export interface IReact {
+159:export interface IReactDOM {
+163:export interface IBrowserHost {
+200:export interface IEditorWidget {
+211:export interface IBrowserPlugin {
+
+$ sed -n 176,197p extension-api.d.ts   (the browser slots, documented in the file)
+// Slots: a component gets the slot's props plus children (what the store renders there) and decides whether to keep it.
+//   layout.head          every page's <head>              props: store, theme (<title>, <meta>, <link>, <script async>)
+//   layout.header        every page's header              props: the Header widget's props
+//   layout.footer        the end of every page
+//   header.search        the header's search box          props: SearchBox's own (dataTestSelector, isMobile,
+//                        isTypeaheadSearch, isHydratedSearch, ...); children = the store's search box (desktop
+//                        and mobile render it once each)
+//   login.form           the login page's form            props: storeCode, isLoginRequired; children = the store's
+//                        Login (rendered on the server: keep the first render free of window, document and Date.now())
+//   product.image      product page image               props: product, isQuickView
+//   product.addToCart    product page Add to Cart         props: product, isQuickView
+//   product.layout       the whole product details area   props: product, configurableProducts (the page's variants:
+//                        render options from them, not from a fetch, so they are in the server HTML),
+//                        part(name) => ref (parts: product.image, product.variants, product.addToCart moved into
+//                        your layout, logic intact)
+//   product.card         a product card                   props: product, selectedMode
+//   productList.layout   a category / search listing      props: productData, isFromSearch
+//   addToCart.notification  the added-to-cart popup       props: data
+//   checkout.address     the checkout's address section   props: its props (updateShippingOptions, userDetails,
+//                        addressData, ...) and checkout: the store's own address calls (ICheckoutApi)
+//   checkout.shippingOptions  the shipping-method list    props: its props (shippingOptions, ...) and checkout
+// Transforms: addToCart.notificationData, productList.data

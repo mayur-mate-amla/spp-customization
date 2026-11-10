@@ -1,0 +1,11 @@
+$ (before) spp-widgets "stores": "*"
+  POCSppDemo        showroom widget offered: True
+  POCStaplesPromo   showroom widget offered: True
+  POCNvidia         showroom widget offered: True
+  MaxwellsHardware  showroom widget offered: True
+
+$ node scripts/registry.mjs stores POCSppDemo --package spp-widgets
+  POCSppDemo        showroom widget offered: True
+  POCStaplesPromo   showroom widget offered: False
+  POCNvidia         showroom widget offered: False
+  MaxwellsHardware  showroom widget offered: False

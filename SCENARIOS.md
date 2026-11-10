@@ -61,10 +61,10 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 59 |
+| ✅ Done | 60 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 78 |
-| ⛔ Blocked | 38 |
+| ⬜ Not started | 76 |
+| ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
 
@@ -164,11 +164,11 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 70 | Can I replace how an existing widget renders? | Yes | UI | Example: parent's Delivery dates rendered as a holiday shipping timeline (next cutoff, past struck) | ✅ Done | [notes](docs/scenarios/070-replace-widget-render/) |
 | 71 | Can I hide or remove a base widget from the page builder for a theme? | No | Base | Result: **Yes, hide from the list** (theme CSS in the editor); removing a type still needs a page-builder change. Example: curated list for SPP stores | ✅ Done | [notes](docs/scenarios/071-hide-base-widget/) |
 | 72 | Can I reorder the editor's widget categories? | No | Base | Result: **Yes, visual order** (theme CSS in the editor). Example: SPP · Promotions and SPP · Content first | ✅ Done | [notes](docs/scenarios/072-reorder-editor-categories/) |
-| 73 | Can a widget hold other widgets (nested)? | Partial | Check | Try a slot field in a package widget | ⬜ Not started | |
+| 73 | Can a widget hold other widgets (nested)? | Partial | Check | Try a slot field in a package widget | ⛔ Blocked | [notes](Confirmed No: nesting needs Puck's drop zones, but the store's widget preview removes the puck prop before calling a package widget (RuntimePageEditor.tsx preview())/) |
 | 74 | Can a widget load its data on the server like base widgets? | Partial | Check | Widget calling this theme's route | ⬜ Not started | |
-| 75 | Are package widgets in the server HTML (for SEO)? | No | Base | | ⛔ Blocked | |
+| 75 | Are package widgets in the server HTML (for SEO)? | No | Base | | ⛔ Blocked | [notes](Confirmed No: package widgets render in the browser (RuntimeWidget, client); the server HTML has only their wrapper (checked in 068)/) |
 | 76 | Can widget settings differ per locale? | No | Base | | ⛔ Blocked | |
-| 77 | Can a widget be used on one store only? | Yes | Config | The theme's `"stores"` limits its widgets | ⬜ Not started | |
+| 77 | Can a widget be used on one store only? | Yes | Config | Example: Visit our showroom (spp-widgets) placed for POCSppDemo only | ✅ Done | [notes](docs/scenarios/077-widget-one-store-only/) |
 | 78 | Can package widgets be used in header and footer pages? | Partial | Check | Needs the page-builder app running | ⬜ Not started | |
 
 ## Plugins

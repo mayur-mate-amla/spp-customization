@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 24 |
+| ✅ Done | 25 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 109 |
+| ⬜ Not started | 108 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -83,7 +83,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 9 | Are older package versions kept on disk for rollback? | Yes | Check | Result: **Yes**. `npm run deploy` keeps each version in `<plugin folder>/.versions/`; `npm run rollback` reinstalls one | ✅ Done | [notes](docs/scenarios/009-older-versions-kept/) |
 | 10 | Is there a one-command rollback? | No | Base | Result: **Yes** for this package: `npm run rollback -- <version>` (needs the older zip in releases/) | ✅ Done | [notes](docs/scenarios/010-rollback-with-one-command/) |
 | 11 | Can a package be uninstalled cleanly (files removed)? | Partial | Check | Result: **Yes**. `npm run uninstall` removes the entry and every owned file (`--purge`: kept versions too) | ✅ Done | [notes](docs/scenarios/011-uninstall-package/) |
-| 12 | Can a package be switched on or off without uninstalling it? | Yes | Config | `"enabled": true/false` for the test store | ⬜ Not started | |
+| 12 | Can a package be switched on or off without uninstalling it? | Yes | Config | Example: kill switch, store falls back to redpanda while the theme stays installed | ✅ Done | [notes](docs/scenarios/012-switch-package-on-off/) |
 | 13 | Can a package be installed for some stores only? | Yes | Config | `"stores": ["<one store>"]`: on there, not on another store | ⬜ Not started | |
 | 14 | Can the same package be installed twice with different settings? | No | Base | | ⛔ Blocked | |
 | 15 | Can a package declare required settings? | Yes | UI | `settingsSchema` field with `"required": true` | ✅ Done | [notes](docs/scenarios/015-required-settings/) |

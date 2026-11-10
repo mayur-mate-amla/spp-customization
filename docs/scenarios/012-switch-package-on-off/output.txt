@@ -1,0 +1,13 @@
+$ (setup) node scripts/registry.mjs before redpanda; node scripts/registry.mjs stores POCSppDemo --package redpanda
+$ node scripts/registry.mjs themes POCSppDemo
+1. spp-customization (parent redpanda): on
+2. redpanda (parent spp-base): on
+
+$ node scripts/registry.mjs enable false   (switch off; nothing uninstalled)
+1. spp-customization (parent redpanda): off
+2. redpanda (parent spp-base): on
+files still in the plugin folder: 8 (spp-customization-1.0.2.*)
+
+$ node scripts/registry.mjs enable true   (on again)
+1. spp-customization (parent redpanda): on
+2. redpanda (parent spp-base): on

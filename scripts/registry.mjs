@@ -6,6 +6,8 @@
 //   node scripts/registry.mjs stores StoreA,StoreB         the stores it runs for ("" for none)
 //   node scripts/registry.mjs themes StoreA                which themes are placed for a store, in the order the store
 //                                                          picks them (the first enabled one is the store's theme)
+//   node scripts/registry.mjs before redpanda              move this entry just before another: it comes first for the
+//                                                          stores both are placed for (theme priority, a fallback)
 //   ... --package redpanda                                 the same for another package's entry (store configuration)
 // The plugin folder: RUNTIME_PLUGINS_DIR, else znode.local.json's pluginsDir.
 import fs from "node:fs";
@@ -57,6 +59,12 @@ const entry = changeRegistry(dir, (registry) => {
     entry.enabled = value === "true";
   } else if (command === "stores") {
     entry.stores = String(value || "").split(",").map((item) => item.trim()).filter(Boolean);
+  } else if (command === "before") {
+    // priority: move the entry just before another one, so it comes first for the stores both are placed for
+    const other = registry.plugins.findIndex((item) => item.name === value);
+    if (other === -1) throw new Error(`${value} is not installed`);
+    registry.plugins.splice(registry.plugins.indexOf(entry), 1);
+    registry.plugins.splice(registry.plugins.findIndex((item) => item.name === value), 0, entry);
   } else {
     throw new Error(`unknown command ${command}`);
   }

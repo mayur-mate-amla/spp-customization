@@ -1,0 +1,10 @@
+webstore pid 21432, started 11/10/2026 12:17:11
+$ node scripts/registry.mjs themes POCSppDemo
+1. spp-customization (parent redpanda): on
+2. redpanda (parent spp-base): on
+
+$ node scripts/registry.mjs stores ""   (take this theme off the store; redpanda, next in line, takes over)
+store picked it up after 226 ms (1 request(s)): packages spp-base, artifi, countdown-banner, delivery-preference; stylesheets spp-base-1.2.1.css, redpanda-1.0.0.css
+1. redpanda (parent spp-base): on
+$ node scripts/registry.mjs enable false   (back to how it was installed: off, no stores)
+webstore pid 21432, started 11/10/2026 12:17:11   (same process: no deploy, no restart)

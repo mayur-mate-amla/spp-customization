@@ -20,14 +20,21 @@ Promo-product stores sell blanks that get the buyer's logo, so the card says so.
 
 ## How, on this store
 
-The listing card on this built-in theme (`custom1`) has no `product.card` slot (probed in 043). So the theme takes the
-**listing** slot (`productList.layout`), which receives the page's products, and draws the grid with its own card. The
-store's sort / count / view bar and filter chips are kept as **parts** (`part("productList.filter")`,
-`part("productList.facets")`): the store's own components, logic intact. When a listing has more than one page, the
-store's listing is kept (the paging is not a part), so no product is ever hidden. Setting `themeCards: false` turns
-the theme's card off.
+The theme takes the **listing** slot (`productList.layout`), which receives the page's products, and draws the grid
+with its own card. The store's sort / count / view bar and filter chips are kept as **parts**
+(`part("productList.filter")`, `part("productList.facets")`): the store's own components, logic intact.
 
-(The `product.card` slot itself still carries the New badge, `ProductBadge.tsx`, on stores whose card has the slot.)
+**Two ways to change a product card**: wrap or replace the store's card through `product.card` (it runs on this
+store: the theme's `ProductBadge.tsx` wraps every card), or draw your own card from the listing's data through
+`productList.layout`, as here. The second also controls the grid around the cards (quick filters in 054). Correction:
+the first version of this page said the store's listing card had no `product.card` slot here; it does (043).
+
+**Fallback, fixed after this scenario**: when the theme does not draw the listing (`themeCards: false`, or a listing
+with more than one page, since the paging is not a part), the store's own listing must show. While a package fills
+`productList.layout`, the store keeps its listing mounted but `hidden` and passes the layout no children, so the first
+version (which returned `children`) showed an **empty listing**. `StoreListing` now un-hides the store's mounted
+listing instead: with `themeCards: false` the 12 store cards are back, each wrapped by the theme's `product.card` slot
+([fallback-check.txt](fallback-check.txt)).
 
 ## Where
 

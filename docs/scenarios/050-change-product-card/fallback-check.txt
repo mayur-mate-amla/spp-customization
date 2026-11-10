@@ -1,0 +1,4 @@
+$ (fallback check) node scripts/registry.mjs set themeCards=false   then the Best Sellers listing on POCSppDemo, theme previewed
+before the fix: store product cards on the page: 0   (the listing was empty: the layout returned children, which this slot never gets)
+after the fix:  store product cards on the page: 12; wrapped by the theme's product.card slot (.spp-customization-card): 12
+$ node scripts/registry.mjs set themeCards=true   (back to the theme's cards)

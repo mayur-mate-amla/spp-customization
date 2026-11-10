@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { settings } from "../lib/host.js";
 
@@ -74,11 +74,28 @@ export function ProductCard(props: { product: IListProduct; customizable: boolea
   );
 }
 
+// The store's own listing, when the theme does not draw it (theme cards off, or a listing with more than one page: the
+// paging is not a part). While a package fills productList.layout the store keeps its listing mounted but hidden
+// (<div hidden data-runtime-base="product.list">) and passes the layout no children, so the fallback shows that element
+// again; the store's sort bar and facets stay in it (no part is claimed).
+function StoreListing() {
+  const marker = useRef<HTMLSpanElement | null>(null);
+  useEffect(() => {
+    let element = marker.current?.parentElement?.firstElementChild ?? null;
+    for (let node = marker.current?.nextElementSibling ?? null; node; node = node.nextElementSibling) {
+      if (node.getAttribute("data-runtime-base") === "product.list") element = node;
+    }
+    const base = element?.getAttribute("data-runtime-base") === "product.list" ? (element as HTMLElement) : document.querySelector<HTMLElement>('[data-runtime-base="product.list"]');
+    if (base) base.hidden = false;
+  }, []);
+  return <span ref={marker} hidden data-test-selector="spnStoreListing" />;
+}
+
 export function ProductListing(props: IListingProps) {
   const [quick, setQuick] = useState("all");
   const products = Array.isArray(props.productData?.productList) ? props.productData.productList : [];
   const total = Number(props.productData?.totalProducts ?? products.length);
-  if (settings.themeCards === false || !products.length || total > products.length) return <>{props.children as never}</>;
+  if (settings.themeCards === false || !products.length || total > products.length) return <StoreListing />;
   const skus = Array.isArray(settings.customizableSkus) ? (settings.customizableSkus as unknown[]).map((sku) => String(sku).toLowerCase()) : [];
   const active = QUICK_FILTERS.find((filter) => filter.id === quick) || QUICK_FILTERS[0];
   const shown = products.filter(active.test);

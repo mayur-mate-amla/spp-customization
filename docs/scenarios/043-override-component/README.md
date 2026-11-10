@@ -1,7 +1,8 @@
 # 043: Can I override an existing component with a runtime package?
 
-**Listed:** Partial. **Result here:** Yes for every component the store wraps with a slot; on this store's built-in
-theme (`custom1`) two components are not wrapped, which is what keeps the list's answer at Partial (see below).
+**Listed:** Partial. **Result here:** Yes for every component the store wraps with a slot (`withRuntimeWrapper`); a
+component with no slot needs one added in the webstore, which is what keeps the list's answer at Partial. (Corrected:
+an earlier version of this page said `product.image` and the listing card were not wrapped on this store; see below.)
 
 | Before (the store's add-to-cart) | After: decorated product | After: other products unchanged |
 | --- | --- | --- |
@@ -23,16 +24,18 @@ keeps the store's own quantity box and "Add to order" button (3/4" Poly Lanyard,
 
 ## Which components can be overridden here
 
-Probed on this store's product and listing pages (temporary probes, removed before the commit):
+Checked on this store's product and listing pages (temporary probes, removed before the commit), and against the
+store code (`docs/RENDER-FLOW.md`):
 
-| Slot | Runs on POCSppDemo (`custom1`) |
+| Slot | On POCSppDemo |
 | --- | --- |
-| `product.addToCart`, `product.layout` | yes |
-| `product.image` | no: `custom1`'s product image component is not wrapped |
-| `product.card` (listing) | no: the listing renders `znode-widget/product-card`, which has no slot |
+| `product.addToCart`, `product.layout` | runs |
+| `product.card` (listing) | runs: the listing's `common/product-card` is wrapped (`ProductCard.tsx:169`); all 12 Best Sellers cards carry the theme's wrapper when the store's own listing shows (re-checked with the theme's listing cards off, 050) |
+| `product.image` | runs, but the **artifi plugin** fills the same slot after the theme and, for products with an Artifi image, replaces what it gets (`artifi/src/slots/product-image.tsx`), so the theme's output does not show there |
 
-Overriding one of the two unwrapped components needs a slot added to that component in the webstore (a base change),
-so it stays outside what a package can do on this built-in theme. On the base theme they are wrapped.
+Correction: the first version of this page said `product.image` and the listing card were not wrapped on this store.
+The listing probe ran while the cards were still loading, and the image probe's output was replaced by artifi. Order
+matters: a slot's later package (plugins come after the theme) decides what is finally shown.
 
 ## Where
 

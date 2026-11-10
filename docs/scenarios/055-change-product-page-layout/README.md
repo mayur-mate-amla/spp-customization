@@ -20,11 +20,12 @@ Store: POCSppDemo (`sppdemo.localhost:3000`), 3/4" Poly Lanyard (`/product/10380
 
 ## Why not the `product.layout` slot here
 
-`product.layout` lets a theme draw the whole details area and move the store's pieces in as parts. On this store's
-built-in theme the product image is not one of those parts (043), and the store hides its own details area as soon as
-a layout takes over, so the image would disappear. The layout is therefore changed with CSS on the store's own markup
-(the info column is found by the product-name heading it holds) plus a slot for the new panel: every store component
-keeps its logic.
+`product.layout` lets a theme draw the whole details area and move the store's pieces in as parts (`product.image`,
+`product.variants`, `product.addToCart`); the store hides its own details area as soon as a layout takes over. Only
+those three pieces move: the product name, SKU, price, ratings and the print / email links would have to be redrawn by
+the theme. Changing the layout with CSS on the store's own markup (the info column is found by the product-name heading
+it holds) plus a slot for the new panel keeps every store piece, Artifi's image included, with its own logic. (An
+earlier version gave a different reason, that the image is not a part here; it is, see the correction in 043.)
 
 ## Where
 

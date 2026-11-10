@@ -124,14 +124,14 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 42 | Can I update a component? | Yes | UI | Example: popular searches added to the store's search box (header.search) | ✅ Done | [notes](docs/scenarios/042-update-component/) |
-| 43 | Can I override an existing component with a runtime package? | Partial | UI | Example: Customize & order replaces add-to-cart for decorated SKUs. Works for wrapped components; product.image and the listing card are not wrapped on custom1 (base) | ✅ Done | [notes](docs/scenarios/043-override-component/) |
+| 43 | Can I override an existing component with a runtime package? | Partial | UI | Example: Customize & order replaces add-to-cart for decorated SKUs. Works for every wrapped component (product.card, product.image too; artifi overrides product.image after the theme) | ✅ Done | [notes](docs/scenarios/043-override-component/) |
 | 44 | Can I override an existing component with an SWC build-time theme? | Yes | Outside | Build-time themes live in the store repo | ➖ Outside | |
 | 45 | Can I add a new slot (extension point) from a package? | No | Base | | ⛔ Blocked | |
 | 46 | Can two plugins change the same slot? | Yes | Check | Example: companion plugin spp-commerce adds a B2B account bar to the theme's layout.header | ✅ Done | [notes](docs/scenarios/046-two-packages-same-slot/) |
 | 47 | Can I control the order in which plugins fill a slot? | Partial | Check | Result: **Yes** between plugins (plugins.json order); theme chain always first. Example: account bar vs sale countdown bar | ✅ Done | [notes](docs/scenarios/047-order-of-packages-in-slot/) |
 | 48 | Can I change the header? | Yes | UI | Example: compact sticky header once the shopper scrolls (desktop) | ✅ Done | [notes](docs/scenarios/048-change-header/) |
 | 49 | Can I change the footer? | Yes | UI | Example: Need-help band (phone, email, hours, payments); fixed the footer slot landing in the hidden header | ✅ Done | [notes](docs/scenarios/049-change-footer/) |
-| 50 | Can I change the product card? | Yes | UI | Example: B2B promo card (logo placeholder, price each, Customize) via productList.layout | ✅ Done | [notes](docs/scenarios/050-change-product-card/) |
+| 50 | Can I change the product card? | Yes | UI | Example: B2B promo card via productList.layout (product.card also runs here); fallback to the store's listing fixed | ✅ Done | [notes](docs/scenarios/050-change-product-card/) |
 | 51 | Can I change the added-to-cart popup? | Yes | UI | Example: Added to your order popup (View order / Keep shopping) from the cart count | ✅ Done | [notes](docs/scenarios/051-added-to-cart-popup/) |
 
 ## Layout
@@ -141,7 +141,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 52 | Can I change the layout code? | Partial | UI | Result: **Yes** (header to footer). Example: skip link + server-rendered dated holiday notice (layout.root) | ✅ Done | [notes](docs/scenarios/052-change-layout-code/) |
 | 53 | Can I change the root layout (html/head, global scripts)? | No | Base | Result: **Yes** for head tags and global scripts (layout.head). Example: theme-color, favicon, preconnect, analytics dataLayer | ✅ Done | [notes](docs/scenarios/053-root-layout-head/) |
 | 54 | Can I change the listing layout? | Yes | UI | Example: quick price / ready-to-ship filters above the grid (productList.layout) | ✅ Done | [notes](docs/scenarios/054-change-listing-layout/) |
-| 55 | Can I change the product page layout? | Yes | UI | Example: sticky B2B buy box + Key details / volume pricing panel | ✅ Done | [notes](docs/scenarios/055-change-product-page-layout/) |
+| 55 | Can I change the product page layout? | Yes | UI | Example: sticky B2B buy box + Key details / volume pricing panel (CSS + product.addToCart; keeps every store piece) | ✅ Done | [notes](docs/scenarios/055-change-product-page-layout/) |
 | 56 | Can I change the cart page layout? | No | Base | Result: **Yes** for layout and look (CSS on the cart's hooks); no cart slot for components. Example: sticky summary card, item cards | ✅ Done | [notes](docs/scenarios/056-cart-page-layout/) |
 | 57 | Can I change the checkout layout? | Partial | UI | Example: numbered checkout step cards + sticky order summary (CSS on checkout hooks) | ✅ Done | [notes](docs/scenarios/057-checkout-layout/) |
 | 58 | Can I change the account section layout? | No | Base | | ⛔ Blocked | |

@@ -5,14 +5,23 @@
   "apiVersion": 1,
   "label": "SPP shared widgets",
   "publisher": "Spp Customization team",
-  "description": "Page-builder widgets for every store, whatever its theme: Visit our showroom (address, hours, directions).",
+  "description": "Page-builder widgets for every store, whatever its theme: Visit our showroom (address, hours, directions), and Footer badges for the footer and header layout pages.",
   "license": "proprietary",
-  "keywords": ["widget"],
+  "keywords": [
+    "widget"
+  ],
   "permissions": [],
-  "compatibility": { "webstore": ">=10.0.0" },
+  "compatibility": {
+    "webstore": ">=10.0.0"
+  },
   "build": {
     "browser": "src/shared-widgets/browser.tsx"
   },
-  "styles": ["src/shared-widgets/*.css"],
-  "widgets": ["SppShowroom"]
+  "styles": [
+    "src/shared-widgets/*.css"
+  ],
+  "widgets": [
+    "SppShowroom",
+    "SppFooterBadges"
+  ]
 }

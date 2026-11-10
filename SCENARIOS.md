@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 69 |
+| ✅ Done | 70 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 67 |
+| ⬜ Not started | 66 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -172,7 +172,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 75 | Are package widgets in the server HTML (for SEO)? | No | Base | | ⛔ Blocked | [notes](Confirmed No: package widgets render in the browser (RuntimeWidget, client); the server HTML has only their wrapper (checked in 068)/) |
 | 76 | Can widget settings differ per locale? | No | Base | | ⛔ Blocked | |
 | 77 | Can a widget be used on one store only? | Yes | Config | Example: Visit our showroom (spp-widgets) placed for POCSppDemo only | ✅ Done | [notes](docs/scenarios/077-widget-one-store-only/) |
-| 78 | Can package widgets be used in header and footer pages? | Partial | Check | Needs the page-builder app running | ⬜ Not started | |
+| 78 | Can package widgets be used in header and footer pages? | Partial | Check | Yes: SppFooterBadges dropped in footer and header pages (published locally); store footer of POCSppDemo is a package widget | ✅ Done | [notes](078-widgets-in-header-footer/) |
 
 ## Plugins
 

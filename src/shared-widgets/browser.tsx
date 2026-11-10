@@ -1,4 +1,5 @@
 import type { IBrowserPlugin } from "znode-plugin/types/extension-api";
+import { FooterBadges, FOOTER_BADGES_EDITOR } from "./FooterBadges.js";
 
 // spp-widgets: page-builder widgets shared by every store, whatever its theme (the package is placed for all stores,
 // "stores": "*"). A theme's own widgets (SppFaq, SppTestimonials) exist only where that theme runs.
@@ -77,6 +78,8 @@ export default function setup(): IBrowserPlugin {
           ],
         },
       },
+      // made for the footer and header layout pages (store-wide, so here and not in a theme)
+      SppFooterBadges: { render: FooterBadges, ...FOOTER_BADGES_EDITOR },
     },
   };
 }

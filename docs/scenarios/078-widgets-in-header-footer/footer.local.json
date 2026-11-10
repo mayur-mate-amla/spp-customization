@@ -1,0 +1,333 @@
+{
+  "root": {
+    "props": {}
+  },
+  "content": [
+    {
+      "type": "Footer",
+      "props": {
+        "footer": [
+          {
+            "type": "Container",
+            "props": {
+              "Container": [
+                {
+                  "type": "DynamicWidget",
+                  "props": {
+                    "text": "<div style=\"padding-bottom:10px;margin-bottom:20px;left:0;right:0;bottom:0;height:3px;background:linear-gradient(120deg,#36494F,#5db043 75%,transparent);\"></div>",
+                    "config": {
+                      "type": "Widget",
+                      "id": "DynamicWidget",
+                      "hasConfigurable": true,
+                      "hasPostMessage": true,
+                      "postMessagePayload": {
+                        "type": "update",
+                        "actionType": "open_popup",
+                        "category": "widget",
+                        "data": {
+                          "widgetName": "DynamicWidget",
+                          "text": "<div style=\"padding-bottom:10px;margin-bottom:20px;left:0;right:0;bottom:0;height:3px;background:linear-gradient(120deg,#36494F,#5db043 75%,transparent);\"></div>"
+                        }
+                      }
+                    },
+                    "locale": {
+                      "en-US": {
+                        "text": "<div style=\"padding-bottom:10px;margin-bottom:20px;left:0;right:0;bottom:0;height:3px;background:linear-gradient(120deg,#36494F,#5db043 75%,transparent);\"></div>"
+                      }
+                    },
+                    "id": "DynamicWidget-a0edb6cb-e23a-41a2-a994-8d85720cf678",
+                    "response": null
+                  }
+                },
+                {
+                  "type": "Column",
+                  "props": {
+                    "column-11": [],
+                    "column-10": [],
+                    "column-9": [],
+                    "column-8": [],
+                    "column-7": [],
+                    "column-6": [],
+                    "column-5": [],
+                    "column-4": [],
+                    "column-3": [],
+                    "column-2": [
+                      {
+                        "type": "Heading",
+                        "props": {
+                          "align": "left",
+                          "text": "HAVE QUESTIONS?",
+                          "margin": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": 10,
+                            "left": "0"
+                          },
+                          "padding": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "0",
+                            "left": "0"
+                          },
+                          "border": {
+                            "width": "0",
+                            "color": "black",
+                            "style": "solid",
+                            "borderRadius": 0,
+                            "sides": []
+                          },
+                          "size": "m",
+                          "background": "transparent",
+                          "textColor": "black",
+                          "id": "Heading-d2009335-9ed2-4112-adfd-5cd8eb5e3d5b",
+                          "level": "2",
+                          "locale": {
+                            "en-US": {
+                              "text": "HAVE QUESTIONS?"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "Text",
+                        "props": {
+                          "align": "left",
+                          "text": "If you have any questions\nemail us or give us a call.\n\n+1-855-927-8434",
+                          "padding": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "0",
+                            "left": "0"
+                          },
+                          "size": "s",
+                          "color": "default",
+                          "id": "Text-edb0a47a-b082-4653-a271-4a48abc30fc5",
+                          "locale": {
+                            "en-US": {
+                              "text": "If you have any questions\nemail us or give us a call.\n\n+1-855-927-8434"
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "column-1": [
+                      {
+                        "type": "Heading",
+                        "props": {
+                          "align": "left",
+                          "text": "CUSTOMER SUPPORT",
+                          "margin": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": 10,
+                            "left": "0"
+                          },
+                          "padding": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "0",
+                            "left": "0"
+                          },
+                          "border": {
+                            "width": "0",
+                            "color": "black",
+                            "style": "solid",
+                            "borderRadius": 0,
+                            "sides": []
+                          },
+                          "size": "m",
+                          "background": "transparent",
+                          "textColor": "black",
+                          "id": "Heading-38e61a1e-1d80-4486-b6e3-d4fd186547a2",
+                          "level": "2",
+                          "locale": {
+                            "en-US": {
+                              "text": "CUSTOMER SUPPORT"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "LinkPanel",
+                        "props": {
+                          "response": null,
+                          "contentOrientation": "vertical",
+                          "customClass": "",
+                          "config": {
+                            "type": "Widget",
+                            "id": "LinkPanelWidget",
+                            "hasConfigurable": true,
+                            "widgetConfig": {
+                              "masterWidgetKey": "2253",
+                              "widgetKey": "2253-41a2b866-caaa-439a-bdf9-77d63224800b",
+                              "typeOfMapping": "PortalMapping",
+                              "widgetCode": "LinkPanel",
+                              "displayName": "Link Panel"
+                            }
+                          },
+                          "id": "LinkPanel-41a2b866-caaa-439a-bdf9-77d63224800b"
+                        }
+                      }
+                    ],
+                    "column-0": [
+                      {
+                        "type": "Heading",
+                        "props": {
+                          "align": "left",
+                          "text": "CORPORATE INFORMATION",
+                          "margin": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": 10,
+                            "left": "0"
+                          },
+                          "padding": {
+                            "top": "0",
+                            "right": "0",
+                            "bottom": "0",
+                            "left": "0"
+                          },
+                          "border": {
+                            "width": "0",
+                            "color": "black",
+                            "style": "solid",
+                            "borderRadius": 0,
+                            "sides": []
+                          },
+                          "size": "m",
+                          "background": "transparent",
+                          "textColor": "black",
+                          "id": "Heading-a29eca99-64cc-44bc-ad45-78c1937f3294",
+                          "level": "2",
+                          "locale": {
+                            "en-US": {
+                              "text": "CORPORATE INFORMATION"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "LinkPanel",
+                        "props": {
+                          "response": null,
+                          "contentOrientation": "vertical",
+                          "customClass": "",
+                          "config": {
+                            "type": "Widget",
+                            "id": "LinkPanelWidget",
+                            "hasConfigurable": true,
+                            "widgetConfig": {
+                              "masterWidgetKey": "2253",
+                              "widgetKey": "2253-61717e7b-d98d-487a-8d44-a06596b11cf2",
+                              "typeOfMapping": "PortalMapping",
+                              "widgetCode": "LinkPanel",
+                              "displayName": "Link Panel"
+                            }
+                          },
+                          "id": "LinkPanel-61717e7b-d98d-487a-8d44-a06596b11cf2"
+                        }
+                      }
+                    ],
+                    "distribution": "auto",
+                    "columns": [
+                      {},
+                      {},
+                      {}
+                    ],
+                    "gap": 15,
+                    "hasDropZoneDisabled": false,
+                    "margin": {
+                      "top": 0,
+                      "right": 20,
+                      "bottom": 0,
+                      "left": 20
+                    },
+                    "id": "Column-7ee46785-1dae-449e-886b-d3171c9fc894"
+                  },
+                  "readOnly": {
+                    "columns": false,
+                    "columns[*].span": true
+                  }
+                }
+              ],
+              "align": "center",
+              "block": "box",
+              "maxWidth": 1100,
+              "margin": {
+                "top": 20,
+                "right": "0",
+                "bottom": 0,
+                "left": 16
+              },
+              "padding": {
+                "top": "0",
+                "right": "0",
+                "bottom": 20,
+                "left": "0"
+              },
+              "border": {
+                "width": "0",
+                "color": "black",
+                "style": "solid",
+                "borderRadius": 0,
+                "sides": []
+              },
+              "height": "auto",
+              "image": {
+                "src": "",
+                "backgroundSize": "cover",
+                "backgroundPosition": "center",
+                "backgroundRepeat": "no-repeat"
+              },
+              "id": "Container-51f1111b-d9dc-4a5d-a175-6766f85e01eb",
+              "layout": "standard",
+              "flexProperties": {
+                "flexDirection": "column",
+                "rowAlignment": {},
+                "columnAlignment": {},
+                "flexWrap": "nowrap"
+              },
+              "rigidView": "no"
+            },
+            "readOnly": {
+              "maxWidth": true,
+              "align": true,
+              "flexProperties.rowAlignment": true
+            }
+          }
+        ],
+        "id": "Footer-a9b198b0-50d4-47df-85d9-ed44eec3abc4"
+      }
+    }
+  ],
+  "zones": {
+    "Footer-a9b198b0-50d4-47df-85d9-ed44eec3abc4:footer": [
+      {
+        "type": "SppFooterBadges",
+        "props": {
+          "heading": "",
+          "tone": "light",
+          "items": [
+            {
+              "title": "ASI member",
+              "detail": "#123456"
+            },
+            {
+              "title": "PPAI member",
+              "detail": "Since 2009"
+            },
+            {
+              "title": "Proof before print",
+              "detail": "Free digital proof"
+            },
+            {
+              "title": "Secure checkout",
+              "detail": "PCI DSS compliant"
+            }
+          ],
+          "id": "SppFooterBadges-6f46ab04-fff3-49ae-aa4d-a367d56e3d94"
+        }
+      }
+    ]
+  }
+}

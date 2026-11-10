@@ -1,0 +1,236 @@
+{
+  "root": {
+    "props": {}
+  },
+  "content": [
+    {
+      "type": "Header",
+      "props": {
+        "response": {
+          "data": {
+            "headerConfig": {
+              "logo": {
+                "url": "https://cdn-usds-pr.znodecorp.com/znode10/c9d8bdcc-6c6f-41cc-84ad-7c62263d96d8ACMEgreenlighter2.png"
+              },
+              "search": {
+                "barcode": true,
+                "voiceBasedSearch": false,
+                "enableTypeaheadSearch": true,
+                "enableHydratedSearch": true
+              },
+              "changeLocale": {
+                "enable": true
+              },
+              "links": {
+                "quickOrder": {
+                  "enable": true
+                },
+                "signIn": {
+                  "enable": true
+                }
+              }
+            },
+            "categories": [],
+            "isUserLoggedIn": false,
+            "portalLocales": [
+              {
+                "localeId": 1,
+                "name": "English",
+                "code": "en-US",
+                "isDefault": true,
+                "isActive": true
+              },
+              {
+                "localeId": 4,
+                "name": "Spanish",
+                "code": "es",
+                "isDefault": false,
+                "isActive": true
+              },
+              {
+                "localeId": 13,
+                "name": "French - Canada",
+                "code": "fr-CA",
+                "isDefault": false,
+                "isActive": true
+              }
+            ],
+            "analyticsInfo": {
+              "containerId": "",
+              "analyticsUId": "",
+              "isEnabledTagManager": false,
+              "isEnabledAnalytics": false,
+              "isEnabledEnhancedEcommerce": false,
+              "trackingPixelScript": "<!-- Start Wingify Async V3.0 SmartCode -->\r\n<link rel=\"preconnect\" href=\"https://edge.wingify.net\"/>\r\n<script type=\"text/javascript\">\r\nwindow._wingify_code || (function() {        \r\n    var account_id = 1286468,\r\n        version = 3.0,\r\n        settings_tolerance = 2000,\r\n        hide_element = 'body',\r\n        hide_element_style =\r\n        'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;transition:none !important';\r\n    /* DO NOT EDIT BELOW THIS LINE */\r\n    var n=window,i=document;if(-1<i.URL.indexOf('__wingify_disable__')||n._wingify_code)return;var t=!1,r=i.currentScript,nonce=r&&r.nonce,e={sT:settings_tolerance,hES:hide_element_style,hE:hide_element};try{e=Object.assign(e,JSON.parse(localStorage.getItem('_wingify_'+account_id+'_config')))}catch(e){}var code={script:r,nonce:nonce,settings_tolerance:function(){return e.sT},hide_element:function(){return performance.getEntriesByName('first-contentful-paint')[0]?'':e.hE},hide_element_style:function(){return'{'+e.hES+'}'},getVersion:function(){return version},finish:function(){var e;!t&&(t=!0,e=i.getElementById('_vis_opt_path_hides'))&&e.parentNode.removeChild(e)},finished:function(){return t},addScript:function(e){var t=i.createElement('script');t.src=e,nonce&&t.setAttribute('nonce',nonce),t.fetchPriority='high',i.head.appendChild(t)},init:function(){n._settings_timer=setTimeout(function(){code.finish()},this.settings_tolerance());var e,t=this.hide_element();t&&((e=i.createElement('style')).id='_vis_opt_path_hides',nonce&&e.setAttribute('nonce',nonce),e.textContent=t+this.hide_element_style(),i.head.appendChild(e)),this.addScript('https://edge.wingify.net/tag/'+account_id+'.js')}};n._wingify_code=code;code.init();})();\r\n</script> \r\n<!--End Wingify Async SmartCode -->"
+            },
+            "cartCount": 0,
+            "isEnableQuoteRequest": false,
+            "permission": {
+              "enablePreviousPurchases": true,
+              "enableQuoteRequest": true,
+              "enableReturnOrderRequest": true
+            },
+            "enableTradeCentric": "true"
+          }
+        },
+        "config": {
+          "hasConfigurable": false,
+          "type": "Layout",
+          "id": "HeaderLayout",
+          "widgetConfig": null
+        },
+        "id": "Header-2dfaf874-2074-47a2-9d2e-7ece3d0a9d1c"
+      }
+    }
+  ],
+  "zones": {
+    "Header-2dfaf874-2074-47a2-9d2e-7ece3d0a9d1c:header-top": [
+      {
+        "type": "SppFooterBadges",
+        "props": {
+          "heading": "",
+          "tone": "light",
+          "items": [
+            {
+              "title": "ASI member",
+              "detail": "#123456"
+            },
+            {
+              "title": "PPAI member",
+              "detail": "Since 2009"
+            },
+            {
+              "title": "Proof before print",
+              "detail": "Free digital proof"
+            },
+            {
+              "title": "Secure checkout",
+              "detail": "PCI DSS compliant"
+            }
+          ],
+          "id": "SppFooterBadges-d8da2475-0771-41f4-bd7f-202b9e92deb4"
+        }
+      },
+      {
+        "type": "Ticker",
+        "props": {
+          "response": {
+            "data": {
+              "title": "Welcome! Please use Promo Code 123XYZ for 16% off your next order!!"
+            }
+          },
+          "config": {
+            "type": "Widget",
+            "id": "TickerWidget",
+            "hasConfigurable": false,
+            "widgetConfig": {
+              "masterWidgetKey": "1786",
+              "widgetKey": "1786-6041f994-9d94-4309-b4a7-d486fadaff94",
+              "typeOfMapping": "PortalMapping",
+              "widgetCode": "HomePageTicker",
+              "displayName": "Home Page Ticker"
+            }
+          },
+          "id": "Ticker-6041f994-9d94-4309-b4a7-d486fadaff94"
+        }
+      }
+    ],
+    "Header-2dfaf874-2074-47a2-9d2e-7ece3d0a9d1c:header-link": [
+      {
+        "type": "LinkPanel",
+        "props": {
+          "response": {
+            "data": [
+              {
+                "portalId": 7,
+                "mediaId": 0,
+                "title": "Our Brands",
+                "url": "/brand/list",
+                "mediaPath": null,
+                "cmsMappingId": 0,
+                "typeOFMapping": "PortalMapping",
+                "widgetName": null,
+                "isActive": true,
+                "localeId": 1,
+                "titleCode": "Shop By Brand",
+                "image": null,
+                "isNewTab": false,
+                "displayOrder": 1,
+                "enableCMSPreview": false
+              },
+              {
+                "portalId": 7,
+                "mediaId": 0,
+                "title": "New Releases",
+                "url": "/cordless-woodworking",
+                "mediaPath": null,
+                "cmsMappingId": 0,
+                "typeOFMapping": "PortalMapping",
+                "widgetName": null,
+                "isActive": true,
+                "localeId": 1,
+                "titleCode": "Cordless Woodworking",
+                "image": null,
+                "isNewTab": false,
+                "displayOrder": 30,
+                "enableCMSPreview": false
+              },
+              {
+                "portalId": 7,
+                "mediaId": 0,
+                "title": "Blog",
+                "url": "/blog/list",
+                "mediaPath": null,
+                "cmsMappingId": 0,
+                "typeOFMapping": "PortalMapping",
+                "widgetName": null,
+                "isActive": true,
+                "localeId": 1,
+                "titleCode": "Blog",
+                "image": null,
+                "isNewTab": false,
+                "displayOrder": 35,
+                "enableCMSPreview": false
+              },
+              {
+                "portalId": 7,
+                "mediaId": 0,
+                "title": "Locations",
+                "url": "/store-locator",
+                "mediaPath": null,
+                "cmsMappingId": 0,
+                "typeOFMapping": "PortalMapping",
+                "widgetName": null,
+                "isActive": false,
+                "localeId": 1,
+                "titleCode": "Branch Locator",
+                "image": null,
+                "isNewTab": false,
+                "displayOrder": 50,
+                "enableCMSPreview": false
+              }
+            ]
+          },
+          "contentOrientation": "horizontal",
+          "customClass": "",
+          "config": {
+            "type": "Widget",
+            "id": "LinkPanelWidget",
+            "hasConfigurable": true,
+            "widgetConfig": {
+              "masterWidgetKey": "2253",
+              "widgetKey": "2253-ac2cbeb0-fe2c-4d32-a627-77f522064381",
+              "typeOfMapping": "PortalMapping",
+              "widgetCode": "LinkPanel",
+              "displayName": "Link Panel",
+              "cmsMappingId": 7
+            }
+          },
+          "id": "LinkPanel-ac2cbeb0-fe2c-4d32-a627-77f522064381",
+          "font": false
+        }
+      }
+    ],
+    "Header-2dfaf874-2074-47a2-9d2e-7ece3d0a9d1c:header-bottom": []
+  }
+}

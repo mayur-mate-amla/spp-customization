@@ -239,7 +239,7 @@ store's own sort bar and facets, styled by the theme's CSS. No store file change
 | `layout.header` around the store's header (props = the Header widget's) | `HeaderRender.tsx:58` → `RuntimeHeader` (`RuntimeSlots.tsx:174-218`, :212) | 008, 015, 031, 036, 039, 041, 046-048, 052 |
 | `layout.footer`: a container added next to `#webstore-header` once the page is steady, the slot portaled into it | `RuntimeSlots.tsx:179-215` | 049 (moved out of spp-base's hidden header) |
 | `header.search` (direct slot around `SearchBox`) | `base-components/.../header/search/Search.tsx:72-74` | 042 |
-| Runtime widgets carried into header / footer page content | `RuntimePageLayout` (`RuntimePageSlots.tsx:42-52`), `RuntimeFooterCarrier` (`RuntimeSlots.tsx:266-268`) | – |
+| Runtime widgets carried into header / footer page content | `RuntimePageLayout` (`RuntimePageSlots.tsx:42-52`), `RuntimeFooterCarrier` (`RuntimeSlots.tsx:266-268`) | 078 |
 
 ## 9. Home, content and package pages; widgets
 
@@ -332,8 +332,9 @@ repository joins it. Commits are on `main` of this repository.
 | 070 | Replace a widget's render | 67e61f1 | §9 | §9 B.2 (existing type) | src/widgets/DeliveryTimeline.tsx |
 | 071 | Hide base widgets in the editor | 68eba69 | §9 | §9 B.4 (`linkRuntimeStyles`) | src/styles/editor.css |
 | 072 | Reorder editor categories | 8acf508 | §9 | §9 B.4 (`linkRuntimeStyles`) | editor.css |
-| 074 | Widget loads its data on the server (route) | (this commit) | §9 A (agent on the server) | §9 B.2 widget + §7 B.5 route | src/widgets/Highlights.tsx, src/server.tsx |
+| 074 | Widget loads its data on the server (route) | 207c48b | §9 A (agent on the server) | §9 B.2 widget + §7 B.5 route | src/widgets/Highlights.tsx, src/server.tsx |
 | 077 | Widget on one store only | 5dd26e6 | §9 | §2 B.2 placement | – |
+| 078 | Package widgets in header and footer pages | (this commit) | §8 A (layout page) | §8 B carriers (`RuntimePageLayout`), §9 B.2 | src/shared-widgets/FooterBadges.tsx, scripts/editor.mjs |
 | 080 | Before/after add to cart (case packs) | 1052a6b | §6 | §6 B (request hooks), §7 B.5 route | src/commerce/server.ts |
 | 081 | React to cart changes (order limit) | 6d7c25f | §7 | §7 B.1 (`runCartHooks`) | src/commerce/server.ts, src/commerce/rules.ts |
 | 082 | Change cart lines before they are shown | 3ad302b | §7 A.1 | §7 B.1 (`runMapCartItems`) | src/commerce/server.ts, src/commerce/rules.ts |

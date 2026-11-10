@@ -5,6 +5,7 @@
 //   node scripts/editor.mjs --store POCSppDemo --widget "FAQ accordion" --field Heading --type "Shipping questions" --out x.png
 //   node scripts/editor.mjs --store POCSppDemo --widget "Your account manager" --publish --out x.png
 //   node scripts/editor.mjs --store POCSppDemo --out x.png                     (no widget: just open the page, e.g. after a publish)
+//   node scripts/editor.mjs --query "url=layout&pageCode=Footer" --widget ... --out x.png   (another page: the footer layout)
 // PAGE_BUILDER_URL (default http://localhost:3001) is the running page builder; EDGE_PATH the browser to drive.
 import fs from "node:fs";
 import path from "node:path";
@@ -17,6 +18,8 @@ const arg = (name, fallback) => {
 };
 const base = (process.env.PAGE_BUILDER_URL || "http://localhost:3001").replace(/\/$/, "");
 const store = arg("store", "POCSppDemo");
+// the editor's page: the home page unless --query names another ("url=layout&pageCode=Footer" for the store's footer)
+const query = arg("query", "url=home");
 const widget = arg("widget");
 const out = arg("out");
 const field = arg("field");
@@ -35,7 +38,7 @@ const browser = await puppeteer.launch({ executablePath: edge, headless: true, a
 try {
   const page = await browser.newPage();
   await page.setViewport({ width: 1600, height: Number(arg("height", 1000)) });
-  await page.goto(`${base}/en-US/page-builder?url=home&storeCode=${encodeURIComponent(store)}`, { waitUntil: "load", timeout: 120000 });
+  await page.goto(`${base}/en-US/page-builder?${query}&storeCode=${encodeURIComponent(store)}`, { waitUntil: "load", timeout: 120000 });
   await sleep(20000);
 
   if (widget) await dropWidget(page);
@@ -155,7 +158,14 @@ async function dropWidget(page) {
     await page.mouse.move(start.x + ((end.x - start.x) * step) / 30, start.y + ((end.y - start.y) * step) / 30);
     await sleep(30);
   }
+  // a nested drop zone (the footer's) only takes the drop once the pointer has moved inside it: a few small moves
+  for (let step = 0; step < 10; step++) {
+    await page.mouse.move(end.x + (step % 2 ? 10 : -10), end.y + step);
+    await sleep(80);
+  }
   await sleep(400);
+  // --drag-shot <file.png>: the editor while the widget is held over the drop point (to place a drop)
+  if (arg("drag-shot")) await page.screenshot({ path: arg("drag-shot") });
   await page.mouse.up();
   await sleep(4000);
 }

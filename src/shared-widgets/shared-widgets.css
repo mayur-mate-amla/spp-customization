@@ -10,3 +10,14 @@
 .spp-widgets-showroom__hours caption { margin-bottom: 6px; font-weight: 700; text-align: left; }
 .spp-widgets-showroom__hours th, .spp-widgets-showroom__hours td { padding: 6px 0; text-align: left; border-bottom: 1px solid rgb(226, 232, 240); }
 .spp-widgets-showroom__hours th { font-weight: 600; }
+
+/* SppFooterBadges: memberships and guarantees, for the footer (and header) layout pages */
+.spp-widgets-badges { padding: 18px 16px; }
+.spp-widgets-badges--dark { color: rgb(226, 232, 240); background: transparent; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+.spp-widgets-badges--light { color: var(--primary, #0b2545); background: rgb(244, 246, 249); }
+.spp-widgets-badges__heading { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-align: center; text-transform: uppercase; opacity: 0.8; }
+.spp-widgets-badges__list { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px; margin: 0; padding: 0; list-style: none; }
+.spp-widgets-badges__item { display: flex; align-items: center; gap: 10px; }
+.spp-widgets-badges__icon { flex: none; color: var(--accent, #f26b1d); }
+.spp-widgets-badges__item strong { display: block; font-size: 14px; }
+.spp-widgets-badges__item small { display: block; font-size: 12px; opacity: 0.75; }

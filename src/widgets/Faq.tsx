@@ -25,7 +25,7 @@ export function Faq(props: IFaqProps) {
 
 export const FAQ_EDITOR = {
   label: "FAQ accordion",
-  category: "Spp Customization",
+  category: "SPP · Content",
   fields: {
     heading: { type: "text", label: "Heading" },
     openFirst: {

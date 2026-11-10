@@ -94,7 +94,7 @@ export function seasonalDefaults(now = new Date()) {
 
 export const PROMO_BANNER_EDITOR = {
   label: "Promotion banner",
-  category: "Spp Customization",
+  category: "SPP · Promotions",
   fields: {
     headline: { type: "text", label: "Headline" },
     details: { type: "textarea", label: "Offer details" },

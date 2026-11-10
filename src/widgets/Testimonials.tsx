@@ -39,7 +39,7 @@ export function Testimonials(props: ITestimonialsProps) {
 
 export const TESTIMONIALS_EDITOR = {
   label: "Customer testimonials",
-  category: "Spp Customization",
+  category: "SPP · Content",
   fields: {
     heading: { type: "text", label: "Heading" },
     subheading: { type: "textarea", label: "Text under the heading" },

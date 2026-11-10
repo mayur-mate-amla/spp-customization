@@ -26,7 +26,7 @@ export function Hero(props: IHeroProps) {
 
 export const HERO_EDITOR = {
   label: "Spp Customization Hero",
-  category: "Content",
+  category: "SPP · Content",
   fields: {
     heading: { type: "text", label: "Heading" },
     text: { type: "textarea", label: "Text" },

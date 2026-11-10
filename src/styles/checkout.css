@@ -1,0 +1,52 @@
+/* Checkout layout: numbered steps (CSS counters on the store's section headings), each step a card, and a sticky order
+   summary. CSS on the store's own checkout markup (its data-test-selector hooks): every step keeps its logic. */
+
+html[data-theme] main:has([data-test-selector="hdgCheckout"]) { counter-reset: spp-step; }
+
+/* each step as a card */
+html[data-theme] [data-test-selector="divDeliveryPreference"],
+html[data-theme] [data-test-selector="divShippingAddress"],
+html[data-theme] div:has(> [data-test-selector="hdgShippingMethod"]):not(:has([data-test-selector="divShippingAddress"])),
+html[data-theme] [data-test-selector="divPaymentContainer"] {
+  margin-bottom: 16px;
+  padding: 20px 22px;
+  background: #fff;
+  border: 1px solid var(--card-border, rgb(226, 232, 240));
+  border-radius: 12px;
+}
+
+/* the steps' headings, numbered in page order */
+html[data-theme] :is([data-test-selector="divDeliveryPreference"] :is(h2, h3, h4, p):first-child, [data-test-selector="hdgShippingAddress"], [data-test-selector="hdgShippingMethod"], [data-test-selector="hdgPaymentMethod"]) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary, #0b2545);
+  font-weight: 700;
+}
+html[data-theme] :is([data-test-selector="divDeliveryPreference"] :is(h2, h3, h4, p):first-child, [data-test-selector="hdgShippingAddress"], [data-test-selector="hdgShippingMethod"], [data-test-selector="hdgPaymentMethod"])::before {
+  counter-increment: spp-step;
+  content: counter(spp-step);
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+  color: #fff;
+  background: var(--accent, #f26b1d);
+  border-radius: 50%;
+}
+
+/* the order summary: a card that stays in view */
+html[data-theme] [data-test-selector="divOrderSummaryContainer"] {
+  padding: 20px 22px;
+  background: #fff;
+  border: 1px solid var(--card-border, rgb(226, 232, 240));
+  border-top: 4px solid var(--accent, #f26b1d);
+  border-radius: 12px;
+  box-shadow: 0 14px 34px rgba(11, 37, 69, 0.09);
+}
+@media (min-width: 1024px) {
+  html[data-theme] [data-test-selector="divOrderSummaryContainer"] { position: sticky; top: 150px; }
+}
+html[data-theme] [data-test-selector="btnPlaceOrder"] { padding-top: 14px; padding-bottom: 14px; font-size: 17px; font-weight: 700; }

@@ -2,7 +2,7 @@
   "name": "spp-customization",
   "version": "1.0.2",
   "kind": "theme",
-  "parent": "spp-base",
+  "parent": "redpanda",
   "apiVersion": 1,
   "label": "Spp Customization",
   "publisher": "Spp Customization team",

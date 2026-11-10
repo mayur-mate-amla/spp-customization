@@ -1,0 +1,6 @@
+$ (page with the theme previewed, in the browser)
+stylesheets in order: spp-base-1.2.1.css, redpanda-1.0.0.css, spp-customization-1.0.2.css   (grandparent, parent, child)
+body font:  Montserrat, ui-sans-serif, system-ui, sans-serif   (from redpanda)
+h2 font:    Montserrat, ui-sans-serif, system-ui, sans-serif   (from redpanda)
+--primary-btn-bg: rgb(242, 107, 29)   (the child's own orange wins over redpanda's black)
+widgets on the home page: HeroBanner, PromoCodeStrip, CardGrid, DeliveryDates   (from spp-base)

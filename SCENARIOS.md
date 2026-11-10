@@ -50,9 +50,9 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 16 |
+| ✅ Done | 17 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 117 |
+| ⬜ Not started | 116 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -92,7 +92,7 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 | 24 | Can I create a theme with CSS only (tokens, fonts, colors)? | Yes | UI | Design tokens in `src/styles/tokens.css` (store CSS variables) | ✅ Done | [notes](docs/scenarios/024-css-only-tokens/) |
 | 25 | Can a theme carry UI code (header, footer, cards, layouts)? | Yes | UI | Covered by 48-50 and 52-55 (header, footer, card, layouts) | ⬜ Not started | |
 | 26 | Can a child theme inherit from a parent theme? | Yes | UI | Example: campaign home page from spp-base's HeroBanner, PromoCodeStrip, CardGrid, DeliveryDates | ✅ Done | [notes](docs/scenarios/026-child-theme-inherits-parent/) |
-| 27 | Can themes inherit more than one level deep? | Yes | UI | `"parent": "redpanda"` (redpanda → spp-base): three levels | ⬜ Not started | |
+| 27 | Can themes inherit more than one level deep? | Yes | UI | Example: sub-brand of Red Panda (Montserrat) on spp-base (widgets), own colors on top | ✅ Done | [notes](docs/scenarios/027-multi-level-inheritance/) |
 | 28 | Can I use my own font files in a theme? | Yes | UI | A `.woff2` in `src/assets/fonts/` with `@font-face` | ⬜ Not started | |
 | 29 | Can I update the CSS? | Yes | UI | Change `theme.css`, deploy, refresh | ⬜ Not started | |
 | 30 | Can I change fonts and colors per theme? | Yes | UI | Accent color and font from settings (`ThemeAccentColor` attribute) | ⬜ Not started | |

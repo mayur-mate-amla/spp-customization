@@ -1,0 +1,12 @@
+$ npm run deploy -- spp-widgets.znode-package.json
+packed spp-widgets-1.0.0.zpkg.zip (4098 bytes)
+installed widget spp-widgets@1.0.0: 3 files, disabled for []
+kept spp-widgets-1.0.0.zpkg.zip in .versions\spp-widgets (1 version on disk: 1.0.0)
+$ node scripts/registry.mjs stores "*" --package spp-widgets; node scripts/registry.mjs enable true --package spp-widgets
+$ (spp-customization live on POCSppDemo for this check; switched back afterwards)
+
+widget packages each store's page builder loads (/api/extensions?store=<code> on :3001):
+  POCSppDemo        spp-base, spp-customization, artifi, countdown-banner, delivery-preference, spp-promos, spp-commerce, spp-widgets
+  POCStaplesPromo   spp-base, artifi, countdown-banner, spp-widgets
+  POCNvidia         spp-base, artifi, countdown-banner, spp-widgets
+  MaxwellsHardware  apex, spp-widgets

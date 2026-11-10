@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 47 |
+| ✅ Done | 48 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 88 |
+| ⬜ Not started | 87 |
 | ⛔ Blocked | 40 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -151,7 +151,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 59 | Can I add a new widget? | Yes | UI | Example: FAQ accordion widget (details/summary), in the editor's Spp Customization category | ✅ Done | [notes](docs/scenarios/059-add-new-widget/) |
-| 60 | Can I create a widget in a theme and use it for that theme or globally? | Yes | UI | Widget in this theme; shown where the theme runs | ⬜ Not started | |
+| 60 | Can I create a widget in a theme and use it for that theme or globally? | Yes | UI | Example: theme widgets on theme stores; spp-widgets package (Visit our showroom) on every store | ✅ Done | [notes](docs/scenarios/060-theme-or-global-widget/) |
 | 61 | Can a plugin carry a widget? | Yes | Check | Same widget API in a `kind: plugin` package (SDK) | ⬜ Not started | |
 | 62 | Can I give a widget settings fields in the page builder? | Yes | UI | `fields` on the widget | ⬜ Not started | |
 | 63 | Are text, textarea, number, select, radio, list, object and custom fields supported? | Yes | UI | One widget using every field type | ⬜ Not started | |

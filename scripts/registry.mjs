@@ -3,7 +3,7 @@
 //   node scripts/registry.mjs show                         this package's entry (version, enabled, stores, settings)
 //   node scripts/registry.mjs set announcement="Hello"     one setting (JSON values: true, 12, "text"; else a string)
 //   node scripts/registry.mjs enable true|false            switch it on or off for its stores
-//   node scripts/registry.mjs stores StoreA,StoreB         the stores it runs for ("" for none)
+//   node scripts/registry.mjs stores StoreA,StoreB         the stores it runs for ("" for none, "*" for every store)
 //   node scripts/registry.mjs themes StoreA                which themes are placed for a store, in the order the store
 //                                                          picks them (the first enabled one is the store's theme)
 //   node scripts/registry.mjs before redpanda              move this entry just before another: it comes first for the
@@ -58,7 +58,7 @@ const entry = changeRegistry(dir, (registry) => {
   } else if (command === "enable") {
     entry.enabled = value === "true";
   } else if (command === "stores") {
-    entry.stores = String(value || "").split(",").map((item) => item.trim()).filter(Boolean);
+    entry.stores = value === "*" ? "*" : String(value || "").split(",").map((item) => item.trim()).filter(Boolean);
   } else if (command === "before") {
     // priority: move the entry just before another one, so it comes first for the stores both are placed for
     const other = registry.plugins.findIndex((item) => item.name === value);

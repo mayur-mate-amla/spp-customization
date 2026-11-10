@@ -1,0 +1,35 @@
+$ ls <plugin folder>/spp-customization-*   (before: version 1.0.0 only)
+   48256  spp-customization-1.0.0-font-inter-8e66b3c3-1.woff2
+    4642  spp-customization-1.0.0.browser.mjs
+    7545  spp-customization-1.0.0.browser.mjs.map
+    3399  spp-customization-1.0.0.css
+       3  spp-customization-1.0.0.labels.json
+    4750  spp-customization-1.0.0.server.mjs
+    7345  spp-customization-1.0.0.server.mjs.map
+     551  spp-customization-hero.svg
+
+$ (package.json and znode-package.json: version 1.0.0 -> 1.0.1)
+$ npm run deploy
+
+> spp-customization@1.0.1 deploy
+> znode deploy .
+
+built theme spp-customization@1.0.1: 9 files
+packed spp-customization-1.0.1.zpkg.zip (59841 bytes)
+installed theme spp-customization@1.0.1 (was 1.0.0): 8 files, disabled for []
+
+$ ls <plugin folder>/spp-customization-*   (after: 1.0.1 installed, 1.0.0 kept)
+   48256  spp-customization-1.0.0-font-inter-8e66b3c3-1.woff2
+    7545  spp-customization-1.0.0.browser.mjs.map
+    7345  spp-customization-1.0.0.server.mjs.map
+   48256  spp-customization-1.0.1-font-inter-8e66b3c3-1.woff2
+    4642  spp-customization-1.0.1.browser.mjs
+    7545  spp-customization-1.0.1.browser.mjs.map
+    3399  spp-customization-1.0.1.css
+       3  spp-customization-1.0.1.labels.json
+    4750  spp-customization-1.0.1.server.mjs
+    7345  spp-customization-1.0.1.server.mjs.map
+     551  spp-customization-hero.svg
+
+$ plugins.json entry
+version 1.0.1, file spp-customization-1.0.1.server.mjs, browser spp-customization-1.0.1.browser.mjs

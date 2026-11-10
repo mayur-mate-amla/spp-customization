@@ -12,6 +12,7 @@ import { HeadTags } from "./slots/HeadTags.js";
 import { Hero, HERO_EDITOR } from "./widgets/Hero.js";
 import { Testimonials, TESTIMONIALS_EDITOR } from "./widgets/Testimonials.js";
 import { Faq, FAQ_EDITOR } from "./widgets/Faq.js";
+import { PromoBanner, PROMO_BANNER_EDITOR } from "./widgets/PromoBanner.js";
 
 // Spp Customization, browser part: what renders in the store's pages (on the server first, then hydrated in the browser).
 //   Slots: wrap or replace a part of the store; the component gets the slot's props, and the store's own rendering as
@@ -49,6 +50,7 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
       SppCustomizationHero: { render: Hero, ...HERO_EDITOR },
       SppTestimonials: { render: Testimonials, ...TESTIMONIALS_EDITOR },
       SppFaq: { render: Faq, ...FAQ_EDITOR },
+      SppPromoBanner: { render: PromoBanner, ...PROMO_BANNER_EDITOR },
     },
   };
 }

@@ -25,7 +25,7 @@ const edge = process.env.EDGE_PATH || "C:\\Program Files (x86)\\Microsoft\\Edge\
 const browser = await puppeteer.launch({ executablePath: edge, headless: true, args: ["--hide-scrollbars", "--disable-gpu"] });
 try {
   const page = await browser.newPage();
-  await page.setViewport({ width: 1600, height: 1000 });
+  await page.setViewport({ width: 1600, height: Number(arg("height", 1000)) });
   await page.goto(`${base}/en-US/page-builder?url=home&storeCode=${encodeURIComponent(store)}`, { waitUntil: "load", timeout: 120000 });
   await sleep(20000);
 

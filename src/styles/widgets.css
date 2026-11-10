@@ -1,5 +1,16 @@
 /* The theme's own page-builder widgets */
 
+/* SppPromoBanner */
+.spp-customization-promo { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin: 32px 0; padding: 32px 36px; border-radius: 14px; }
+.spp-customization-promo--brand { color: #fff; background: linear-gradient(120deg, var(--accent, #f26b1d), rgb(214, 84, 10)); }
+.spp-customization-promo--dark { color: #fff; background: var(--primary, #0b2545); }
+.spp-customization-promo--light { color: var(--primary, #0b2545); background: rgb(255, 247, 237); border: 1px solid rgb(254, 215, 170); }
+.spp-customization-promo--center { flex-direction: column; text-align: center; }
+.spp-customization-promo__badge { display: grid; place-items: center; flex: none; width: 96px; height: 96px; font-size: 22px; font-weight: 800; line-height: 1.05; text-align: center; color: var(--primary, #0b2545); background: #fff; border-radius: 50%; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
+.spp-customization-promo__text { flex: 1; min-width: 240px; }
+.spp-customization-promo__headline { margin: 0 0 6px; font-size: 30px; font-weight: 800; }
+.spp-customization-promo__details { margin: 0; font-size: 17px; opacity: 0.92; }
+
 /* SppFaq */
 .spp-customization-faq { max-width: 880px; margin: 40px auto; }
 .spp-customization-faq__heading { margin: 0 0 16px; font-size: 28px; font-weight: 700; text-align: center; color: var(--primary, #0b2545); }

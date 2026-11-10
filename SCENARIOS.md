@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 72 |
+| ✅ Done | 73 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 64 |
+| ⬜ Not started | 63 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -187,7 +187,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 82 | Can a plugin change cart lines before they are shown? | Yes | UI | mapCartItems: case-pack and order-limit notes under the cart lines | ✅ Done | [notes](082-map-cart-items/) |
 | 83 | Can a plugin fill slots in the page? | Yes | UI | spp-commerce fills product.card: case pack / minimum / limit tags from the cart-rule settings | ✅ Done | [notes](083-plugin-fills-slots/) |
 | 84 | Can a plugin transform data (listing data, popup data)? | Yes | UI | productList.data pins promoted SKUs first; addToCart.notificationData shows the case-pack quantity | ✅ Done | [notes](084-plugin-transforms/) |
-| 85 | Can a plugin read the shopper's cart and user? | Yes | UI | Route using `context.user` / `cartNumber`, shown in a slot | ⬜ Not started | |
+| 85 | Can a plugin read the shopper's cart and user? | Yes | UI | route my-order: context.cartNumber + context.znode cart lines + context.user; free-shipping meter in the account bar | ✅ Done | [notes](085-read-cart-and-user/) |
 | 86 | Can a plugin set cookies? | Partial | Check | Route answering with `Set-Cookie` | ⬜ Not started | |
 | 87 | Can a plugin store its own data (database)? | No | Base | | ⛔ Blocked | |
 | 88 | Can a plugin add labels and messages? | Yes | UI | New namespace in `labels.json` | ⬜ Not started | |

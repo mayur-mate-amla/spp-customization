@@ -13,6 +13,9 @@ import { companionChanges, lineNotes, quantityRule, withNotes } from "./rules";
 //   mapCartItems     line notes (setting lineNotes): "Sold in cases of 10", "Minimum order 25", "Limit 5 per order"
 //                    under the lines they apply to, on the cart page and checkout
 //   routes.activity  GET /api/extensions/plugins/spp-commerce/activity: the store's last 20 adds and cart changes
+//   routes.my-order  GET /api/extensions/plugins/spp-commerce/my-order: the shopper's own cart (context.cartNumber, its
+//                    lines read from Znode with context.znode) and user (context.user): subtotal, the free-shipping
+//                    gap and, for a signed-in buyer, their name and budget; for the account bar
 // The add-to-cart request is { cartId, skuDetails: [{ sku, quantity, customData, personalizedDetails, ... }], localeId,
 // userId }; the response { cartId, addToCartStatus, cartNumber, cartCount }. onCartChanged gets the cart as
 // { cartNumber, lines: [{ id, sku, quantity, totalPrice, personalization }] } and actions addItem / removeLine.
@@ -121,12 +124,45 @@ async function mapCartItems(cart: IRuntimeData, { settings }: IRuntimeHookContex
   return { ...cart, cartItems };
 }
 
+// The shopper's cart and user, from the route's context: the cart number comes from the shopper's cart cookie and the
+// user from their session, so a shopper only ever sees their own. The lines are read from Znode with the store's
+// headers (context.znode, permission znodeApi): the same call the cart page's agent makes.
+type IZnodeLine = Record<string, unknown>;
+const pick = (line: IZnodeLine, ...keys: string[]) => {
+  for (const key of keys) if (line[key] !== undefined && line[key] !== null) return line[key];
+  return undefined;
+};
+
+async function myOrder(_request: IPluginRouteRequest, context: IPluginRouteContext) {
+  const freeOver = Number(context.settings.freeShippingOver) || 0;
+  const user = context.user ? { name: context.user.userName, budget: context.user.budgetAmount || 0, account: context.user.accountCode || "" } : null;
+  let lines: IZnodeLine[] = [];
+  if (context.cartNumber) {
+    const answer = await context.znode(`commerceapi/v1/Carts/item-list/${encodeURIComponent(context.cartNumber)}`);
+    const data = (answer.data || {}) as Record<string, unknown>;
+    const list = data.ItemList ?? data.itemList;
+    lines = answer.status === 200 && Array.isArray(list) ? (list as IZnodeLine[]) : [];
+  }
+  const items = lines.reduce((sum, line) => sum + (Number(pick(line, "Quantity", "quantity")) || 0), 0);
+  const subtotal = Math.round(lines.reduce((sum, line) => sum + (Number(pick(line, "ExtendedPrice", "extendedPrice", "TotalPrice", "totalPrice")) || 0), 0) * 100) / 100;
+  return {
+    cartNumber: context.cartNumber || null,
+    lines: lines.length,
+    items,
+    subtotal,
+    freeShippingOver: freeOver,
+    remaining: freeOver ? Math.max(0, Math.round((freeOver - subtotal) * 100) / 100) : 0,
+    user,
+  };
+}
+
 const plugin: IRuntimePlugin = {
   name: "spp-commerce",
   apiVersion: 1,
   hooks: { beforeAddToCart, afterAddToCart, onCartChanged, mapCartItems },
   routes: {
     activity: async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ store: context.store.code, adds: activity.get(context.store.code) || [] }),
+    "my-order": myOrder,
   },
 };
 

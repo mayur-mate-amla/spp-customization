@@ -1,0 +1,11 @@
+# a shopper with a cart (scripts/cart-shot.mjs: 1 lanyard -> a case of 10, 1 backpack), the route read from that browser
+> node scripts/cart-shot.mjs --add 103808:1 --add 103809:1 --route /api/extensions/plugins/spp-commerce/my-order --out .../after.png
+{"cartNumber":"C-10112026-1115","lines":2,"items":11,"subtotal":57.5,"freeShippingOver":100,"remaining":42.5,"user":null}
+
+# another shopper, no cart cookie: no cart, nothing of the first shopper's
+> curl -H "Host: sppdemo.localhost:3000" http://127.0.0.1:3000/api/extensions/plugins/spp-commerce/my-order
+{"cartNumber":null,"lines":0,"items":0,"subtotal":0,"freeShippingOver":100,"remaining":100,"user":null}
+
+# a cart number made up in a cookie: Znode answers for that cart only if it exists; an unknown one gives no lines
+> curl -H "Host: sppdemo.localhost:3000" -b "CartNumber=C-00000000-0000" .../my-order
+{"cartNumber":"C-00000000-0000","lines":0,"items":0,"subtotal":0,"freeShippingOver":100,"remaining":100,"user":null}

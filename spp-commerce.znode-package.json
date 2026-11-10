@@ -14,7 +14,8 @@
   ],
   "permissions": [
     "routes",
-    "cartHooks"
+    "cartHooks",
+    "znodeApi"
   ],
   "compatibility": {
     "webstore": ">=10.0.0"
@@ -83,6 +84,12 @@
         "811JQ_1",
         "Y1448_001"
       ]
+    },
+    "freeShippingOver": {
+      "type": "number",
+      "label": "Free shipping over this subtotal (0: no free-shipping meter)",
+      "browser": true,
+      "default": 100
     },
     "showAccountBar": {
       "type": "boolean",

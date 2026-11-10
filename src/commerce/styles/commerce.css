@@ -3,7 +3,10 @@
 .spp-commerce-account strong { color: #fff; }
 .spp-commerce-account__link { color: #fff; font-weight: 700; text-decoration: underline; }
 .spp-commerce-account__cart { color: rgb(148, 163, 184); }
-@media (max-width: 639px) { .spp-commerce-account__cart { display: none; } }
+.spp-commerce-account__order { display: flex; align-items: center; gap: 10px; color: rgb(226, 232, 240); }
+.spp-commerce-account__meter { display: inline-block; width: 120px; height: 6px; overflow: hidden; background: rgba(255, 255, 255, 0.18); border-radius: 999px; }
+.spp-commerce-account__meter span { display: block; height: 100%; background: rgb(74, 222, 128); border-radius: inherit; }
+@media (max-width: 639px) { .spp-commerce-account__cart, .spp-commerce-account__meter { display: none; } }
 
 /* SppAccountManager widget */
 .spp-commerce-rep { margin: 40px 0; }

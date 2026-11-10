@@ -1,5 +1,6 @@
 import type { ICartHookContext, IPluginRouteContext, IPluginRouteRequest, IRuntimeData, IRuntimeHookContext, IRuntimePlugin } from "znode-plugin/types/extension-api";
 import { companionChanges, lineNotes, quantityRule, withNotes } from "./rules";
+import { OrderingInfoPage } from "./OrderingInfoPage";
 
 // spp-commerce, server part (runs on the store's server only).
 //   beforeAddToCart  case packs: an item sold in packs (setting casePacks: { "<sku>": <pack size> }) is rounded up to
@@ -12,6 +13,7 @@ import { companionChanges, lineNotes, quantityRule, withNotes } from "./rules";
 //                      removed again with it
 //   mapCartItems     line notes (setting lineNotes): "Sold in cases of 10", "Minimum order 25", "Limit 5 per order"
 //                    under the lines they apply to, on the cart page and checkout
+//   serverPages      /ordering-information: the ordering policies, written from these settings (OrderingInfoPage.tsx)
 //   routes.activity  GET /api/extensions/plugins/spp-commerce/activity: the store's last 20 adds and cart changes
 //   routes.rep       GET .../rep?code=JR&to=/category/1674: a sales rep's link. Sets the spp_rep cookie (30 days) for a
 //                    known rep (setting salesReps) and redirects; the account bar names the rep, adds are credited
@@ -185,6 +187,13 @@ const plugin: IRuntimePlugin = {
   name: "spp-commerce",
   apiVersion: 1,
   hooks: { beforeAddToCart, afterAddToCart, onCartChanged, mapCartItems },
+  serverPages: {
+    "/ordering-information": {
+      // this file is .ts (no JSX): the page element is made with the store's React from the context
+      render: (_props, context) => context.React.createElement(OrderingInfoPage, { settings: context.settings, storeCode: context.store.code }),
+      metadata: { title: "Ordering information", description: "Case packs, minimums, order limits, free shipping and sales reps." },
+    },
+  },
   routes: {
     activity: async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ store: context.store.code, adds: activity.get(context.store.code) || [] }),
     "my-order": myOrder,

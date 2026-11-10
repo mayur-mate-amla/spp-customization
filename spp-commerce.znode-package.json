@@ -34,6 +34,9 @@
   "pages": {
     "/": "src/commerce/pages/home.json"
   },
+  "serverPages": [
+    "/ordering-information"
+  ],
   "settingsSchema": {
     "casePacks": {
       "type": "object",

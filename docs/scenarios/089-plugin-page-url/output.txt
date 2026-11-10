@@ -1,0 +1,16 @@
+# the page is in the server's HTML (no JavaScript needed), with its own <title>
+> curl -H "Host: sppdemo.localhost:3000" http://127.0.0.1:3000/ordering-information | grep ...
+<h1 class="spp-commerce-info__title">Ordering information</h1>
+<meta name="description" content="Case packs, minimums, order limits, free shipping and sales reps."
+<title>Ordering information</title>
+HTTP 200
+Limit 5 per order
+Minimum order 25
+Sold in cases of 10
+
+
+# a store the plugin is not placed for (MaxwellsHardware): the URL does not exist there
+> curl -H "Host: localhost:3000" http://127.0.0.1:3000/ordering-information | grep ...
+<title>Acme Manufacturing</title>
+NEXT_REDIRECT;replace;/404;307;
+(the store streams its own not-found redirect to /404: no page at that URL for this store)

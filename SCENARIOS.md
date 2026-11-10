@@ -37,6 +37,17 @@ Commit message format: `scenario <nnn>: <use case>`, then what changed, where an
 Screenshots use the theme preview (`/api/extensions/preview?theme=spp-customization`), which shows this theme in place
 of the store's own without changing `plugins.json`. "Before" is the theme as it was at the previous commit.
 
+**Open question: where to show product scenarios.** In this environment the Acme store (`localhost:3000`) and the
+Kalles store (`kalles.localhost:3000`) have no products: every category says "No records found" and search finds
+nothing. Listing, product page, product card, add-to-cart, cart and checkout rows (29, 50, 51, 54, 55, 57, 80-82,
+106, 109, 112-117, 120 and others) need a store with products: the SPP stores (`sppdemo.localhost:3000`,
+`staplespromo.localhost:3000`, `nvidia.localhost:3000`, `lol.localhost:3000`) have them. This repository is
+**public**, so their screenshots would publish client storefronts; waiting for a decision (make the repo private, or
+approve those screenshots) before those rows.
+
+**Other findings so far:** asset files are not protected from other packages (007); `znode create` exists (022);
+one-command rollback, kept versions and clean uninstall are implemented in this repo (009, 010, 011).
+
 **Notes where the list may be out of date** (re-checked against the SDK and store code in this repo):
 
 - 22: `znode create <kind> <name>` scaffolds a package (SDK README), so this looks like **Yes**.

@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 32 |
+| ✅ Done | 33 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 101 |
+| ⬜ Not started | 100 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -123,7 +123,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 42 | Can I update a component? | Yes | UI | Wrap a store component through its slot (search box) | ⬜ Not started | |
+| 42 | Can I update a component? | Yes | UI | Example: popular searches added to the store's search box (header.search) | ✅ Done | [notes](docs/scenarios/042-update-component/) |
 | 43 | Can I override an existing component with a runtime package? | Partial | UI | Replace a slot's children (product image) | ⬜ Not started | |
 | 44 | Can I override an existing component with an SWC build-time theme? | Yes | Outside | Build-time themes live in the store repo | ➖ Outside | |
 | 45 | Can I add a new slot (extension point) from a package? | No | Base | | ⛔ Blocked | |

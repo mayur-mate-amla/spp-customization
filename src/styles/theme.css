@@ -17,6 +17,13 @@
 .spp-customization-preview__exit { padding: 2px 10px; color: #111827; font-weight: 700; background: #facc15; border-radius: 999px; }
 .spp-customization-announcement__link { color: #fff; font-weight: 600; text-decoration: underline; }
 
+/* header.search: the store's search box, popular searches under it (absolutely placed, so the header keeps its height) */
+.spp-customization-search { position: relative; width: 100%; }
+.spp-customization-search__popular { position: absolute; top: calc(100% + 4px); left: 0; display: flex; flex-wrap: nowrap; gap: 6px; align-items: center; overflow: hidden; max-width: 100%; font-size: 12px; white-space: nowrap; }
+.spp-customization-search__label { color: rgb(100, 116, 139); }
+.spp-customization-search__term { padding: 1px 8px; color: var(--primary, #0b2545); background: rgb(241, 245, 249); border-radius: 999px; }
+.spp-customization-search__term:hover, .spp-customization-search__term:focus-visible { color: #fff; background: var(--accent, #f26b1d); }
+
 .spp-customization-card { position: relative; }
 .spp-customization-badge { position: absolute; top: 8px; left: 8px; z-index: 1; padding: 2px 8px; font-size: 12px; font-weight: 700; color: #fff; background: var(--theme-accent, var(--accent, #f26b1d)); border-radius: 2px; }
 

@@ -12,7 +12,8 @@
     "uninstall": "node scripts/uninstall.mjs",
     "link-store": "znode link-store",
     "shot": "node scripts/shot.mjs",
-    "rollback": "node scripts/rollback.mjs"
+    "rollback": "node scripts/rollback.mjs",
+    "inventory": "node scripts/inventory.mjs"
   },
   "devDependencies": {
     "@types/react": "19.2.13",

@@ -1,0 +1,17 @@
+> npm run inventory
+Package                                          spp-customization@1.0.2 (theme)   [znode-package.json]
+Theme chain                                      spp-customization → redpanda → spp-base   [parent]
+Permissions                                      routes
+Settings                                         accentColor (string, browser, attribute ThemeAccentColor), announcement (string, browser), headingFont (string, browser, attribute ThemeHeadingFont), logoUrl (string, browser, attribute ThemeLogoUrl), supportPhone (string, browser, required), showTrustStrip (boolean, browser), popularSearches (list, browser), customizableSkus (list, browser), shipCutoffHour (number), shipTimezone (string), supportEmail (string, browser), supportHours (string, browser), themeCards (boolean, browser), noticeText (string), noticeFrom (string), noticeUntil (string), showBadge (boolean, browser)   [settingsSchema]
+Labels                                           Product.*, Common.*   [src/i18n/labels.json]
+Styles                                           src/styles/*.css   [styles]
+Assets                                           src/assets/*.svg, src/assets/*.mjs, src/assets/fonts/*.woff2   [assets]
+Pages (page-builder content)                     /   [pages]
+Browser slots                                    layout.head, layout.header, product.card, header.search, product.addToCart, layout.footer, productList.layout, addToCart.notification   [src/browser.tsx]
+Browser transforms                               –
+Widgets                                          SppCustomizationHero, SppTestimonials, SppFaq, SppPromoBanner, PromoCodeStrip, DeliveryDates
+Server slots                                     layout.root   [src/server.tsx]
+Server pages (own URLs)                          /spp-customization-welcome
+Routes (/api/extensions/plugins/<name>/<route>)  highlights, shipping-cutoff
+Cart hooks                                       –
+Route overrides                                  –   [overrides]

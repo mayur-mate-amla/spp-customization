@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 66 |
+| ✅ Done | 67 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 70 |
+| ⬜ Not started | 69 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -102,7 +102,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 23 | Can I create a complex theme? | Yes | UI | Done when 24-41 are: the sum of them | ⬜ Not started | |
+| 23 | Can I create a complex theme? | Yes | UI | the sum of 24-41 (40 blocked); npm run inventory lists what the built theme carries | ✅ Done | [notes](023-complex-theme/) |
 | 24 | Can I create a theme with CSS only (tokens, fonts, colors)? | Yes | UI | Design tokens in `src/styles/tokens.css` (store CSS variables) | ✅ Done | [notes](docs/scenarios/024-css-only-tokens/) |
 | 25 | Can a theme carry UI code (header, footer, cards, layouts)? | Yes | UI | Covered by 48-50 and 52-55 (header, footer, card, layouts) | ⬜ Not started | |
 | 26 | Can a child theme inherit from a parent theme? | Yes | UI | Example: campaign home page from spp-base's HeroBanner, PromoCodeStrip, CardGrid, DeliveryDates | ✅ Done | [notes](docs/scenarios/026-child-theme-inherits-parent/) |

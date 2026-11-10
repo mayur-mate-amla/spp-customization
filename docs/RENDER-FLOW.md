@@ -286,6 +286,7 @@ repository joins it. Commits are on `main` of this repository.
 | 016 | Empty required settings reported | ce79d42 | – | §1 install | – |
 | 017 | API version | a76185e | – | §1 install, `registry.server.ts:89` load check | – |
 | 022 | Scaffold command | 7717e83 | – | §1 (`znode create`) | – |
+| 023 | Complex theme (inventory) | (this commit) | §1-§4 | §2 B.2 chain, §3 B.1, §8 B, §9 B | scripts/inventory.mjs |
 | 024 | CSS-only tokens | 0805627 | §3 A.1 `data-theme` | §3 B.1 stylesheets | src/styles/tokens.css |
 | 026 | Child theme | ae1cced | §9 A home | §2 B.2 parent chain, §9 B.1 page content, §9 B.2 parent's widgets | src/pages/home.json |
 | 027 | Multi-level inheritance | 47128bc | §3 | §2 B.2 chain, §3 B.1 order | znode-package.json |
@@ -335,6 +336,6 @@ repository joins it. Commits are on `main` of this repository.
 | 081 | React to cart changes (order limit) | 6d7c25f | §7 | §7 B.1 (`runCartHooks`) | src/commerce/server.ts, src/commerce/rules.ts |
 | 082 | Change cart lines before they are shown | 3ad302b | §7 A.1 | §7 B.1 (`runMapCartItems`) | src/commerce/server.ts, src/commerce/rules.ts |
 | 113 | Add or remove cart items automatically | 68703da | §7 A.1 | §7 B.1 (`runCartHooks` actions) | src/commerce/server.ts, src/commerce/rules.ts |
-| 114 | Cart rules (minimum order quantity) | (this commit) | §7 A.1 | §7 B.1 (`runCartHooks`, `runMapCartItems`) | src/commerce/rules.ts, src/commerce/server.ts |
+| 114 | Cart rules (minimum order quantity) | 180df50 | §7 A.1 | §7 B.1 (`runCartHooks`, `runMapCartItems`) | src/commerce/rules.ts, src/commerce/server.ts |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

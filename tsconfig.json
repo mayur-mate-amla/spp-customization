@@ -1,0 +1,7 @@
+{
+  // tsconfig.store.json (this machine's, git-ignored) extends the znode-plugin preset and, once you run
+  // `npm run link-store -- <path to the store repo>`, the store's tsconfig.base.json: every @znode alias then resolves to
+  // the store's real source and types.
+  "extends": "./tsconfig.store.json",
+  "include": ["src", "znode-env.d.ts"]
+}

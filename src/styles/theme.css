@@ -1,0 +1,21 @@
+/* Spp Customization styles: linked into every page of the stores the theme is enabled for, after the store's own CSS.
+   Target your own classes, or the store's markup through its data-test-selector attributes. */
+
+.spp-customization-layout { flex: 1 0 auto; display: flex; flex-direction: column; width: 100%; }
+
+.spp-customization-announcement { padding: 8px 16px; text-align: center; font-size: 14px; color: #fff; background: var(--theme-accent, #2563eb); }
+
+.spp-customization-card { position: relative; }
+.spp-customization-badge { position: absolute; top: 8px; left: 8px; z-index: 1; padding: 2px 8px; font-size: 12px; font-weight: 700; color: #fff; background: var(--theme-accent, #2563eb); border-radius: 2px; }
+
+.spp-customization-hero { position: relative; margin: 24px 0; overflow: hidden; border-radius: 8px; background: #f3f4f6; }
+.spp-customization-hero__image { display: block; width: 100%; height: auto; }
+.spp-customization-hero__text { padding: 24px; }
+.spp-customization-hero__heading { margin: 0 0 8px; font-size: 28px; font-weight: 700; }
+.spp-customization-hero__button { display: inline-block; margin-top: 12px; padding: 10px 20px; color: #fff; font-weight: 600; background: var(--theme-accent, #2563eb); border-radius: 4px; }
+
+.spp-customization-welcome { padding: 0 0 40px; }
+.spp-customization-welcome__title { margin: 24px 0 16px; font-size: 32px; font-weight: 700; }
+.spp-customization-welcome__list { display: grid; gap: 16px; margin: 0 0 24px; padding: 0; list-style: none; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .spp-customization-welcome__list { grid-template-columns: repeat(3, 1fr); } }
+.spp-customization-welcome__list li { display: flex; flex-direction: column; gap: 4px; padding: 16px; border-top: 3px solid var(--theme-accent, #2563eb); background: #f9fafb; }

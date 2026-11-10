@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360">
+  <defs>
+    <linearGradient id="hero-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e3a8a"/>
+      <stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="360" fill="url(#hero-bg)"/>
+  <circle cx="1080" cy="180" r="120" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="28"/>
+  <path d="M0 360 L240 160 L400 280 L560 180 L820 360 Z" fill="#000000" fill-opacity="0.15"/>
+</svg>

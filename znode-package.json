@@ -1,0 +1,43 @@
+{
+  "name": "spp-customization",
+  "version": "1.0.0",
+  "kind": "theme",
+  "apiVersion": 1,
+  "label": "Spp Customization",
+  "publisher": "Spp Customization team",
+  "description": "Spp Customization: a store layout with its own font, an announcement bar, a New badge on product cards, a hero block for the page builder and a welcome page.",
+  "license": "proprietary",
+  "keywords": ["theme"],
+  "permissions": ["routes"],
+  "compatibility": { "webstore": ">=10.0.0" },
+  "build": {
+    "server": "src/server.tsx",
+    "browser": "src/browser.tsx"
+  },
+  "styles": ["src/styles/*.css"],
+  "assets": ["src/assets/*"],
+  "messages": "src/i18n/labels.json",
+  "widgets": ["SppCustomizationHero"],
+  "serverPages": ["/spp-customization-welcome"],
+  "settingsSchema": {
+    "accentColor": {
+      "type": "string",
+      "label": "Accent color (CSS)",
+      "browser": true,
+      "default": "#2563eb",
+      "attribute": "ThemeAccentColor"
+    },
+    "announcement": {
+      "type": "string",
+      "label": "Announcement bar text (empty: no bar)",
+      "browser": true,
+      "default": "Free shipping on orders over $100"
+    },
+    "showBadge": {
+      "type": "boolean",
+      "label": "Show the New badge on product cards",
+      "browser": true,
+      "default": true
+    }
+  }
+}

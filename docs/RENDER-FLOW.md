@@ -366,6 +366,7 @@ repository joins it. Commits are on `main` of this repository.
 | 117 | Shipping methods (no rush for decorated items; live check open) | 1e0fed8 | §7 A.3 shipping methods | §7 B.2 `checkout.shippingOptions` | src/commerce/rules.ts, src/commerce/slots/CheckoutShipping.tsx |
 | 121 | A new module: Event kits | af180b9 | – (404) | §9 B.1 server page + `layout.header` browser part, §7 B.5 route, §6 store add-to-cart | src/commerce/EventKitsPage.tsx, src/commerce/slots/EventKits.tsx |
 | 130 | Login page (theme login.page server slot) | 764466c | login page `Login` | §3 B server slot `login.page` | src/server/LoginPage.tsx |
-| 133 | SEO meta per theme (brand and verification tags) | (this commit) | page `generateMetadata` (CMS SEO) | §3 B `layout.head` (in the server head) | src/slots/HeadTags.tsx |
+| 133 | SEO meta per theme (brand and verification tags) | 6063d1d | page `generateMetadata` (CMS SEO) | §3 B `layout.head` (in the server head) | src/slots/HeadTags.tsx |
+| 134 | JSON-LD per store (BreadcrumbList) | (this commit) | layout and product page JSON-LD | §5 B `product.addToCart` (server-rendered) | src/commerce/slots/ProductJsonLd.tsx |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

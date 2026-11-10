@@ -240,6 +240,18 @@
         "2 day",
         "express"
       ]
+    },
+    "siteUrl": {
+      "type": "string",
+      "label": "This store's address, e.g. https://store.example.com (absolute URLs in structured data); empty: no breadcrumb data",
+      "browser": true,
+      "default": ""
+    },
+    "storeName": {
+      "type": "string",
+      "label": "The store's name as the first breadcrumb in search results",
+      "browser": true,
+      "default": "Navigate Brand Store"
     }
   }
 }

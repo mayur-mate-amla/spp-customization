@@ -1,0 +1,16 @@
+# JSON-LD types on /product/103809 once the page has rendered (node ld-types.mjs), POCSppDemo
+
+## before (siteUrl empty: spp-commerce prints no breadcrumb data)
+﻿the store's own theme      : Organization, WebSite, LocalBusiness, Product
+spp-customization previewed: Organization, WebSite, LocalBusiness, Product
+
+## after (siteUrl = http://sppdemo.localhost:3000 for this store)
+﻿the store's own theme      : BreadcrumbList (Navigate Brand Store > Best Sellers > Graphite Deluxe 15" Computer Backpack), Organization, WebSite, LocalBusiness, Product
+spp-customization previewed: BreadcrumbList (Navigate Brand Store > Best Sellers > Graphite Deluxe 15" Computer Backpack), Organization, WebSite, LocalBusiness, Product
+
+## the BreadcrumbList in the HTML the server sends (curl): a literal <script>, readable without JavaScript
+<script type="application/ld+json" data-test-selector="scriptBreadcrumbJsonLd">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Navigate Brand Store","item":"http://sppdemo.localhost:3000/"},{"@type":"ListItem","position":2,"name":"Best Sellers","item":"http://sppdemo.localhost:3000/category/1674"},{"@type":"ListItem","position":3,"name":"Graphite Deluxe 15\" Computer Backpack","item":"http://sppdemo.localhost:3000/product/103809"}]}
+
+
+## the store's own blocks: inside the page's React data stream, not as <script> tags in the HTML (curl)
+literal <script type="application/ld+json"> tags in the server HTML: 1 (the BreadcrumbList); "ld+json" mentions in total: 5

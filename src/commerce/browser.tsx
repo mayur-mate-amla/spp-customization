@@ -4,6 +4,7 @@ import { AccountBar } from "./slots/AccountBar.js";
 import { EventKits } from "./slots/EventKits.js";
 import { RuleTags } from "./slots/RuleTags.js";
 import { DeliveryEstimate } from "./slots/DeliveryEstimate.js";
+import { ProductJsonLd } from "./slots/ProductJsonLd.js";
 import { CheckoutAddress } from "./slots/CheckoutAddress.js";
 import { CheckoutShipping } from "./slots/CheckoutShipping.js";
 import { pinPromoted, popupQuantity } from "./transforms.js";
@@ -28,7 +29,13 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
       // the ordering rules (case packs, minimums, limits) on every product card, from the same settings as the cart rules
       "product.card": RuleTags,
       // "Deliver to [ZIP]" under the add to cart, from the delivery-estimate route
-      "product.addToCart": DeliveryEstimate,
+      // and the product page's per-store structured data (BreadcrumbList, row 134)
+      "product.addToCart": (props) => (
+        <>
+          <ProductJsonLd product={props.product} isQuickView={props.isQuickView} />
+          <DeliveryEstimate {...props} />
+        </>
+      ),
       // the checkout's address step: a PO Box guard and the delivery date (row 116)
       "checkout.address": CheckoutAddress,
       // the shipping methods: no rush methods for decorated items (row 117)

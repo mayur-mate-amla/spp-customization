@@ -64,10 +64,10 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 96 |
+| ✅ Done | 97 |
 | 🟡 In progress | 1 |
 | ⬜ Not started | 40 |
-| ⛔ Blocked | 38 |
+| ⛔ Blocked | 37 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
 
@@ -281,7 +281,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 133 | Can I change SEO and meta tags per theme? | No | Base | re-checked: a theme adds head tags (in server HTML): og/twitter/app/verification; page title and description stay the CMS's | ✅ Done | [notes](133-seo-meta-per-theme/) |
-| 134 | Can I add structured data (JSON-LD) per store? | No | Base | | ⛔ Blocked | |
+| 134 | Can I add structured data (JSON-LD) per store? | No | Base | re-checked: yes, spp-commerce prints a per-store BreadcrumbList on product pages (literal script in server HTML); store's own blocks cannot be changed | ✅ Done | [notes](134-json-ld-per-store/) |
 | 135 | Can I change the sitemap or robots rules? | No | Base | | ⛔ Blocked | |
 | 136 | Is the webstore AEO and GEO compatible? | Not tested | Outside | Webstore-wide audit | ➖ Outside | |
 

@@ -7,40 +7,72 @@
   "publisher": "Spp Customization team",
   "description": "Companion plugin of the spp-customization theme: B2B account bar, cart and checkout rules, and the store API routes the theme cannot take over.",
   "license": "proprietary",
-  "keywords": ["plugin", "b2b", "cart"],
-  "permissions": ["routes", "cartHooks"],
-  "compatibility": { "webstore": ">=10.0.0" },
+  "keywords": [
+    "plugin",
+    "b2b",
+    "cart"
+  ],
+  "permissions": [
+    "routes",
+    "cartHooks"
+  ],
+  "compatibility": {
+    "webstore": ">=10.0.0"
+  },
   "build": {
     "server": "src/commerce/server.ts",
     "browser": "src/commerce/browser.tsx"
   },
-  "styles": ["src/commerce/styles/*.css"],
-  "widgets": ["SppAccountManager"],
-  "pages": { "/": "src/commerce/pages/home.json" },
+  "styles": [
+    "src/commerce/styles/*.css"
+  ],
+  "widgets": [
+    "SppAccountManager"
+  ],
+  "pages": {
+    "/": "src/commerce/pages/home.json"
+  },
   "settingsSchema": {
     "casePacks": {
       "type": "object",
       "label": "Items sold in case packs: { \"<SKU>\": <pack size> } (quantities are rounded up to whole packs)",
-      "default": { "81DRL": 10 }
+      "default": {
+        "81DRL": 10
+      },
+      "browser": true
     },
     "orderLimits": {
       "type": "object",
       "label": "Per-order limits: { \"<SKU>\": <max quantity> } (a cart line over its limit is brought back to it)",
-      "default": { "817NK_25": 5 }
+      "default": {
+        "817NK_25": 5
+      },
+      "browser": true
     },
     "minimums": {
       "type": "object",
       "label": "Minimum order quantities: { \"<SKU>\": <min quantity> } (a cart line under its minimum is raised to it)",
-      "default": { "Y1448_001": 25 }
+      "default": {
+        "Y1448_001": 25
+      },
+      "browser": true
     },
     "companions": {
       "type": "object",
       "label": "Companion items: { \"<SKU>\": \"<companion SKU>\" } (added with the item, removed with it)",
-      "default": { "80BEK_1-V": "81DRL" }
+      "default": {
+        "80BEK_1-V": "81DRL"
+      }
     },
     "lineNotes": {
       "type": "boolean",
       "label": "Show case-pack and order-limit notes under cart and checkout lines",
+      "default": true
+    },
+    "cardTags": {
+      "type": "boolean",
+      "label": "Show the ordering rules (case packs, minimums, limits) on product cards",
+      "browser": true,
       "default": true
     },
     "showAccountBar": {

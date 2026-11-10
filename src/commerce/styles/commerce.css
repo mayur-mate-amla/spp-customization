@@ -20,3 +20,8 @@
 /* cart and checkout lines: the notes mapCartItems adds after Znode's description */
 .spp-line-notes { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; padding: 0; list-style: none; }
 .spp-line-notes li { padding: 2px 8px; font-size: 12px; font-weight: 600; color: rgb(30, 64, 175); background: rgb(219, 234, 254); border-radius: 6px; }
+
+/* product cards: the ordering rules (product.card slot), over the card's top edge */
+.spp-commerce-rules-card { position: relative; height: 100%; }
+.spp-commerce-rules-card__tags { position: absolute; top: 8px; left: 8px; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.spp-commerce-rules-card__tags li { padding: 2px 8px; font-size: 12px; font-weight: 700; color: rgb(30, 64, 175); background: rgb(219, 234, 254); border: 1px solid rgb(191, 219, 254); border-radius: 6px; }

@@ -334,7 +334,8 @@ repository joins it. Commits are on `main` of this repository.
 | 072 | Reorder editor categories | 8acf508 | §9 | §9 B.4 (`linkRuntimeStyles`) | editor.css |
 | 074 | Widget loads its data on the server (route) | 207c48b | §9 A (agent on the server) | §9 B.2 widget + §7 B.5 route | src/widgets/Highlights.tsx, src/server.tsx |
 | 077 | Widget on one store only | 5dd26e6 | §9 | §2 B.2 placement | – |
-| 078 | Package widgets in header and footer pages | (this commit) | §8 A (layout page) | §8 B carriers (`RuntimePageLayout`), §9 B.2 | src/shared-widgets/FooterBadges.tsx, scripts/editor.mjs |
+| 078 | Package widgets in header and footer pages | af51ace | §8 A (layout page) | §8 B carriers (`RuntimePageLayout`), §9 B.2 | src/shared-widgets/FooterBadges.tsx, scripts/editor.mjs |
+| 083 | Plugin fills a slot (rules on the card) | (this commit) | §4 A card | §4 B `product.card` | src/commerce/slots/RuleTags.tsx |
 | 080 | Before/after add to cart (case packs) | 1052a6b | §6 | §6 B (request hooks), §7 B.5 route | src/commerce/server.ts |
 | 081 | React to cart changes (order limit) | 6d7c25f | §7 | §7 B.1 (`runCartHooks`) | src/commerce/server.ts, src/commerce/rules.ts |
 | 082 | Change cart lines before they are shown | 3ad302b | §7 A.1 | §7 B.1 (`runMapCartItems`) | src/commerce/server.ts, src/commerce/rules.ts |

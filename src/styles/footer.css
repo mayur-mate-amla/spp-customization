@@ -5,6 +5,6 @@
 .spp-customization-help__text { margin: 0 0 14px; color: rgb(71, 85, 105); }
 .spp-customization-help__ways { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; padding: 0; list-style: none; font-weight: 600; }
 .spp-customization-help__ways a { color: var(--primary, #0b2545); text-decoration: underline; text-underline-offset: 3px; }
-.spp-customization-help__label { margin: 0 0 8px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgb(100, 116, 139); }
+.spp-customization-help__label { margin: 0 0 8px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgb(71, 85, 105); }
 .spp-customization-help__badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .spp-customization-help__badges li { padding: 4px 10px; font-size: 13px; font-weight: 600; background: #fff; border: 1px solid var(--card-border, rgb(226, 232, 240)); border-radius: 6px; }

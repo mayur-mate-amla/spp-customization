@@ -1,0 +1,101 @@
+# npm run a11y: axe-core 4.11.1 (WCAG 2.1 A/AA) on this repository's parts only, then Tab through the page
+
+## before (theme as it was), home of MaxwellsHardware, spp-customization previewed
+## (this first run printed at most 5 elements per rule; the later runs list them all)
+﻿axe (WCAG 2.1 A/AA) on 14 parts: spp-customization-skip, spp-customization-notice, spp-customization-preview, spp-customization-announcement, spp-customization-search, spp-customization-trust, spp-customization-skip-target, spp-customization-strip__ends, spp-customization-strip__terms, spp-customization-timeline, spp-customization-highlights, spp-customization-testimonials, spp-customization-faq, spp-customization-help
+  serious color-contrast: Elements must meet minimum color contrast ratio thresholds
+    - .spp-customization-announcement > span: Element has insufficient color contrast of 3.04 (foreground color: #ffffff, background color: #f26b1d, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1
+    - a[data-test-selector="linkAnnouncement"]: Element has insufficient color contrast of 3.04 (foreground color: #ffffff, background color: #f26b1d, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1
+    - .spp-customization-announcement__long: Element has insufficient color contrast of 3.04 (foreground color: #ffffff, background color: #f26b1d, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1
+    - .spp-customization-strip__terms: Element has insufficient color contrast of 4.39 (foreground color: #64748b, background color: #fff4ec, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1
+    - .is-past > .spp-customization-timeline__label:nth-child(1): Element has insufficient color contrast of 1.99 (foreground color: #acb5c2, background color: #fafbfc, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1
+keyboard: 33 stops in our parts
+1 problem(s)
+
+## before, home of POCSppDemo (spp-commerce's parts)
+﻿axe (WCAG 2.1 A/AA) on 3 parts: spp-commerce-account, spp-commerce-rep, spp-commerce-quote
+  no violations
+keyboard: 12 stops in our parts
+no problems
+
+## after the fixes
+### home
+﻿axe (WCAG 2.1 A/AA) on 14 parts: spp-customization-skip, spp-customization-notice, spp-customization-preview, spp-customization-announcement, spp-customization-search, spp-customization-trust, spp-customization-skip-target, spp-customization-strip__ends, spp-customization-strip__terms, spp-customization-timeline, spp-customization-highlights, spp-customization-testimonials, spp-customization-faq, spp-customization-help
+  no violations
+keyboard: 17 stops in our parts
+  ok   spp-customization-skip <a> "Skip to main content"
+  ok   spp-customization-preview__exit <a> "Exit preview"
+  ok   spp-customization-announcement__link <a> "Learn more"
+  ok   spp-customization-announcement__link <a> "Call 1-800-555-0199"
+  ok   spp-customization-search <button> "search icon"
+  ok   spp-customization-search <input> "search box"
+  ok   spp-customization-search <button> "scan icon"
+  ok   spp-customization-search__term <a> "Cordless drill"
+  ok   spp-customization-search__term <a> "Safety glasses"
+  ok   spp-customization-search__term <a> "Work gloves"
+  ok   spp-customization-search__term <a> "Extension cord"
+  ok   spp-customization-trust__item <a> "1-800-555-0199"
+  ok   spp-customization-faq__question <summary> "Do you offer account pricing?"
+  ok   spp-customization-faq__question <summary> "How fast do in-stock items ship?"
+  ok   spp-customization-faq__question <summary> "Can I return opened tools?"
+  ok   spp-customization-help__ways <a> "1-800-555-0199"
+  ok   spp-customization-help__ways <a> "orders@sppbrandedgoods.example"
+no problems
+### sppdemo
+﻿axe (WCAG 2.1 A/AA) on 3 parts: spp-commerce-account, spp-commerce-rep, spp-commerce-quote
+  no violations
+keyboard: 12 stops in our parts
+  ok   spp-commerce-account__link <a> "Sign in"
+  ok   spp-commerce-rep__ways <a> "1-800-555-0142"
+  ok   spp-commerce-rep__ways <a> "jordan.rivera@sppbrandedgoods.example"
+  ok   spp-commerce-rep__quote <a> "Request a quote"
+  ok   spp-commerce-quote__form <input> "firstName"
+  ok   spp-commerce-quote__form <input> "lastName"
+  ok   spp-commerce-quote__form <input> "emailId"
+  ok   spp-commerce-quote__form <input> "companyName"
+  ok   spp-commerce-quote__form <input> "quantity"
+  ok   spp-commerce-quote__form <input> "neededBy"
+  ok   spp-commerce-quote__wide <textarea> "comments"
+  ok   spp-commerce-quote__actions <button> "Request a quote"
+no problems
+### listing
+﻿axe (WCAG 2.1 A/AA) on 10 parts: spp-customization-skip, spp-customization-notice, spp-commerce-account, spp-customization-preview, spp-customization-announcement, spp-customization-search, spp-customization-trust, spp-customization-skip-target, spp-customization-listing, spp-customization-help
+  no violations
+keyboard: 28 stops in our parts
+  ok   spp-customization-skip <a> "Skip to main content"
+  ok   spp-commerce-account__link <a> "Sign in"
+  ok   spp-customization-preview__exit <a> "Exit preview"
+  ok   spp-customization-announcement__link <a> "Learn more"
+  ok   spp-customization-announcement__link <a> "Call 1-800-555-0199"
+  ok   spp-customization-trust__item <a> "1-800-555-0199"
+  ok   spp-customization-listing <select> "Default SortPrice, High to LowPrice, Low to HighNa"
+  ok   spp-customization-quick__chip <button> "All (12)"
+  ok   spp-customization-quick__chip <button> "Under $5 (4)"
+  ok   spp-customization-quick__chip <button> "$5 – $25 (2)"
+  ok   spp-customization-quick__chip <button> "$25 and up (6)"
+  ok   spp-customization-quick__chip <button> "Ready to ship (12)"
+  ok   spp-customization-pcard__name <a> "24 oz. Fluted Stadium Cup"
+  ok   spp-customization-pcard__view <a> "View details"
+  ok   spp-customization-pcard__name <a> "Kan-Tastic Can Cooler"
+  ok   spp-customization-pcard__name <a> "Clear Casual Tote"
+  ok   spp-customization-pcard__customize <a> "Customize"
+  ok   spp-customization-pcard__name <a> "3/4" Poly Lanyard w/clip"
+  ok   spp-customization-pcard__name <a> "Graphite Deluxe 15" Computer Backpack"
+  ok   spp-customization-pcard__name <a> "Dade Polo"
+  ok   spp-customization-pcard__name <a> "Field & Co.® Cable Knit Sherpa Blanket"
+  ok   spp-customization-pcard__name <a> "BELLA+CANVAS® Unisex Jersey T-shirt"
+  ok   spp-customization-pcard__name <a> "Women’s Dade Polo"
+  ok   spp-customization-pcard__name <a> "ID Holder"
+  ok   spp-customization-pcard__name <a> "Nike Dri-FIT® Micro Pique Polo"
+  ok   spp-customization-pcard__name <a> "Odell Knit Zip Hoody"
+  ok   spp-customization-help__ways <a> "1-800-555-0199"
+  ok   spp-customization-help__ways <a> "orders@sppbrandedgoods.example"
+no problems
+### pdp
+﻿axe (WCAG 2.1 A/AA) on 2 parts: spp-commerce-account, spp-commerce-delivery
+  no violations
+keyboard: 3 stops in our parts
+  ok   spp-commerce-account__link <a> "Sign in"
+  ok   spp-commerce-delivery <input> ""
+  ok   spp-commerce-delivery <button> "Check"
+no problems

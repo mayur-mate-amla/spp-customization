@@ -40,3 +40,10 @@ html[data-theme] {
   --focus-outline-color: rgb(242, 107, 29);
   --focus-outline-width: 2px;
 }
+
+/* row 138: the accent darkened by a quarter, for small text on white and white text on the accent: 4.8:1 for the
+   default #f26b1d (the bright accent is 3.04:1, under WCAG AA's 4.5:1). Browsers without color-mix use the accent. */
+:root, .spp-customization-layout { --spp-accent-strong: var(--theme-accent, var(--accent, #f26b1d)); }
+@supports (color: color-mix(in srgb, red, blue)) {
+  :root, .spp-customization-layout { --spp-accent-strong: color-mix(in srgb, var(--theme-accent, var(--accent, #f26b1d)) 76%, #000); }
+}

@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 97 |
+| ✅ Done | 98 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 40 |
+| ⬜ Not started | 39 |
 | ⛔ Blocked | 37 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -290,7 +290,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 137 | Does the webstore reach a AAA accessibility rating? | Not tested | Outside | Webstore-wide audit | ➖ Outside | |
-| 138 | Do package widgets work with the keyboard and screen readers? | Partial | UI | Labels, focus styles and roles in this theme's widgets | ⬜ Not started | |
+| 138 | Do package widgets work with the keyboard and screen readers? | Partial | UI | npm run a11y (axe WCAG 2.1 A/AA + Tab walk): contrast fixed (accent-strong token); 4 pages clean, all focus visible | ✅ Done | [notes](138-widget-accessibility/) |
 
 ## Languages
 

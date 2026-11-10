@@ -46,5 +46,5 @@
 .spp-customization-pcard__actions { display: flex; gap: 8px; margin-top: auto; padding-top: 10px; }
 .spp-customization-pcard__actions a { flex: 1; padding: 9px 10px; font-size: 14px; font-weight: 700; text-align: center; border-radius: var(--btn-border-radius, 6px); }
 .spp-customization-pcard__view { color: var(--primary, #0b2545); border: 1.5px solid var(--primary, #0b2545); }
-.spp-customization-pcard__customize { color: #fff; background: var(--accent, #f26b1d); }
+.spp-customization-pcard__customize { color: #fff; background: var(--spp-accent-strong, var(--accent, #f26b1d)); } /* row 138: 4.8:1, was 3.04:1 */
 @media (prefers-reduced-motion: reduce) { .spp-customization-pcard { transition: none; } .spp-customization-pcard:hover { transform: none; } }

@@ -76,6 +76,7 @@ try {
     await sleep(2500);
   }
 
+  await page.addStyleTag({ content: "nextjs-portal{display:none!important}" }).catch(() => undefined);
   fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
   await page.screenshot({ path: out });
   console.log(out);

@@ -38,7 +38,9 @@
         "buttonText": "Copy code",
         "background": "#fff4ec",
         "buttonColor": "#f26b1d",
-        "codeColor": "#0b2545"
+        "codeColor": "#0b2545",
+        "expiresOn": "2026-12-31",
+        "terms": "One use per account. Not valid on gift cards or rush fees. Cannot be combined with account pricing."
       }
     },
     {

@@ -103,6 +103,8 @@ try {
     await page.hover(hover);
     await new Promise((resolve) => setTimeout(resolve, 600));
   }
+  // the dev server's own badge (Next.js dev tools) is not part of the store: hide it from the screenshot
+  await page.addStyleTag({ content: "nextjs-portal{display:none!important}" }).catch(() => undefined);
   fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
   if (selector && selector !== true) {
     const element = await page.waitForSelector(selector, { timeout: 15000 });

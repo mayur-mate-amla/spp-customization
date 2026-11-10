@@ -1,0 +1,6 @@
+(in the browser: the theme's home page on the Acme store, previewed; this widget renders in the browser, not in the server HTML)
+expiresOn "2026-11-09" (yesterday): PromoCodeStrip placed on the page, strip rendered: false   (hidden: expired)
+expiresOn "2026-12-31": strip rendered: true, shows "Offer ends Dec 31, 2026"
+
+page builder, Promo code strip dropped on POCSppDemo's home page: fields = Title, Text before the code, Code, Text after the code,
+Copy button text, Background, Button color, Code color (the parent's, kept) + Expires on, Terms (added)

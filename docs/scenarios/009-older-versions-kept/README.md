@@ -1,34 +1,44 @@
 # 009: Are older package versions kept on disk for rollback?
 
-**Listed:** Yes. **Result here:** Partial. The older version's **zip** and the **registry history** are kept; its
-code files are **removed** from the store's plugin folder when the new version installs.
+**Listed:** Yes. **Result here:** Yes, every deployed version is kept next to the store and can be reinstalled with
+one command.
 
 ## What changed
 
-The theme moves from 1.0.0 to 1.0.1 (`package.json`, `znode-package.json`) and is deployed.
+`znode install` removes the previous version's server, browser, CSS and labels files from the plugin folder when a new
+version installs (`node_modules/znode-plugin/lib/znode-package.mjs`, around line 470). So the store's folder alone
+could not roll back. Now `npm run deploy` also keeps each packed version **next to the store**:
 
-## What the store's plugin folder keeps
+```
+<plugin folder>/.versions/spp-customization/
+  spp-customization-1.0.1.zpkg.zip
+  spp-customization-1.0.2.zpkg.zip
+```
 
-| Kept | Removed |
-| --- | --- |
-| `spp-customization-1.0.0-font-inter-*.woff2` (asset) | `spp-customization-1.0.0.server.mjs` |
-| `spp-customization-1.0.0.*.mjs.map` (source maps) | `spp-customization-1.0.0.browser.mjs` |
-| | `spp-customization-1.0.0.css`, `.labels.json` |
+and `npm run rollback -- <version>` reinstalls one of them (010). This works from any machine that can reach the
+plugin folder, without this project's `releases/`. The store serves only flat file names from its plugin folder, so
+nothing under `.versions/` is ever sent to a browser.
 
-The SDK removes the previous version's server, browser, labels, styles and pages files on install
-(`node_modules/znode-plugin/lib/znode-package.mjs`, around line 470). What survives for a rollback:
-
-- `releases/spp-customization-1.0.0.zpkg.zip`: the packed older version, in this project (git-ignored, so on the
-  machine that built it)
-- `<plugin folder>/.history/plugins-<time>.json`: the registry before each install (the last 50)
-
-Rolling back with the zip: see 010.
+The theme is now at version 1.0.2.
 
 ## Where
 
-- `package.json`, `znode-package.json`: `"version": "1.0.1"`
+- `scripts/deploy.mjs` (new): `npx znode deploy .`, then copies `releases/<name>-<version>.zpkg.zip` to
+  `<plugin folder>/.versions/<name>/`
+- `scripts/lib/store.mjs` (new): package name, plugin folder, `.versions` folder, and the registry lock/history/
+  atomic write shared by the scripts (`registry.mjs` now uses it)
+- `scripts/rollback.mjs`: reads versions from `.versions/` first, then `releases/`
+- `package.json`: `"deploy": "node scripts/deploy.mjs"`; version 1.0.2 (`znode-package.json` too)
 
 ## How to check
 
-`output.txt` / `evidence.png`: the theme's files in the plugin folder before the deploy (1.0.0), the deploy, the files
-after (1.0.1, with what is left of 1.0.0) and the registry entry (version 1.0.1).
+```bash
+npm run deploy            # 1.0.1, kept
+# version -> 1.0.2
+npm run deploy            # 1.0.2, kept: 2 versions on disk
+npm run rollback          # lists them (releases/ moved away for this test)
+npm run rollback -- 1.0.1
+npm run rollback -- 1.0.2
+```
+
+`output.txt` / `evidence.png` hold the run, including a version that was never kept being refused.

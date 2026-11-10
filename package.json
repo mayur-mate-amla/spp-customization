@@ -1,6 +1,6 @@
 {
   "name": "spp-customization",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,7 +8,8 @@
     "build": "znode build .",
     "check": "znode check .",
     "pack": "znode pack .",
-    "deploy": "znode deploy .",
+    "deploy": "node scripts/deploy.mjs",
+    "uninstall": "node scripts/uninstall.mjs",
     "link-store": "znode link-store",
     "shot": "node scripts/shot.mjs",
     "rollback": "node scripts/rollback.mjs"

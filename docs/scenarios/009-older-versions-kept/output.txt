@@ -1,35 +1,57 @@
-$ ls <plugin folder>/spp-customization-*   (before: version 1.0.0 only)
-   48256  spp-customization-1.0.0-font-inter-8e66b3c3-1.woff2
-    4642  spp-customization-1.0.0.browser.mjs
-    7545  spp-customization-1.0.0.browser.mjs.map
-    3399  spp-customization-1.0.0.css
-       3  spp-customization-1.0.0.labels.json
-    4750  spp-customization-1.0.0.server.mjs
-    7345  spp-customization-1.0.0.server.mjs.map
-     551  spp-customization-hero.svg
-
-$ (package.json and znode-package.json: version 1.0.0 -> 1.0.1)
-$ npm run deploy
+$ npm run deploy   (1.0.1: deploy now also keeps the zip next to the store)
 
 > spp-customization@1.0.1 deploy
-> znode deploy .
+> node scripts/deploy.mjs
 
 built theme spp-customization@1.0.1: 9 files
-packed spp-customization-1.0.1.zpkg.zip (59841 bytes)
-installed theme spp-customization@1.0.1 (was 1.0.0): 8 files, disabled for []
+packed spp-customization-1.0.1.zpkg.zip (60139 bytes)
+installed theme spp-customization@1.0.1 (was 1.0.1): 8 files, disabled for []
+kept spp-customization-1.0.1.zpkg.zip in .versions\spp-customization (1 version on disk: 1.0.1)
 
-$ ls <plugin folder>/spp-customization-*   (after: 1.0.1 installed, 1.0.0 kept)
-   48256  spp-customization-1.0.0-font-inter-8e66b3c3-1.woff2
-    7545  spp-customization-1.0.0.browser.mjs.map
-    7345  spp-customization-1.0.0.server.mjs.map
-   48256  spp-customization-1.0.1-font-inter-8e66b3c3-1.woff2
-    4642  spp-customization-1.0.1.browser.mjs
-    7545  spp-customization-1.0.1.browser.mjs.map
-    3399  spp-customization-1.0.1.css
-       3  spp-customization-1.0.1.labels.json
-    4750  spp-customization-1.0.1.server.mjs
-    7345  spp-customization-1.0.1.server.mjs.map
-     551  spp-customization-hero.svg
+$ (version 1.0.1 -> 1.0.2)
+$ npm run deploy
 
-$ plugins.json entry
-version 1.0.1, file spp-customization-1.0.1.server.mjs, browser spp-customization-1.0.1.browser.mjs
+> spp-customization@1.0.2 deploy
+> node scripts/deploy.mjs
+
+built theme spp-customization@1.0.2: 9 files
+packed spp-customization-1.0.2.zpkg.zip (60140 bytes)
+installed theme spp-customization@1.0.2 (was 1.0.1): 8 files, disabled for []
+kept spp-customization-1.0.2.zpkg.zip in .versions\spp-customization (2 versions on disk: 1.0.1, 1.0.2)
+
+$ ls <plugin folder>/.versions/spp-customization
+   60139  spp-customization-1.0.1.zpkg.zip
+   60140  spp-customization-1.0.2.zpkg.zip
+
+$ (move this project's releases/ away: the versions must come from the store's folder alone)
+$ npm run rollback
+
+> spp-customization@1.0.2 rollback
+> node scripts/rollback.mjs
+
+versions on disk:
+  1.0.1  (<plugin folder>\.versions\spp-customization\spp-customization-1.0.1.zpkg.zip)
+  1.0.2  (<plugin folder>\.versions\spp-customization\spp-customization-1.0.2.zpkg.zip)
+usage: npm run rollback -- <version>
+$ npm run rollback -- 1.0.1
+
+> spp-customization@1.0.2 rollback
+> node scripts/rollback.mjs 1.0.1
+
+installed theme spp-customization@1.0.1 (was 1.0.2): 8 files, disabled for []
+(exit 0)
+$ npm run rollback -- 1.0.2   (forward again)
+
+> spp-customization@1.0.2 rollback
+> node scripts/rollback.mjs 1.0.2
+
+installed theme spp-customization@1.0.2 (was 1.0.1): 8 files, disabled for []
+(exit 0)
+
+$ npm run rollback -- 1.0.0   (never deployed with the new script, and releases/ is away)
+
+> spp-customization@1.0.2 rollback
+> node scripts/rollback.mjs 1.0.0
+
+version 1.0.0 is not on disk; kept: 1.0.1, 1.0.2
+(exit 1)

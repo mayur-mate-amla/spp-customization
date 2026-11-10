@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 76 |
+| ✅ Done | 77 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 60 |
+| ⬜ Not started | 59 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -193,7 +193,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 88 | Can a plugin add labels and messages? | Yes | UI | Yes under a namespace the store sends (Common.sppCommerce); a new top-level namespace never reaches the browser | ✅ Done | [notes](088-plugin-labels/) |
 | 89 | Can a plugin add a page with its own URL? | Partial | UI | spp-commerce serverPages /ordering-information, written from the cart-rule settings, in the server HTML | ✅ Done | [notes](089-plugin-page-url/) |
 | 90 | Can plugins send events to each other? | No | Base | | ⛔ Blocked | |
-| 91 | Can a plugin receive webhooks or callbacks? | Yes | Check | Route with `verifySignature`, called with curl | ⬜ Not started | |
+| 91 | Can a plugin receive webhooks or callbacks? | Yes | Check | erp-stock route: HMAC verifySignature (401 unsigned/wrong/tampered); holds shown on product cards | ✅ Done | [notes](091-plugin-webhooks/) |
 | 92 | Can a plugin run scheduled jobs? | No | Base | | ⛔ Blocked | |
 
 ## BFF / API

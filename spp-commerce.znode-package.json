@@ -109,6 +109,11 @@
       "label": "Show the account bar above the header",
       "browser": true,
       "default": true
+    },
+    "erpWebhookSecret": {
+      "type": "string",
+      "label": "Shared secret the ERP signs its stock webhooks with (X-Erp-Signature: sha256=<HMAC of the body>); empty: the webhook takes nothing",
+      "default": ""
     }
   }
 }

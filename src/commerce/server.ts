@@ -17,6 +17,7 @@ import { OrderingInfoPage } from "./OrderingInfoPage";
 //   routes.activity  GET /api/extensions/plugins/spp-commerce/activity: the store's last 20 adds and cart changes
 //   routes.rep       GET .../rep?code=JR&to=/category/1674: a sales rep's link. Sets the spp_rep cookie (30 days) for a
 //                    known rep (setting salesReps) and redirects; the account bar names the rep, adds are credited
+//   routes.erp-stock POST, a signed webhook from the ERP: stock holds ("out until Dec 1"); routes.stock-holds lists them
 //   routes.my-order  GET /api/extensions/plugins/spp-commerce/my-order: the shopper's own cart (context.cartNumber, its
 //                    lines read from Znode with context.znode) and user (context.user): subtotal, the free-shipping
 //                    gap and, for a signed-in buyer, their name and budget; for the account bar
@@ -183,6 +184,41 @@ async function repRoute(request: IPluginRouteRequest, context: IPluginRouteConte
   return new Response(null, { status, headers });
 }
 
+// ---- ERP stock holds: a webhook ---------------------------------------------------------------------------------
+// The ERP posts when an item goes on hold or comes back:
+//   POST /api/extensions/plugins/spp-commerce/erp-stock
+//   X-Erp-Signature: sha256=<hex HMAC-SHA256 of the body with the erpWebhookSecret setting>
+//   { "sku": "817NK_25", "available": false, "backOn": "2026-12-01", "note": "Restocking" }   (available: true clears it)
+// Only a correctly signed body is taken (verifySignature: constant time, on the body exactly as sent); anything else is
+// 401. The holds are kept in memory per store (a plugin has no database, row 087): the ERP sends them again after a
+// restart. GET .../stock-holds lists them for the product cards.
+type IStockHold = { sku: string; backOn: string; note: string; at: string };
+const stockHolds = new Map<string, Map<string, IStockHold>>();
+
+export function readStockEvent(body: unknown): { sku: string; available: boolean; backOn: string; note: string } | null {
+  if (!body || typeof body !== "object") return null;
+  const event = body as Record<string, unknown>;
+  const sku = typeof event.sku === "string" ? event.sku.trim().toUpperCase() : "";
+  if (!/^[A-Z0-9_.-]{1,40}$/.test(sku) || typeof event.available !== "boolean") return null;
+  const backOn = typeof event.backOn === "string" && /^\d{4}-\d{2}-\d{2}$/.test(event.backOn) ? event.backOn : "";
+  const note = typeof event.note === "string" ? event.note.slice(0, 80) : "";
+  return { sku, available: event.available, backOn, note };
+}
+
+async function erpStock(request: IPluginRouteRequest, context: IPluginRouteContext) {
+  const json = (status: number, data: unknown) => new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
+  if (request.method !== "POST") return json(405, { error: "POST only" });
+  const secret = String(context.settings.erpWebhookSecret || "");
+  if (!context.verifySignature(request.rawBody, request.headers["x-erp-signature"], secret, { prefix: "sha256=" })) return json(401, { error: "Bad signature" });
+  const event = readStockEvent(request.body);
+  if (!event) return json(400, { error: "Expected { sku, available, backOn?, note? }" });
+  const holds = stockHolds.get(context.store.code) || new Map<string, IStockHold>();
+  if (event.available) holds.delete(event.sku);
+  else holds.set(event.sku, { sku: event.sku, backOn: event.backOn, note: event.note, at: new Date().toISOString() });
+  stockHolds.set(context.store.code, holds);
+  return json(200, { ok: true, sku: event.sku, onHold: !event.available, holds: holds.size });
+}
+
 const plugin: IRuntimePlugin = {
   name: "spp-commerce",
   apiVersion: 1,
@@ -198,6 +234,8 @@ const plugin: IRuntimePlugin = {
     activity: async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ store: context.store.code, adds: activity.get(context.store.code) || [] }),
     "my-order": myOrder,
     rep: repRoute,
+    "erp-stock": erpStock,
+    "stock-holds": async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ holds: [...(stockHolds.get(context.store.code)?.values() || [])] }),
   },
 };
 

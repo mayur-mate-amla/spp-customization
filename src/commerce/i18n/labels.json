@@ -14,7 +14,9 @@
       "orderingRules": "Ordering rules",
       "casePack": "Case of {count}",
       "minimum": "Min. order {count}",
-      "limit": "Max {count} per order"
+      "limit": "Max {count} per order",
+      "onHold": "Temporarily out of stock",
+      "onHoldUntil": "Out until {date}"
     }
   }
 }

@@ -1,0 +1,28 @@
+# 1. no signature: refused
+> curl -X POST .../erp-stock -H 'Content-Type: application/json' -d '{"sku":"817NK_25","available":false,"backOn":"2026-12-01","note":"Restocking from supplier"}'
+{"error":"Bad signature"}  (HTTP 401)
+
+# 2. a wrong signature (signed with another secret): refused
+> curl ... -H 'X-Erp-Signature: sha256=<HMAC with a wrong secret>'
+{"error":"Bad signature"}  (HTTP 401)
+
+# 3. the body changed after signing (backOn moved): refused
+> curl ... -H 'X-Erp-Signature: sha256=<the right HMAC of the original body>' -d '<body with backOn 2027-01-15>'
+{"error":"Bad signature"}  (HTTP 401)
+
+# 4. correctly signed: taken
+> curl ... -H 'X-Erp-Signature: sha256=<HMAC-SHA256 of the body with erpWebhookSecret>' -d '{"sku":"817NK_25","available":false,"backOn":"2026-12-01","note":"Restocking from supplier"}'
+{"ok":true,"sku":"817NK_25","onHold":true,"holds":1}  (HTTP 200)
+
+# 5. a GET: not a webhook
+{"error":"POST only"}  (HTTP 405)
+
+# the holds the product cards read
+> curl .../stock-holds
+{"holds":[{"sku":"817NK_25","backOn":"2026-12-01","note":"Restocking from supplier","at":"2026-11-10T11:53:56.641Z"}]}
+
+# the same with scripts/erp-webhook.mjs (signs the body with ERP_SECRET): a second hold (the can cooler), then it ends
+> ERP_SECRET=<secret> node scripts/erp-webhook.mjs '{"sku":"Y1448_001","available":false}'
+HTTP 200 {"ok":true,"sku":"Y1448_001","onHold":true,"holds":2}
+> ERP_SECRET=<secret> node scripts/erp-webhook.mjs '{"sku":"Y1448_001","available":true}'
+HTTP 200 {"ok":true,"sku":"Y1448_001","onHold":false,"holds":1}

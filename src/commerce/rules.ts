@@ -31,3 +31,31 @@ export function withNotes(description: unknown, notes: string[]) {
   if (!notes.length || html.includes("spp-line-notes")) return html;
   return `${html}<ul class="spp-line-notes">${notes.map((note) => `<li>${escapeHtml(note)}</li>`).join("")}</ul>`;
 }
+
+type ILine = { id: string; sku: string; quantity: number };
+export type ICompanionChange = { add?: { sku: string; quantity: number; for: string }; remove?: { lineId: string; sku: string; for: string } };
+
+/**
+ * What the companion rule (setting companions: { "<sku>": "<companion sku>" }) changes in a cart: a companion is added
+ * when its item is in the cart and it is not (its quantity: the item's, rounded up to the companion's case pack), and
+ * the companions this rule added are removed once their item has left the cart. `added` is what the rule added to
+ * this cart before (companion SKU -> item SKU); a companion the shopper added is never removed.
+ */
+export function companionChanges(lines: ILine[], companions: Record<string, unknown>, added: Record<string, string>, casePacks: Record<string, unknown>) {
+  const inCart = (sku: string) => lines.find((line) => line.sku.toUpperCase() === sku.toUpperCase());
+  const changes: ICompanionChange[] = [];
+  for (const [item, companion] of Object.entries(companions)) {
+    if (typeof companion !== "string" || !companion) continue;
+    const line = inCart(item);
+    if (line && !inCart(companion)) {
+      const pack = forSku(casePacks, companion);
+      const quantity = pack > 1 ? Math.ceil(line.quantity / pack) * pack : line.quantity;
+      changes.push({ add: { sku: companion, quantity, for: item } });
+    }
+  }
+  for (const [companion, item] of Object.entries(added)) {
+    const line = inCart(companion);
+    if (line && !inCart(item)) changes.push({ remove: { lineId: line.id, sku: companion, for: item } });
+  }
+  return changes;
+}

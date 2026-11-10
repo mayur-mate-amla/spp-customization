@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 64 |
+| ✅ Done | 65 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 72 |
+| ⬜ Not started | 71 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -235,7 +235,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 112 | Can I change the cart page? | Partial | UI | `mapCartItems` (line text) and CSS | ⬜ Not started | |
-| 113 | Can a plugin add or remove cart items automatically? | Yes | UI | `onCartChanged` adds a free item over a total | ⬜ Not started | |
+| 113 | Can a plugin add or remove cart items automatically? | Yes | UI | onCartChanged: ID holder brings its lanyard, removed with it (a free item needs a Znode promotion) | ✅ Done | [notes](113-auto-add-remove/) |
 | 114 | Can a plugin enforce cart rules (minimums, bundles)? | Yes | UI | `onCartChanged` minimum quantity rule | ⬜ Not started | |
 
 ## Checkout

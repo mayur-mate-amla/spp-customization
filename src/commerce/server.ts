@@ -1,12 +1,13 @@
 import type { ICartHookContext, IPluginRouteContext, IPluginRouteRequest, IRuntimeData, IRuntimeHookContext, IRuntimePlugin } from "znode-plugin/types/extension-api";
-import { lineNotes, overLimit, withNotes } from "./rules";
+import { companionChanges, lineNotes, overLimit, withNotes } from "./rules";
 
 // spp-commerce, server part (runs on the store's server only).
 //   beforeAddToCart  case packs: an item sold in packs (setting casePacks: { "<sku>": <pack size> }) is rounded up to
 //                    whole packs before the request goes to Znode (1 lanyard -> a pack of 10)
 //   afterAddToCart   order activity: each add (asked, added, cart number, result) is recorded for the store
 //   onCartChanged    per-order limits (setting orderLimits: { "<sku>": <max> }): a line over its limit is brought back
-//                    to the limit when the cart is read (cart page, checkout)
+//                    to the limit when the cart is read (cart page, checkout); companions (setting companions:
+//                    { "<sku>": "<companion sku>" }): an ID holder brings its lanyard, removed again with it
 //   mapCartItems     line notes (setting lineNotes): "Sold in cases of 10", "Limit 5 per order" under the lines they
 //                    apply to, on the cart page and checkout
 //   routes.activity  GET /api/extensions/plugins/spp-commerce/activity: the store's last 20 adds and cart changes
@@ -19,6 +20,8 @@ type IActivity = { at: string; sku: string; asked: number; added: number; rule: 
 
 // per store (module scope is per store on the server); kept in memory: the last 20 adds and cart changes
 const activity = new Map<string, IActivity[]>();
+// per cart: the companions the companion rule added (companion SKU -> item SKU), so only those are ever removed
+const companionsAdded = new Map<string, Record<string, string>>();
 // the adds of the request in flight, completed by afterAddToCart
 const pending = new Map<string, IActivity[]>();
 
@@ -43,7 +46,9 @@ export function roundToPacks(quantity: number, pack: number) {
 }
 
 async function beforeAddToCart(request: IRuntimeData, context: IRuntimeHookContext) {
-  const lines = Array.isArray(request.skuDetails) ? (request.skuDetails as ISkuLine[]) : [];
+  const details = Array.isArray(request.skuDetails) ? (request.skuDetails as (ISkuLine & { addToCartChildItems?: ISkuLine[] })[]) : [];
+  // a variant (configurable product) comes as its parent with the variant, and its quantity, in addToCartChildItems
+  const lines = details.flatMap((line) => (Array.isArray(line.addToCartChildItems) && line.addToCartChildItems.length ? line.addToCartChildItems : [line]));
   const adds: IActivity[] = [];
   for (const line of lines) {
     const sku = String(line.sku || "");
@@ -77,6 +82,24 @@ async function onCartChanged({ store, cart, settings, actions }: ICartHookContex
     const added = removed && (await actions.addItem({ sku: line.sku, quantity: max, personalization: line.personalization }));
     record(store.code, [{ at: new Date().toISOString(), sku: line.sku, asked: line.quantity, added: max, rule: `limit ${max} per order`, cartNumber: cart.cartNumber, ok: Boolean(added) }]);
   }
+
+  // companions: added with their item, removed with it (only the ones this rule added)
+  const added = companionsAdded.get(cart.cartNumber) || {};
+  for (const change of companionChanges(cart.lines, skuMap(settings, "companions"), added, skuMap(settings, "casePacks"))) {
+    const at = new Date().toISOString();
+    if (change.add) {
+      const ok = await actions.addItem({ sku: change.add.sku, quantity: change.add.quantity });
+      if (ok) added[change.add.sku] = change.add.for;
+      record(store.code, [{ at, sku: change.add.sku, asked: 0, added: change.add.quantity, rule: `companion of ${change.add.for}`, cartNumber: cart.cartNumber, ok }]);
+    }
+    if (change.remove) {
+      const ok = await actions.removeLine(change.remove.lineId);
+      if (ok) delete added[change.remove.sku];
+      record(store.code, [{ at, sku: change.remove.sku, asked: 0, added: 0, rule: `companion removed with ${change.remove.for}`, cartNumber: cart.cartNumber, ok }]);
+    }
+  }
+  if (Object.keys(added).length) companionsAdded.set(cart.cartNumber, added);
+  else companionsAdded.delete(cart.cartNumber);
 }
 
 // The cart's lines before the cart page or checkout shows them: { cartNumber, cartItems: [{ sku, productName,

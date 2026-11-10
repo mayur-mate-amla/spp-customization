@@ -28,6 +28,11 @@
       "label": "Per-order limits: { \"<SKU>\": <max quantity> } (a cart line over its limit is brought back to it)",
       "default": { "817NK_25": 5 }
     },
+    "companions": {
+      "type": "object",
+      "label": "Companion items: { \"<SKU>\": \"<companion SKU>\" } (added with the item, removed with it)",
+      "default": { "80BEK_1-V": "81DRL" }
+    },
     "lineNotes": {
       "type": "boolean",
       "label": "Show case-pack and order-limit notes under cart and checkout lines",

@@ -1,0 +1,25 @@
+# before: companions = {}
+> node scripts/cart-shot.mjs --add 103946:1 --out docs/scenarios/113-auto-add-remove/before.png
+added product 103946 x 1
+ID Holder - Black With Black | qty 1
+
+# after: companions = { "80BEK_1-V": "81DRL" }
+> node scripts/cart-shot.mjs --add 103946:1 --route /api/extensions/plugins/spp-commerce/activity --out .../after.png
+added product 103946 x 1
+ID Holder - Black With Black | qty 1
+3/4" Poly Lanyard w/clip | qty 10
+{"sku":"80BEK_1-V","asked":1,"added":1,"rule":"","cartNumber":"C-10112026-1105","ok":true}
+{"sku":"81DRL","asked":0,"added":10,"rule":"companion of 80BEK_1-V","cartNumber":"C-10112026-1105","ok":true}
+
+# after, then "Remove" on the ID holder's line
+> node scripts/cart-shot.mjs --add 103946:1 --remove 103941 --route /api/extensions/plugins/spp-commerce/activity --out .../after-remove.png
+added product 103946 x 1
+removed product 103941
+(no cart lines)
+{"sku":"80BEK_1-V","asked":1,"added":1,"rule":"","cartNumber":"C-10112026-1107","ok":true}
+{"sku":"81DRL","asked":0,"added":10,"rule":"companion of 80BEK_1-V","cartNumber":"C-10112026-1107","ok":true}
+{"sku":"81DRL","asked":0,"added":0,"rule":"companion removed with 80BEK_1-V","cartNumber":"C-10112026-1107","ok":true}
+
+# first try, with the parent SKU "80BEK_1" as the key: nothing happened. The cart line is the variant ("80BEK_1-V")
+# and the add request had the quantity under addToCartChildItems (asked 0):
+{"sku":"80BEK_1","asked":0,"added":0,"rule":"","cartNumber":"C-10112026-1104","ok":true}

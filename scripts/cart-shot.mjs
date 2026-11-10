@@ -1,7 +1,8 @@
 // Fills a fresh cart and screenshots the cart page: the evidence for the cart rules (onCartChanged, mapCartItems).
-//   node scripts/cart-shot.mjs --add 103809:8 [--add 103946:1 ...] [--remove 103946] [--reload] --out x.png
+//   node scripts/cart-shot.mjs --add 103809:8 [--add 103946:1 ...] [--remove 103946] [--route <path>] [--full] --out x.png
 //   --add <productId>:<qty>  opens the product page, sets the quantity, clicks "Add to cart" (in order)
-//   --remove <productId>     on the cart page, removes that product's line, then reads the cart again
+//   --remove <productId>     on the cart page, removes that product's line (the id in its cart-row selectors), then reads
+//                            the cart again
 //   --route <path>           also prints what GET <path> answers (e.g. a plugin route) after the cart is shown
 // STORE_URL picks the store (default http://sppdemo.localhost:3000). Each run is a new browser, so a new cart.
 import puppeteer from "puppeteer-core";
@@ -22,14 +23,15 @@ try {
   for (const add of all("--add")) {
     const [id, qty = "1"] = add.split(":");
     await page.goto(`${store}/product/${id}`, { waitUntil: "load", timeout: 120000 });
-    await page.waitForSelector(`[data-test-selector=btnAddToCart${id}]`, { timeout: 60000 });
+    // a variant's page has its parent product's button (ID Holder - Black 103946 -> btnAddToCart103941)
+    await page.waitForSelector("[data-test-selector^=btnAddToCart]", { timeout: 60000 });
     await wait(2500);
     const box = await page.$("[data-test-selector=txtProductQuantity]");
     if (box && qty !== "1") {
       await box.click({ clickCount: 3 });
       await box.type(qty);
     }
-    await page.click(`[data-test-selector=btnAddToCart${id}]`);
+    await ((await page.$(`[data-test-selector=btnAddToCart${id}]`)) || (await page.$("[data-test-selector^=btnAddToCart]"))).click();
     await wait(5000);
     console.log(`added product ${id} x ${qty}`);
   }
@@ -43,7 +45,7 @@ try {
 
   for (const id of all("--remove")) {
     const remove = (await page.$(`[data-test-selector=btnRemoveCartItem${id}]`)) || (await page.$(`[data-test-selector=linkRemoveCartItem${id}]`));
-    if (!remove) throw new Error(`no remove button for product ${id}`);
+    if (!remove) throw new Error(`no remove button for product ${id}: ${await page.$$eval("[data-test-selector^=btnRemoveCartItem]", (nodes) => nodes.map((node) => node.dataset.testSelector).join(", "))}`);
     await remove.click();
     await wait(5000);
     console.log(`removed product ${id}`);

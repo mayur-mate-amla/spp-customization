@@ -1,0 +1,37 @@
+$ node scripts/bad-packages.mjs releases/spp-customization-1.0.0.zpkg.zip <bad>   (one broken copy per rule)
+
+$ znode install bad/bad-name.zpkg.zip <empty scratch plugin folder>
+znode-package: package: name must be lowercase letters, digits and dashes
+(exit 1)
+
+$ znode install bad/bad-version.zpkg.zip <empty scratch plugin folder>
+znode-package: package: version must be semver (1.2.3)
+(exit 1)
+
+$ znode install bad/bad-kind.zpkg.zip <empty scratch plugin folder>
+znode-package: package: kind must be one of theme, plugin, widget, content
+(exit 1)
+
+$ znode install bad/bad-api-version.zpkg.zip <empty scratch plugin folder>
+znode-package: package: apiVersion 99 isn't supported (this store runs 1)
+(exit 1)
+
+$ znode install bad/missing-file.zpkg.zip <empty scratch plugin folder>
+znode-package: znode-package.json names "spp-customization-1.0.0.missing.mjs", which isn't in the package
+(exit 1)
+
+$ znode install bad/file-type.zpkg.zip <empty scratch plugin folder>
+znode-package: "install.exe": file type not allowed
+(exit 1)
+
+$ znode install bad/folder.zpkg.zip <empty scratch plugin folder>
+znode-package: "nested/evil.css": a package is flat, no folders
+(exit 1)
+
+$ znode install bad/too-big.zpkg.zip <empty scratch plugin folder>
+znode-package: package is 11611473 bytes; the limit is 10485760
+(exit 1)
+
+$ znode install releases/spp-customization-1.0.0.zpkg.zip <empty scratch plugin folder>   (the good package)
+installed theme spp-customization@1.0.0: 8 files, disabled for []
+(exit 0)

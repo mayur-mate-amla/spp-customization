@@ -43,6 +43,13 @@
       "default": "brand",
       "attribute": "ThemeHeadingFont"
     },
+    "logoUrl": {
+      "type": "string",
+      "label": "Header logo for this store (image URL; empty: the store's own logo)",
+      "browser": true,
+      "default": "",
+      "attribute": "ThemeLogoUrl"
+    },
     "supportPhone": {
       "type": "string",
       "label": "Customer service phone, shown in the announcement bar (required)",

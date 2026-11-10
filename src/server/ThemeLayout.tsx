@@ -32,8 +32,13 @@ export function ThemeLayout(props: { children?: ReactNode; settings: Record<stri
       "--focus-outline-color": accent,
     });
   }
+  // logoUrl (attribute ThemeLogoUrl): a store's own header logo, e.g. a co-branded lockup; the header component is
+  // untouched, its logo image shows this file instead (layout.css)
+  const logo = String(props.settings.logoUrl || "").trim();
+  const safeLogo = /^(\/|https:\/\/)[^"'()\s]+$/.test(logo) ? logo : "";
+  if (safeLogo) style["--spp-logo"] = `url("${safeLogo}")`;
   return (
-    <div className="spp-customization-layout" data-test-selector="divThemeLayout" style={style}>
+    <div className="spp-customization-layout" data-test-selector="divThemeLayout" data-logo={safeLogo ? "custom" : undefined} style={style}>
       {props.children}
     </div>
   );

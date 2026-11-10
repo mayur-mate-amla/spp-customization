@@ -3,6 +3,15 @@
 
 .spp-customization-layout { flex: 1 0 auto; display: flex; flex-direction: column; width: 100%; }
 
+/* a store's own logo (setting logoUrl): the header's logo images show it, at the header's logo size */
+/* the store's header (imgDesktopLogo, imgMobileLogo) and the parent theme's brand header (.spp-logo, .spp-compact-logo) */
+.spp-customization-layout[data-logo="custom"] :is([data-test-selector="imgDesktopLogo"], [data-test-selector="imgMobileLogo"], .spp-logo, .spp-compact-logo) {
+  content: var(--spp-logo);
+  width: auto;
+  max-height: 48px;
+  object-fit: contain;
+}
+
 .spp-customization-announcement { display: flex; flex-wrap: wrap; gap: 4px 12px; justify-content: center; padding: 8px 16px; text-align: center; font-size: 14px; color: #fff; background: var(--theme-accent, #2563eb); }
 .spp-customization-announcement__link { color: #fff; font-weight: 600; text-decoration: underline; }
 

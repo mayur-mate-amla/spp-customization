@@ -1,0 +1,7 @@
+$ npm run deploy   (logoUrl setting, attribute ThemeLogoUrl)
+packed spp-customization-1.0.2.zpkg.zip (48357 bytes)
+installed theme spp-customization@1.0.2 (was 1.0.2): 15 files, disabled for []
+kept spp-customization-1.0.2.zpkg.zip in .versions\spp-customization (2 versions on disk: 1.0.1, 1.0.2)
+
+$ node scripts/registry.mjs set logoUrl=/api/extensions/files/spp-customization-cobrand-logo.svg
+"logoUrl": "/api/extensions/files/spp-customization-cobrand-logo.svg",

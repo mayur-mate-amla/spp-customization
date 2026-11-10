@@ -2,6 +2,7 @@ import type { IBrowserHost, IBrowserPlugin } from "znode-plugin/types/extension-
 import { bindHost } from "./host.js";
 import { AccountBar } from "./slots/AccountBar.js";
 import { RuleTags } from "./slots/RuleTags.js";
+import { pinPromoted, popupQuantity } from "./transforms.js";
 import { AccountManager, ACCOUNT_MANAGER_EDITOR } from "./widgets/AccountManager.js";
 
 // spp-commerce, browser part: the companion plugin of the spp-customization theme. A plugin runs for the stores it is
@@ -15,6 +16,12 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
       "layout.header": AccountBar,
       // the ordering rules (case packs, minimums, limits) on every product card, from the same settings as the cart rules
       "product.card": RuleTags,
+    },
+    transforms: {
+      // listings: the promoted SKUs first
+      "productList.data": pinPromoted,
+      // the added-to-cart popup: the quantity the cart really got (case packs)
+      "addToCart.notificationData": popupQuantity,
     },
     widgets: {
       // "Your account manager" card for the page builder

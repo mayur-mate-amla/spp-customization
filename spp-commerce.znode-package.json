@@ -75,6 +75,15 @@
       "browser": true,
       "default": true
     },
+    "pinnedSkus": {
+      "type": "list",
+      "label": "Promoted SKUs, shown first in category and search listings (in this order)",
+      "browser": true,
+      "default": [
+        "811JQ_1",
+        "Y1448_001"
+      ]
+    },
     "showAccountBar": {
       "type": "boolean",
       "label": "Show the account bar above the header",

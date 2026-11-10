@@ -76,3 +76,19 @@ export function companionChanges(lines: ILine[], companions: Record<string, unkn
   }
   return changes;
 }
+
+/** The quantity an add really puts in the cart: rounded up to the SKU's case pack (setting casePacks), as beforeAddToCart does. */
+export function caseQuantity(sku: string, quantity: number, casePacks: Record<string, unknown>) {
+  const pack = forSku(casePacks, sku);
+  return pack > 1 && quantity > 0 ? Math.ceil(quantity / pack) * pack : quantity;
+}
+
+/** The products with the pinned SKUs first, in the pinned order; the others after them in the order they came. */
+export function pinFirst<T extends { sku?: string }>(products: T[], pinned: unknown[]) {
+  const order = pinned.map((sku) => String(sku).toUpperCase());
+  const rank = (product: T) => {
+    const index = order.indexOf(String(product.sku || "").toUpperCase());
+    return index === -1 ? order.length : index;
+  };
+  return products.map((product, index) => ({ product, index })).sort((a, b) => rank(a.product) - rank(b.product) || a.index - b.index).map(({ product }) => product);
+}

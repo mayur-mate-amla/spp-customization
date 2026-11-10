@@ -1,0 +1,7 @@
+$ (theme defaults: accentColor #f26b1d, headingFont brand)
+$ node scripts/registry.mjs set accentColor=#0f766e
+"accentColor": "#0f766e",
+$ node scripts/registry.mjs set headingFont=system
+"headingFont": "system",
+(no build, no deploy: refresh the page)
+$ (browser, after refresh) h1 computed font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif

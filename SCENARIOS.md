@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 19 |
+| ✅ Done | 20 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 114 |
+| ⬜ Not started | 113 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -106,7 +106,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 27 | Can themes inherit more than one level deep? | Yes | UI | Example: sub-brand of Red Panda (Montserrat) on spp-base (widgets), own colors on top | ✅ Done | [notes](docs/scenarios/027-multi-level-inheritance/) |
 | 28 | Can I use my own font files in a theme? | Yes | UI | Example: self-hosted brand font (Geist, OFL) for headings | ✅ Done | [notes](docs/scenarios/028-own-font-files/) |
 | 29 | Can I update the CSS? | Yes | UI | Example: listing card refresh (hover lift, price, stock pill), CSS only, on POCSppDemo | ✅ Done | [notes](docs/scenarios/029-update-css/) |
-| 30 | Can I change fonts and colors per theme? | Yes | UI | Accent color and font from settings (`ThemeAccentColor` attribute) | ⬜ Not started | |
+| 30 | Can I change fonts and colors per theme? | Yes | UI | Example: accentColor and headingFont settings (store attributes) drive the brand; no code change | ✅ Done | [notes](docs/scenarios/030-fonts-and-colors-per-theme/) |
 | 31 | Is a theme's CSS kept from clashing with the store's own CSS? | Yes | Check | Prefixed classes, `dedupeStyles`; only the active theme's CSS loads | ⬜ Not started | |
 | 32 | Can I change labels and messages per theme? | Yes | UI | `src/i18n/labels.json`: "Add to Cart" → "Add to bag" | ⬜ Not started | |
 | 33 | Can I change logos and images per store? | Yes | UI | Logo from a setting bound to a store attribute | ⬜ Not started | |

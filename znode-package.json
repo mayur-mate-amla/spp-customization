@@ -26,7 +26,7 @@
       "type": "string",
       "label": "Accent color (CSS)",
       "browser": true,
-      "default": "#2563eb",
+      "default": "#f26b1d",
       "attribute": "ThemeAccentColor"
     },
     "announcement": {
@@ -34,6 +34,13 @@
       "label": "Announcement bar text (empty: no bar)",
       "browser": true,
       "default": "Free shipping on orders over $100"
+    },
+    "headingFont": {
+      "type": "string",
+      "label": "Heading font: brand (the theme's own Geist), family (Montserrat, from the parent theme) or system",
+      "browser": true,
+      "default": "brand",
+      "attribute": "ThemeHeadingFont"
     },
     "supportPhone": {
       "type": "string",

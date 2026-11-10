@@ -50,9 +50,9 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 6 |
+| ✅ Done | 7 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 127 |
+| ⬜ Not started | 126 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -67,7 +67,7 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 | 4 | Is the public API documented for partners (extension-api.d.ts)? | Yes | Check | Build type-checks `src/` against `extension-api.d.ts` | ✅ Done | [notes](docs/scenarios/004-public-api-documented/) |
 | 5 | Are partner docs and examples available? | Yes | Check | SDK README and this repo's README / examples | ✅ Done | [notes](docs/scenarios/005-partner-docs-and-examples/) |
 | 6 | Is a package validated at install? | Yes | Check | Bad version / name / file in a copy of the manifest: install refuses it | ✅ Done | [notes](docs/scenarios/006-package-validated-at-install/) |
-| 7 | Is a package prevented from overwriting another package's files? | Yes | Check | An asset named like another package's file: install refuses it | ⬜ Not started | |
+| 7 | Is a package prevented from overwriting another package's files? | Yes | Check | An asset named like another package's file: install refuses it | ✅ Done | [notes](docs/scenarios/007-no-overwriting-other-packages/) |
 | 8 | Can I install or update a package without a build or restart? | Yes | UI | Change the announcement text, `npm run deploy`, refresh: new text, no store restart | ⬜ Not started | |
 | 9 | Are older package versions kept on disk for rollback? | Yes | Check | Bump to 1.0.1, deploy: 1.0.0 files still in the plugin folder | ⬜ Not started | |
 | 10 | Is there a one-command rollback? | No | Base | Manual: reinstall the older zip with `znode install` (documented) | ⛔ Blocked | |

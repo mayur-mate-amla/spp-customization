@@ -1,0 +1,7 @@
+$ (scratch copy of the store's plugins.json: apex owns apex-1.0.19.css)
+$ node -e owner of apex-1.0.19.css
+apex@1.0.19
+
+$ znode install bad/other-package-file.zpkg.zip <scratch copy>   (spp-customization carrying a file named apex-1.0.19.css)
+znode-package: "apex-1.0.19.css" belongs to package apex
+(exit 1)

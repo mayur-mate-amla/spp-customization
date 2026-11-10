@@ -104,3 +104,21 @@ export function pinFirst<T extends { sku?: string }>(products: T[], pinned: unkn
   };
   return products.map((product, index) => ({ product, index })).sort((a, b) => rank(a.product) - rank(b.product) || a.index - b.index).map(({ product }) => product);
 }
+
+/**
+ * The current item number for a superseded one (setting replacedSkus: { "<old sku>": "<current sku>" }), or "" when the
+ * SKU is current. Follows a chain (A -> B -> C) to its end, and stops on a loop.
+ */
+export function replacedBy(sku: string, replacements: Record<string, unknown>) {
+  const find = (code: string) => {
+    const key = Object.keys(replacements).find((name) => name.toUpperCase() === code.toUpperCase());
+    return key !== undefined && typeof replacements[key] === "string" ? String(replacements[key]).trim() : "";
+  };
+  const seen = new Set([sku.toUpperCase()]);
+  let current = sku;
+  for (let next = find(current); next && !seen.has(next.toUpperCase()); next = find(current)) {
+    seen.add(next.toUpperCase());
+    current = next;
+  }
+  return current === sku ? "" : current;
+}

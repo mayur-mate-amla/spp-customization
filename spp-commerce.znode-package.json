@@ -45,6 +45,14 @@
     "/api/contact-us": "quote-request"
   },
   "settingsSchema": {
+    "replacedSkus": {
+      "type": "object",
+      "label": "Superseded item numbers: { \"<old SKU>\": \"<current SKU>\" } (an add of the old one adds the current one)",
+      "browser": true,
+      "default": {
+        "200341843": "81DRL"
+      }
+    },
     "casePacks": {
       "type": "object",
       "label": "Items sold in case packs: { \"<SKU>\": <pack size> } (quantities are rounded up to whole packs)",

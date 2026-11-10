@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 86 |
+| ✅ Done | 87 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 50 |
+| ⬜ Not started | 49 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -218,7 +218,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 103 | Can I update an agent with a runtime package? | Partial | Check | Same as 102 | ⬜ Not started | |
 | 104 | Can I update an agent with an SWC build-time theme? | Yes | Outside | Store repo | ➖ Outside | |
 | 105 | Can I change agents called during server rendering? | No | Base | | ⛔ Blocked | |
-| 106 | Can I change add-to-cart logic? | Yes | UI | `beforeAddToCart` changes the request (quantity rule) | ⬜ Not started | |
+| 106 | Can I change add-to-cart logic? | Yes | UI | beforeAddToCart: superseded SKU 200341843 -> 81DRL before case packs; a hook cannot refuse an add | ✅ Done | [notes](106-change-add-to-cart/) |
 | 107 | Can I change place-order logic? | Partial | Check | Override of `/api/place-order` | ⬜ Not started | |
 | 108 | Can I change pricing, tax or promotion calculation? | No | Base | | ⛔ Blocked | |
 | 109 | Can I change inventory checks? | Partial | Check | `beforeAddToCart` refusing over a stock limit | ⬜ Not started | |

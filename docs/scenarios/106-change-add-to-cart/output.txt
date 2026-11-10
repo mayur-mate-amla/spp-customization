@@ -1,0 +1,15 @@
+# before: replacedSkus not deployed
+> node scripts/cart-shot.mjs --add 105666:1
+3/4" Poly Lanyard w/clip | qty 1     (SKU 200341843, $1.11)
+
+# after: replacedSkus = { "200341843": "81DRL" }
+> node scripts/cart-shot.mjs --add 105666:1 --route /api/extensions/plugins/spp-commerce/activity
+3/4" Poly Lanyard w/clip | qty 10    (SKU 81DRL, $1.25)
+{"sku":"81DRL","asked":1,"added":10,"rule":"replaces 200341843, case pack of 10","cartNumber":"C-10112026-1122","ok":true}
+
+# replacedBy with node alone (map: 200341843->81DRL, A->B, B->C, X->Y, Y->X)
+200341843  "81DRL"
+81DRL      ""
+a          "C"
+X          "Y"
+(a: the chain a -> B -> C; X: stops at the loop)

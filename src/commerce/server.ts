@@ -1,11 +1,11 @@
 import type { ICartHookContext, IPluginRouteContext, IPluginRouteRequest, IRuntimeData, IRuntimeHookContext, IRuntimePlugin } from "znode-plugin/types/extension-api";
-import { companionChanges, lineNotes, quantityRule, withNotes } from "./rules";
+import { companionChanges, lineNotes, quantityRule, replacedBy, withNotes } from "./rules";
 import { OrderingInfoPage } from "./OrderingInfoPage";
 import { arrivalDate, lookupZip, transitDays, type IPlace } from "./delivery";
 import { envelope, readQuoteRequest, type IQuoteRequest } from "./quotes";
 
 // spp-commerce, server part (runs on the store's server only).
-//   beforeAddToCart  case packs: an item sold in packs (setting casePacks: { "<sku>": <pack size> }) is rounded up to
+//   beforeAddToCart  superseded item numbers go to their current item (setting replacedSkus, row 106); case packs: an item sold in packs (setting casePacks: { "<sku>": <pack size> }) is rounded up to
 //                    whole packs before the request goes to Znode (1 lanyard -> a pack of 10)
 //   afterAddToCart   order activity: each add (asked, added, cart number, result) is recorded for the store
 //   onCartChanged    when the cart is read (cart page, checkout):
@@ -71,13 +71,23 @@ async function beforeAddToCart(request: IRuntimeData, context: IRuntimeHookConte
   const adds: IActivity[] = [];
   // hooks get the shopper's cookies (routes do not): the rep this add is credited to
   const rep = context.cookies.get(REP_COOKIE) || undefined;
+  const replacements = skuMap(context.settings, "replacedSkus");
   for (const line of lines) {
+    // superseded item numbers (setting replacedSkus: { "<old sku>": "<current sku>" }, row 106): the add goes to the
+    // current item, before the case-pack rule, so the current item's pack applies
+    const rules: string[] = [];
+    const replacement = replacedBy(String(line.sku || ""), replacements);
+    if (replacement) {
+      rules.push(`replaces ${line.sku}`);
+      line.sku = replacement;
+    }
     const sku = String(line.sku || "");
     const asked = Number(line.quantity) || 0;
     const pack = packSize(context.settings, sku);
     const added = roundToPacks(asked, pack);
     if (added !== asked) line.quantity = typeof line.quantity === "string" ? String(added) : added;
-    adds.push({ at: new Date().toISOString(), sku, asked, added, rule: pack ? `case pack of ${pack}` : "", ...(rep ? { rep } : {}) });
+    if (pack) rules.push(`case pack of ${pack}`);
+    adds.push({ at: new Date().toISOString(), sku, asked, added, rule: rules.join(", "), ...(rep ? { rep } : {}) });
   }
   pending.set(context.store.code, adds);
   return request;

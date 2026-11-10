@@ -1,7 +1,8 @@
-import { useEffect, useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { ruleFacts } from "../rules.js";
 import { settings } from "../host.js";
+import { shortDate, useHold } from "../holds.js";
 
 // Slot product.card (spp-commerce): the store's ordering rules on the product card, before the shopper adds anything
 // ("Sold in cases of 10", "Minimum order 25", "Limit 5 per order"). The same settings and the same wording as the cart
@@ -12,33 +13,8 @@ import { settings } from "../host.js";
 // asked once per page for all the cards, after the page has loaded.
 
 type IProduct = { sku?: string; SKU?: string; publishProductId?: number };
-type IHold = { sku: string; backOn: string; note: string };
 
 const map = (key: string) => (settings[key] && typeof settings[key] === "object" ? (settings[key] as Record<string, unknown>) : {});
-
-// one request per page, shared by every card
-let holdsRequest: Promise<Map<string, IHold>> | null = null;
-function loadHolds() {
-  holdsRequest ??= fetch("/api/extensions/plugins/spp-commerce/stock-holds", { cache: "no-store" })
-    .then((response) => (response.ok ? response.json() : { holds: [] }))
-    .then((data) => new Map<string, IHold>((Array.isArray(data?.holds) ? data.holds : []).map((hold: IHold) => [hold.sku.toUpperCase(), hold])))
-    .catch(() => new Map<string, IHold>());
-  return holdsRequest;
-}
-
-function useHold(sku: string) {
-  const [hold, setHold] = useState<IHold | null>(null);
-  useEffect(() => {
-    let live = true;
-    if (sku) loadHolds().then((holds) => live && setHold(holds.get(sku.toUpperCase()) || null));
-    return () => {
-      live = false;
-    };
-  }, [sku]);
-  return hold;
-}
-
-const shortDate = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString(undefined, { month: "short", day: "numeric" });
 
 export function RuleTags(props: { children?: ReactNode; product?: IProduct }) {
   const t = useTranslations("Common.sppCommerce");

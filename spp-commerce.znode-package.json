@@ -42,7 +42,8 @@
   ],
   "overrides": {
     "/api/search/search-hydrated-typeahead": "search-typeahead",
-    "/api/contact-us": "quote-request"
+    "/api/contact-us": "quote-request",
+    "/api/add-to-cart": "add-to-cart"
   },
   "settingsSchema": {
     "replacedSkus": {
@@ -148,7 +149,8 @@
     "sourcingLink": {
       "type": "string",
       "label": "Where \"Ask us to source it\" goes when a search finds nothing",
-      "default": "/specialorder"
+      "default": "/specialorder",
+      "browser": true
     },
     "staffKey": {
       "type": "string",

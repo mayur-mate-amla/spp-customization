@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 87 |
+| ✅ Done | 88 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 49 |
+| ⬜ Not started | 48 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -221,7 +221,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 106 | Can I change add-to-cart logic? | Yes | UI | beforeAddToCart: superseded SKU 200341843 -> 81DRL before case packs; a hook cannot refuse an add | ✅ Done | [notes](106-change-add-to-cart/) |
 | 107 | Can I change place-order logic? | Partial | Check | Override of `/api/place-order` | ⬜ Not started | |
 | 108 | Can I change pricing, tax or promotion calculation? | No | Base | | ⛔ Blocked | |
-| 109 | Can I change inventory checks? | Partial | Check | `beforeAddToCart` refusing over a stock limit | ⬜ Not started | |
+| 109 | Can I change inventory checks? | Partial | Check | override /api/add-to-cart: ERP-held items refused, rest via original({ body }); original() sends no body unless passed | ✅ Done | [notes](109-inventory-checks/) |
 
 ## Middleware
 

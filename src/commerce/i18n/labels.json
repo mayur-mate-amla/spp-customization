@@ -21,7 +21,10 @@
       "checkDelivery": "Check",
       "arrivesBy": "Arrives by <b>{date}</b> to {place}",
       "zipInvalid": "Enter a 5-digit ZIP code",
-      "deliveryUnavailable": "Delivery dates are not available right now"
+      "deliveryUnavailable": "Delivery dates are not available right now",
+      "holdNotice": "<b>Out until {date}.</b> This item cannot be ordered right now.",
+      "holdNoticeNoDate": "<b>Temporarily out of stock.</b> This item cannot be ordered right now.",
+      "askAlternatives": "Ask us about an alternative"
     }
   }
 }

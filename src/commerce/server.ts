@@ -22,6 +22,7 @@ import { envelope, readQuoteRequest, type IQuoteRequest } from "./quotes";
 //   routes.erp-stock POST, a signed webhook from the ERP: stock holds ("out until Dec 1"); routes.stock-holds lists them
 //   routes.delivery-estimate  GET ?zip=: the delivery date to a ZIP (city and state from a public ZIP API, server side)
 //   overrides        /api/search/search-hydrated-typeahead -> search-typeahead: synonyms and a sourcing link (row 098)
+//   overrides        /api/add-to-cart -> add-to-cart: items on an ERP stock hold are refused, the rest is the store's (row 109)
 //   overrides        /api/contact-us -> quote-request: replaced, a quote request for the shopper's rep (row 099)
 //   routes.my-order  GET /api/extensions/plugins/spp-commerce/my-order: the shopper's own cart (context.cartNumber, its
 //                    lines read from Znode with context.znode) and user (context.user): subtotal, the free-shipping
@@ -234,6 +235,39 @@ async function erpStock(request: IPluginRouteRequest, context: IPluginRouteConte
   return json(200, { ok: true, sku: event.sku, onHold: !event.available, holds: holds.size });
 }
 
+// ---- Add to cart: an inventory check before the store's agent (row 109) -------------------------------------------
+// "overrides": { "/api/add-to-cart": "add-to-cart" }. A hook cannot refuse an add (row 106), so the plugin takes over the
+// store's add-to-cart route: a line whose item is on an ERP stock hold (the erp-stock webhook, row 091; superseded
+// numbers resolved first, row 106) is refused in the store's envelope (addToCartStatus false, so the store's own UI says
+// the add failed; the product page's notice says why); anything else is the store's route, called with
+// context.original(): its hooks (case packs, activity) and its agent run as before.
+type IAddLine = { sku?: string; addToCartChildItems?: { sku?: string }[] };
+
+export function heldLines(body: unknown, holds: Map<string, IStockHold> | undefined, replacements: Record<string, unknown>) {
+  const details = body && typeof body === "object" && Array.isArray((body as { skuDetails?: unknown }).skuDetails) ? ((body as { skuDetails: IAddLine[] }).skuDetails) : [];
+  const skus = details.flatMap((line) => (Array.isArray(line.addToCartChildItems) && line.addToCartChildItems.length ? line.addToCartChildItems : [line])).map((line) => String(line.sku || ""));
+  return skus.flatMap((sku) => {
+    const current = (replacedBy(sku, replacements) || sku).toUpperCase();
+    const hold = holds?.get(current);
+    return hold ? [hold] : [];
+  });
+}
+
+async function addToCartGuard(request: IPluginRouteRequest, context: IPluginRouteContext) {
+  const json = (status: number, data: unknown) => new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
+  const held = heldLines(request.body, stockHolds.get(context.store.code), skuMap(context.settings, "replacedSkus"));
+  if (held.length) {
+    const first = held[0];
+    record(context.store.code, held.map((hold) => ({ at: new Date().toISOString(), sku: hold.sku, asked: 0, added: 0, rule: `refused: on hold${hold.backOn ? ` until ${hold.backOn}` : ""}`, ok: false })));
+    const message = `Item # ${first.sku} is on hold${first.backOn ? ` until ${first.backOn}` : ""} and cannot be ordered right now.`;
+    return json(200, envelope({ addToCartStatus: false, isSuccess: false, cartCount: 0, errorMessage: message, onHold: held.map(({ sku, backOn }) => ({ sku, backOn })) }, message));
+  }
+  // the store's own route, with the shopper's cookies. The body must be passed: original() with no body sends none
+  // (found here: the store's route then fails with "Unexpected end of JSON input")
+  const answer = await context.original({ body: request.body });
+  return json(answer.status, answer.data);
+}
+
 // ---- Contact us: a store route replaced (row 099) ------------------------------------------------------------------
 // "overrides": { "/api/contact-us": "quote-request" }: the store's route is never called (no context.original()). The
 // request is checked, given a reference and the shopper's rep, and kept for the staff route; the answer is the store's
@@ -389,6 +423,7 @@ const plugin: IRuntimePlugin = {
     "sku-lookup": skuLookup,
     "search-typeahead": searchTypeahead,
     "quote-request": quoteRequest,
+    "add-to-cart": addToCartGuard,
     "quote-requests": quoteRequestList,
     "stock-holds": async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ holds: [...(stockHolds.get(context.store.code)?.values() || [])] }),
   },

@@ -1,10 +1,13 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import { shortDate, useHold } from "../holds.js";
+import { settings } from "../host.js";
 
 // Slot product.addToCart (spp-commerce): "Deliver to [ZIP] Check" under the store's add-to-cart (children, kept as it
 // is). The date comes from the plugin's delivery-estimate route (the BFF: it asks the ZIP API on the server and works
 // out the date); the ZIP is remembered in this browser (localStorage) so every product page shows it at once.
-// Not in the quick view (the popup is small).
+// Not in the quick view (the popup is small). An item on an ERP stock hold (row 109) gets a notice instead of the
+// estimate: the store's add-to-cart route refuses it, and its own message only says the add failed.
 
 type IEstimate = { zip: string; city: string; state: string; arrivesBy: string; shipsOn: string };
 
@@ -13,12 +16,13 @@ const KEY = "spp-commerce-zip";
 
 const day = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 
-export function DeliveryEstimate(props: { children?: ReactNode; isQuickView?: boolean }) {
+export function DeliveryEstimate(props: { children?: ReactNode; isQuickView?: boolean; product?: { sku?: string } }) {
   const t = useTranslations("Common.sppCommerce");
   const [zip, setZip] = useState("");
   const [estimate, setEstimate] = useState<IEstimate | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const hold = useHold(String(props.product?.sku || ""));
 
   const check = async (value: string) => {
     setBusy(true);
@@ -62,6 +66,17 @@ export function DeliveryEstimate(props: { children?: ReactNode; isQuickView?: bo
     if (/^\d{5}$/.test(zip)) check(zip);
     else setError(t("zipInvalid"));
   };
+
+  if (hold)
+    return (
+      <>
+        {props.children}
+        <p className="spp-commerce-hold" role="status" data-test-selector="paraStockHold">
+          {t.rich(hold.backOn ? "holdNotice" : "holdNoticeNoDate", { date: hold.backOn ? shortDate(hold.backOn) : "", b: (chunks: ReactNode) => <strong>{chunks}</strong> })}{" "}
+          <a href={String(settings.sourcingLink || "/specialorder")}>{t("askAlternatives")}</a>
+        </p>
+      </>
+    );
 
   return (
     <>

@@ -1,0 +1,25 @@
+# the ERP puts the backpack on hold (signed webhook, row 091)
+> ERP_SECRET=<secret> node scripts/erp-webhook.mjs '{"sku":"817NK_25","available":false,"backOn":"2026-12-01",...}'
+HTTP 200 {"ok":true,"sku":"817NK_25","onHold":true,"holds":1}
+
+# before (no add-to-cart override): the held item is added anyway
+> node scripts/cart-shot.mjs --add 103809:2
+Graphite Deluxe 15" Computer Backpack | qty 2
+
+# after: the store's add-to-cart route, taken over by spp-commerce
+> POST /api/add-to-cart  {skuDetails:[{sku:"817NK_25",quantity:"1",...}]}
+{"status":"success","message":"Item # 817NK_25 is on hold until 2026-12-01 and cannot be ordered right now.","data":{"addToCartStatus":false,"isSuccess":false,"cartCount":0,"errorMessage":"Item # 817NK_25 is on hold until 2026-12-01 and cannot be ordered right now.","onHold":[{"sku":"817NK_25","backOn":"2026-12-01"}]}}  (HTTP 200)
+
+> node scripts/cart-shot.mjs --add 103809:2 --add 103808:1 --route .../activity   (held backpack, then the lanyard)
+3/4" Poly Lanyard w/clip | qty 10
+{"sku":"817NK_25","asked":0,"added":0,"rule":"refused: on hold until 2026-12-01","ok":false}
+{"sku":"81DRL","asked":1,"added":10,"rule":"case pack of 10","cartNumber":"C-10112026-1124","ok":true}
+(the lanyard went through context.original(): the store's route, its hooks and its agent)
+
+# found on the way: original() with no argument sends no body, so a POST reached the store's route empty
+"Failed to Add to Cart Product.SyntaxError: Unexpected end of JSON input"  (HTTP 500)
+fixed with context.original({ body: request.body })
+
+# the hold lifted again after the pictures
+> ERP_SECRET=<secret> node scripts/erp-webhook.mjs '{"sku":"817NK_25","available":true}'
+HTTP 200 {"ok":true,"sku":"817NK_25","onHold":false,"holds":0}

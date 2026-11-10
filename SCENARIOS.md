@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 37 |
+| ✅ Done | 38 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 96 |
+| ⬜ Not started | 95 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -130,7 +130,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 46 | Can two plugins change the same slot? | Yes | Check | Example: companion plugin spp-commerce adds a B2B account bar to the theme's layout.header | ✅ Done | [notes](docs/scenarios/046-two-packages-same-slot/) |
 | 47 | Can I control the order in which plugins fill a slot? | Partial | Check | Result: **Yes** between plugins (plugins.json order); theme chain always first. Example: account bar vs sale countdown bar | ✅ Done | [notes](docs/scenarios/047-order-of-packages-in-slot/) |
 | 48 | Can I change the header? | Yes | UI | Example: compact sticky header once the shopper scrolls (desktop) | ✅ Done | [notes](docs/scenarios/048-change-header/) |
-| 49 | Can I change the footer? | Yes | UI | `layout.footer` slot: own footer | ⬜ Not started | |
+| 49 | Can I change the footer? | Yes | UI | Example: Need-help band (phone, email, hours, payments); fixed the footer slot landing in the hidden header | ✅ Done | [notes](docs/scenarios/049-change-footer/) |
 | 50 | Can I change the product card? | Yes | UI | `product.card` slot: badge and card styling | ⬜ Not started | |
 | 51 | Can I change the added-to-cart popup? | Yes | UI | `addToCart.notification` slot | ⬜ Not started | |
 

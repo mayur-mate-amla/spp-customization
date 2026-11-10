@@ -84,6 +84,18 @@
       "label": "Warehouse time zone (IANA, e.g. America/New_York)",
       "default": "America/New_York"
     },
+    "supportEmail": {
+      "type": "string",
+      "label": "Customer service email (footer help band)",
+      "browser": true,
+      "default": "orders@sppbrandedgoods.example"
+    },
+    "supportHours": {
+      "type": "string",
+      "label": "Customer service hours (footer help band)",
+      "browser": true,
+      "default": "Mon-Fri, 8am-6pm ET"
+    },
     "showBadge": {
       "type": "boolean",
       "label": "Show the New badge on product cards",

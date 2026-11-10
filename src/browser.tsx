@@ -4,6 +4,7 @@ import { AnnouncementBar } from "./slots/AnnouncementBar.js";
 import { ProductBadge } from "./slots/ProductBadge.js";
 import { SearchWithPopular } from "./slots/SearchWithPopular.js";
 import { CustomizeToOrder } from "./slots/CustomizeToOrder.js";
+import { FooterHelp } from "./slots/FooterHelp.js";
 import { Hero, HERO_EDITOR } from "./widgets/Hero.js";
 import { Testimonials, TESTIMONIALS_EDITOR } from "./widgets/Testimonials.js";
 
@@ -25,6 +26,8 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
       "header.search": SearchWithPopular,
       // decorated products: "Customize & order" replaces the store's add-to-cart
       "product.addToCart": CustomizeToOrder,
+      // "Need help?" contact and payments band above the store's footer
+      "layout.footer": FooterHelp,
     },
     widgets: {
       SppCustomizationHero: { render: Hero, ...HERO_EDITOR },

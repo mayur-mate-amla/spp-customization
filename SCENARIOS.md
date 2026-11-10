@@ -50,9 +50,9 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 12 |
+| ✅ Done | 13 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 122 |
+| ⬜ Not started | 121 |
 | ⛔ Blocked | 41 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -76,7 +76,7 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 | 13 | Can a package be installed for some stores only? | Yes | Config | `"stores": ["<one store>"]`: on there, not on another store | ⬜ Not started | |
 | 14 | Can the same package be installed twice with different settings? | No | Base | | ⛔ Blocked | |
 | 15 | Can a package declare required settings? | Yes | UI | `settingsSchema` field with `"required": true` | ✅ Done | [notes](docs/scenarios/015-required-settings/) |
-| 16 | Are required settings that are still empty reported at install? | Yes | Check | Deploy output names the empty required setting | ⬜ Not started | |
+| 16 | Are required settings that are still empty reported at install? | Yes | Check | Deploy output names the empty required setting | ✅ Done | [notes](docs/scenarios/016-empty-required-settings-reported/) |
 | 17 | Can a package declare which API version it needs? | Yes | Check | `"apiVersion": 1`; a wrong value is refused | ⬜ Not started | |
 | 18 | Can a package declare that it depends on another package? | No | Base | (`parent` covers theme-on-theme only) | ⛔ Blocked | |
 | 19 | Is there an admin screen to upload, enable and configure packages? | No | Base | | ⛔ Blocked | |

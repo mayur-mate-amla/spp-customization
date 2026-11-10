@@ -1,0 +1,26 @@
+$ npm run check
+
+> spp-customization@1.0.1 check
+> znode check .
+
+check spp-customization@1.0.1: 0 errors, 0 warnings
+
+$ npm run deploy   (supportPhone declared "required": true, no value yet)
+
+> spp-customization@1.0.1 deploy
+> znode deploy .
+
+built theme spp-customization@1.0.1: 9 files
+packed spp-customization-1.0.1.zpkg.zip (60139 bytes)
+installed theme spp-customization@1.0.1 (was 1.0.1): 8 files, disabled for []
+  settings to fill in before enabling: supportPhone
+
+$ node scripts/registry.mjs set supportPhone=1-800-555-0199
+$ npm run deploy   (value filled in: nothing left to report)
+
+> spp-customization@1.0.1 deploy
+> znode deploy .
+
+built theme spp-customization@1.0.1: 9 files
+packed spp-customization-1.0.1.zpkg.zip (60139 bytes)
+installed theme spp-customization@1.0.1 (was 1.0.1): 8 files, disabled for []

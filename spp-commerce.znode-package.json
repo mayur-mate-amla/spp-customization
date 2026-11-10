@@ -143,6 +143,13 @@
       "label": "Orders placed before this hour (warehouse time, Central) ship the same business day",
       "default": 14
     },
+    "productionDays": {
+      "type": "object",
+      "label": "Production days of decorated items: { \"<SKU>\": <days> } (added to their delivery dates)",
+      "default": {
+        "80RXL_986": 3
+      }
+    },
     "searchSynonyms": {
       "type": "object",
       "label": "Search words the catalog does not use: { \"koozie\": \"can cooler\" } (the typeahead offers the catalog's word)",

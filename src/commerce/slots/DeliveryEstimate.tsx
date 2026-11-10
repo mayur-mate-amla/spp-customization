@@ -34,6 +34,8 @@ export function DeliveryEstimate(props: { children?: ReactNode; isQuickView?: bo
       setEstimate(data);
       try {
         localStorage.setItem(KEY, value);
+        // also for the cart page's delivery dates: the cart hooks read cookies (row 112)
+        document.cookie = `spp_zip=${value}; Path=/; Max-Age=${30 * 86400}; SameSite=Lax`;
       } catch {
         // private mode: not remembered
       }

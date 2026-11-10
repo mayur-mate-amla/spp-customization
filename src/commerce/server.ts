@@ -13,7 +13,7 @@ import { envelope, readQuoteRequest, type IQuoteRequest } from "./quotes";
 //                    - per-order limits (setting orderLimits: { "<sku>": <max> }): a line over its limit is brought to it
 //                    - companions (setting companions: { "<sku>": "<companion sku>" }): an ID holder brings its lanyard,
 //                      removed again with it
-//   mapCartItems     line notes (setting lineNotes): "Sold in cases of 10", "Minimum order 25", "Limit 5 per order"
+//   mapCartItems     line notes (setting lineNotes), and each line's delivery date with the shopper's ZIP (row 112): "Sold in cases of 10", "Minimum order 25", "Limit 5 per order"
 //                    under the lines they apply to, on the cart page and checkout
 //   serverPages      /ordering-information: the ordering policies, written from these settings (OrderingInfoPage.tsx)
 //   routes.activity  GET /api/extensions/plugins/spp-commerce/activity: the store's last 20 adds and cart changes
@@ -38,6 +38,9 @@ type IActivity = { at: string; sku: string; asked: number; added: number; rule: 
 // the sales rep a shopper came through (routes.rep sets it from the rep's link; the browser and the cart hooks read it)
 const REP_COOKIE = "spp_rep";
 const REP_DAYS = 30;
+// the ZIP the shopper gave on a product page (DeliveryEstimate sets it), for the cart lines' delivery dates (row 112)
+const ZIP_COOKIE = "spp_zip";
+const shortDay = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" });
 
 // per store (module scope is per store on the server); kept in memory: the last 20 adds and cart changes
 const activity = new Map<string, IActivity[]>();
@@ -140,13 +143,41 @@ async function onCartChanged({ store, cart, settings, actions }: ICartHookContex
 // The cart's lines before the cart page or checkout shows them: { cartNumber, cartItems: [{ sku, productName,
 // productDescription (HTML), quantity, unitPrice, ... }] }. The notes go after Znode's description, which the cart
 // renders as HTML; the object is returned changed.
-async function mapCartItems(cart: IRuntimeData, { settings }: IRuntimeHookContext) {
+// Per-line delivery dates on the cart page (row 112): with the ZIP the shopper gave on a product page (cookie spp_zip,
+// set by the "Deliver to" box; hooks read cookies, routes do not), each line says when it arrives: ground days from
+// the warehouse plus the item's production days (setting productionDays: decorated items take longer), counted from
+// the ship day. Without a ZIP, or when the ZIP API cannot be reached, the lines have no date: the cart works as before.
+async function deliveryNotes(context: IRuntimeHookContext) {
+  const zip = String(context.cookies.get(ZIP_COOKIE) || "");
+  if (!/^\d{5}$/.test(zip)) return null;
+  let place: IPlace | null = null;
+  try {
+    place = await lookupZip(zip);
+  } catch {
+    return null;
+  }
+  if (!place) return null;
+  const transit = transitDays(place);
+  const cutoff = Number(context.settings.shipCutoffHour) || 14;
+  const production = skuMap(context.settings, "productionDays");
+  const to = `${place.city}, ${place.state} ${zip}`;
+  return (sku: string) => {
+    const extra = Math.max(0, Math.floor(Number(production[sku] ?? production[sku.toUpperCase()]) || 0));
+    const { arrivesBy } = arrivalDate(new Date(), transit + extra, cutoff);
+    return `Arrives by ${shortDay(arrivesBy)} to ${to}${extra ? ` (includes ${extra} production days)` : ""}`;
+  };
+}
+
+async function mapCartItems(cart: IRuntimeData, context: IRuntimeHookContext) {
+  const { settings } = context;
   if (settings.lineNotes === false || !Array.isArray(cart.cartItems)) return cart;
   const casePacks = skuMap(settings, "casePacks");
   const limits = skuMap(settings, "orderLimits");
   const minimums = skuMap(settings, "minimums");
+  const arrival = await deliveryNotes(context);
   const cartItems = (cart.cartItems as IRuntimeData[]).map((item) => {
-    const notes = lineNotes(String(item.sku || ""), casePacks, limits, minimums);
+    const sku = String(item.sku || "");
+    const notes = [...lineNotes(sku, casePacks, limits, minimums), ...(arrival ? [arrival(sku)] : [])];
     return notes.length ? { ...item, productDescription: withNotes(item.productDescription, notes) } : item;
   });
   return { ...cart, cartItems };

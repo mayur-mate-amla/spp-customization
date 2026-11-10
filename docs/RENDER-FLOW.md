@@ -351,7 +351,7 @@ repository joins it. Commits are on `main` of this repository.
 | 100 | Overrides only where the plugin is enabled | 868861a | store routes | §2 B placement, §7 B.4 `findRouteOverride` | scripts/overrides.mjs |
 | 101 | 64 KB body limit for plugin routes | 97284d9 | – | §7 B.5 `readLimited` (413) | src/commerce/quotes.ts, src/commerce/widgets/QuoteRequest.tsx |
 | 102 | Extend existing agent logic (map) | c94a9ab | §6 A, §7 A agents | §6 B, §7 B.1 hooks; §7 B.4 overrides | – |
-| 103 | Update an agent with a runtime package (live, no rebuild) | (this commit) | agents compiled in the store | §1-§2 B registry per request, §6 B, §7 B | – |
+| 103 | Update an agent with a runtime package (live, no rebuild) | 8bcab6a | agents compiled in the store | §1-§2 B registry per request, §6 B, §7 B | – |
 | 106 | Change add-to-cart logic (superseded item numbers) | 97a4fcf | §6 A add-to-cart agent | §6 B `beforeAddToCart` | src/commerce/rules.ts, src/commerce/server.ts |
 | 107 | Place-order logic (minimum order value) | fc8a531 | §7 A place-order route + agent | §7 B.4 override, refusal or `original({ body })`; §8 B bar | src/commerce/server.ts, src/commerce/slots/AccountBar.tsx |
 | 109 | Inventory check before the agent (ERP holds) | ea907c3 | §6 A add-to-cart route + agent | §7 B.4 override + `original({ body })`, §5 B notice | src/commerce/server.ts, src/commerce/holds.ts |
@@ -359,6 +359,7 @@ repository joins it. Commits are on `main` of this repository.
 | 080 | Before/after add to cart (case packs) | 1052a6b | §6 | §6 B (request hooks), §7 B.5 route | src/commerce/server.ts |
 | 081 | React to cart changes (order limit) | 6d7c25f | §7 | §7 B.1 (`runCartHooks`) | src/commerce/server.ts, src/commerce/rules.ts |
 | 082 | Change cart lines before they are shown | 3ad302b | §7 A.1 | §7 B.1 (`runMapCartItems`) | src/commerce/server.ts, src/commerce/rules.ts |
+| 112 | Change the cart page (per-line delivery dates) | (this commit) | §7 A cart page (no slot) | §7 B.1 `mapCartItems` with cookies | src/commerce/server.ts, src/commerce/slots/DeliveryEstimate.tsx |
 | 113 | Add or remove cart items automatically | 68703da | §7 A.1 | §7 B.1 (`runCartHooks` actions) | src/commerce/server.ts, src/commerce/rules.ts |
 | 114 | Cart rules (minimum order quantity) | 180df50 | §7 A.1 | §7 B.1 (`runCartHooks`, `runMapCartItems`) | src/commerce/rules.ts, src/commerce/server.ts |
 

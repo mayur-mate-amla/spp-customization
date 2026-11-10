@@ -1,5 +1,6 @@
 // Fills a fresh cart and screenshots the cart page: the evidence for the cart rules (onCartChanged, mapCartItems).
 //   node scripts/cart-shot.mjs --add 103809:8 [--add 103946:1 ...] [--remove 103946] [--route <path>] [--full] --out x.png
+//   --cookie <name>=<value>  sets a cookie of the store first (e.g. spp_zip=53202, as the product page's ZIP box does)
 //   --visit <path>           opens this path first (e.g. a link that sets a cookie), before any add
 //   --add <productId>:<qty>  opens the product page, sets the quantity, clicks "Add to cart" (in order)
 //   --remove <productId>     on the cart page, removes that product's line (the id in its cart-row selectors), then reads
@@ -20,6 +21,11 @@ const browser = await puppeteer.launch({ executablePath: edge, headless: true })
 try {
   const page = await browser.newPage();
   await page.setViewport({ width: 1366, height: 900 });
+
+  for (const cookie of all("--cookie")) {
+    const at = cookie.indexOf("=");
+    await page.setCookie({ name: cookie.slice(0, at), value: cookie.slice(at + 1), url: store });
+  }
 
   for (const visit of all("--visit")) {
     await page.goto(`${store}${visit}`, { waitUntil: "load", timeout: 120000 });

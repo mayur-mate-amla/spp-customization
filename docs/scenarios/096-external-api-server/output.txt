@@ -1,0 +1,22 @@
+# with the permission declared
+> npx znode check spp-commerce.znode-package.json
+check spp-commerce@1.0.0: 0 errors, 1 warnings
+
+# the plugin's own outbound rules (src/commerce/outbound.ts), with node alone
+allowedUrl true  https://api.zippopotam.us/us/53202
+allowedUrl false http://api.zippopotam.us/us/53202
+allowedUrl false https://evil.example/steal
+allowedUrl false https://user:pw@api.zippopotam.us/x
+allowedUrl false https://api.zippopotam.us.evil.example/x
+outboundJson(evil.example)      -> OutboundError: Not an allowed host: https://evil.example/steal
+outboundJson(1 ms timeout)       -> OutboundError: Timed out after 1 ms
+outboundJson(50-byte cap)        -> OutboundError: Answer too large (219 bytes)
+outboundJson(53202)              -> 200 {"country":"United States","country abbreviation":"US","post code":"53202","plac...
+
+# the route still answers, through outboundJson
+> GET .../delivery-estimate?zip=98101
+{"zip":"98101","city":"Seattle","state":"WA","transitDays":5,"shipsOn":"2026-11-10","arrivesBy":"2026-11-17"}
+
+# the shopper's browser on the product page (ZIP 98101, Check): its requests
+GET http://sppdemo.localhost:3000/api/extensions/plugins/spp-commerce/delivery-estimate?zip=98101 -> 200 OK
+(none to api.zippopotam.us: the outside API is called by the store's server only)

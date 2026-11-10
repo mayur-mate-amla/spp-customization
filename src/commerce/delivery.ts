@@ -4,6 +4,8 @@
 // by distance, counted in business days from the day the order ships (today before the cutoff, else the next business
 // day). No shopper data but the ZIP leaves the store.
 
+import { outboundJson } from "./outbound";
+
 export type IPlace = { zip: string; city: string; state: string; lat: number; lon: number };
 
 const WAREHOUSE = { state: "WI", lat: 43.05, lon: -87.9 }; // Milwaukee
@@ -15,14 +17,14 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 export async function lookupZip(zip: string): Promise<IPlace | null> {
   const cached = places.get(zip);
   if (cached && Date.now() - cached.at < DAY_MS) return cached.place;
-  const response = await fetch(`${ZIP_API}${zip}`, { signal: AbortSignal.timeout(5000), headers: { Accept: "application/json" } });
-  if (response.status === 404) {
+  // through the plugin's outbound rules: allowed host, 5 s, 64 KB (outbound.ts, row 096)
+  const answer = await outboundJson<{ places?: { "place name"?: string; "state abbreviation"?: string; latitude?: string; longitude?: string }[] }>(`${ZIP_API}${zip}`);
+  if (answer.status === 404) {
     places.set(zip, { at: Date.now(), place: null });
     return null;
   }
-  if (!response.ok) throw new Error(`ZIP API answered ${response.status}`);
-  const data = (await response.json()) as { places?: { "place name"?: string; "state abbreviation"?: string; latitude?: string; longitude?: string }[] };
-  const first = data.places?.[0];
+  if (answer.status !== 200) throw new Error(`ZIP API answered ${answer.status}`);
+  const first = answer.data?.places?.[0];
   const place = first ? { zip, city: String(first["place name"] || ""), state: String(first["state abbreviation"] || ""), lat: Number(first.latitude), lon: Number(first.longitude) } : null;
   places.set(zip, { at: Date.now(), place });
   return place;

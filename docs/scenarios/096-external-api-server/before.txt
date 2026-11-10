@@ -1,0 +1,8 @@
+# 1. without "externalNetwork" in permissions: the check finds the outbound call (fetch) and fails ...
+> npx znode check spp-commerce.znode-package.json
+error   uses "externalNetwork" without declaring it in "permissions"
+check spp-commerce@1.0.0: 1 errors, 1 warnings
+
+# ... but an install does not stop it, and the call runs: the permission is a review check, not enforced
+> npm run deploy -- spp-commerce.znode-package.json
+installed plugin spp-commerce@1.0.0 (was 1.0.0): 7 files, enabled for ["POCSppDemo"]

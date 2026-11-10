@@ -1,0 +1,42 @@
+/* Spp Customization design tokens: the store's own CSS variables (the ones the base components read,
+   packages/base-components/src/tailwind-config/global.css), set to the SPP palette. CSS only: no component changes.
+   `html[data-theme]` outranks the built-in `:root` tokens and the portal's inline theme CSS, whatever the load order. */
+
+html[data-theme] {
+  /* brand */
+  --primary: rgb(11, 37, 69);
+  --accent: rgb(242, 107, 29);
+  --link: rgb(19, 64, 116);
+  --hover: rgb(214, 84, 10);
+
+  /* buttons */
+  --primary-btn-bg: rgb(242, 107, 29);
+  --primary-btn-text: rgb(255, 255, 255);
+  --secondary-btn-bg: rgb(255, 255, 255);
+  --secondary-btn-text: rgb(11, 37, 69);
+  --btn-border: rgb(242, 107, 29);
+  --btn-border-radius: 6px;
+
+  /* header, navigation, ticker */
+  --header-bg: rgb(255, 255, 255);
+  --navigation-bar-bg: rgb(11, 37, 69);
+  --navigation-text: rgb(255, 255, 255);
+  --ticker-bg: rgb(19, 64, 116);
+  --mega-menu-bg: rgb(244, 246, 249);
+  --mega-menu-link: rgb(11, 37, 69);
+
+  /* footer */
+  --footer-bg: rgb(11, 37, 69);
+  --footer-primary-text: rgb(255, 255, 255);
+  --footer-secondary-text: rgb(203, 213, 225);
+
+  /* cards and inputs */
+  --card-radius: 8px;
+  --card-border: rgb(226, 232, 240);
+  --input-radius: 6px;
+  --input-border: rgb(203, 213, 225);
+
+  /* focus (keyboard users) */
+  --focus-outline-color: rgb(242, 107, 29);
+  --focus-outline-width: 2px;
+}

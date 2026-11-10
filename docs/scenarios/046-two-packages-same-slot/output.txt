@@ -1,0 +1,5 @@
+$ npm run deploy -- spp-commerce.znode-package.json
+installed plugin spp-commerce@1.0.0: 3 files, disabled for []
+$ node scripts/registry.mjs stores POCSppDemo --package spp-commerce; node scripts/registry.mjs enable true --package spp-commerce
+packages on POCSppDemo (theme previewed), in the order they fill a slot: spp-base > spp-customization > artifi > countdown-banner > delivery-preference > spp-commerce
+layout.header is filled by: spp-customization (preview bar, announcement, trust strip) and spp-commerce (account bar)

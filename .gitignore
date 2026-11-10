@@ -6,3 +6,4 @@ releases/
 tsconfig.store.json
 znode.local.json
 .claude/
+dist-*/

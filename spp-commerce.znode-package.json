@@ -1,0 +1,25 @@
+{
+  "name": "spp-commerce",
+  "version": "1.0.0",
+  "kind": "plugin",
+  "apiVersion": 1,
+  "label": "SPP commerce rules",
+  "publisher": "Spp Customization team",
+  "description": "Companion plugin of the spp-customization theme: B2B account bar, cart and checkout rules, and the store API routes the theme cannot take over.",
+  "license": "proprietary",
+  "keywords": ["plugin", "b2b", "cart"],
+  "permissions": [],
+  "compatibility": { "webstore": ">=10.0.0" },
+  "build": {
+    "browser": "src/commerce/browser.tsx"
+  },
+  "styles": ["src/commerce/styles/*.css"],
+  "settingsSchema": {
+    "showAccountBar": {
+      "type": "boolean",
+      "label": "Show the account bar above the header",
+      "browser": true,
+      "default": true
+    }
+  }
+}

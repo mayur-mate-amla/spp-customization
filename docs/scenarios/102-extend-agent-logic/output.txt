@@ -1,0 +1,14 @@
+> npm run inventory -- spp-commerce.znode-package.json   (the parts that act on agents)
+Package                                          spp-commerce@1.0.0 (plugin)   [spp-commerce.znode-package.json]
+Permissions                                      routes, cartHooks, znodeApi, externalNetwork, overrides
+Routes (/api/extensions/plugins/<name>/<route>)  activity, my-order, rep, erp-stock, delivery-estimate, sku-lookup, search-typeahead, quote-request, add-to-cart, place-order, quote-requests, stock-holds
+Cart hooks                                       beforeAddToCart, afterAddToCart, onCartChanged, mapCartItems
+Route overrides                                  /api/search/search-hydrated-typeahead, /api/contact-us, /api/add-to-cart, /api/place-order   [overrides]
+
+> npm run overrides -- POCSppDemo
+POCSppDemo: 5 store route(s) taken over
+  /api/store-locator  ->  /api/extensions/plugins/delivery-preference/store-locator
+  /api/search/search-hydrated-typeahead  ->  /api/extensions/plugins/spp-commerce/search-typeahead
+  /api/contact-us  ->  /api/extensions/plugins/spp-commerce/quote-request
+  /api/add-to-cart  ->  /api/extensions/plugins/spp-commerce/add-to-cart
+  /api/place-order  ->  /api/extensions/plugins/spp-commerce/place-order

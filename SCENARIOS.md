@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 89 |
+| ✅ Done | 90 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 47 |
+| ⬜ Not started | 46 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -214,7 +214,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 102 | Can I extend or update existing agent logic? | Partial | Check | Through hooks and overrides (80-82, 98) | ⬜ Not started | |
+| 102 | Can I extend or update existing agent logic? | Partial | Check | around the agents: input/output hooks, cart actions, overrides (refuse, wrap, replace), context.znode; map of rows | ✅ Done | [notes](102-extend-agent-logic/) |
 | 103 | Can I update an agent with a runtime package? | Partial | Check | Same as 102 | ⬜ Not started | |
 | 104 | Can I update an agent with an SWC build-time theme? | Yes | Outside | Store repo | ➖ Outside | |
 | 105 | Can I change agents called during server rendering? | No | Base | | ⛔ Blocked | |

@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 50 |
+| ✅ Done | 51 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 85 |
+| ⬜ Not started | 84 |
 | ⛔ Blocked | 40 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -154,7 +154,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 60 | Can I create a widget in a theme and use it for that theme or globally? | Yes | UI | Example: theme widgets on theme stores; spp-widgets package (Visit our showroom) on every store | ✅ Done | [notes](docs/scenarios/060-theme-or-global-widget/) |
 | 61 | Can a plugin carry a widget? | Yes | Check | Example: spp-commerce plugin's Your account manager widget, dropped on a redpanda store's page | ✅ Done | [notes](docs/scenarios/061-plugin-carries-widget/) |
 | 62 | Can I give a widget settings fields in the page builder? | Yes | UI | Example: Promotion banner with headline, details, discount, style, alignment fields | ✅ Done | [notes](docs/scenarios/062-widget-settings-fields/) |
-| 63 | Are text, textarea, number, select, radio, list, object and custom fields supported? | Yes | UI | One widget using every field type | ⬜ Not started | |
+| 63 | Are text, textarea, number, select, radio, list, object and custom fields supported? | Yes | UI | Example: Promotion banner with text, textarea, number, select, radio, list, object and custom (brand swatches) | ✅ Done | [notes](docs/scenarios/063-all-field-types/) |
 | 64 | Can a widget have default values? | Yes | UI | `defaultProps` | ⬜ Not started | |
 | 65 | Can a widget appear in its own editor category? | Yes | UI | `category: "Spp Customization"` | ⬜ Not started | |
 | 66 | Does the editor preview a widget live while editing? | Yes | Check | Needs the page-builder app running | ⬜ Not started | |

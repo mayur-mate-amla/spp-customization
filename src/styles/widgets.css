@@ -10,6 +10,16 @@
 .spp-customization-promo__text { flex: 1; min-width: 240px; }
 .spp-customization-promo__headline { margin: 0 0 6px; font-size: 30px; font-weight: 800; }
 .spp-customization-promo__details { margin: 0; font-size: 17px; opacity: 0.92; }
+.spp-customization-promo__perks { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 10px 0 0; padding: 0; list-style: none; font-weight: 600; }
+.spp-customization-promo__perks li::before { content: "✓ "; }
+.spp-customization-promo--center .spp-customization-promo__perks { justify-content: center; }
+.spp-customization-promo__button { flex: none; padding: 12px 24px; font-weight: 700; color: var(--primary, #0b2545); background: #fff; border-radius: 8px; }
+.spp-customization-promo--light .spp-customization-promo__button { color: #fff; background: var(--primary, #0b2545); }
+
+/* the Promotion banner's custom editor field: brand swatches */
+.spp-customization-swatches__label { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+.spp-customization-swatches { display: flex; gap: 10px; }
+.spp-customization-swatches__swatch { width: 32px; height: 32px; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 0 0 1px rgb(203, 213, 225); cursor: pointer; }
 
 /* SppFaq */
 .spp-customization-faq { max-width: 880px; margin: 40px auto; }

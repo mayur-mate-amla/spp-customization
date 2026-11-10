@@ -1,0 +1,35 @@
+# a rep's link: 302 to the page, Set-Cookie spp_rep (30 days)
+> curl -i ".../rep?code=JR&to=/category/1674"
+HTTP/1.1 302 Found
+set-cookie: themeName=custom1; Path=/; Expires=Wed, 10 Nov 2027 11:42:42 GMT; Max-Age=31536000; SameSite=lax
+set-cookie: DEFAULT_LOCALE=en-US; Path=/; SameSite=lax
+set-cookie: NEXT_LOCALE=en-US; Path=/; Expires=Wed, 10 Nov 2027 11:42:42 GMT; Max-Age=31536000; SameSite=lax
+set-cookie: UserLoggedInStatus=false; Path=/; SameSite=lax
+set-cookie: spp_rep=JR; Path=/; Max-Age=2592000; SameSite=Lax
+cache-control: no-store
+location: /category/1674
+
+# an unknown code: the redirect, no cookie
+> curl -i ".../rep?code=ZZ&to=/"
+HTTP/1.1 302 Found
+set-cookie: themeName=custom1; Path=/; Expires=Wed, 10 Nov 2027 11:42:42 GMT; Max-Age=31536000; SameSite=lax
+set-cookie: DEFAULT_LOCALE=en-US; Path=/; SameSite=lax
+set-cookie: NEXT_LOCALE=en-US; Path=/; Expires=Wed, 10 Nov 2027 11:42:42 GMT; Max-Age=31536000; SameSite=lax
+set-cookie: UserLoggedInStatus=false; Path=/; SameSite=lax
+location: /
+
+# another site as the target: refused, the store's home instead (no open redirect)
+> curl -i ".../rep?code=JR&to=//evil.example"
+HTTP/1.1 302 Found
+location: /
+
+# the hooks read it: follow the link, add a lanyard, read the activity (beforeAddToCart's context.cookies.get)
+> node scripts/cart-shot.mjs --visit "/api/extensions/plugins/spp-commerce/rep?code=JR&to=/" --add 103808:1 --route /api/extensions/plugins/spp-commerce/activity
+visited /api/extensions/plugins/spp-commerce/rep?code=JR&to=/ -> /
+{"sku":"81DRL","asked":1,"added":10,"rule":"case pack of 10","rep":"JR","cartNumber":"C-10112026-1116","ok":true}
+
+(the other set-cookie lines are the store's own, added by its proxy to every answer)
+
+> npx znode check spp-commerce.znode-package.json
+warning reads cookies in the browser: keep secrets on the server (routes)
+(expected: the account bar reads spp_rep, a rep code, not a secret)

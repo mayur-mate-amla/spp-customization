@@ -3,6 +3,7 @@
 .spp-commerce-account strong { color: #fff; }
 .spp-commerce-account__link { color: #fff; font-weight: 700; text-decoration: underline; }
 .spp-commerce-account__cart { color: rgb(148, 163, 184); }
+.spp-commerce-account__rep { margin-right: auto; padding-left: 16px; border-left: 1px solid rgba(255, 255, 255, 0.25); }
 .spp-commerce-account__order { display: flex; align-items: center; gap: 10px; color: rgb(226, 232, 240); }
 .spp-commerce-account__meter { display: inline-block; width: 120px; height: 6px; overflow: hidden; background: rgba(255, 255, 255, 0.18); border-radius: 999px; }
 .spp-commerce-account__meter span { display: block; height: 100%; background: rgb(74, 222, 128); border-radius: inherit; }

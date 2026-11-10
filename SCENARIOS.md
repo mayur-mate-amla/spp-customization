@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 73 |
+| ✅ Done | 74 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 63 |
+| ⬜ Not started | 62 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -188,7 +188,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 83 | Can a plugin fill slots in the page? | Yes | UI | spp-commerce fills product.card: case pack / minimum / limit tags from the cart-rule settings | ✅ Done | [notes](083-plugin-fills-slots/) |
 | 84 | Can a plugin transform data (listing data, popup data)? | Yes | UI | productList.data pins promoted SKUs first; addToCart.notificationData shows the case-pack quantity | ✅ Done | [notes](084-plugin-transforms/) |
 | 85 | Can a plugin read the shopper's cart and user? | Yes | UI | route my-order: context.cartNumber + context.znode cart lines + context.user; free-shipping meter in the account bar | ✅ Done | [notes](085-read-cart-and-user/) |
-| 86 | Can a plugin set cookies? | Partial | Check | Route answering with `Set-Cookie` | ⬜ Not started | |
+| 86 | Can a plugin set cookies? | Partial | Check | routes set cookies (Response + Set-Cookie: spp_rep rep link); hooks and browser read them; routes cannot read cookies | ✅ Done | [notes](086-plugin-sets-cookies/) |
 | 87 | Can a plugin store its own data (database)? | No | Base | | ⛔ Blocked | |
 | 88 | Can a plugin add labels and messages? | Yes | UI | New namespace in `labels.json` | ⬜ Not started | |
 | 89 | Can a plugin add a page with its own URL? | Partial | UI | `serverPages` (`/spp-customization-welcome` and a new one) | ⬜ Not started | |

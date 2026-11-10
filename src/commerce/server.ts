@@ -13,6 +13,8 @@ import { companionChanges, lineNotes, quantityRule, withNotes } from "./rules";
 //   mapCartItems     line notes (setting lineNotes): "Sold in cases of 10", "Minimum order 25", "Limit 5 per order"
 //                    under the lines they apply to, on the cart page and checkout
 //   routes.activity  GET /api/extensions/plugins/spp-commerce/activity: the store's last 20 adds and cart changes
+//   routes.rep       GET .../rep?code=JR&to=/category/1674: a sales rep's link. Sets the spp_rep cookie (30 days) for a
+//                    known rep (setting salesReps) and redirects; the account bar names the rep, adds are credited
 //   routes.my-order  GET /api/extensions/plugins/spp-commerce/my-order: the shopper's own cart (context.cartNumber, its
 //                    lines read from Znode with context.znode) and user (context.user): subtotal, the free-shipping
 //                    gap and, for a signed-in buyer, their name and budget; for the account bar
@@ -21,7 +23,11 @@ import { companionChanges, lineNotes, quantityRule, withNotes } from "./rules";
 // { cartNumber, lines: [{ id, sku, quantity, totalPrice, personalization }] } and actions addItem / removeLine.
 
 type ISkuLine = { sku?: string; quantity?: string | number };
-type IActivity = { at: string; sku: string; asked: number; added: number; rule: string; cartNumber?: string; ok?: boolean };
+type IActivity = { at: string; sku: string; asked: number; added: number; rule: string; cartNumber?: string; ok?: boolean; rep?: string };
+
+// the sales rep a shopper came through (routes.rep sets it from the rep's link; the browser and the cart hooks read it)
+const REP_COOKIE = "spp_rep";
+const REP_DAYS = 30;
 
 // per store (module scope is per store on the server); kept in memory: the last 20 adds and cart changes
 const activity = new Map<string, IActivity[]>();
@@ -55,13 +61,15 @@ async function beforeAddToCart(request: IRuntimeData, context: IRuntimeHookConte
   // a variant (configurable product) comes as its parent with the variant, and its quantity, in addToCartChildItems
   const lines = details.flatMap((line) => (Array.isArray(line.addToCartChildItems) && line.addToCartChildItems.length ? line.addToCartChildItems : [line]));
   const adds: IActivity[] = [];
+  // hooks get the shopper's cookies (routes do not): the rep this add is credited to
+  const rep = context.cookies.get(REP_COOKIE) || undefined;
   for (const line of lines) {
     const sku = String(line.sku || "");
     const asked = Number(line.quantity) || 0;
     const pack = packSize(context.settings, sku);
     const added = roundToPacks(asked, pack);
     if (added !== asked) line.quantity = typeof line.quantity === "string" ? String(added) : added;
-    adds.push({ at: new Date().toISOString(), sku, asked, added, rule: pack ? `case pack of ${pack}` : "" });
+    adds.push({ at: new Date().toISOString(), sku, asked, added, rule: pack ? `case pack of ${pack}` : "", ...(rep ? { rep } : {}) });
   }
   pending.set(context.store.code, adds);
   return request;
@@ -156,6 +164,23 @@ async function myOrder(_request: IPluginRouteRequest, context: IPluginRouteConte
   };
 }
 
+// A rep's link (in their emails and quotes): remember the rep for 30 days and go on to the page. A route answers with a
+// Response to set headers: here Set-Cookie and a redirect. Only a known rep code is kept, and only a path on this store
+// is followed (no open redirect).
+export function repRedirect(code: string, to: string, reps: Record<string, unknown>) {
+  const rep = code.trim().toUpperCase();
+  const target = /^\/(?!\/)[^\s\\]*$/.test(to) ? to : "/";
+  const headers = new Headers({ Location: target });
+  if (typeof reps[rep] === "string") headers.append("Set-Cookie", `${REP_COOKIE}=${encodeURIComponent(rep)}; Path=/; Max-Age=${REP_DAYS * 86400}; SameSite=Lax`);
+  return { status: 302, headers };
+}
+
+async function repRoute(request: IPluginRouteRequest, context: IPluginRouteContext) {
+  const reps = context.settings.salesReps && typeof context.settings.salesReps === "object" ? (context.settings.salesReps as Record<string, unknown>) : {};
+  const { status, headers } = repRedirect(String(request.query.code || ""), String(request.query.to || "/"), reps);
+  return new Response(null, { status, headers });
+}
+
 const plugin: IRuntimePlugin = {
   name: "spp-commerce",
   apiVersion: 1,
@@ -163,6 +188,7 @@ const plugin: IRuntimePlugin = {
   routes: {
     activity: async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ store: context.store.code, adds: activity.get(context.store.code) || [] }),
     "my-order": myOrder,
+    rep: repRoute,
   },
 };
 

@@ -14,7 +14,19 @@ const ROUTE = "/api/extensions/plugins/spp-commerce/my-order";
 
 type IMyOrder = { items: number; subtotal: number; freeShippingOver: number; remaining: number; user: { name: string; budget: number } | null };
 
-const money = (value: number) => `$${value.toFixed(2)}`;
+const money = (value: number) => `${value.toFixed(2)}`;
+
+// the rep the shopper came through: the spp_rep cookie the plugin's rep route sets (read after the page has loaded,
+// so the server's and the browser's first render agree)
+function useRep() {
+  const [rep, setRep] = useState("");
+  useEffect(() => {
+    const code = decodeURIComponent(document.cookie.match(/(?:^|;\s*)spp_rep=([^;]*)/)?.[1] || "");
+    const reps = settings.salesReps && typeof settings.salesReps === "object" ? (settings.salesReps as Record<string, unknown>) : {};
+    setRep(typeof reps[code] === "string" ? (reps[code] as string) : "");
+  }, []);
+  return rep;
+}
 
 function useMyOrder(count: number) {
   const [order, setOrder] = useState<IMyOrder | null>(null);
@@ -35,6 +47,7 @@ export function AccountBar(props: { children?: ReactNode }) {
   const sessionUser = host?.stores.useUser() ?? null;
   const count = host?.stores.useCartCount() ?? 0;
   const order = useMyOrder(count);
+  const rep = useRep();
   if (settings.showAccountBar === false) return <>{props.children}</>;
   const name = order?.user?.name || sessionUser?.userName;
   const meter = order && order.freeShippingOver > 0 && order.items > 0;
@@ -53,6 +66,11 @@ export function AccountBar(props: { children?: ReactNode }) {
               Sign in
             </Link>{" "}
             to see your account pricing
+          </span>
+        )}
+        {rep && (
+          <span className="spp-commerce-account__rep" data-test-selector="divSalesRep">
+            Your rep: <strong>{rep}</strong>
           </span>
         )}
         {meter ? (

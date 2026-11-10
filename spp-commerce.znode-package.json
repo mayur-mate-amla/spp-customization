@@ -91,6 +91,15 @@
       "browser": true,
       "default": 100
     },
+    "salesReps": {
+      "type": "object",
+      "label": "Sales reps by code: { \"JR\": \"Jordan Rivera\" } (their links: /api/extensions/plugins/spp-commerce/rep?code=JR&to=/)",
+      "browser": true,
+      "default": {
+        "JR": "Jordan Rivera",
+        "MP": "Maya Patel"
+      }
+    },
     "showAccountBar": {
       "type": "boolean",
       "label": "Show the account bar above the header",

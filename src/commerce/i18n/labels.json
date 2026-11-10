@@ -16,7 +16,12 @@
       "minimum": "Min. order {count}",
       "limit": "Max {count} per order",
       "onHold": "Temporarily out of stock",
-      "onHoldUntil": "Out until {date}"
+      "onHoldUntil": "Out until {date}",
+      "deliverTo": "Deliver to",
+      "checkDelivery": "Check",
+      "arrivesBy": "Arrives by <b>{date}</b> to {place}",
+      "zipInvalid": "Enter a 5-digit ZIP code",
+      "deliveryUnavailable": "Delivery dates are not available right now"
     }
   }
 }

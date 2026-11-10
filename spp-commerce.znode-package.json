@@ -15,7 +15,8 @@
   "permissions": [
     "routes",
     "cartHooks",
-    "znodeApi"
+    "znodeApi",
+    "externalNetwork"
   ],
   "compatibility": {
     "webstore": ">=10.0.0"
@@ -114,6 +115,11 @@
       "type": "string",
       "label": "Shared secret the ERP signs its stock webhooks with (X-Erp-Signature: sha256=<HMAC of the body>); empty: the webhook takes nothing",
       "default": ""
+    },
+    "shipCutoffHour": {
+      "type": "number",
+      "label": "Orders placed before this hour (warehouse time, Central) ship the same business day",
+      "default": 14
     }
   }
 }

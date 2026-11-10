@@ -1,0 +1,16 @@
+# the BFF route (on 2026-11-10T12:16Z, before the 2pm Central cutoff)
+> GET .../delivery-estimate?zip=53202
+{"zip":"53202","city":"Milwaukee","state":"WI","transitDays":1,"shipsOn":"2026-11-10","arrivesBy":"2026-11-11"}  (HTTP 200)
+> GET .../delivery-estimate?zip=90012
+{"zip":"90012","city":"Los Angeles","state":"CA","transitDays":5,"shipsOn":"2026-11-10","arrivesBy":"2026-11-17"}  (HTTP 200)
+> GET .../delivery-estimate?zip=60601
+{"zip":"60601","city":"Chicago","state":"IL","transitDays":2,"shipsOn":"2026-11-10","arrivesBy":"2026-11-12"}  (HTTP 200)
+> GET .../delivery-estimate?zip=00000
+{"error":"Unknown ZIP code"}  (HTTP 404)
+> GET .../delivery-estimate?zip=12ab
+{"error":"A 5-digit US ZIP code"}  (HTTP 400)
+
+# the date logic with node alone (src/commerce/delivery.ts)
+transitDays: WI 1 | IL 2 | CA 5
+Tue 10:00 Central + 3 days  {"shipsOn":"2026-11-10","arrivesBy":"2026-11-13"}
+Fri 15:00 Central + 2 days  {"shipsOn":"2026-11-16","arrivesBy":"2026-11-18"}  (after the cutoff: ships Monday)

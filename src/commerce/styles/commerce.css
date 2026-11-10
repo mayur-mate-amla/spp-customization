@@ -44,3 +44,11 @@
 .spp-commerce-info__table thead th { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(100, 116, 139); }
 .spp-commerce-info__note { margin-top: 10px; font-size: 14px; color: rgb(100, 116, 139); }
 .spp-commerce-info__reps li { margin-bottom: 6px; }
+
+/* product page: Deliver to [ZIP] (product.addToCart slot) */
+.spp-commerce-delivery { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; font-size: 14px; }
+.spp-commerce-delivery label { font-weight: 600; }
+.spp-commerce-delivery input { width: 84px; padding: 6px 8px; border: 1px solid rgb(203, 213, 225); border-radius: 4px; }
+.spp-commerce-delivery button { padding: 6px 12px; font-weight: 600; border: 1px solid currentColor; border-radius: 4px; background: #fff; }
+.spp-commerce-delivery button:disabled { opacity: 0.6; }
+.spp-commerce-delivery__result { flex-basis: 100%; min-height: 1.4em; margin: 0; color: rgb(21, 128, 61); }

@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 78 |
+| ✅ Done | 79 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 58 |
+| ⬜ Not started | 57 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -200,7 +200,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 93 | Can I add a new BFF layer or call any new API? | Yes | Check | Route calling an API, called from the browser part | ⬜ Not started | |
+| 93 | Can I add a new BFF layer or call any new API? | Yes | Check | PDP Deliver to ZIP: browser -> spp-commerce route delivery-estimate -> zippopotam.us (server) -> date | ✅ Done | [notes](093-new-bff-layer/) |
 | 94 | Can I create a new BFF API? | Yes | Check | New route `GET /api/extensions/plugins/spp-customization/<route>` | ⬜ Not started | |
 | 95 | Can a plugin call the Znode API with the store's headers? | Yes | Check | Route using `context.znode(...)` (`znodeApi` permission) | ⬜ Not started | |
 | 96 | Can a plugin call an external API from the server? | Yes | Check | Route calling a public API (`externalNetwork` permission) | ⬜ Not started | |

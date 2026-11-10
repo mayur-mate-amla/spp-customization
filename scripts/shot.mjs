@@ -85,6 +85,14 @@ try {
     await page.keyboard.press(String(press));
     await new Promise((resolve) => setTimeout(resolve, 500));
   }
+  // --type "<selector>=<text>": type into a field first (e.g. a ZIP code), before --click
+  const typed = arg("type");
+  if (typed && typed !== true) {
+    const at = String(typed).indexOf("=");
+    const field = String(typed).slice(0, at);
+    await page.waitForSelector(field, { timeout: 20000 });
+    await page.type(field, String(typed).slice(at + 1), { delay: 30 });
+  }
   // --click <selector>: click an element (e.g. Add to cart), then wait --after ms for what it opens
   const click = arg("click");
   if (click && click !== true) {

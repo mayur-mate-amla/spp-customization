@@ -1,6 +1,7 @@
 import type { ICartHookContext, IPluginRouteContext, IPluginRouteRequest, IRuntimeData, IRuntimeHookContext, IRuntimePlugin } from "znode-plugin/types/extension-api";
 import { companionChanges, lineNotes, quantityRule, withNotes } from "./rules";
 import { OrderingInfoPage } from "./OrderingInfoPage";
+import { arrivalDate, lookupZip, transitDays, type IPlace } from "./delivery";
 
 // spp-commerce, server part (runs on the store's server only).
 //   beforeAddToCart  case packs: an item sold in packs (setting casePacks: { "<sku>": <pack size> }) is rounded up to
@@ -18,6 +19,7 @@ import { OrderingInfoPage } from "./OrderingInfoPage";
 //   routes.rep       GET .../rep?code=JR&to=/category/1674: a sales rep's link. Sets the spp_rep cookie (30 days) for a
 //                    known rep (setting salesReps) and redirects; the account bar names the rep, adds are credited
 //   routes.erp-stock POST, a signed webhook from the ERP: stock holds ("out until Dec 1"); routes.stock-holds lists them
+//   routes.delivery-estimate  GET ?zip=: the delivery date to a ZIP (city and state from a public ZIP API, server side)
 //   routes.my-order  GET /api/extensions/plugins/spp-commerce/my-order: the shopper's own cart (context.cartNumber, its
 //                    lines read from Znode with context.znode) and user (context.user): subtotal, the free-shipping
 //                    gap and, for a signed-in buyer, their name and budget; for the account bar
@@ -219,6 +221,26 @@ async function erpStock(request: IPluginRouteRequest, context: IPluginRouteConte
   return json(200, { ok: true, sku: event.sku, onHold: !event.available, holds: holds.size });
 }
 
+// ---- Delivery estimate: a BFF route over an outside API (row 093) -------------------------------------------------
+// GET .../delivery-estimate?zip=53202 -> { zip, city, state, transitDays, shipsOn, arrivesBy }; 400 for a ZIP that is
+// not five digits, 404 for one that does not exist, 502 when the ZIP API cannot be reached. The browser never calls
+// the ZIP API itself: the route chooses what goes out (the ZIP only) and what comes back.
+async function deliveryEstimate(request: IPluginRouteRequest, context: IPluginRouteContext) {
+  const json = (status: number, data: unknown) => new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
+  const zip = String(request.query.zip || "").trim();
+  if (!/^\d{5}$/.test(zip)) return json(400, { error: "A 5-digit US ZIP code" });
+  let place: IPlace | null;
+  try {
+    place = await lookupZip(zip);
+  } catch {
+    return json(502, { error: "Delivery dates are not available right now" });
+  }
+  if (!place) return json(404, { error: "Unknown ZIP code" });
+  const days = transitDays(place);
+  const cutoff = Number(context.settings.shipCutoffHour) || 14;
+  return { zip, city: place.city, state: place.state, transitDays: days, ...arrivalDate(new Date(), days, cutoff) };
+}
+
 const plugin: IRuntimePlugin = {
   name: "spp-commerce",
   apiVersion: 1,
@@ -235,6 +257,7 @@ const plugin: IRuntimePlugin = {
     "my-order": myOrder,
     rep: repRoute,
     "erp-stock": erpStock,
+    "delivery-estimate": deliveryEstimate,
     "stock-holds": async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ holds: [...(stockHolds.get(context.store.code)?.values() || [])] }),
   },
 };

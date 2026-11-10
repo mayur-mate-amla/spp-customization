@@ -5,6 +5,7 @@ import { ProductBadge } from "./slots/ProductBadge.js";
 import { SearchWithPopular } from "./slots/SearchWithPopular.js";
 import { CustomizeToOrder } from "./slots/CustomizeToOrder.js";
 import { FooterHelp } from "./slots/FooterHelp.js";
+import { ProductListing } from "./slots/ProductListing.js";
 import { Hero, HERO_EDITOR } from "./widgets/Hero.js";
 import { Testimonials, TESTIMONIALS_EDITOR } from "./widgets/Testimonials.js";
 
@@ -28,6 +29,8 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
       "product.addToCart": CustomizeToOrder,
       // "Need help?" contact and payments band above the store's footer
       "layout.footer": FooterHelp,
+      // the listing with the theme's own product card (the store's listing card has no slot on this theme)
+      "productList.layout": ProductListing,
     },
     widgets: {
       SppCustomizationHero: { render: Hero, ...HERO_EDITOR },

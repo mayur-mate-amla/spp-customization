@@ -96,6 +96,12 @@
       "browser": true,
       "default": "Mon-Fri, 8am-6pm ET"
     },
+    "themeCards": {
+      "type": "boolean",
+      "label": "Listings use the theme's product card (single-page listings; paged ones keep the store's)",
+      "browser": true,
+      "default": true
+    },
     "showBadge": {
       "type": "boolean",
       "label": "Show the New badge on product cards",

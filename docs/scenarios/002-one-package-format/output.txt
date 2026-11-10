@@ -1,0 +1,14 @@
+$ node -e (znode-package.json kind, name, version, apiVersion)
+{
+  kind: 'theme',
+  name: 'spp-customization',
+  version: '1.0.0',
+  apiVersion: 1
+}
+
+$ npm run check
+
+> spp-customization@1.0.0 check
+> znode check .
+
+check spp-customization@1.0.0: 0 errors, 0 warnings

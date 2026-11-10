@@ -22,6 +22,7 @@ import { envelope, readQuoteRequest, type IQuoteRequest } from "./quotes";
 //   routes.erp-stock POST, a signed webhook from the ERP: stock holds ("out until Dec 1"); routes.stock-holds lists them
 //   routes.delivery-estimate  GET ?zip=: the delivery date to a ZIP (city and state from a public ZIP API, server side)
 //   overrides        /api/search/search-hydrated-typeahead -> search-typeahead: synonyms and a sourcing link (row 098)
+//   overrides        /api/place-order -> place-order: an order under the minimum order value is refused (row 107)
 //   overrides        /api/add-to-cart -> add-to-cart: items on an ERP stock hold are refused, the rest is the store's (row 109)
 //   overrides        /api/contact-us -> quote-request: replaced, a quote request for the shopper's rep (row 099)
 //   routes.my-order  GET /api/extensions/plugins/spp-commerce/my-order: the shopper's own cart (context.cartNumber, its
@@ -160,27 +161,66 @@ const pick = (line: IZnodeLine, ...keys: string[]) => {
   return undefined;
 };
 
-async function myOrder(_request: IPluginRouteRequest, context: IPluginRouteContext) {
-  const freeOver = Number(context.settings.freeShippingOver) || 0;
-  const user = context.user ? { name: context.user.userName, budget: context.user.budgetAmount || 0, account: context.user.accountCode || "" } : null;
+// a cart's lines from Znode (the cart page agent's call) and their totals; no lines for no cart or an unknown one
+async function cartTotals(context: IPluginRouteContext, cartNumber: string) {
   let lines: IZnodeLine[] = [];
-  if (context.cartNumber) {
-    const answer = await context.znode(`commerceapi/v1/Carts/item-list/${encodeURIComponent(context.cartNumber)}`);
+  if (cartNumber) {
+    const answer = await context.znode(`commerceapi/v1/Carts/item-list/${encodeURIComponent(cartNumber)}`);
     const data = (answer.data || {}) as Record<string, unknown>;
     const list = data.ItemList ?? data.itemList;
     lines = answer.status === 200 && Array.isArray(list) ? (list as IZnodeLine[]) : [];
   }
   const items = lines.reduce((sum, line) => sum + (Number(pick(line, "Quantity", "quantity")) || 0), 0);
   const subtotal = Math.round(lines.reduce((sum, line) => sum + (Number(pick(line, "ExtendedPrice", "extendedPrice", "TotalPrice", "totalPrice")) || 0), 0) * 100) / 100;
+  return { lines: lines.length, items, subtotal };
+}
+
+const money = (value: number) => `$${value.toFixed(2)}`;
+
+/** What is missing to reach the store's minimum order value (setting minOrderValue), 0 when there is none or it is met. */
+export function belowMinimumOrder(subtotal: number, minimum: number) {
+  return minimum > 0 && subtotal < minimum ? Math.round((minimum - subtotal) * 100) / 100 : 0;
+}
+
+async function myOrder(_request: IPluginRouteRequest, context: IPluginRouteContext) {
+  const freeOver = Number(context.settings.freeShippingOver) || 0;
+  const minimum = Number(context.settings.minOrderValue) || 0;
+  const user = context.user ? { name: context.user.userName, budget: context.user.budgetAmount || 0, account: context.user.accountCode || "" } : null;
+  const { lines, items, subtotal } = await cartTotals(context, context.cartNumber);
   return {
     cartNumber: context.cartNumber || null,
-    lines: lines.length,
+    lines,
     items,
     subtotal,
     freeShippingOver: freeOver,
     remaining: freeOver ? Math.max(0, Math.round((freeOver - subtotal) * 100) / 100) : 0,
+    minOrderValue: minimum,
+    toMinimum: belowMinimumOrder(subtotal, minimum),
     user,
   };
+}
+
+// ---- Place order: a check before the store's agent (row 107) -----------------------------------------------------
+// "overrides": { "/api/place-order": "place-order" }. An order (orderType "Order"; quotes are not affected) whose cart is
+// under the store's minimum order value (setting minOrderValue) is refused in the store's answer shape
+// ({ isSuccess: false, hasError: true, errorMessage }: the checkout shows its "failed to create" message and stays);
+// any other request goes to the store's own place-order route with its body (context.original({ body })), unchanged.
+// The cart is read from Znode, not from the request, so a changed request cannot get round the minimum.
+async function placeOrderGuard(request: IPluginRouteRequest, context: IPluginRouteContext) {
+  const json = (status: number, data: unknown) => new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
+  const body = (request.body && typeof request.body === "object" ? request.body : {}) as { cartNumber?: string; orderType?: string };
+  const minimum = Number(context.settings.minOrderValue) || 0;
+  if (String(body.orderType || "").toLowerCase() === "order" && minimum > 0) {
+    const { subtotal } = await cartTotals(context, String(body.cartNumber || context.cartNumber || ""));
+    const missing = belowMinimumOrder(subtotal, minimum);
+    if (missing) {
+      const errorMessage = `Orders start at ${money(minimum)}. Your order is ${money(subtotal)}: add ${money(missing)} to check out.`;
+      record(context.store.code, [{ at: new Date().toISOString(), sku: "-", asked: 0, added: 0, rule: `order refused: ${money(subtotal)} under the ${money(minimum)} minimum`, cartNumber: String(body.cartNumber || ""), ok: false }]);
+      return json(200, envelope({ isSuccess: false, hasError: true, errorMessage, minOrderValue: minimum, subtotal }, errorMessage));
+    }
+  }
+  const answer = await context.original({ body: request.body });
+  return json(answer.status, answer.data);
 }
 
 // A rep's link (in their emails and quotes): remember the rep for 30 days and go on to the page. A route answers with a
@@ -424,6 +464,7 @@ const plugin: IRuntimePlugin = {
     "search-typeahead": searchTypeahead,
     "quote-request": quoteRequest,
     "add-to-cart": addToCartGuard,
+    "place-order": placeOrderGuard,
     "quote-requests": quoteRequestList,
     "stock-holds": async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ holds: [...(stockHolds.get(context.store.code)?.values() || [])] }),
   },

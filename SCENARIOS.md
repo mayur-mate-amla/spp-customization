@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 88 |
+| ✅ Done | 89 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 48 |
+| ⬜ Not started | 47 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -219,7 +219,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 104 | Can I update an agent with an SWC build-time theme? | Yes | Outside | Store repo | ➖ Outside | |
 | 105 | Can I change agents called during server rendering? | No | Base | | ⛔ Blocked | |
 | 106 | Can I change add-to-cart logic? | Yes | UI | beforeAddToCart: superseded SKU 200341843 -> 81DRL before case packs; a hook cannot refuse an add | ✅ Done | [notes](106-change-add-to-cart/) |
-| 107 | Can I change place-order logic? | Partial | Check | Override of `/api/place-order` | ⬜ Not started | |
+| 107 | Can I change place-order logic? | Partial | Check | override /api/place-order: order under minOrderValue ($25, from Znode's cart) refused in the store's shape; rest via original({ body }) | ✅ Done | [notes](107-place-order-logic/) |
 | 108 | Can I change pricing, tax or promotion calculation? | No | Base | | ⛔ Blocked | |
 | 109 | Can I change inventory checks? | Partial | Check | override /api/add-to-cart: ERP-held items refused, rest via original({ body }); original() sends no body unless passed | ✅ Done | [notes](109-inventory-checks/) |
 

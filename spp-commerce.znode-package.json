@@ -43,7 +43,8 @@
   "overrides": {
     "/api/search/search-hydrated-typeahead": "search-typeahead",
     "/api/contact-us": "quote-request",
-    "/api/add-to-cart": "add-to-cart"
+    "/api/add-to-cart": "add-to-cart",
+    "/api/place-order": "place-order"
   },
   "settingsSchema": {
     "replacedSkus": {
@@ -110,6 +111,12 @@
       "label": "Free shipping over this subtotal (0: no free-shipping meter)",
       "browser": true,
       "default": 100
+    },
+    "minOrderValue": {
+      "type": "number",
+      "label": "Minimum order value (subtotal); an order under it is refused at checkout (0: none)",
+      "browser": true,
+      "default": 25
     },
     "salesReps": {
       "type": "object",

@@ -351,7 +351,8 @@ repository joins it. Commits are on `main` of this repository.
 | 100 | Overrides only where the plugin is enabled | 868861a | store routes | §2 B placement, §7 B.4 `findRouteOverride` | scripts/overrides.mjs |
 | 101 | 64 KB body limit for plugin routes | 97284d9 | – | §7 B.5 `readLimited` (413) | src/commerce/quotes.ts, src/commerce/widgets/QuoteRequest.tsx |
 | 106 | Change add-to-cart logic (superseded item numbers) | 97a4fcf | §6 A add-to-cart agent | §6 B `beforeAddToCart` | src/commerce/rules.ts, src/commerce/server.ts |
-| 109 | Inventory check before the agent (ERP holds) | (this commit) | §6 A add-to-cart route + agent | §7 B.4 override + `original({ body })`, §5 B notice | src/commerce/server.ts, src/commerce/holds.ts |
+| 107 | Place-order logic (minimum order value) | (this commit) | §7 A place-order route + agent | §7 B.4 override, refusal or `original({ body })`; §8 B bar | src/commerce/server.ts, src/commerce/slots/AccountBar.tsx |
+| 109 | Inventory check before the agent (ERP holds) | ea907c3 | §6 A add-to-cart route + agent | §7 B.4 override + `original({ body })`, §5 B notice | src/commerce/server.ts, src/commerce/holds.ts |
 | 079 | Complex plugin (spp-commerce, the sum of 080-091) | 2c5d1a0 | §1-§9 A | §2 B placement; every B section | src/commerce/* |
 | 080 | Before/after add to cart (case packs) | 1052a6b | §6 | §6 B (request hooks), §7 B.5 route | src/commerce/server.ts |
 | 081 | React to cart changes (order limit) | 6d7c25f | §7 | §7 B.1 (`runCartHooks`) | src/commerce/server.ts, src/commerce/rules.ts |

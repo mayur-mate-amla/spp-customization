@@ -1,0 +1,9 @@
+# a new cart: 1 lanyard (a case of 10, $12.50); then, from the same browser, the store's own place-order route
+# (node place-order-check.mjs: only for a cart under the minimum, so nothing reaches Znode's order logic)
+﻿cart C-10112026-1126
+> GET .../my-order
+{"cartNumber":"C-10112026-1126","lines":1,"items":10,"subtotal":12.5,"freeShippingOver":100,"remaining":87.5,"minOrderValue":25,"toMinimum":12.5,"user":null}
+> POST /api/place-order {"cartNumber":"C-10112026-1126","orderType":"Order",...}
+{"status":"success","message":"Orders start at $25.00. Your order is $12.50: add $12.50 to check out.","data":{"isSuccess":false,"hasError":true,"errorMessage":"Orders start at $25.00. Your order is $12.50: add $12.50 to check out.","minOrderValue":25,"subtotal":12.5}}  (HTTP 200)
+> activity (last)
+[{"at":"2026-11-10T12:51:31.431Z","sku":"-","asked":0,"added":0,"rule":"order refused: $12.50 under the $25.00 minimum","cartNumber":"C-10112026-1126","ok":false}]

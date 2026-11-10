@@ -14,7 +14,7 @@ import { host, settings } from "../host.js";
 
 const ROUTE = "/api/extensions/plugins/spp-commerce/my-order";
 
-type IMyOrder = { items: number; subtotal: number; freeShippingOver: number; remaining: number; user: { name: string; budget: number } | null };
+type IMyOrder = { items: number; subtotal: number; freeShippingOver: number; remaining: number; minOrderValue?: number; toMinimum?: number; user: { name: string; budget: number } | null };
 
 const money = (value: number) => `$${value.toFixed(2)}`;
 // <b> in the labels: bold
@@ -82,7 +82,8 @@ export function AccountBar(props: { children?: ReactNode }) {
           <span className="spp-commerce-account__order" data-test-selector="divFreeShippingMeter">
             <span>
               {t.rich("inYourOrder", { amount: money(order.subtotal), b })} ·{" "}
-              {order.remaining > 0 ? t.rich("addForFreeShipping", { amount: money(order.remaining), b }) : t.rich("shipsFree", { b })}
+              {/* under the minimum order value (row 107): what is missing to check out comes first */}
+              {order.toMinimum ? t.rich("addForMinimum", { amount: money(order.toMinimum), minimum: money(order.minOrderValue || 0), b }) : order.remaining > 0 ? t.rich("addForFreeShipping", { amount: money(order.remaining), b }) : t.rich("shipsFree", { b })}
             </span>
             <span className="spp-commerce-account__meter" role="progressbar" aria-label={t("towardFreeShipping")} aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress}>
               <span style={{ width: `${progress}%` }} />

@@ -1,0 +1,82 @@
+{
+  "root": {
+    "props": {
+      "contentWidth": "store"
+    }
+  },
+  "content": [
+    {
+      "type": "HeroBanner",
+      "props": {
+        "id": "HeroBanner-spp-customization-spring-pro",
+        "image": "/api/extensions/files/spp-customization-campaign-hero.svg",
+        "imageAlt": "",
+        "frame": "",
+        "height": 420,
+        "eyebrow": "Spring Pro Event",
+        "title": "Gear up for the season",
+        "titleHighlight": "Up to 25% off pro tools",
+        "subtitle": "Account pricing on **every order**, free shipping over $2,500.",
+        "buttonText": "Shop tools",
+        "buttonUrl": "/tools",
+        "secondaryLinkText": "See all departments",
+        "secondaryLinkUrl": "/brand/list",
+        "contentAlign": "left",
+        "overlay": "none",
+        "textColor": "#ffffff",
+        "buttonColor": "#f26b1d"
+      }
+    },
+    {
+      "type": "PromoCodeStrip",
+      "props": {
+        "id": "PromoCodeStrip-spp-customization-pro15",
+        "title": "Extra 15% off your first online order",
+        "text": "Use code:",
+        "code": "PRO15",
+        "suffix": "at checkout",
+        "buttonText": "Copy code",
+        "background": "#fff4ec",
+        "buttonColor": "#f26b1d",
+        "codeColor": "#0b2545"
+      }
+    },
+    {
+      "type": "CardGrid",
+      "props": {
+        "id": "CardGrid-spp-customization-departments",
+        "heading": "Shop by department",
+        "headingLevel": "h2",
+        "linkText": "All brands",
+        "linkUrl": "/brand/list",
+        "columns": 4,
+        "accentColor": "#f26b1d",
+        "cards": [
+          { "title": "Power tools", "image": "/api/extensions/files/spp-customization-tile-tools.svg", "url": "/tools" },
+          { "title": "Electrical", "image": "/api/extensions/files/spp-customization-tile-electrical.svg", "url": "/electrical" },
+          { "title": "Plumbing", "image": "/api/extensions/files/spp-customization-tile-plumbing.svg", "url": "/plumbing" },
+          { "title": "Workwear", "image": "/api/extensions/files/spp-customization-tile-workwear.svg", "url": "/workwear" }
+        ]
+      }
+    },
+    {
+      "type": "DeliveryDates",
+      "props": {
+        "id": "DeliveryDates-spp-customization-spring",
+        "heading": "Need it on site? Order by these dates",
+        "text": "Standard ground shipping, in-stock items, contiguous US.",
+        "orderByLabel": "Order by:",
+        "receiveByLabel": "Receive by:",
+        "rows": [
+          { "orderBy": "Mon, Mar 9", "receiveBy": "Fri, Mar 13" },
+          { "orderBy": "Mon, Mar 16", "receiveBy": "Fri, Mar 20" },
+          { "orderBy": "Mon, Mar 23", "receiveBy": "Fri, Mar 27" }
+        ],
+        "background": "#f4f6f9",
+        "textColor": "#0b2545",
+        "tableHeaderBg": "#0b2545"
+      }
+    }
+  ],
+  "zones": {}
+}

@@ -2,6 +2,7 @@
   "name": "spp-customization",
   "version": "1.0.2",
   "kind": "theme",
+  "parent": "spp-base",
   "apiVersion": 1,
   "label": "Spp Customization",
   "publisher": "Spp Customization team",
@@ -18,6 +19,7 @@
   "assets": ["src/assets/*"],
   "messages": "src/i18n/labels.json",
   "widgets": ["SppCustomizationHero"],
+  "pages": { "/": "src/pages/home.json" },
   "serverPages": ["/spp-customization-welcome"],
   "settingsSchema": {
     "accentColor": {

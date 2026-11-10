@@ -1,5 +1,5 @@
 import { cloneElement, isValidElement, useEffect, useState, type ReactElement, type ReactNode } from "react";
-import { useTranslations } from "next-intl";
+import { useSppTranslations } from "../i18n.js";
 import { shippingChoices } from "../rules.js";
 import { settings } from "../host.js";
 
@@ -29,7 +29,7 @@ function useCartSkus() {
 }
 
 export function CheckoutShipping(props: { children?: ReactNode; shippingOptions?: IOption[] }) {
-  const t = useTranslations("Common.sppCommerce");
+  const t = useSppTranslations();
   const skus = useCartSkus();
   const options = Array.isArray(props.shippingOptions) ? props.shippingOptions : [];
   const { kept, removed } = shippingChoices(options, skus, map("productionDays"), Array.isArray(settings.rushShipping) ? settings.rushShipping : []);

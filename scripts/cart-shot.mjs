@@ -5,6 +5,7 @@
 //   --add <productId>:<qty>  opens the product page, sets the quantity, clicks "Add to cart" (in order)
 //   --remove <productId>     on the cart page, removes that product's line (the id in its cart-row selectors), then reads
 //                            the cart again
+//   --cart <path>            the cart page to show (default /cart; /fr-FR/cart for the French store)
 //   --route <path>           also prints what GET <path> answers (e.g. a plugin route) after the cart is shown
 // STORE_URL picks the store (default http://sppdemo.localhost:3000). Each run is a new browser, so a new cart.
 import puppeteer from "puppeteer-core";
@@ -49,7 +50,7 @@ try {
   }
 
   const showCart = async () => {
-    await page.goto(`${store}/cart`, { waitUntil: "load", timeout: 120000 });
+    await page.goto(`${store}${one("--cart", "/cart")}`, { waitUntil: "load", timeout: 120000 });
     await page.waitForSelector("[data-test-selector^=paraOrderRowTotal]", { timeout: 60000 }).catch(() => undefined);
     await wait(4000);
   };

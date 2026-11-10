@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useTranslations } from "next-intl";
+import { useSppTranslations } from "../i18n.js";
 import { ruleFacts } from "../rules.js";
 import { settings } from "../host.js";
 import { shortDate, useHold } from "../holds.js";
@@ -17,7 +17,7 @@ type IProduct = { sku?: string; SKU?: string; publishProductId?: number };
 const map = (key: string) => (settings[key] && typeof settings[key] === "object" ? (settings[key] as Record<string, unknown>) : {});
 
 export function RuleTags(props: { children?: ReactNode; product?: IProduct }) {
-  const t = useTranslations("Common.sppCommerce");
+  const t = useSppTranslations();
   const sku = String(props.product?.sku || props.product?.SKU || "");
   const hold = useHold(settings.cardTags === false ? "" : sku);
   const facts = settings.cardTags === false || !sku ? [] : ruleFacts(sku, map("casePacks"), map("orderLimits"), map("minimums"));

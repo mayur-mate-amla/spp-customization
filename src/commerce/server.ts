@@ -1,5 +1,5 @@
 import type { ICartHookContext, IPluginRouteContext, IPluginRouteRequest, IRuntimeData, IRuntimeHookContext, IRuntimePlugin } from "znode-plugin/types/extension-api";
-import { companionChanges, lineNotes, quantityRule, replacedBy, withNotes } from "./rules";
+import { companionChanges, lineNotes, noteLanguage, quantityRule, replacedBy, withNotes } from "./rules";
 import { OrderingInfoPage } from "./OrderingInfoPage";
 import { EventKitsPage } from "./EventKitsPage";
 import { arrivalDate, lookupZip, transitDays, type IPlace } from "./delivery";
@@ -41,7 +41,7 @@ const REP_COOKIE = "spp_rep";
 const REP_DAYS = 30;
 // the ZIP the shopper gave on a product page (DeliveryEstimate sets it), for the cart lines' delivery dates (row 112)
 const ZIP_COOKIE = "spp_zip";
-const shortDay = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" });
+const shortDay = (iso: string, locale = "en-US") => new Date(`${iso}T12:00:00Z`).toLocaleDateString(locale, { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" });
 
 // per store (module scope is per store on the server); kept in memory: the last 20 adds and cart changes
 const activity = new Map<string, IActivity[]>();
@@ -117,8 +117,16 @@ async function onCartChanged({ store, cart, settings, actions }: ICartHookContex
   for (const line of cart.lines) {
     const fix = quantityRule(line.sku, line.quantity, minimums, limits);
     if (!fix) continue;
-    const removed = await actions.removeLine(line.id);
-    const added = removed && (await actions.addItem({ sku: line.sku, quantity: fix.quantity, personalization: line.personalization }));
+    let added = false;
+    if (fix.quantity > line.quantity) {
+      // a minimum: add the missing quantity to the line; nothing is removed, so nothing can be lost (row 139)
+      added = await actions.addItem({ sku: line.sku, quantity: fix.quantity - line.quantity, personalization: line.personalization });
+    } else if (await actions.removeLine(line.id)) {
+      // a limit: no "set quantity" action, so remove and add again at the limit; if that add fails (an item the
+      // catalog of this language does not have, row 139), put the line back as it was
+      added = await actions.addItem({ sku: line.sku, quantity: fix.quantity, personalization: line.personalization });
+      if (!added) await actions.addItem({ sku: line.sku, quantity: line.quantity, personalization: line.personalization });
+    }
     record(store.code, [{ at: new Date().toISOString(), sku: line.sku, asked: line.quantity, added: fix.quantity, rule: fix.rule, cartNumber: cart.cartNumber, ok: Boolean(added) }]);
   }
 
@@ -148,7 +156,7 @@ async function onCartChanged({ store, cart, settings, actions }: ICartHookContex
 // set by the "Deliver to" box; hooks read cookies, routes do not), each line says when it arrives: ground days from
 // the warehouse plus the item's production days (setting productionDays: decorated items take longer), counted from
 // the ship day. Without a ZIP, or when the ZIP API cannot be reached, the lines have no date: the cart works as before.
-async function deliveryNotes(context: IRuntimeHookContext) {
+async function deliveryNotes(context: IRuntimeHookContext, language: string) {
   const zip = String(context.cookies.get(ZIP_COOKIE) || "");
   if (!/^\d{5}$/.test(zip)) return null;
   let place: IPlace | null = null;
@@ -165,6 +173,7 @@ async function deliveryNotes(context: IRuntimeHookContext) {
   return (sku: string) => {
     const extra = Math.max(0, Math.floor(Number(production[sku] ?? production[sku.toUpperCase()]) || 0));
     const { arrivesBy } = arrivalDate(new Date(), transit + extra, cutoff);
+    if (language === "fr") return `Livré d’ici le ${shortDay(arrivesBy, "fr-FR")} à ${to}${extra ? ` (dont ${extra} jours de production)` : ""}`;
     return `Arrives by ${shortDay(arrivesBy)} to ${to}${extra ? ` (includes ${extra} production days)` : ""}`;
   };
 }
@@ -175,10 +184,12 @@ async function mapCartItems(cart: IRuntimeData, context: IRuntimeHookContext) {
   const casePacks = skuMap(settings, "casePacks");
   const limits = skuMap(settings, "orderLimits");
   const minimums = skuMap(settings, "minimums");
-  const arrival = await deliveryNotes(context);
+  // the page's language: the store's NEXT_LOCALE cookie ("fr-FR" on /fr-FR pages), row 139
+  const language = noteLanguage(context.cookies.get("NEXT_LOCALE"));
+  const arrival = await deliveryNotes(context, language);
   const cartItems = (cart.cartItems as IRuntimeData[]).map((item) => {
     const sku = String(item.sku || "");
-    const notes = [...lineNotes(sku, casePacks, limits, minimums), ...(arrival ? [arrival(sku)] : [])];
+    const notes = [...lineNotes(sku, casePacks, limits, minimums, language), ...(arrival ? [arrival(sku)] : [])];
     return notes.length ? { ...item, productDescription: withNotes(item.productDescription, notes) } : item;
   });
   return { ...cart, cartItems };

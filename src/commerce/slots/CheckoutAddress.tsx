@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
-import { useTranslations } from "next-intl";
+import { useSppTranslations } from "../i18n.js";
 import { settings } from "../host.js";
 
 // Slot checkout.address (spp-commerce, row 116): the store's address section (children) kept as it is, with two
@@ -28,7 +28,7 @@ const savedZip = () => {
 };
 
 export function CheckoutAddress(props: { children?: ReactNode }) {
-  const t = useTranslations("Common.sppCommerce");
+  const t = useSppTranslations();
   const [poBox, setPoBox] = useState(false);
   const [zip, setZip] = useState("");
   const [estimate, setEstimate] = useState<IEstimate | null>(null);

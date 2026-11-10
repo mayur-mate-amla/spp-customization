@@ -43,14 +43,25 @@ export function ruleFacts(sku: string, casePacks: Record<string, unknown>, limit
 }
 
 /** The notes a cart line gets (setting casePacks, minimums and orderLimits): shown under the line on the cart page and checkout. */
-export function lineNotes(sku: string, casePacks: Record<string, unknown>, limits: Record<string, unknown>, minimums: Record<string, unknown> = {}) {
+// the cart-line notes' wording per language (row 139): the server hooks get no translations, so the plugin keeps its
+// own; a language not here is English
+export const NOTE_WORDS: Record<string, { casePack: (n: number) => string; minimum: (n: number) => string; limit: (n: number) => string }> = {
+  en: { casePack: (n) => `Sold in cases of ${n}`, minimum: (n) => `Minimum order ${n}`, limit: (n) => `Limit ${n} per order` },
+  fr: { casePack: (n) => `Vendu par cartons de ${n}`, minimum: (n) => `Minimum ${n} par commande`, limit: (n) => `Maximum ${n} par commande` },
+};
+
+/** The page's language from the store's NEXT_LOCALE cookie ("fr-FR" -> "fr"), "en" for anything else. */
+export const noteLanguage = (locale: unknown) => (String(locale || "").slice(0, 2) in NOTE_WORDS ? String(locale).slice(0, 2) : "en");
+
+export function lineNotes(sku: string, casePacks: Record<string, unknown>, limits: Record<string, unknown>, minimums: Record<string, unknown> = {}, language = "en") {
+  const words = NOTE_WORDS[language] || NOTE_WORDS.en;
   const notes: string[] = [];
   const pack = forSku(casePacks, sku);
-  if (pack > 1) notes.push(`Sold in cases of ${pack}`);
+  if (pack > 1) notes.push(words.casePack(pack));
   const min = forSku(minimums, sku);
-  if (min > 1) notes.push(`Minimum order ${min}`);
+  if (min > 1) notes.push(words.minimum(min));
   const max = forSku(limits, sku);
-  if (max) notes.push(`Limit ${max} per order`);
+  if (max) notes.push(words.limit(max));
   return notes;
 }
 

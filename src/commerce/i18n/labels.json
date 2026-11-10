@@ -28,7 +28,37 @@
       "addForMinimum": "add <b>{amount}</b> to reach the {minimum} order minimum",
       "checkoutArrives": "Ships from Milwaukee: arrives by <b>{date}</b> to {place} (decorated items may take longer).",
       "noPoBox": "<b>We can't deliver to a PO Box.</b> Decorated orders ship by ground freight: please enter a street address.",
-      "rushUnavailable": "Not available for decorated items, which need production days first: {methods}."
+      "rushUnavailable": "Not available for decorated items, which need production days first: {methods}.",
+      "fr": {
+        "signIn": "Connectez-vous",
+        "toSeePricing": "pour voir vos prix contractuels",
+        "signedInAs": "Connecté en tant que <b>{name}</b> · vos prix contractuels s’appliquent",
+        "budgetLeft": "budget restant {amount}",
+        "yourRep": "Votre représentant : <b>{name}</b>",
+        "items": "{count, plural, =0 {Aucun article dans votre commande} one {# article dans votre commande} other {# articles dans votre commande}}",
+        "inYourOrder": "<b>{amount}</b> dans votre commande",
+        "addForFreeShipping": "ajoutez <b>{amount}</b> pour la livraison gratuite",
+        "shipsFree": "<b>livraison gratuite</b>",
+        "towardFreeShipping": "Vers la livraison gratuite",
+        "orderingRules": "Règles de commande",
+        "casePack": "Carton de {count}",
+        "minimum": "Min. {count} par commande",
+        "limit": "Max. {count} par commande",
+        "onHold": "Temporairement en rupture",
+        "onHoldUntil": "Indisponible jusqu’au {date}",
+        "deliverTo": "Livrer à",
+        "checkDelivery": "Vérifier",
+        "arrivesBy": "Livré d’ici le <b>{date}</b> à {place}",
+        "zipInvalid": "Saisissez un code postal à 5 chiffres",
+        "deliveryUnavailable": "Les dates de livraison ne sont pas disponibles pour le moment",
+        "holdNotice": "<b>Indisponible jusqu’au {date}.</b> Cet article ne peut pas être commandé pour le moment.",
+        "holdNoticeNoDate": "<b>Temporairement en rupture.</b> Cet article ne peut pas être commandé pour le moment.",
+        "askAlternatives": "Demandez-nous une alternative",
+        "addForMinimum": "ajoutez <b>{amount}</b> pour atteindre le minimum de commande de {minimum}",
+        "checkoutArrives": "Expédié depuis Milwaukee : livré d’ici le <b>{date}</b> à {place} (les articles personnalisés peuvent prendre plus de temps).",
+        "noPoBox": "<b>Nous ne livrons pas aux boîtes postales.</b> Les commandes personnalisées partent par transporteur : saisissez une adresse de rue.",
+        "rushUnavailable": "Indisponible pour les articles personnalisés, qui demandent d’abord des jours de production : {methods}."
+      }
     }
   }
 }

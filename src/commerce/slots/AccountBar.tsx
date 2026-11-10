@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useSppTranslations } from "../i18n.js";
 import { host, settings } from "../host.js";
 
 // Slot layout.header (spp-commerce): a thin B2B account bar above everything else in the header: who is signed in and
@@ -48,7 +48,7 @@ function useMyOrder(count: number) {
 }
 
 export function AccountBar(props: { children?: ReactNode }) {
-  const t = useTranslations("Common.sppCommerce");
+  const t = useSppTranslations();
   const sessionUser = host?.stores.useUser() ?? null;
   const count = host?.stores.useCartCount() ?? 0;
   const order = useMyOrder(count);

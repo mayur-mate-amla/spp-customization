@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
-import { useTranslations } from "next-intl";
+import { useSppTranslations } from "../i18n.js";
 import { shortDate, useHold } from "../holds.js";
 import { settings } from "../host.js";
 
@@ -17,7 +17,7 @@ const KEY = "spp-commerce-zip";
 const day = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 
 export function DeliveryEstimate(props: { children?: ReactNode; isQuickView?: boolean; product?: { sku?: string } }) {
-  const t = useTranslations("Common.sppCommerce");
+  const t = useSppTranslations();
   const [zip, setZip] = useState("");
   const [estimate, setEstimate] = useState<IEstimate | null>(null);
   const [error, setError] = useState("");

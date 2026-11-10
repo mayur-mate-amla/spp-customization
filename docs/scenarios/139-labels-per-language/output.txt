@@ -1,0 +1,13 @@
+# the page's language: the store prefixes non-default languages (/fr-FR/...) and sets the NEXT_LOCALE cookie
+> curl -i -H "Host: sppdemo.localhost:3000" http://127.0.0.1:3000/fr-FR/cart
+set-cookie: NEXT_LOCALE=fr-FR; Path=/; Max-Age=31536000; SameSite=lax
+
+# the minimum rule now adds the missing quantity (nothing removed): English cart, 6 can coolers
+﻿added product 103814 x 6
+Kan-Tastic Can Cooler | qty 25
+{"store":"POCSppDemo","adds":[{"at":"2026-11-10T13:43:52.828Z","sku":"Y1448_001","asked":6,"added":6,"rule":"","cartNumber":"C-10112026-1145","ok":true},{"at":"2026-11-10T13:44:02.187Z","sku":"Y1448_001","asked":6,"added":25,"rule":"minimum 25","cartNumber":"C-10112026-1145","ok":true}]}
+
+# found before this change, French cart: the rule removed-and-re-added the line and failed in French (ok:false);
+# the line survived only because the removal failed too. Now: add the missing quantity; a limit's re-add that fails
+# puts the line back as it was.
+{"sku":"Y1448_001","asked":6,"added":25,"rule":"minimum 25","cartNumber":"C-10112026-1144","ok":false}

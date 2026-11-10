@@ -23,6 +23,11 @@
       "label": "Items sold in case packs: { \"<SKU>\": <pack size> } (quantities are rounded up to whole packs)",
       "default": { "81DRL": 10 }
     },
+    "orderLimits": {
+      "type": "object",
+      "label": "Per-order limits: { \"<SKU>\": <max quantity> } (a cart line over its limit is brought back to it)",
+      "default": { "817NK_25": 5 }
+    },
     "showAccountBar": {
       "type": "boolean",
       "label": "Show the account bar above the header",

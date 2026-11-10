@@ -1,0 +1,13 @@
+# before: orderLimits = {}
+> node scripts/cart-shot.mjs --add 103809:8 --out docs/scenarios/081-on-cart-changed/before.png
+added product 103809 x 8
+Graphite Deluxe 15" Computer Backpack | qty 8
+
+# after: orderLimits = { "817NK_25": 5 }
+> node scripts/cart-shot.mjs --add 103809:8 --route /api/extensions/plugins/spp-commerce/activity --out docs/scenarios/081-on-cart-changed/after.png
+added product 103809 x 8
+Graphite Deluxe 15" Computer Backpack | qty 5
+{"store":"POCSppDemo","adds":[
+ {"at":"2026-11-10T10:56:36.037Z","sku":"817NK_25","asked":8,"added":8,"rule":"","cartNumber":"C-10112026-1099","ok":true},
+ {"at":"2026-11-10T10:56:45.269Z","sku":"817NK_25","asked":8,"added":5,"rule":"limit 5 per order","cartNumber":"C-10112026-1099","ok":true}]}
+(first line: the add as Znode got it; second: onCartChanged bringing the line back to the limit when the cart was read)

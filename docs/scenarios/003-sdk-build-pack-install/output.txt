@@ -1,0 +1,47 @@
+$ npm run build
+
+> spp-customization@1.0.0 build
+> znode build .
+
+built theme spp-customization@1.0.0: 9 files
+(took 4233 ms)
+
+$ npm run pack
+
+> spp-customization@1.0.0 pack
+> znode pack .
+
+built theme spp-customization@1.0.0: 9 files
+packed spp-customization-1.0.0.zpkg.zip (59604 bytes)
+(took 4268 ms)
+
+$ npm run deploy
+
+> spp-customization@1.0.0 deploy
+> znode deploy .
+
+built theme spp-customization@1.0.0: 9 files
+packed spp-customization-1.0.0.zpkg.zip (59604 bytes)
+installed theme spp-customization@1.0.0 (was 1.0.0): 8 files, disabled for []
+(took 4327 ms)
+
+$ ls releases dist
+dist:
+total 98
+drwxr-xr-x 1 mayur.mate 1049089     0 Nov 10 12:51 .
+drwxr-xr-x 1 mayur.mate 1049089     0 Nov 10 12:51 ..
+-rw-r--r-- 1 mayur.mate 1049089 48256 Nov 10 12:51 spp-customization-1.0.0-font-inter-8e66b3c3-1.woff2
+-rw-r--r-- 1 mayur.mate 1049089  4396 Nov 10 12:51 spp-customization-1.0.0.browser.mjs
+-rw-r--r-- 1 mayur.mate 1049089  7078 Nov 10 12:51 spp-customization-1.0.0.browser.mjs.map
+-rw-r--r-- 1 mayur.mate 1049089  3226 Nov 10 12:51 spp-customization-1.0.0.css
+-rw-r--r-- 1 mayur.mate 1049089     3 Nov 10 12:01 spp-customization-1.0.0.labels.json
+-rw-r--r-- 1 mayur.mate 1049089  4750 Nov 10 12:51 spp-customization-1.0.0.server.mjs
+-rw-r--r-- 1 mayur.mate 1049089  7345 Nov 10 12:51 spp-customization-1.0.0.server.mjs.map
+-rw-r--r-- 1 mayur.mate 1049089   551 Nov 10 12:01 spp-customization-hero.svg
+-rw-r--r-- 1 mayur.mate 1049089  1533 Nov 10 12:51 znode-package.json
+
+releases:
+total 64
+drwxr-xr-x 1 mayur.mate 1049089     0 Nov 10 12:02 .
+drwxr-xr-x 1 mayur.mate 1049089     0 Nov 10 12:51 ..
+-rw-r--r-- 1 mayur.mate 1049089 59604 Nov 10 12:51 spp-customization-1.0.0.zpkg.zip

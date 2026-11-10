@@ -50,9 +50,9 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 14 |
+| ✅ Done | 15 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 120 |
+| ⬜ Not started | 119 |
 | ⛔ Blocked | 41 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -82,7 +82,7 @@ of the store's own without changing `plugins.json`. "Before" is the theme as it 
 | 19 | Is there an admin screen to upload, enable and configure packages? | No | Base | | ⛔ Blocked | |
 | 20 | Is there a package marketplace or catalogue? | No | Base | | ⛔ Blocked | |
 | 21 | Are packages signed and verified at install? | No | Base | | ⛔ Blocked | |
-| 22 | Is there a command to scaffold a new package? | No | Check | `znode create theme <name>` output (see notes: looks like Yes) | ⬜ Not started | |
+| 22 | Is there a command to scaffold a new package? | No | Check | Result: **Yes**: `npx znode create <kind> <name>` and `npm create znode-plugin` | ✅ Done | [notes](docs/scenarios/022-scaffold-command/) |
 
 ## Themes
 

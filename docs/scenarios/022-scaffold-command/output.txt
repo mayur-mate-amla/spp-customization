@@ -1,0 +1,52 @@
+$ npx znode create theme demo-theme <scratch>/demo-theme
+created theme demo-theme in <scratch>/demo-theme
+  next: fill in label, publisher and description in znode-package.json, then run its build-and-upload.sh
+(exit 0)
+  demo-theme/build-and-upload.sh
+  demo-theme/znode-package.json
+  demo-theme/src/browser.tsx
+  demo-theme/src/extension-api.d.ts
+  demo-theme/src/i18n/labels.json
+  demo-theme/src/lib/host.ts
+  demo-theme/src/styles/10-tokens.css
+  demo-theme/src/styles/20-parts.css
+  demo-theme/src/widgets/DemoThemeHero.tsx
+
+$ npx znode create plugin demo-plugin <scratch>/demo-plugin
+created plugin demo-plugin in <scratch>/demo-plugin
+  next: fill in label, publisher and description in znode-package.json, then run its build-and-upload.sh
+(exit 0)
+  demo-plugin/build-and-upload.sh
+  demo-plugin/znode-package.json
+  demo-plugin/src/browser.tsx
+  demo-plugin/src/extension-api.d.ts
+  demo-plugin/src/server.ts
+  demo-plugin/src/lib/host.ts
+
+$ npx znode create widget demo-widget <scratch>/demo-widget
+created widget demo-widget in <scratch>/demo-widget
+  next: fill in label, publisher and description in znode-package.json, then run its build-and-upload.sh
+(exit 0)
+  demo-widget/build-and-upload.sh
+  demo-widget/znode-package.json
+  demo-widget/src/browser.tsx
+  demo-widget/src/extension-api.d.ts
+  demo-widget/src/lib/host.ts
+  demo-widget/src/widgets/DemoWidget.tsx
+
+$ npx znode create content demo-content <scratch>/demo-content
+created content demo-content in <scratch>/demo-content
+  next: fill in label, publisher and description in znode-package.json, then run its build-and-upload.sh
+(exit 0)
+  demo-content/build-and-upload.sh
+  demo-content/znode-package.json
+  demo-content/src/pages/landing.json
+
+$ npx znode create skin demo-skin <scratch>/demo-skin   (unknown kind)
+znode-package: kind must be one of theme, plugin, widget, content
+(exit 1)
+
+$ npx znode check <scratch>/demo-theme   (the starter, before its texts are filled in)
+error   the starter's publisher or description is still in place
+warning not built yet: pack it to check sizes and the server-render format
+check demo-theme@1.0.0: 1 errors, 1 warnings

@@ -7,6 +7,7 @@ import { CustomizeToOrder } from "./slots/CustomizeToOrder.js";
 import { FooterHelp } from "./slots/FooterHelp.js";
 import { ProductListing } from "./slots/ProductListing.js";
 import { AddedToCart } from "./slots/AddedToCart.js";
+import { HeadTags } from "./slots/HeadTags.js";
 import { Hero, HERO_EDITOR } from "./widgets/Hero.js";
 import { Testimonials, TESTIMONIALS_EDITOR } from "./widgets/Testimonials.js";
 
@@ -20,6 +21,8 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
   bindHost(host);
   return {
     slots: {
+      // the document <head>: theme-color, favicon, preconnect, analytics script
+      "layout.head": HeadTags,
       // preview bar, announcement bar above the store's header, trust strip below it
       "layout.header": AnnouncementBar,
       // a New badge on product cards

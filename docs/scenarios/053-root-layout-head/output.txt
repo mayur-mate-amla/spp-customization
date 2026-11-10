@@ -1,0 +1,17 @@
+$ npm run deploy
+installed theme spp-customization@1.0.2 (was 1.0.2): 17 files, disabled for []
+kept spp-customization-1.0.2.zpkg.zip in .versions\spp-customization (2 versions on disk: 1.0.1, 1.0.2)
+
+$ GET / (POCSppDemo, theme previewed): tags in the server-rendered <head>, before -> after
+  name="theme-color"                                      False -> True
+  spp-customization-favicon.svg                           False -> True
+  rel="preconnect" href="https://imagelab.artifi.net"     False -> True
+  spp-customization-analytics.mjs                         False -> True
+
+$ GET /api/extensions/files/spp-customization-analytics.mjs
+  HTTP 200  text/javascript; charset=utf-8
+
+$ (in the browser, POCSppDemo home, theme previewed)
+document.head has: <script async src=".../spp-customization-analytics.mjs" data-store="POCSppDemo">, <meta name="theme-color" content="#f26b1d">, <link rel="icon" ... spp-customization-favicon.svg>, <link rel="preconnect" href="https://imagelab.artifi.net">
+window.dataLayer: [{ event: "page_view", store: "POCSppDemo", page_path: "/", page_title: "Navigate Brand Store", theme: "spp-customization" }]
+html[data-spp-analytics="ready"]

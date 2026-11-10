@@ -1,0 +1,11 @@
+$ node scripts/registry.mjs show   (the theme is installed but not live)
+  "enabled": false,
+  "stores": [],
+  "parent": "redpanda",
+
+$ npm run deploy
+installed theme spp-customization@1.0.2 (was 1.0.2): 15 files, disabled for []
+kept spp-customization-1.0.2.zpkg.zip in .versions\spp-customization (2 versions on disk: 1.0.1, 1.0.2)
+
+preview link: http://sppdemo.localhost:3000/api/extensions/preview?theme=spp-customization   (after.png)
+same page without the cookie: the store's live theme, redpanda   (shopper.png)

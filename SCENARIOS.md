@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 27 |
+| ✅ Done | 28 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 106 |
+| ⬜ Not started | 105 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -112,7 +112,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 33 | Can I change logos and images per store? | Yes | UI | Example: co-branded header logo from setting logoUrl (store attribute ThemeLogoUrl) | ✅ Done | [notes](docs/scenarios/033-logo-per-store/) |
 | 34 | Can I assign a theme per store? | Yes | Config | Example: POCSppDemo moved from redpanda to spp-customization (plugins.json only) | ✅ Done | [notes](docs/scenarios/034-assign-theme-per-store/) |
 | 35 | Can I switch a store's theme without a deploy? | Yes | Config | Example: POCSppDemo back to redpanda; picked up in 226 ms, no deploy | ✅ Done | [notes](docs/scenarios/035-switch-theme-without-deploy/) |
-| 36 | Can I preview a theme before it goes live? | Yes | Check | Preview link with the theme disabled in `plugins.json` | ⬜ Not started | |
+| 36 | Can I preview a theme before it goes live? | Yes | Check | Example: review link + 'Previewing theme … Exit preview' bar | ✅ Done | [notes](docs/scenarios/036-preview-before-live/) |
 | 37 | Does the theme show in the page-builder preview? | Yes | Check | Needs the page-builder app running | ⬜ Not started | |
 | 38 | Can a theme include page-builder widgets? | Yes | UI | `SppCustomizationHero` and new widgets (59-70) | ⬜ Not started | |
 | 39 | Can I add routes in a theme? | Partial | UI | A new route in `src/server.tsx`, shown on a page | ⬜ Not started | |

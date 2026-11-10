@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { settings } from "../lib/host.js";
 import { TrustStrip } from "./TrustStrip.js";
+import { PreviewBanner } from "./PreviewBanner.js";
 
 // Slot layout.header: a bar above the store's header (children), text from the announcement setting, with a link to
 // the theme's welcome page and the store's customer service phone (supportPhone, a required setting); below the header,
@@ -12,6 +13,7 @@ export function AnnouncementBar(props: { children?: ReactNode }) {
   const phone = String(settings.supportPhone || "").trim();
   return (
     <>
+      <PreviewBanner />
       {text && (
         <div className="spp-customization-announcement" data-test-selector="divAnnouncement">
           <span>{text}</span>

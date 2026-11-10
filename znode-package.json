@@ -62,6 +62,16 @@
       "browser": true,
       "default": true
     },
+    "shipCutoffHour": {
+      "type": "number",
+      "label": "Daily dispatch cutoff hour (0-23, warehouse time): orders before it ship the same weekday",
+      "default": 15
+    },
+    "shipTimezone": {
+      "type": "string",
+      "label": "Warehouse time zone (IANA, e.g. America/New_York)",
+      "default": "America/New_York"
+    },
     "showBadge": {
       "type": "boolean",
       "label": "Show the New badge on product cards",

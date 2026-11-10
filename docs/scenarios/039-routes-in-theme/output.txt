@@ -1,0 +1,16 @@
+$ (logic check) shippingCutoffAt(<moment>, 15, "America/New_York")
+2026-11-10 13:48 UTC  ->  Order within 6h 12m to ship today
+2026-11-10 19:59 UTC  ->  Order within 1m to ship today
+2026-11-10 20:00 UTC  ->  Order now, ships tomorrow
+2026-11-13 21:00 UTC  ->  Order now, ships Monday
+2026-11-14 15:00 UTC  ->  Order now, ships Monday
+
+$ npm run deploy
+packed spp-customization-1.0.2.zpkg.zip (55253 bytes)
+installed theme spp-customization@1.0.2 (was 1.0.2): 15 files, disabled for []
+kept spp-customization-1.0.2.zpkg.zip in .versions\spp-customization (2 versions on disk: 1.0.1, 1.0.2)
+
+$ GET /api/extensions/plugins/spp-customization/shipping-cutoff   (POCSppDemo, theme previewed)
+{"shipsToday":true,"minutesLeft":706,"shipDay":"today","label":"Order within 11h 46m to ship today"}
+$ the same without the theme (store on redpanda)
+HTTP 404

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { IPluginRouteContext, IPluginRouteRequest, IRuntimePlugin, IServerSlotContext } from "znode-plugin/types/extension-api";
 import { getHighlights, IHighlight } from "./server/data.js";
 import { ThemeLayout } from "./server/ThemeLayout.js";
+import { shippingCutoff } from "./server/shipping.js";
 import { WelcomePage } from "./server/WelcomePage.js";
 
 // Spp Customization, server part: runs only on the store's server, never in the browser.
@@ -18,7 +19,7 @@ const plugin: IRuntimePlugin = {
   name: "spp-customization",
   apiVersion: 1,
   hooks: {},
-  routes: { highlights },
+  routes: { highlights, "shipping-cutoff": shippingCutoff },
   serverSlots: {
     "layout.root": (props: { children?: ReactNode }, context: IServerSlotContext) => <ThemeLayout settings={context.settings}>{props.children}</ThemeLayout>,
   },

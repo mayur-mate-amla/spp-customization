@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 30 |
+| ✅ Done | 31 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 103 |
+| ⬜ Not started | 102 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -115,7 +115,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 36 | Can I preview a theme before it goes live? | Yes | Check | Example: review link + 'Previewing theme … Exit preview' bar | ✅ Done | [notes](docs/scenarios/036-preview-before-live/) |
 | 37 | Does the theme show in the page-builder preview? | Yes | Check | Example: editor canvas shows the theme; page builder needs RUNTIME_PLUGINS_DIR; CSS defaults on tokens | ✅ Done | [notes](docs/scenarios/037-page-builder-preview/) |
 | 38 | Can a theme include page-builder widgets? | Yes | UI | Example: Customer testimonials widget (editor category Spp Customization), on the home page | ✅ Done | [notes](docs/scenarios/038-theme-includes-widgets/) |
-| 39 | Can I add routes in a theme? | Partial | UI | A new route in `src/server.tsx`, shown on a page | ⬜ Not started | |
+| 39 | Can I add routes in a theme? | Partial | UI | Result: **Yes**. Example: shipping-cutoff route (Order within 3h 12m to ship today) in the trust strip | ✅ Done | [notes](docs/scenarios/039-routes-in-theme/) |
 | 40 | Can a theme take over a store API route? | No | Base | Re-check: SDK accepts `overrides` on a theme (see notes) | ⛔ Blocked | |
 | 41 | Does the mobile layout work? | Partial | UI | Screenshots at 375 px; fix what breaks in this theme | ⬜ Not started | |
 

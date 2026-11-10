@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 80 |
+| ✅ Done | 81 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 56 |
+| ⬜ Not started | 55 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -202,7 +202,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | --- | --- | --- | --- | --- | --- | --- |
 | 93 | Can I add a new BFF layer or call any new API? | Yes | Check | PDP Deliver to ZIP: browser -> spp-commerce route delivery-estimate -> zippopotam.us (server) -> date | ✅ Done | [notes](093-new-bff-layer/) |
 | 94 | Can I create a new BFF API? | Yes | Check | theme route store-status: support hours + ship cutoff + notice in one call, cached 60 s; used by the trust strip | ✅ Done | [notes](094-new-bff-api/) |
-| 95 | Can a plugin call the Znode API with the store's headers? | Yes | Check | Route using `context.znode(...)` (`znodeApi` permission) | ⬜ Not started | |
+| 95 | Can a plugin call the Znode API with the store's headers? | Yes | Check | route sku-lookup: context.znode published-products/sku with store headers (direct call without them: 401); portal codes via v2/portals | ✅ Done | [notes](095-znode-api-store-headers/) |
 | 96 | Can a plugin call an external API from the server? | Yes | Check | Route calling a public API (`externalNetwork` permission) | ⬜ Not started | |
 | 97 | Can a plugin call an external API from the browser? | No | Base | | ⛔ Blocked | |
 | 98 | Can I wrap an existing store API route (change its input or output)? | Yes | Check | `"overrides"` with `context.original()` | ⬜ Not started | |

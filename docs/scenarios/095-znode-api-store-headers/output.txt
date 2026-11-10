@@ -1,0 +1,10 @@
+# the plugin route: context.znode() with the store's headers -> this store's catalog, prices and stock
+> GET .../sku-lookup?skus=81DRL,817NK_25,Y1448_001,NOPE1
+{"store":"POCSppDemo","items":[{"sku":"81DRL","found":true,"name":"3/4\" Poly Lanyard w/clip","price":1.25,"inStock":100,"url":"/product/103808"},{"sku":"817NK_25","found":true,"name":"Graphite Deluxe 15\" Computer Backpack","price":45,"inStock":100,"url":"/product/103809"},{"sku":"Y1448_001","found":true,"name":"Kan-Tastic Can Cooler","price":1,"inStock":100,"url":"/product/103814"},{"sku":"NOPE1","found":false}]}
+
+> GET .../sku-lookup   (no skus)
+{"error":"skus: item numbers, comma separated"}  (HTTP 400)
+
+# the same Znode path called directly, without the store's headers (no API key, portal, locale)
+> curl "<API_URL>v2/published-products/sku/81DRL?expand=Pricing,Inventory,Seo&ParentProductId=0&ParentProductSKU=81DRL&CatalogCode=...&LocaleCode=en-US&StoreCode=POCSppDemo"
+{"ErrorCode":401,"ErrorMessage":"You are unauthorized to access this resource. Please check your token credentials.","HasError":false,"StatusCode":401}  (HTTP 401)

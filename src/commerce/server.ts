@@ -221,6 +221,51 @@ async function erpStock(request: IPluginRouteRequest, context: IPluginRouteConte
   return json(200, { ok: true, sku: event.sku, onHold: !event.available, holds: holds.size });
 }
 
+// ---- SKU lookup: the Znode API with the store's headers (row 095) ------------------------------------------------
+// GET .../sku-lookup?skus=81DRL,817NK_25 -> { items: [{ sku, found, name, price, inStock, url }] }, at most 20 SKUs.
+// context.znode(path) fetches {API_URL}<path> with the headers the store's own agents send (its API key, portal,
+// locale, catalog, the shopper's profile), so the answer is this store's catalog and prices, as on its pages. The path
+// is the one the store's agent uses for a SKU (PublishProducts_skuByProductSKU).
+type ISkuItem = { sku: string; found: boolean; name?: string; price?: number; inStock?: number; url?: string };
+
+// the store's catalog and locale codes, which the SKU call needs: from Znode's portal call (the one the store's
+// getPortalDetails makes, v2/portals/<store>/application/2 = web store), once per store
+const portalCodes = new Map<string, { catalog: string; locale: string }>();
+async function storeCodes(context: IPluginRouteContext) {
+  const known = portalCodes.get(context.store.code);
+  if (known) return known;
+  const answer = await context.znode(`v2/portals/${encodeURIComponent(context.store.code)}/application/2`);
+  const data = (answer.data || {}) as Record<string, unknown>;
+  const portal = (data.WebStorePortal ?? data.webStorePortal ?? data) as Record<string, unknown>;
+  const locales = (portal.PortalLocales ?? []) as { LocaleCode?: string; IsDefault?: boolean }[];
+  const codes = {
+    catalog: String(portal.CatalogCode ?? portal.catalogCode ?? ""),
+    locale: String(portal.LocaleCode ?? locales.find((locale) => locale.IsDefault)?.LocaleCode ?? locales[0]?.LocaleCode ?? "en-US"),
+  };
+  if (codes.catalog) portalCodes.set(context.store.code, codes);
+  return codes;
+}
+
+async function lookupSku(context: IPluginRouteContext, sku: string): Promise<ISkuItem> {
+  const { catalog, locale } = await storeCodes(context);
+  const query = new URLSearchParams({ expand: "Pricing,Inventory,Seo", ParentProductId: "0", ParentProductSKU: sku, CatalogCode: catalog, LocaleCode: locale, StoreCode: context.store.code });
+  const answer = await context.znode(`v2/published-products/sku/${encodeURIComponent(sku)}?${query}`);
+  const data = (answer.data || {}) as Record<string, unknown>;
+  const product = (data.PublishProduct ?? data.publishProduct ?? data) as Record<string, unknown>;
+  const id = Number(product.PublishProductId ?? product.publishProductId);
+  if (answer.status !== 200 || !id) return { sku, found: false };
+  const price = Number(product.SalesPrice ?? product.salesPrice) || Number(product.RetailPrice ?? product.retailPrice) || undefined;
+  const inventory = (product.Inventory ?? product.inventory) as Record<string, unknown>[] | undefined;
+  const quantity = Number(product.Quantity ?? product.quantity ?? (Array.isArray(inventory) ? inventory.reduce((sum, row) => sum + (Number(row.Quantity ?? row.quantity) || 0), 0) : NaN));
+  return { sku, found: true, name: String(product.Name ?? product.name ?? ""), price, inStock: Number.isFinite(quantity) ? quantity : undefined, url: `/product/${id}` };
+}
+
+async function skuLookup(request: IPluginRouteRequest, context: IPluginRouteContext) {
+  const skus = [...new Set(String(request.query.skus || "").split(",").map((sku) => sku.trim().toUpperCase()).filter((sku) => /^[A-Z0-9_.-]{1,40}$/.test(sku)))].slice(0, 20);
+  if (!skus.length) return new Response(JSON.stringify({ error: "skus: item numbers, comma separated" }), { status: 400, headers: { "Content-Type": "application/json" } });
+  return { store: context.store.code, items: await Promise.all(skus.map((sku) => lookupSku(context, sku))) };
+}
+
 // ---- Delivery estimate: a BFF route over an outside API (row 093) -------------------------------------------------
 // GET .../delivery-estimate?zip=53202 -> { zip, city, state, transitDays, shipsOn, arrivesBy }; 400 for a ZIP that is
 // not five digits, 404 for one that does not exist, 502 when the ZIP API cannot be reached. The browser never calls
@@ -258,6 +303,7 @@ const plugin: IRuntimePlugin = {
     rep: repRoute,
     "erp-stock": erpStock,
     "delivery-estimate": deliveryEstimate,
+    "sku-lookup": skuLookup,
     "stock-holds": async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ holds: [...(stockHolds.get(context.store.code)?.values() || [])] }),
   },
 };

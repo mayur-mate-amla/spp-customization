@@ -1,0 +1,34 @@
+# 1. which store routes are taken over, per store (from the registry)
+> npm run overrides -- POCSppDemo MaxwellsHardware
+POCSppDemo: 3 store route(s) taken over
+  /api/store-locator  ->  /api/extensions/plugins/delivery-preference/store-locator
+  /api/search/search-hydrated-typeahead  ->  /api/extensions/plugins/spp-commerce/search-typeahead
+  /api/contact-us  ->  /api/extensions/plugins/spp-commerce/quote-request
+MaxwellsHardware: the store's own routes only
+  /api/store-locator  (delivery-preference: not placed for this store)
+  /api/search/search-hydrated-typeahead  (spp-commerce: not placed for this store)
+  /api/contact-us  (spp-commerce: not placed for this store)
+
+# 2. the same request on both stores
+> sppdemo.localhost:3000  GET /api/search/search-hydrated-typeahead?searchTerm=koozie
+  {"hydratedSearchProductList":[{"productId":-1,"productName":"Search \"can cooler\" instead","imagePath":"","seoUrl":"search?searchTerm=can%20cooler"},
+> localhost:3000  GET /api/search/search-hydrated-typeahead?searchTerm=koozie
+  {"hydratedSearchCategoryList":[],"hydratedSkuList":[],"isTypeaheadSearchEnabled":true}
+  (POCSppDemo: spp-commerce's answer with the added entries; MaxwellsHardware: the store's own route, its own shape)
+
+# 3. the plugin's route called directly on a store it is not placed for
+> localhost:3000  GET /api/extensions/plugins/spp-commerce/search-typeahead?searchTerm=koozie
+{"error":"Not found"}  (HTTP 404)
+
+# 4. spp-commerce switched off for its store (registry.mjs enable false): POCSppDemo gets the store's own route back
+> npm run overrides -- POCSppDemo
+POCSppDemo: 1 store route(s) taken over
+  /api/store-locator  ->  /api/extensions/plugins/delivery-preference/store-locator
+  /api/search/search-hydrated-typeahead  (spp-commerce: switched off)
+  /api/contact-us  (spp-commerce: switched off)
+> sppdemo.localhost:3000  GET /api/search/search-hydrated-typeahead?searchTerm=koozie
+  {"hydratedSearchProductList":[],"hydratedSearchCategoryList":[],"hydratedSearchBrandList":[],"hydratedSearchContentList":[],"hydratedSearchActivityLis
+
+# 5. switched on again: taken over again, no deploy, no restart
+> sppdemo.localhost:3000  GET /api/search/search-hydrated-typeahead?searchTerm=koozie
+  {"hydratedSearchProductList":[{"productId":-1,"productName":"Search \"can cooler\" instead","imagePath":"","seoUrl":"search?searchTerm=can%20cooler"},

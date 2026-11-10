@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 84 |
+| ✅ Done | 85 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 52 |
+| ⬜ Not started | 51 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -207,7 +207,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 97 | Can a plugin call an external API from the browser? | No | Base | | ⛔ Blocked | |
 | 98 | Can I wrap an existing store API route (change its input or output)? | Yes | Check | overrides typeahead: original() + synonym and sourcing entries; query cannot be changed through original() | ✅ Done | [notes](098-wrap-store-route/) |
 | 99 | Can I replace an existing store API route completely? | Yes | Check | overrides /api/contact-us without original(): quote request routed to the rep, store envelope kept; Request a quote widget | ✅ Done | [notes](099-replace-store-route/) |
-| 100 | Is a route override applied only for the stores the plugin is enabled for? | Yes | Check | Same request on a store without the theme | ⬜ Not started | |
+| 100 | Is a route override applied only for the stores the plugin is enabled for? | Yes | Check | Yes: POCSppDemo overridden, MaxwellsHardware store route, direct plugin route 404; off/on via registry, no deploy | ✅ Done | [notes](100-override-enabled-stores-only/) |
 | 101 | Are request bodies to plugin routes size-limited? | Yes | Check | POST over 64 KB: refused | ⬜ Not started | |
 
 ## Agents

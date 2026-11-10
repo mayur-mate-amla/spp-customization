@@ -13,7 +13,8 @@
     "link-store": "znode link-store",
     "shot": "node scripts/shot.mjs",
     "rollback": "node scripts/rollback.mjs",
-    "inventory": "node scripts/inventory.mjs"
+    "inventory": "node scripts/inventory.mjs",
+    "overrides": "node scripts/overrides.mjs"
   },
   "devDependencies": {
     "@types/react": "19.2.13",

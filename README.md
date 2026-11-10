@@ -15,6 +15,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run link-store -- <store repo>` | Use the store's real types (writes `tsconfig.store.json`) |
 | `npm run shot -- --path / --out <file.png>` | Screenshot a store page with this theme previewed (`scripts/shot.mjs`; `--theme none` for the store's own) |
 | `npm run inventory [-- <manifest>]` | What the built package carries: slots, widgets, routes, hooks, settings, assets (`scripts/inventory.mjs`) |
+| `npm run overrides [-- <store> ...]` | Which store API routes are taken over on each store, by which plugin (`scripts/overrides.mjs`) |
 
 ## Use-case scenarios
 

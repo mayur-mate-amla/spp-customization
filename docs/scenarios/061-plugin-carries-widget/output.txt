@@ -1,0 +1,6 @@
+$ npm run deploy -- spp-commerce.znode-package.json
+packed spp-commerce-1.0.0.zpkg.zip (6036 bytes)
+installed plugin spp-commerce@1.0.0 (was 1.0.0): 3 files, enabled for ["POCSppDemo"]
+kept spp-commerce-1.0.0.zpkg.zip in .versions\spp-commerce (1 version on disk: 1.0.0)
+
+POCSppDemo's page builder loads: spp-base, artifi, countdown-banner, delivery-preference, spp-promos, spp-commerce, spp-widgets   (the store's theme is redpanda; spp-commerce is a plugin)

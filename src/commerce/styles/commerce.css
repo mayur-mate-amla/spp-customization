@@ -4,3 +4,15 @@
 .spp-commerce-account__link { color: #fff; font-weight: 700; text-decoration: underline; }
 .spp-commerce-account__cart { color: rgb(148, 163, 184); }
 @media (max-width: 639px) { .spp-commerce-account__cart { display: none; } }
+
+/* SppAccountManager widget */
+.spp-commerce-rep { margin: 40px 0; }
+.spp-commerce-rep__heading { margin: 0 0 14px; font-size: 24px; font-weight: 700; }
+.spp-commerce-rep__card { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 24px; padding: 22px 24px; background: #fff; border: 1px solid rgb(226, 232, 240); border-radius: 12px; box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06); }
+.spp-commerce-rep__avatar { display: grid; place-items: center; flex: none; width: 64px; height: 64px; font-size: 22px; font-weight: 800; color: #fff; background: rgb(15, 23, 42); border-radius: 50%; }
+.spp-commerce-rep__who { flex: 1; min-width: 220px; }
+.spp-commerce-rep__name { margin: 0; font-size: 18px; font-weight: 700; }
+.spp-commerce-rep__title { margin: 2px 0 8px; color: rgb(100, 116, 139); }
+.spp-commerce-rep__ways { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; font-weight: 600; }
+.spp-commerce-rep__ways a { text-decoration: underline; }
+.spp-commerce-rep__quote { padding: 12px 22px; font-weight: 700; color: #fff; background: rgb(15, 23, 42); border-radius: 8px; }

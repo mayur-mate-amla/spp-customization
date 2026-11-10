@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 25 |
+| ✅ Done | 26 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 108 |
+| ⬜ Not started | 107 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -84,7 +84,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 10 | Is there a one-command rollback? | No | Base | Result: **Yes** for this package: `npm run rollback -- <version>` (needs the older zip in releases/) | ✅ Done | [notes](docs/scenarios/010-rollback-with-one-command/) |
 | 11 | Can a package be uninstalled cleanly (files removed)? | Partial | Check | Result: **Yes**. `npm run uninstall` removes the entry and every owned file (`--purge`: kept versions too) | ✅ Done | [notes](docs/scenarios/011-uninstall-package/) |
 | 12 | Can a package be switched on or off without uninstalling it? | Yes | Config | Example: kill switch, store falls back to redpanda while the theme stays installed | ✅ Done | [notes](docs/scenarios/012-switch-package-on-off/) |
-| 13 | Can a package be installed for some stores only? | Yes | Config | `"stores": ["<one store>"]`: on there, not on another store | ⬜ Not started | |
+| 13 | Can a package be installed for some stores only? | Yes | Config | Example: pilot on POCSppDemo; StaplesPromo, NVIDIA, Land O'Lakes unaffected | ✅ Done | [notes](docs/scenarios/013-some-stores-only/) |
 | 14 | Can the same package be installed twice with different settings? | No | Base | | ⛔ Blocked | |
 | 15 | Can a package declare required settings? | Yes | UI | `settingsSchema` field with `"required": true` | ✅ Done | [notes](docs/scenarios/015-required-settings/) |
 | 16 | Are required settings that are still empty reported at install? | Yes | Check | Deploy output names the empty required setting | ✅ Done | [notes](docs/scenarios/016-empty-required-settings-reported/) |

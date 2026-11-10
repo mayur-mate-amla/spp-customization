@@ -1,0 +1,9 @@
+$ node scripts/registry.mjs show   (stores)
+  "stores": [
+    "POCSppDemo"
+  ],
+  "parent": "redpanda",
+sppdemo.localhost:3000  store POCSppDemo: packages spp-base, spp-customization, artifi, countdown-banner, delivery-preference
+staplespromo.localhost:3000  store POCStaplesPromo: packages spp-base, artifi, countdown-banner
+nvidia.localhost:3000  store POCNvidia: packages spp-base, artifi, countdown-banner
+lol.localhost:3000  store POCLandOLakes: packages spp-base, artifi, countdown-banner

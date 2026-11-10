@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 53 |
+| ✅ Done | 54 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 82 |
+| ⬜ Not started | 81 |
 | ⛔ Blocked | 40 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -157,7 +157,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 63 | Are text, textarea, number, select, radio, list, object and custom fields supported? | Yes | UI | Example: Promotion banner with text, textarea, number, select, radio, list, object and custom (brand swatches) | ✅ Done | [notes](docs/scenarios/063-all-field-types/) |
 | 64 | Can a widget have default values? | Yes | UI | Example: season-aware defaults for new Promotion banners | ✅ Done | [notes](docs/scenarios/064-widget-default-values/) |
 | 65 | Can a widget appear in its own editor category? | Yes | UI | Example: SPP · Content and SPP · Promotions categories | ✅ Done | [notes](docs/scenarios/065-widget-editor-category/) |
-| 66 | Does the editor preview a widget live while editing? | Yes | Check | Needs the page-builder app running | ⬜ Not started | |
+| 66 | Does the editor preview a widget live while editing? | Yes | Check | Example: headline typed in the panel shows on the canvas as it is typed | ✅ Done | [notes](docs/scenarios/066-live-preview-while-editing/) |
 | 67 | Can I drag a new package widget onto a page and publish it? | Not tested | Check | Needs the page-builder app running | ⬜ Not started | |
 | 68 | Can I update an existing widget's config (fields, defaults)? | Partial | UI | Add fields to a store widget type (`ProductsCarousel`) | ⬜ Not started | |
 | 69 | Can I change an existing widget's design? | Yes | UI | CSS for a store widget | ⬜ Not started | |

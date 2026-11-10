@@ -25,3 +25,7 @@
 }
 .spp-customization-trust__item { font-weight: 600; }
 .spp-customization-trust__icon { color: var(--accent, rgb(242, 107, 29)); }
+
+/* customer service status (store-status API): green while open */
+.spp-customization-trust__support.is-open .spp-customization-trust__icon { color: rgb(22, 163, 74); }
+.spp-customization-trust__support a { font-weight: 600; text-decoration: underline; }

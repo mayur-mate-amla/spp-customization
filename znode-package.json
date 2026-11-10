@@ -96,6 +96,16 @@
       "browser": true,
       "default": "Mon-Fri, 8am-6pm ET"
     },
+    "supportOpenHour": {
+      "type": "number",
+      "label": "Customer service opens at this hour (0-23, weekdays, warehouse time)",
+      "default": 8
+    },
+    "supportCloseHour": {
+      "type": "number",
+      "label": "Customer service closes at this hour (1-24, weekdays, warehouse time)",
+      "default": 18
+    },
     "themeCards": {
       "type": "boolean",
       "label": "Listings use the theme's product card (single-page listings; paged ones keep the store's)",

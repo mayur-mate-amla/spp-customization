@@ -1,0 +1,11 @@
+> curl -i -H "Host: localhost:3000" -b runtimeThemePreview=spp-customization http://127.0.0.1:3000/api/extensions/plugins/spp-customization/store-status
+HTTP/1.1 200 OK
+cache-control: public, max-age=60
+content-type: application/json
+{"support":{"open":false,"label":"Customer service opens today at 8am","phone":"1-800-555-0199"},"shipping":{"shipsToday":true,"minutesLeft":461,"shipDay":"today","label":"Order within 7h 41m to ship today"},"notice":"Holiday shipping: order by Dec 17 for delivery before Dec 25. Our warehouse is closed Dec 24-26.","date":"2026-11-10","timeZone":"America/New_York"}
+
+# supportStatusAt at other times (8am-6pm ET, weekdays)
+Tue 10:00 ET  {"open":true,"label":"Customer service open until 6pm","phone":"1-800-555-0199"}
+Tue 18:30 ET  {"open":false,"label":"Customer service opens tomorrow at 8am","phone":"1-800-555-0199"}
+Fri 18:30 ET  {"open":false,"label":"Customer service opens Mon at 8am","phone":"1-800-555-0199"}
+Tue 06:00 ET  {"open":false,"label":"Customer service opens today at 8am","phone":"1-800-555-0199"}

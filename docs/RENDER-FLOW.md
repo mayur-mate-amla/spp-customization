@@ -342,7 +342,8 @@ repository joins it. Commits are on `main` of this repository.
 | 088 | Plugin labels (Common.sppCommerce) | 74eac5d | §3 A messages, client namespaces | §3 B.7 `withRuntimeMessages`, `useTranslations` from the store | src/commerce/i18n/labels.json |
 | 089 | Plugin page with its own URL (/ordering-information) | 9b25b9e | §9 A (store not-found) | §9 B.1 `serverPages` | src/commerce/OrderingInfoPage.tsx, src/commerce/server.ts |
 | 091 | Plugin webhook (signed ERP stock holds) | c3c088c | – | §7 B.5 route (`rawBody`, `verifySignature`), §4 B card tag | src/commerce/server.ts, scripts/erp-webhook.mjs |
-| 093 | New BFF layer (delivery estimate over a ZIP API) | (this commit) | §5 A add to cart | §5 B `product.addToCart`, §7 B.5 route + outbound fetch | src/commerce/delivery.ts, src/commerce/slots/DeliveryEstimate.tsx |
+| 093 | New BFF layer (delivery estimate over a ZIP API) | f9dbf96 | §5 A add to cart | §5 B `product.addToCart`, §7 B.5 route + outbound fetch | src/commerce/delivery.ts, src/commerce/slots/DeliveryEstimate.tsx |
+| 094 | New BFF API in the theme (store-status) | (this commit) | – | §8 B header slot + §7 B.5 route `Response` | src/server/status.ts, src/slots/TrustStrip.tsx |
 | 079 | Complex plugin (spp-commerce, the sum of 080-091) | 2c5d1a0 | §1-§9 A | §2 B placement; every B section | src/commerce/* |
 | 080 | Before/after add to cart (case packs) | 1052a6b | §6 | §6 B (request hooks), §7 B.5 route | src/commerce/server.ts |
 | 081 | React to cart changes (order limit) | 6d7c25f | §7 | §7 B.1 (`runCartHooks`) | src/commerce/server.ts, src/commerce/rules.ts |

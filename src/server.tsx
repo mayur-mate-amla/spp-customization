@@ -3,6 +3,7 @@ import type { IPluginRouteContext, IPluginRouteRequest, IRuntimePlugin, IServerS
 import { getHighlights, IHighlight } from "./server/data.js";
 import { ThemeLayout } from "./server/ThemeLayout.js";
 import { shippingCutoff } from "./server/shipping.js";
+import { storeStatus } from "./server/status.js";
 import { WelcomePage } from "./server/WelcomePage.js";
 
 // Spp Customization, server part: runs only on the store's server, never in the browser.
@@ -23,7 +24,8 @@ const plugin: IRuntimePlugin = {
   name: "spp-customization",
   apiVersion: 1,
   hooks: {},
-  routes: { highlights, "shipping-cutoff": shippingCutoff },
+  // store-status: the theme's BFF API for the header (support hours, ship cutoff, notice in one call)
+  routes: { highlights, "shipping-cutoff": shippingCutoff, "store-status": storeStatus },
   serverSlots: {
     "layout.root": (props: { children?: ReactNode }, context: IServerSlotContext) => <ThemeLayout settings={context.settings}>{props.children}</ThemeLayout>,
   },

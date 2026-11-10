@@ -64,10 +64,10 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 95 |
+| ✅ Done | 96 |
 | 🟡 In progress | 1 |
 | ⬜ Not started | 40 |
-| ⛔ Blocked | 39 |
+| ⛔ Blocked | 38 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
 
@@ -280,7 +280,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 133 | Can I change SEO and meta tags per theme? | No | Base | Re-check with `layout.head` (see notes) | ⛔ Blocked | |
+| 133 | Can I change SEO and meta tags per theme? | No | Base | re-checked: a theme adds head tags (in server HTML): og/twitter/app/verification; page title and description stay the CMS's | ✅ Done | [notes](133-seo-meta-per-theme/) |
 | 134 | Can I add structured data (JSON-LD) per store? | No | Base | | ⛔ Blocked | |
 | 135 | Can I change the sitemap or robots rules? | No | Base | | ⛔ Blocked | |
 | 136 | Is the webstore AEO and GEO compatible? | Not tested | Outside | Webstore-wide audit | ➖ Outside | |

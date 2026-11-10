@@ -96,6 +96,18 @@
       "browser": true,
       "default": "Mon-Fri, 8am-6pm ET"
     },
+    "brandName": {
+      "type": "string",
+      "label": "Brand name for link previews and the home-screen app name (og:site_name, application-name)",
+      "browser": true,
+      "default": "SPP Branded Goods"
+    },
+    "siteVerification": {
+      "type": "string",
+      "label": "Search console site verification code (google-site-verification); set per store",
+      "browser": true,
+      "default": ""
+    },
     "supportOpenHour": {
       "type": "number",
       "label": "Customer service opens at this hour (0-23, weekdays, warehouse time)",

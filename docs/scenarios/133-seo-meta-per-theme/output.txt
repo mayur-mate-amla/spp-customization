@@ -1,0 +1,28 @@
+# the <head> of the home page, as the server sends it (curl, MaxwellsHardware, spp-customization previewed)
+
+## before (the theme's head slot: theme-color only)
+<title>Acme Manufacturing</title>
+<meta name="description" content="Acme Manufacturing is a trusted industry leader specializing in professional power tools, electrical supplies, and durable workwear."/>
+<meta name="theme-color" content="#f26b1d"/>
+
+## after (brandName "SPP Branded Goods", siteVerification set for this test)
+<title>Acme Manufacturing</title>
+<meta name="description" content="Acme Manufacturing is a trusted industry leader specializing in professional power tools, electrical supplies, and durable workwear."/>
+<meta name="theme-color" content="#f26b1d"/>
+<meta property="og:site_name" content="SPP Branded Goods"/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="en_US"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="application-name" content="SPP Branded Goods"/>
+<meta name="apple-mobile-web-app-title" content="SPP Branded Goods"/>
+<meta name="google-site-verification" content="test-verification-code-123"/>
+
+## a category page (/category/1), same theme: the page's own title and description (CMS) with the theme's tags
+<title>Acme Manufacturing</title>
+<meta name="description" content="Acme Manufacturing is a trusted industry leader specializing in professional power tools, electrical supplies, and durable workwear."/>
+<meta name="theme-color" content="#f26b1d"/>
+...
+
+## the store's own theme (no preview): none of the theme's tags
+<title>Acme Manufacturing</title>
+<meta name="description" content="Acme Manufacturing is a trusted industry leader specializing in professional power tools, electrical supplies, and durable workwear."/>

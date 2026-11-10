@@ -1,0 +1,9 @@
+$ GET / (POCSppDemo, theme previewed): in the server HTML?
+  Skip to main content link: True
+  dated notice: True
+
+$ (rule check) datedNotice(settings, <date>)   from 2026-11-01 until 2026-12-26
+  2026-10-31 -> (no notice)
+  2026-11-01 -> Holiday shipping...
+  2026-12-26 -> Holiday shipping...
+  2026-12-27 -> (no notice)

@@ -1,13 +1,17 @@
 import type { ReactNode } from "react";
+import { datedNotice } from "./notice.js";
 
-// Server slot layout.root: every store page, header to footer (children). The merchant's brand settings become CSS
-// variables on this wrapper, so they override the theme's defaults (tokens.css, fonts.css) for everything inside:
-//   accentColor  (attribute ThemeAccentColor): buttons, button borders, links on hover, focus outline, announcement bar
-//   headingFont  (attribute ThemeHeadingFont): "brand" (Geist, the theme's own file), "family" (Montserrat, from the
-//                parent theme) or "system"
-// Set per store in Znode admin (the attributes) or in plugins.json; no code change, no deploy. The typography of body
-// text comes from the theme family (parent redpanda). The store's body is a flex column whose main area grows, so this
-// wrapper grows too and the footer stays at the bottom.
+// Server slot layout.root: every store page, header to footer (children), rendered on the server.
+//   - "Skip to main content": the first focusable element of the page, for keyboard and screen-reader users; it jumps
+//     past the header to the page's <main> (or the content after the header)
+//   - a dated notice (holiday shipping, closures): noticeText shows only between noticeFrom and noticeUntil, decided on
+//     the server with the warehouse's clock (shipTimezone), so it is in the page's HTML and never flickers in
+//   - the merchant's brand settings become CSS variables on this wrapper, so they override the theme's defaults
+//     (tokens.css, fonts.css) for everything inside:
+//       accentColor (attribute ThemeAccentColor): buttons, button borders, hover, focus outline, announcement bar
+//       headingFont (attribute ThemeHeadingFont): "brand" (Geist), "family" (Montserrat, from the parent) or "system"
+//       logoUrl (attribute ThemeLogoUrl): a store's own header logo (theme.css)
+// The store's body is a flex column whose main area grows, so this wrapper grows too and the footer stays at the bottom.
 
 // a CSS value from settings, without what could end the declaration
 const cssValue = (value: unknown) => String(value ?? "").replace(/[^#a-zA-Z0-9(),.% -]/g, "").trim();
@@ -17,6 +21,7 @@ const HEADING_FONTS: Record<string, string> = {
   family: "Montserrat, ui-sans-serif, system-ui, sans-serif",
   system: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif",
 };
+
 
 export function ThemeLayout(props: { children?: ReactNode; settings: Record<string, unknown> }) {
   const accent = cssValue(props.settings.accentColor);
@@ -33,12 +38,21 @@ export function ThemeLayout(props: { children?: ReactNode; settings: Record<stri
     });
   }
   // logoUrl (attribute ThemeLogoUrl): a store's own header logo, e.g. a co-branded lockup; the header component is
-  // untouched, its logo image shows this file instead (layout.css)
+  // untouched, its logo image shows this file instead (theme.css)
   const logo = String(props.settings.logoUrl || "").trim();
   const safeLogo = /^(\/|https:\/\/)[^"'()\s]+$/.test(logo) ? logo : "";
   if (safeLogo) style["--spp-logo"] = `url("${safeLogo}")`;
+  const notice = datedNotice(props.settings);
   return (
     <div className="spp-customization-layout" data-test-selector="divThemeLayout" data-logo={safeLogo ? "custom" : undefined} style={style}>
+      <a href="#spp-main" className="spp-customization-skip" data-test-selector="linkSkipToContent">
+        Skip to main content
+      </a>
+      {notice && (
+        <p className="spp-customization-notice" role="note" data-test-selector="txtDatedNotice">
+          {notice}
+        </p>
+      )}
       {props.children}
     </div>
   );

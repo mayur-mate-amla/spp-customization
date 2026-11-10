@@ -32,6 +32,8 @@ export function AnnouncementBar(props: { children?: ReactNode }) {
       )}
       {props.children}
       {settings.showTrustStrip !== false && <TrustStrip />}
+      {/* where "Skip to main content" (the theme's layout, ThemeLayout.tsx) lands: just past the header */}
+      <span id="spp-main" tabIndex={-1} className="spp-customization-skip-target" />
     </>
   );
 }

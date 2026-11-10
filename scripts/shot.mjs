@@ -79,6 +79,12 @@ try {
     }, String(find));
     await new Promise((resolve) => setTimeout(resolve, 800));
   }
+  // --press <key>: press a key first (e.g. Tab, to show what keyboard users get first)
+  const press = arg("press");
+  if (press && press !== true) {
+    await page.keyboard.press(String(press));
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
   // --click <selector>: click an element (e.g. Add to cart), then wait --after ms for what it opens
   const click = arg("click");
   if (click && click !== true) {

@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 40 |
+| ✅ Done | 41 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 93 |
+| ⬜ Not started | 92 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -138,7 +138,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 52 | Can I change the layout code? | Partial | UI | `layout.root` server slot (`ThemeLayout.tsx`) | ⬜ Not started | |
+| 52 | Can I change the layout code? | Partial | UI | Result: **Yes** (header to footer). Example: skip link + server-rendered dated holiday notice (layout.root) | ✅ Done | [notes](docs/scenarios/052-change-layout-code/) |
 | 53 | Can I change the root layout (html/head, global scripts)? | No | Base | Re-check: `layout.head` slot exists (see notes) | ⛔ Blocked | |
 | 54 | Can I change the listing layout? | Yes | UI | `productList.layout` slot | ⬜ Not started | |
 | 55 | Can I change the product page layout? | Yes | UI | `product.layout` slot | ⬜ Not started | |

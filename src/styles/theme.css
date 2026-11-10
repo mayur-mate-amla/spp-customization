@@ -3,6 +3,13 @@
 
 .spp-customization-layout { flex: 1 0 auto; display: flex; flex-direction: column; width: 100%; }
 
+/* layout.root: skip link (hidden until focused) and the dated notice */
+.spp-customization-skip { position: absolute; top: 8px; left: 8px; z-index: 100; padding: 10px 16px; font-weight: 700; color: #fff; background: var(--primary, #0b2545); border-radius: 6px; transform: translateY(-200%); }
+.spp-customization-skip:focus { transform: none; outline: 3px solid var(--accent, #f26b1d); outline-offset: 2px; }
+.spp-customization-skip-target { display: block; height: 0; }
+.spp-customization-skip-target:focus { outline: none; }
+.spp-customization-notice { margin: 0; padding: 8px 16px; font-size: 13.5px; font-weight: 600; text-align: center; color: rgb(30, 58, 138); background: rgb(219, 234, 254); }
+
 /* a store's own logo (setting logoUrl): the header's logo images show it, at the header's logo size */
 /* the store's header (imgDesktopLogo, imgMobileLogo) and the parent theme's brand header (.spp-logo, .spp-compact-logo) */
 .spp-customization-layout[data-logo="custom"] :is([data-test-selector="imgDesktopLogo"], [data-test-selector="imgMobileLogo"], .spp-logo, .spp-compact-logo) {

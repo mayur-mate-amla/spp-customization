@@ -1,0 +1,10 @@
+> curl -H "Host: localhost:3000" -b runtimeThemePreview=spp-customization "http://127.0.0.1:3000/api/extensions/plugins/spp-customization/highlights?limit=3"
+{"store":"MaxwellsHardware","loadedAt":"2026-11-10T11:17:31.501Z","items":[{"id":1,"title":"Account pricing","text":"Your agreed prices on every product."},{"id":2,"title":"Fast reorder","text":"Past orders and saved lists, ready to add to the cart."},{"id":3,"title":"Order tracking","text":"See where every order is and download its invoice."}]}
+
+> the same with ?limit=1
+{"store":"MaxwellsHardware","loadedAt":"2026-11-10T11:17:31.615Z","items":[{"id":1,"title":"Account pricing","text":"Your agreed prices on every product."}]}
+
+> npx znode check .
+warning reads cookies in the browser: keep secrets on the server (routes)
+check spp-customization@1.0.2: 0 errors, 1 warnings
+(the warning is the preview banner reading its cookie, unchanged by this row)

@@ -11,6 +11,7 @@ import { AddedToCart } from "./slots/AddedToCart.js";
 import { HeadTags } from "./slots/HeadTags.js";
 import { Hero, HERO_EDITOR } from "./widgets/Hero.js";
 import { Testimonials, TESTIMONIALS_EDITOR } from "./widgets/Testimonials.js";
+import { Highlights, HIGHLIGHTS_EDITOR } from "./widgets/Highlights.js";
 import { Faq, FAQ_EDITOR } from "./widgets/Faq.js";
 import { PromoBanner, PROMO_BANNER_EDITOR } from "./widgets/PromoBanner.js";
 import { PromoCodeStripPlus, PROMO_CODE_STRIP_EDITOR } from "./widgets/PromoCodeStripPlus.js";
@@ -51,6 +52,8 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
     widgets: {
       SppCustomizationHero: { render: Hero, ...HERO_EDITOR },
       SppTestimonials: { render: Testimonials, ...TESTIMONIALS_EDITOR },
+      // its content comes from the theme's highlights route (server), not from the page
+      SppHighlights: { render: Highlights, ...HIGHLIGHTS_EDITOR },
       SppFaq: { render: Faq, ...FAQ_EDITOR },
       SppPromoBanner: { render: PromoBanner, ...PROMO_BANNER_EDITOR },
       // the parent theme's Promo code strip, extended with an expiry date and terms

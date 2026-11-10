@@ -11,8 +11,12 @@ import { WelcomePage } from "./server/WelcomePage.js";
 //   routes:      your API, /api/extensions/plugins/spp-customization/<route>
 // They may be async (fetch data, call an API) and use next/image, next/link and next/font/google.
 
-async function highlights(_request: IPluginRouteRequest, context: IPluginRouteContext): Promise<{ store: string; items: IHighlight[] }> {
-  return { store: context.store.code, items: await getHighlights(context.store.code) };
+// GET .../highlights?limit=3: the store's highlights for the SppHighlights widget and the welcome page; the source is
+// read here, on the store's server, so the widget never needs its address or key
+async function highlights(request: IPluginRouteRequest, context: IPluginRouteContext): Promise<{ store: string; loadedAt: string; items: IHighlight[] }> {
+  const limit = Math.max(1, Math.min(6, Number(request.query.limit) || 6));
+  const items = await getHighlights(context.store.code);
+  return { store: context.store.code, loadedAt: new Date().toISOString(), items: items.slice(0, limit) };
 }
 
 const plugin: IRuntimePlugin = {

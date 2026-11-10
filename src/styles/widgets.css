@@ -64,3 +64,15 @@
 .spp-customization-testimonials__quote { margin: 0; font-size: 16px; line-height: 1.5; color: rgb(30, 41, 59); }
 .spp-customization-testimonials__who { display: flex; flex-direction: column; margin: auto 0 0; font-size: 14px; color: rgb(71, 85, 105); }
 .spp-customization-testimonials__who strong { color: var(--primary, #0b2545); }
+
+/* SppHighlights: "Why order with us", loaded from the theme's highlights route */
+.spp-customization-highlights { margin: 40px 0; }
+.spp-customization-highlights__heading { margin: 0 0 18px; font-size: 28px; font-weight: 700; color: var(--primary, #0b2545); }
+.spp-customization-highlights__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.spp-customization-highlights__card { min-height: 150px; padding: 22px; background: #fff; border: 1px solid rgb(226, 232, 240); border-top: 4px solid var(--accent, #f26b1d); border-radius: 10px; }
+.spp-customization-highlights__card--loading { background: linear-gradient(90deg, rgb(241, 245, 249), rgb(226, 232, 240), rgb(241, 245, 249)); background-size: 200% 100%; animation: spp-customization-shimmer 1.2s linear infinite; }
+.spp-customization-highlights__number { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; color: var(--accent, #f26b1d); }
+.spp-customization-highlights__title { margin: 0 0 6px; font-size: 18px; font-weight: 700; color: var(--primary, #0b2545); }
+.spp-customization-highlights__text { margin: 0; color: rgb(71, 85, 105); }
+@keyframes spp-customization-shimmer { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .spp-customization-highlights__card--loading { animation: none; } }

@@ -1,0 +1,33 @@
+/* Product page layout: from 1024 px the product's info column (title, price, add-to-cart, key details) becomes a sticky
+   buy box card beside the image, so the price and the button stay in view while the shopper reads the rest of the
+   page. The store's components are not touched: the column is found by the product name heading it holds. */
+
+@media (min-width: 1024px) {
+  html[data-theme] div:has(> div > h1[data-test-selector="hdgProductName"]) {
+    align-items: flex-start;
+    gap: 40px;
+  }
+  html[data-theme] div:has(> h1[data-test-selector="hdgProductName"]) {
+    position: sticky;
+    top: 150px;
+    align-self: flex-start;
+    margin-left: 0;
+    padding: 28px;
+    background: #fff;
+    border: 1px solid var(--card-border, rgb(226, 232, 240));
+    border-radius: 12px;
+    box-shadow: 0 14px 34px rgba(11, 37, 69, 0.09);
+  }
+}
+
+/* key details (product.addToCart, ProductFacts.tsx) */
+.spp-customization-facts { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--card-border, rgb(226, 232, 240)); color: var(--primary, #0b2545); }
+.spp-customization-facts__title { margin: 0 0 10px; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.spp-customization-facts__list { display: grid; gap: 6px 24px; margin: 0; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.spp-customization-facts__list div { display: flex; flex-direction: column; }
+.spp-customization-facts__list dt { font-size: 12.5px; color: rgb(100, 116, 139); }
+.spp-customization-facts__list dd { margin: 0; font-size: 14.5px; font-weight: 600; }
+.spp-customization-facts__tiers { width: 100%; margin-top: 14px; font-size: 14px; border-collapse: collapse; }
+.spp-customization-facts__tiers caption { margin-bottom: 6px; font-weight: 700; text-align: left; }
+.spp-customization-facts__tiers th, .spp-customization-facts__tiers td { padding: 6px 10px; text-align: left; border-bottom: 1px solid var(--card-border, rgb(226, 232, 240)); }
+.spp-customization-facts__tiers th { font-size: 12.5px; color: rgb(100, 116, 139); background: rgb(248, 250, 252); }

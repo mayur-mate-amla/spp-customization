@@ -4,6 +4,7 @@ import { AnnouncementBar } from "./slots/AnnouncementBar.js";
 import { ProductBadge } from "./slots/ProductBadge.js";
 import { SearchWithPopular } from "./slots/SearchWithPopular.js";
 import { CustomizeToOrder } from "./slots/CustomizeToOrder.js";
+import { ProductFacts } from "./slots/ProductFacts.js";
 import { FooterHelp } from "./slots/FooterHelp.js";
 import { ProductListing } from "./slots/ProductListing.js";
 import { AddedToCart } from "./slots/AddedToCart.js";
@@ -29,8 +30,13 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
       "product.card": ProductBadge,
       // the store's search box with popular searches under it
       "header.search": SearchWithPopular,
-      // decorated products: "Customize & order" replaces the store's add-to-cart
-      "product.addToCart": CustomizeToOrder,
+      // decorated products: "Customize & order" replaces the store's add-to-cart; then the product's key details
+      "product.addToCart": (props: Parameters<typeof CustomizeToOrder>[0]) => (
+        <>
+          <CustomizeToOrder {...props} />
+          <ProductFacts product={props.product as never} isQuickView={props.isQuickView} />
+        </>
+      ),
       // "Need help?" contact and payments band above the store's footer
       "layout.footer": FooterHelp,
       // the listing with the theme's own product card (the store's listing card has no slot on this theme)

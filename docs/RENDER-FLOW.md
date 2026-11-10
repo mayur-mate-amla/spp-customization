@@ -286,8 +286,9 @@ repository joins it. Commits are on `main` of this repository.
 | 016 | Empty required settings reported | ce79d42 | – | §1 install | – |
 | 017 | API version | a76185e | – | §1 install, `registry.server.ts:89` load check | – |
 | 022 | Scaffold command | 7717e83 | – | §1 (`znode create`) | – |
-| 023 | Complex theme (inventory) | (this commit) | §1-§4 | §2 B.2 chain, §3 B.1, §8 B, §9 B | scripts/inventory.mjs |
+| 023 | Complex theme (inventory) | 3fc8ef2 | §1-§4 | §2 B.2 chain, §3 B.1, §8 B, §9 B | scripts/inventory.mjs |
 | 024 | CSS-only tokens | 0805627 | §3 A.1 `data-theme` | §3 B.1 stylesheets | src/styles/tokens.css |
+| 025 | Theme carries UI code | (this commit) | §4 A, §8 A | §4 B, §8 B slots | src/slots/*, src/server/ThemeLayout.tsx |
 | 026 | Child theme | ae1cced | §9 A home | §2 B.2 parent chain, §9 B.1 page content, §9 B.2 parent's widgets | src/pages/home.json |
 | 027 | Multi-level inheritance | 47128bc | §3 | §2 B.2 chain, §3 B.1 order | znode-package.json |
 | 028 | Own font files | 7f8b51f | §3 | §3 B.1 + B.6 (font file) | src/styles/fonts.css |

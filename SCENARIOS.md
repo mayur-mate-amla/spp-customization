@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 67 |
+| ✅ Done | 68 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 69 |
+| ⬜ Not started | 68 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -104,7 +104,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | --- | --- | --- | --- | --- | --- | --- |
 | 23 | Can I create a complex theme? | Yes | UI | the sum of 24-41 (40 blocked); npm run inventory lists what the built theme carries | ✅ Done | [notes](023-complex-theme/) |
 | 24 | Can I create a theme with CSS only (tokens, fonts, colors)? | Yes | UI | Design tokens in `src/styles/tokens.css` (store CSS variables) | ✅ Done | [notes](docs/scenarios/024-css-only-tokens/) |
-| 25 | Can a theme carry UI code (header, footer, cards, layouts)? | Yes | UI | Covered by 48-50 and 52-55 (header, footer, card, layouts) | ⬜ Not started | |
+| 25 | Can a theme carry UI code (header, footer, cards, layouts)? | Yes | UI | header, footer, card, listing, PDP parts, popup, root layout: 8 browser slots + 1 server slot (rows 48-55) | ✅ Done | [notes](025-theme-ui-code/) |
 | 26 | Can a child theme inherit from a parent theme? | Yes | UI | Example: campaign home page from spp-base's HeroBanner, PromoCodeStrip, CardGrid, DeliveryDates | ✅ Done | [notes](docs/scenarios/026-child-theme-inherits-parent/) |
 | 27 | Can themes inherit more than one level deep? | Yes | UI | Example: sub-brand of Red Panda (Montserrat) on spp-base (widgets), own colors on top | ✅ Done | [notes](docs/scenarios/027-multi-level-inheritance/) |
 | 28 | Can I use my own font files in a theme? | Yes | UI | Example: self-hosted brand font (Geist, OFL) for headings | ✅ Done | [notes](docs/scenarios/028-own-font-files/) |

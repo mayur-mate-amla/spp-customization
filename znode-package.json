@@ -33,6 +33,12 @@
       "browser": true,
       "default": "Free shipping on orders over $100"
     },
+    "supportPhone": {
+      "type": "string",
+      "label": "Customer service phone, shown in the announcement bar (required)",
+      "required": true,
+      "browser": true
+    },
     "showBadge": {
       "type": "boolean",
       "label": "Show the New badge on product cards",

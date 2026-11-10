@@ -1,0 +1,22 @@
+$ npm run deploy   ("dedupeStyles": true; the store page compared: http://staplespromo.localhost:3000/, the SDK default)
+css-dedupe: 8 rules the store already has dropped, 7191 bytes kept (5 store stylesheets)
+built theme spp-customization@1.0.2: 15 files
+packed spp-customization-1.0.2.zpkg.zip (47120 bytes)
+installed theme spp-customization@1.0.2 (was 1.0.2): 14 files, disabled for []
+kept spp-customization-1.0.2.zpkg.zip in .versions\spp-customization (2 versions on disk: 1.0.1, 1.0.2)
+
+$ grep -c the utility rules in the installed stylesheet
+.flex{                     0
+.flex {                    0
+.items-center              1
+.gap-6                     1
+.text-sm                   0
+.justify-center            0
+.flex-wrap                 0
+.py-2                      0
+.gap-2                     0
+.spp-customization-trust   3
+(the two matches above are the stylesheet's comment, not rules)
+
+$ GET http://staplespromo.localhost:3000/api/extensions   (a store that does not use this theme)
+plugins: spp-base, artifi, countdown-banner   (no spp-customization: its CSS is never linked there)

@@ -16,6 +16,7 @@
     "browser": "src/browser.tsx"
   },
   "styles": ["src/styles/*.css"],
+  "dedupeStyles": true,
   "assets": ["src/assets/*.svg", "src/assets/fonts/*.woff2"],
   "messages": "src/i18n/labels.json",
   "widgets": ["SppCustomizationHero"],
@@ -47,6 +48,12 @@
       "label": "Customer service phone, shown in the announcement bar (required)",
       "required": true,
       "browser": true
+    },
+    "showTrustStrip": {
+      "type": "boolean",
+      "label": "Show the trust strip under the header",
+      "browser": true,
+      "default": true
     },
     "showBadge": {
       "type": "boolean",

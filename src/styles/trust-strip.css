@@ -1,0 +1,27 @@
+/* Trust strip, as copied from the client's live site: its own component rules plus the utility classes its markup
+   uses. Those utilities (.flex, .items-center, .gap-6, ...) also exist in the store's CSS; shipped again they would load
+   after the store's and win over its responsive variants (md:..., lg:...). "dedupeStyles": true in znode-package.json
+   drops every rule here that the store's page already has, at build time. */
+
+/* utilities from the live site (dropped at build: the store has them) */
+.flex { display: flex; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 0.5rem; }
+.gap-6 { gap: 1.5rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+
+/* the component (kept: only this theme has it) */
+.spp-customization-trust {
+  margin: 0;
+  padding-right: 16px;
+  padding-left: 16px;
+  list-style: none;
+  color: var(--primary, rgb(11, 37, 69));
+  background: rgb(244, 246, 249);
+  border-bottom: 1px solid var(--card-border, rgb(226, 232, 240));
+}
+.spp-customization-trust__item { font-weight: 600; }
+.spp-customization-trust__icon { color: var(--accent, rgb(242, 107, 29)); }

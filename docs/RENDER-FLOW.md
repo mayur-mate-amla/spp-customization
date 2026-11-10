@@ -359,8 +359,9 @@ repository joins it. Commits are on `main` of this repository.
 | 080 | Before/after add to cart (case packs) | 1052a6b | §6 | §6 B (request hooks), §7 B.5 route | src/commerce/server.ts |
 | 081 | React to cart changes (order limit) | 6d7c25f | §7 | §7 B.1 (`runCartHooks`) | src/commerce/server.ts, src/commerce/rules.ts |
 | 082 | Change cart lines before they are shown | 3ad302b | §7 A.1 | §7 B.1 (`runMapCartItems`) | src/commerce/server.ts, src/commerce/rules.ts |
-| 112 | Change the cart page (per-line delivery dates) | (this commit) | §7 A cart page (no slot) | §7 B.1 `mapCartItems` with cookies | src/commerce/server.ts, src/commerce/slots/DeliveryEstimate.tsx |
+| 112 | Change the cart page (per-line delivery dates) | 6e949b5 | §7 A cart page (no slot) | §7 B.1 `mapCartItems` with cookies | src/commerce/server.ts, src/commerce/slots/DeliveryEstimate.tsx |
 | 113 | Add or remove cart items automatically | 68703da | §7 A.1 | §7 B.1 (`runCartHooks` actions) | src/commerce/server.ts, src/commerce/rules.ts |
 | 114 | Cart rules (minimum order quantity) | 180df50 | §7 A.1 | §7 B.1 (`runCartHooks`, `runMapCartItems`) | src/commerce/rules.ts, src/commerce/server.ts |
+| 116 | Checkout address step (PO Box guard, delivery date) | (this commit) | §7 A.3 address form | §7 B.2 `checkout.address` | src/commerce/slots/CheckoutAddress.tsx |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

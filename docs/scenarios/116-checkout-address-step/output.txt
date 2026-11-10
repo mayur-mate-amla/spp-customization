@@ -1,0 +1,17 @@
+# /checkout as a guest, backpack in the cart (node checkout-steps.mjs: types into the store's address form)
+
+## before (no checkout.address slot of spp-commerce): address1 = "PO Box 4521", postalCode = 53202
+POST requests after the form was reached: none
+warning shown: (none)
+delivery shown: (none)
+
+## after, typing only
+warning shown: We can't deliver to a PO Box. Decorated orders ship by ground freight: please enter a street address.
+delivery shown: Ships from Milwaukee: arrives by Wed, Nov 11 to Milwaukee, WI 53202 (decorated items may take longer).
+
+## after, Test / Buyer / PO Box 4521 / 53202, then "Save changes" pressed
+﻿saved docs/scenarios/116-checkout-address-step/after-save.png
+POST requests after the form was reached: none
+warning shown: We can't deliver to a PO Box. Decorated orders ship by ground freight: please enter a street address.
+delivery shown: Ships from Milwaukee: arrives by Wed, Nov 11 to Milwaukee, WI 53202 (decorated items may take longer).
+(the store's save never ran: no POST, and none of the store's own validation messages)

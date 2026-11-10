@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 92 |
+| ✅ Done | 93 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 44 |
+| ⬜ Not started | 43 |
 | ⛔ Blocked | 39 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -243,7 +243,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 115 | Can I change the checkout? | Partial | UI | Covered by 116-117 | ⬜ Not started | |
-| 116 | Can I change the checkout address step? | Yes | UI | `checkout.address` slot | ⬜ Not started | |
+| 116 | Can I change the checkout address step? | Yes | UI | checkout.address wraps the store's form: PO Box warning + save stopped (capture phase), delivery date for the ZIP | ✅ Done | [notes](116-checkout-address-step/) |
 | 117 | Can I filter or change shipping methods? | Yes | UI | `checkout.shippingOptions` slot | ⬜ Not started | |
 | 118 | Can I change the payment step UI? | No | Base | | ⛔ Blocked | |
 | 119 | Can I change the payment gateway? | No | Base | | ⛔ Blocked | |

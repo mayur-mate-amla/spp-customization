@@ -3,6 +3,7 @@ import { bindHost } from "./host.js";
 import { AccountBar } from "./slots/AccountBar.js";
 import { RuleTags } from "./slots/RuleTags.js";
 import { DeliveryEstimate } from "./slots/DeliveryEstimate.js";
+import { CheckoutAddress } from "./slots/CheckoutAddress.js";
 import { pinPromoted, popupQuantity } from "./transforms.js";
 import { AccountManager, ACCOUNT_MANAGER_EDITOR } from "./widgets/AccountManager.js";
 import { QuoteRequest, QUOTE_REQUEST_EDITOR } from "./widgets/QuoteRequest.js";
@@ -20,6 +21,8 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
       "product.card": RuleTags,
       // "Deliver to [ZIP]" under the add to cart, from the delivery-estimate route
       "product.addToCart": DeliveryEstimate,
+      // the checkout's address step: a PO Box guard and the delivery date (row 116)
+      "checkout.address": CheckoutAddress,
     },
     transforms: {
       // listings: the promoted SKUs first

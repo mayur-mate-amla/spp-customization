@@ -25,7 +25,9 @@
       "holdNotice": "<b>Out until {date}.</b> This item cannot be ordered right now.",
       "holdNoticeNoDate": "<b>Temporarily out of stock.</b> This item cannot be ordered right now.",
       "askAlternatives": "Ask us about an alternative",
-      "addForMinimum": "add <b>{amount}</b> to reach the {minimum} order minimum"
+      "addForMinimum": "add <b>{amount}</b> to reach the {minimum} order minimum",
+      "checkoutArrives": "Ships from Milwaukee: arrives by <b>{date}</b> to {place} (decorated items may take longer).",
+      "noPoBox": "<b>We can't deliver to a PO Box.</b> Decorated orders ship by ground freight: please enter a street address."
     }
   }
 }

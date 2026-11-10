@@ -73,3 +73,7 @@
 /* product page: an item on an ERP stock hold (row 109) */
 .spp-commerce-hold { margin: 14px 0 0; padding: 10px 12px; font-size: 14px; color: rgb(120, 53, 15); background: rgb(254, 243, 199); border: 1px solid rgb(253, 230, 138); border-radius: 8px; }
 .spp-commerce-hold a { font-weight: 600; text-decoration: underline; }
+
+/* checkout address step (checkout.address slot, row 116) */
+.spp-commerce-checkout-address__eta { margin: 0 0 14px; padding: 10px 12px; font-size: 14px; color: rgb(21, 128, 61); background: rgb(240, 253, 244); border: 1px solid rgb(187, 247, 208); border-radius: 8px; }
+.spp-commerce-checkout-address__warning { margin: 12px 0 0; padding: 10px 12px; font-size: 14px; color: rgb(153, 27, 27); background: rgb(254, 242, 242); border: 1px solid rgb(254, 202, 202); border-radius: 8px; }

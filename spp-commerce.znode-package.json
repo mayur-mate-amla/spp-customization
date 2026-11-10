@@ -170,6 +170,12 @@
       "type": "string",
       "label": "Key staff send (X-Staff-Key) to list quote requests at .../quote-requests; empty: the list is closed",
       "default": ""
+    },
+    "noPoBoxes": {
+      "type": "boolean",
+      "label": "Refuse PO Box shipping addresses at checkout (ground freight)",
+      "browser": true,
+      "default": true
     }
   }
 }

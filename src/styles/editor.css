@@ -1,0 +1,14 @@
+/* Page builder only: the editor loads the edited store's runtime stylesheets into its own page (RuntimePageEditor's
+   linkRuntimeStyles), so a theme can tidy the editor's component list for its stores. The selectors are the editor's
+   stable drag-and-drop ids, "component-list:<category>::<widget type>"; they never match on the storefront.
+
+   Curated widget list: base widgets this theme does not support are left out of the list, so merchandisers pick the
+   right block. This only hides them from the list: pages that already use them still render them. */
+
+/* the plain Products Carousel: SPP stores use "Artifi products carousel" (product images come from Artifi) */
+[data-rfd-draggable-id$="::ProductsCarousel"],
+/* newsletter sign-up and ad spaces: not offered on the SPP company stores */
+[data-rfd-draggable-id$="::NewsLetter"],
+[data-rfd-draggable-id$="::AdSpace"] {
+  display: none;
+}

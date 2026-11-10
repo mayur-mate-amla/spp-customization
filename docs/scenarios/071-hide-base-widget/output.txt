@@ -1,0 +1,42 @@
+component list ids for POCSppDemo (data-rfd-draggable-id, "component-list:" removed), after the change:
+Layout::Container
+Layout::Column
+Layout::VerticalSpacing
+UI Widgets::Text
+UI Widgets::Heading
+UI Widgets::ButtonGroup
+UI Widgets::TextImage
+UI Widgets::DynamicWidget
+UI Widgets::RichTextWidget
+Znode Widgets::BannerSlider
+Znode Widgets::CategoriesCarousel
+Znode Widgets::OfferBanner
+Znode Widgets::ProductsCarousel  (hidden)
+Znode Widgets::BrandsCarousel
+Znode Widgets::AdSpace  (hidden)
+Znode Widgets::HomePagePromo
+Znode Widgets::Image
+Znode Widgets::Video
+Znode Widgets::NewsLetter  (hidden)
+Znode Widgets::LinkPanel
+Znode Widgets::FormWidget
+SPP widgets::StoreFooter
+SPP widgets::HeroBanner
+SPP widgets::LogoStrip
+SPP widgets::CardGrid
+SPP widgets::PromoCodeStrip
+SPP widgets::DeliveryDates
+SPP widgets::PromoCards
+SPP widgets::CategoryTiles
+SPP widgets::ArtifiProductsCarousel
+SPP widgets::BrandSection
+SPP widgets::BrandSelector
+SPP widgets::SignUpBanner
+SPP · Content::SppCustomizationHero
+SPP · Content::SppTestimonials
+SPP · Content::SppFaq
+SPP · Promotions::SppPromoBanner
+Artifi::DesignYourOwn
+Promotions::CountdownBanner
+SPP commerce::SppAccountManager
+SPP shared::SppShowroom

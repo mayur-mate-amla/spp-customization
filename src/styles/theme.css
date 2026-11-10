@@ -24,6 +24,12 @@
 .spp-customization-search__term { padding: 1px 8px; color: var(--primary, #0b2545); background: rgb(241, 245, 249); border-radius: 999px; }
 .spp-customization-search__term:hover, .spp-customization-search__term:focus-visible { color: #fff; background: var(--accent, #f26b1d); }
 
+/* product.addToCart for decorated products: the steps and the "Customize & order" button */
+.spp-customization-customize { display: flex; flex-direction: column; gap: 12px; margin: 8px 0; padding: 16px; border: 1px solid var(--card-border, rgb(226, 232, 240)); border-radius: var(--card-radius, 8px); background: rgb(255, 247, 237); }
+.spp-customization-customize__steps { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0; padding: 0 0 0 18px; font-size: 14px; color: var(--primary, #0b2545); list-style: decimal; }
+.spp-customization-customize__button { align-self: flex-start; padding: 12px 28px; font-weight: 700; color: #fff; background: var(--accent, #f26b1d); border-radius: var(--btn-border-radius, 6px); }
+.spp-customization-customize__button:hover, .spp-customization-customize__button:focus-visible { background: var(--hover, #d6540a); }
+
 .spp-customization-card { position: relative; }
 .spp-customization-badge { position: absolute; top: 8px; left: 8px; z-index: 1; padding: 2px 8px; font-size: 12px; font-weight: 700; color: #fff; background: var(--theme-accent, var(--accent, #f26b1d)); border-radius: 2px; }
 

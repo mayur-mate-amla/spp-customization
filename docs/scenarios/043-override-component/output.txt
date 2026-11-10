@@ -1,0 +1,2 @@
+$ node scripts/registry.mjs set customizableSkus=["80RXL_986"]
+"customizableSkus": [ "80RXL_986" ]

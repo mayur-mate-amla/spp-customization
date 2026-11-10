@@ -68,6 +68,12 @@
       "browser": true,
       "default": ["Cordless drill", "Safety glasses", "Work gloves", "Extension cord"]
     },
+    "customizableSkus": {
+      "type": "list",
+      "label": "Decorated products: SKUs whose add-to-cart becomes \"Customize & order\" (opens the customizer)",
+      "browser": true,
+      "default": []
+    },
     "shipCutoffHour": {
       "type": "number",
       "label": "Daily dispatch cutoff hour (0-23, warehouse time): orders before it ship the same weekday",

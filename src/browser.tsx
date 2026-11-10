@@ -3,6 +3,7 @@ import { bindHost } from "./lib/host.js";
 import { AnnouncementBar } from "./slots/AnnouncementBar.js";
 import { ProductBadge } from "./slots/ProductBadge.js";
 import { SearchWithPopular } from "./slots/SearchWithPopular.js";
+import { CustomizeToOrder } from "./slots/CustomizeToOrder.js";
 import { Hero, HERO_EDITOR } from "./widgets/Hero.js";
 import { Testimonials, TESTIMONIALS_EDITOR } from "./widgets/Testimonials.js";
 
@@ -16,12 +17,14 @@ export default function setup(host: IBrowserHost): IBrowserPlugin {
   bindHost(host);
   return {
     slots: {
-      // an announcement bar above the store's header
+      // preview bar, announcement bar above the store's header, trust strip below it
       "layout.header": AnnouncementBar,
       // a New badge on product cards
       "product.card": ProductBadge,
       // the store's search box with popular searches under it
       "header.search": SearchWithPopular,
+      // decorated products: "Customize & order" replaces the store's add-to-cart
+      "product.addToCart": CustomizeToOrder,
     },
     widgets: {
       SppCustomizationHero: { render: Hero, ...HERO_EDITOR },

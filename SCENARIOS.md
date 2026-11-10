@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 33 |
+| ✅ Done | 34 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 100 |
+| ⬜ Not started | 99 |
 | ⛔ Blocked | 42 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -124,7 +124,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 42 | Can I update a component? | Yes | UI | Example: popular searches added to the store's search box (header.search) | ✅ Done | [notes](docs/scenarios/042-update-component/) |
-| 43 | Can I override an existing component with a runtime package? | Partial | UI | Replace a slot's children (product image) | ⬜ Not started | |
+| 43 | Can I override an existing component with a runtime package? | Partial | UI | Example: Customize & order replaces add-to-cart for decorated SKUs. Works for wrapped components; product.image and the listing card are not wrapped on custom1 (base) | ✅ Done | [notes](docs/scenarios/043-override-component/) |
 | 44 | Can I override an existing component with an SWC build-time theme? | Yes | Outside | Build-time themes live in the store repo | ➖ Outside | |
 | 45 | Can I add a new slot (extension point) from a package? | No | Base | | ⛔ Blocked | |
 | 46 | Can two plugins change the same slot? | Yes | Check | This theme and countdown-banner both in `layout.header` | ⬜ Not started | |

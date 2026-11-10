@@ -1,0 +1,12 @@
+$ grep apiVersion znode-package.json src/server.tsx   (the package declares API version 1)
+znode-package.json:5: "apiVersion": 1,
+server.tsx:19: apiVersion: 1,
+
+$ npx znode install bad/bad-api-version.zpkg.zip <empty scratch folder>   (manifest says 99)
+znode-package: package: apiVersion 99 isn't supported (this store runs 1)
+(exit 1)
+
+$ (store side) packages/extensions/src/types.ts and registry.server.ts
+types.ts:7: export const EXTENSION_API_VERSION = 1;
+registry.server.ts:89: const plugin = loaded && loaded.apiVersion === EXTENSION_API_VERSION && loaded.name === entry.name ? loaded : null;
+(a server bundle whose apiVersion is not the store's is not loaded)

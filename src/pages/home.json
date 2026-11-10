@@ -129,6 +129,28 @@
           }
         ]
       }
+    },
+    {
+      "type": "SppFaq",
+      "props": {
+        "id": "SppFaq-home",
+        "heading": "Frequently asked questions",
+        "openFirst": true,
+        "items": [
+          {
+            "question": "Do you offer account pricing?",
+            "answer": "Yes. Business accounts see their agreed prices on every product once signed in."
+          },
+          {
+            "question": "How fast do in-stock items ship?",
+            "answer": "Orders placed before 3 pm Eastern on a weekday ship the same day from our Milwaukee warehouse."
+          },
+          {
+            "question": "Can I return opened tools?",
+            "answer": "Unused items can be returned within 30 days. Opened power tools are covered by the manufacturer warranty."
+          }
+        ]
+      }
     }
   ],
   "zones": {}

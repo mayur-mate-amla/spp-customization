@@ -1,5 +1,17 @@
 /* The theme's own page-builder widgets */
 
+/* SppFaq */
+.spp-customization-faq { max-width: 880px; margin: 40px auto; }
+.spp-customization-faq__heading { margin: 0 0 16px; font-size: 28px; font-weight: 700; text-align: center; color: var(--primary, #0b2545); }
+.spp-customization-faq__list { border-top: 1px solid var(--card-border, rgb(226, 232, 240)); }
+.spp-customization-faq__item { border-bottom: 1px solid var(--card-border, rgb(226, 232, 240)); }
+.spp-customization-faq__question { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 4px; font-size: 17px; font-weight: 600; color: var(--primary, #0b2545); cursor: pointer; list-style: none; }
+.spp-customization-faq__question::-webkit-details-marker { display: none; }
+.spp-customization-faq__question::after { content: "+"; flex: none; font-size: 22px; line-height: 1; color: var(--accent, #f26b1d); transition: transform 0.15s ease; }
+.spp-customization-faq__item[open] .spp-customization-faq__question::after { transform: rotate(45deg); }
+.spp-customization-faq__question:focus-visible { outline: 2px solid var(--focus-outline-color, #f26b1d); outline-offset: 2px; }
+.spp-customization-faq__answer { margin: 0; padding: 0 4px 18px; line-height: 1.6; color: rgb(51, 65, 85); }
+
 /* SppTestimonials */
 .spp-customization-testimonials { margin: 40px 0; text-align: center; }
 .spp-customization-testimonials__heading { margin: 0 0 8px; font-size: 28px; font-weight: 700; color: var(--primary, #0b2545); }

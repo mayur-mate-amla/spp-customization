@@ -61,9 +61,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 46 |
+| ✅ Done | 47 |
 | 🟡 In progress | 0 |
-| ⬜ Not started | 89 |
+| ⬜ Not started | 88 |
 | ⛔ Blocked | 40 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -150,7 +150,7 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 59 | Can I add a new widget? | Yes | UI | New widget in `src/widgets/` and `"widgets"` | ⬜ Not started | |
+| 59 | Can I add a new widget? | Yes | UI | Example: FAQ accordion widget (details/summary), in the editor's Spp Customization category | ✅ Done | [notes](docs/scenarios/059-add-new-widget/) |
 | 60 | Can I create a widget in a theme and use it for that theme or globally? | Yes | UI | Widget in this theme; shown where the theme runs | ⬜ Not started | |
 | 61 | Can a plugin carry a widget? | Yes | Check | Same widget API in a `kind: plugin` package (SDK) | ⬜ Not started | |
 | 62 | Can I give a widget settings fields in the page builder? | Yes | UI | `fields` on the widget | ⬜ Not started | |

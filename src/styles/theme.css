@@ -3,7 +3,8 @@
 
 .spp-customization-layout { flex: 1 0 auto; display: flex; flex-direction: column; width: 100%; }
 
-.spp-customization-announcement { padding: 8px 16px; text-align: center; font-size: 14px; color: #fff; background: var(--theme-accent, #2563eb); }
+.spp-customization-announcement { display: flex; flex-wrap: wrap; gap: 4px 12px; justify-content: center; padding: 8px 16px; text-align: center; font-size: 14px; color: #fff; background: var(--theme-accent, #2563eb); }
+.spp-customization-announcement__link { color: #fff; font-weight: 600; text-decoration: underline; }
 
 .spp-customization-card { position: relative; }
 .spp-customization-badge { position: absolute; top: 8px; left: 8px; z-index: 1; padding: 2px 8px; font-size: 12px; font-weight: 700; color: #fff; background: var(--theme-accent, #2563eb); border-radius: 2px; }

@@ -1,0 +1,14 @@
+$ (webstore before) pid 21432, started 11/10/2026 12:17:11
+
+$ npm run deploy
+
+> spp-customization@1.0.0 deploy
+> znode deploy .
+
+built theme spp-customization@1.0.0: 9 files
+packed spp-customization-1.0.0.zpkg.zip (59840 bytes)
+installed theme spp-customization@1.0.0 (was 1.0.0): 8 files, disabled for []
+(took 4085 ms)
+
+$ (webstore after, page refreshed) pid 21432, started 11/10/2026 12:17:11
+same process: no restart, no store build

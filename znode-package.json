@@ -16,7 +16,7 @@
     "browser": "src/browser.tsx"
   },
   "styles": ["src/styles/*.css"],
-  "assets": ["src/assets/*"],
+  "assets": ["src/assets/*.svg", "src/assets/fonts/*.woff2"],
   "messages": "src/i18n/labels.json",
   "widgets": ["SppCustomizationHero"],
   "pages": { "/": "src/pages/home.json" },

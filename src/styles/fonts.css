@@ -1,0 +1,21 @@
+/* The brand's own font file, shipped in the package (src/assets/fonts) and served by the store from the plugin folder.
+   Geist (SIL Open Font License 1.1), a variable font: one file for every weight from 100 to 900.
+   Used for headings and the announcement bar; the body keeps the family font from the parent theme (redpanda). */
+
+@font-face {
+  font-family: SppBrand;
+  src: url("spp-customization-geist-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+html[data-theme] {
+  --heading-font-family: SppBrand, ui-sans-serif, system-ui, sans-serif;
+}
+
+html[data-theme] :is(h1, h2, h3, h4, h5, h6, .heading-1, .heading-2, .heading-3, .heading-4, .heading-5, .heading-6),
+.spp-customization-announcement {
+  font-family: var(--heading-font-family);
+  letter-spacing: -0.01em;
+}

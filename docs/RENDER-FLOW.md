@@ -389,6 +389,7 @@ repository joins it. Commits are on `main` of this repository.
 | 167 | Routes check the caller: activity staff-only (it leaked cart numbers), my-quotes 401 for guests | f595970 | `routeContext` passes `context.user`, checks nothing; cart-summary trusts a sequential cart number | §7 B.4 plugin routes | src/commerce/server.ts, src/commerce/quotes.ts |
 | 168 | SVG from packages runs no script (six ways checked in Edge, with a control) | 945afee | files route: sandboxing CSP on SVG, nosniff; page CSP nonce | §3 B.1 files route, assets as images | scripts/svg-check.mjs, src/sandbox-probe/spp-sandbox-probe-script.svg |
 | 173 | Zero-downtime release: previous browser files kept (release 1.0.3) | adecb12 | `znode install` deletes the previous version's files | §1 install and registry; §3 B.1 files by name | scripts/lib/store.mjs, scripts/deploy.mjs, scripts/rollback.mjs, scripts/release-watch.mjs |
-| 175 | Package errors in the store log (written ten at a time); npm run store-log | (this commit) | `logServer` buffers 10 entries per module, then the log file | §7 B.4 `runPluginRoute` catch and log | scripts/store-log.mjs |
+| 175 | Package errors in the store log (written ten at a time); npm run store-log | cabc249 | `logServer` buffers 10 entries per module, then the log file | §7 B.4 `runPluginRoute` catch and log | scripts/store-log.mjs |
+| 181 | Work committed and pushed, checked by npm run scenario-check (57 links fixed) | (this commit) | – | §10 this table | scripts/scenario-check.mjs, SCENARIOS.md |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

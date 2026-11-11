@@ -27,6 +27,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run svg-check [-- --file <svg> --store <url>]` | Whether script inside a package's SVG runs in the browser: opened directly, in iframe/object/embed/img, inlined with innerHTML, plus a no-CSP control (`scripts/svg-check.mjs`) |
 | `npm run release-watch -- -- <command>` | Requests a page and a route without pause while a command runs (a deploy or rollback), then checks every bundle and stylesheet those pages named still loads (`scripts/release-watch.mjs`) |
 | `npm run store-log [-- --package <name>] [--date YYYY-MM-DD] [--all-lines]` | Package errors from the store's own log file: failed routes, hooks, slots, pages, packages skipped at load (`scripts/store-log.mjs`) |
+| `npm run scenario-check [-- --fix-links]` | Every Done row of SCENARIOS.md: its notes folder, README ("How it renders"), images, RENDER-FLOW row and commit, pushed; and nothing uncommitted or unpushed (`scripts/scenario-check.mjs`) |
 
 ## Use-case scenarios
 

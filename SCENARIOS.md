@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 119 |
+| ✅ Done | 120 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 21 |
+| ⬜ Not started | 20 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -102,9 +102,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 23 | Can I create a complex theme? | Yes | UI | the sum of 24-41 (40 blocked); npm run inventory lists what the built theme carries | ✅ Done | [notes](023-complex-theme/) |
+| 23 | Can I create a complex theme? | Yes | UI | the sum of 24-41 (40 blocked); npm run inventory lists what the built theme carries | ✅ Done | [notes](docs/scenarios/023-complex-theme/) |
 | 24 | Can I create a theme with CSS only (tokens, fonts, colors)? | Yes | UI | Design tokens in `src/styles/tokens.css` (store CSS variables) | ✅ Done | [notes](docs/scenarios/024-css-only-tokens/) |
-| 25 | Can a theme carry UI code (header, footer, cards, layouts)? | Yes | UI | header, footer, card, listing, PDP parts, popup, root layout: 8 browser slots + 1 server slot (rows 48-55) | ✅ Done | [notes](025-theme-ui-code/) |
+| 25 | Can a theme carry UI code (header, footer, cards, layouts)? | Yes | UI | header, footer, card, listing, PDP parts, popup, root layout: 8 browser slots + 1 server slot (rows 48-55) | ✅ Done | [notes](docs/scenarios/025-theme-ui-code/) |
 | 26 | Can a child theme inherit from a parent theme? | Yes | UI | Example: campaign home page from spp-base's HeroBanner, PromoCodeStrip, CardGrid, DeliveryDates | ✅ Done | [notes](docs/scenarios/026-child-theme-inherits-parent/) |
 | 27 | Can themes inherit more than one level deep? | Yes | UI | Example: sub-brand of Red Panda (Montserrat) on spp-base (widgets), own colors on top | ✅ Done | [notes](docs/scenarios/027-multi-level-inheritance/) |
 | 28 | Can I use my own font files in a theme? | Yes | UI | Example: self-hosted brand font (Geist, OFL) for headings | ✅ Done | [notes](docs/scenarios/028-own-font-files/) |
@@ -168,11 +168,11 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 | 71 | Can I hide or remove a base widget from the page builder for a theme? | No | Base | Result: **Yes, hide from the list** (theme CSS in the editor); removing a type still needs a page-builder change. Example: curated list for SPP stores | ✅ Done | [notes](docs/scenarios/071-hide-base-widget/) |
 | 72 | Can I reorder the editor's widget categories? | No | Base | Result: **Yes, visual order** (theme CSS in the editor). Example: SPP · Promotions and SPP · Content first | ✅ Done | [notes](docs/scenarios/072-reorder-editor-categories/) |
 | 73 | Can a widget hold other widgets (nested)? | Partial | Check | Try a slot field in a package widget | ⛔ Blocked | [notes](Confirmed No: nesting needs Puck's drop zones, but the store's widget preview removes the puck prop before calling a package widget (RuntimePageEditor.tsx preview())/) |
-| 74 | Can a widget load its data on the server like base widgets? | Partial | Check | Yes via the package route: SppHighlights loads from routes.highlights (server); data after load, not in HTML | ✅ Done | [notes](074-widget-server-data/) |
+| 74 | Can a widget load its data on the server like base widgets? | Partial | Check | Yes via the package route: SppHighlights loads from routes.highlights (server); data after load, not in HTML | ✅ Done | [notes](docs/scenarios/074-widget-server-data/) |
 | 75 | Are package widgets in the server HTML (for SEO)? | No | Base | | ⛔ Blocked | [notes](Confirmed No: package widgets render in the browser (RuntimeWidget, client); the server HTML has only their wrapper (checked in 068)/) |
 | 76 | Can widget settings differ per locale? | No | Base | | ⛔ Blocked | |
 | 77 | Can a widget be used on one store only? | Yes | Config | Example: Visit our showroom (spp-widgets) placed for POCSppDemo only | ✅ Done | [notes](docs/scenarios/077-widget-one-store-only/) |
-| 78 | Can package widgets be used in header and footer pages? | Partial | Check | Yes: SppFooterBadges dropped in footer and header pages (published locally); store footer of POCSppDemo is a package widget | ✅ Done | [notes](078-widgets-in-header-footer/) |
+| 78 | Can package widgets be used in header and footer pages? | Partial | Check | Yes: SppFooterBadges dropped in footer and header pages (published locally); store footer of POCSppDemo is a package widget | ✅ Done | [notes](docs/scenarios/078-widgets-in-header-footer/) |
 
 ## Plugins
 
@@ -181,47 +181,47 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 79 | Can I create a complex plugin? | Yes | UI | spp-commerce: sum of 080-091 (087, 090 blocked); one cart, plugin off vs on | ✅ Done | [notes](079-complex-plugin/) |
+| 79 | Can I create a complex plugin? | Yes | UI | spp-commerce: sum of 080-091 (087, 090 blocked); one cart, plugin off vs on | ✅ Done | [notes](docs/scenarios/079-complex-plugin/) |
 | 80 | Can a plugin run code before and after add to cart? | Yes | UI | Example: beforeAddToCart rounds to case packs (1 lanyard -> 10); afterAddToCart activity log | ✅ Done | [notes](docs/scenarios/080-before-after-add-to-cart/) |
-| 81 | Can a plugin react when the cart changes? | Yes | UI | onCartChanged: per-order limit (817NK_25 max 5), line removed and re-added at the limit | ✅ Done | [notes](081-on-cart-changed/) |
-| 82 | Can a plugin change cart lines before they are shown? | Yes | UI | mapCartItems: case-pack and order-limit notes under the cart lines | ✅ Done | [notes](082-map-cart-items/) |
-| 83 | Can a plugin fill slots in the page? | Yes | UI | spp-commerce fills product.card: case pack / minimum / limit tags from the cart-rule settings | ✅ Done | [notes](083-plugin-fills-slots/) |
-| 84 | Can a plugin transform data (listing data, popup data)? | Yes | UI | productList.data pins promoted SKUs first; addToCart.notificationData shows the case-pack quantity | ✅ Done | [notes](084-plugin-transforms/) |
-| 85 | Can a plugin read the shopper's cart and user? | Yes | UI | route my-order: context.cartNumber + context.znode cart lines + context.user; free-shipping meter in the account bar | ✅ Done | [notes](085-read-cart-and-user/) |
-| 86 | Can a plugin set cookies? | Partial | Check | routes set cookies (Response + Set-Cookie: spp_rep rep link); hooks and browser read them; routes cannot read cookies | ✅ Done | [notes](086-plugin-sets-cookies/) |
+| 81 | Can a plugin react when the cart changes? | Yes | UI | onCartChanged: per-order limit (817NK_25 max 5), line removed and re-added at the limit | ✅ Done | [notes](docs/scenarios/081-on-cart-changed/) |
+| 82 | Can a plugin change cart lines before they are shown? | Yes | UI | mapCartItems: case-pack and order-limit notes under the cart lines | ✅ Done | [notes](docs/scenarios/082-map-cart-items/) |
+| 83 | Can a plugin fill slots in the page? | Yes | UI | spp-commerce fills product.card: case pack / minimum / limit tags from the cart-rule settings | ✅ Done | [notes](docs/scenarios/083-plugin-fills-slots/) |
+| 84 | Can a plugin transform data (listing data, popup data)? | Yes | UI | productList.data pins promoted SKUs first; addToCart.notificationData shows the case-pack quantity | ✅ Done | [notes](docs/scenarios/084-plugin-transforms/) |
+| 85 | Can a plugin read the shopper's cart and user? | Yes | UI | route my-order: context.cartNumber + context.znode cart lines + context.user; free-shipping meter in the account bar | ✅ Done | [notes](docs/scenarios/085-read-cart-and-user/) |
+| 86 | Can a plugin set cookies? | Partial | Check | routes set cookies (Response + Set-Cookie: spp_rep rep link); hooks and browser read them; routes cannot read cookies | ✅ Done | [notes](docs/scenarios/086-plugin-sets-cookies/) |
 | 87 | Can a plugin store its own data (database)? | No | Base | | ⛔ Blocked | |
-| 88 | Can a plugin add labels and messages? | Yes | UI | Yes under a namespace the store sends (Common.sppCommerce); a new top-level namespace never reaches the browser | ✅ Done | [notes](088-plugin-labels/) |
-| 89 | Can a plugin add a page with its own URL? | Partial | UI | spp-commerce serverPages /ordering-information, written from the cart-rule settings, in the server HTML | ✅ Done | [notes](089-plugin-page-url/) |
+| 88 | Can a plugin add labels and messages? | Yes | UI | Yes under a namespace the store sends (Common.sppCommerce); a new top-level namespace never reaches the browser | ✅ Done | [notes](docs/scenarios/088-plugin-labels/) |
+| 89 | Can a plugin add a page with its own URL? | Partial | UI | spp-commerce serverPages /ordering-information, written from the cart-rule settings, in the server HTML | ✅ Done | [notes](docs/scenarios/089-plugin-page-url/) |
 | 90 | Can plugins send events to each other? | No | Base | | ⛔ Blocked | |
-| 91 | Can a plugin receive webhooks or callbacks? | Yes | Check | erp-stock route: HMAC verifySignature (401 unsigned/wrong/tampered); holds shown on product cards | ✅ Done | [notes](091-plugin-webhooks/) |
+| 91 | Can a plugin receive webhooks or callbacks? | Yes | Check | erp-stock route: HMAC verifySignature (401 unsigned/wrong/tampered); holds shown on product cards | ✅ Done | [notes](docs/scenarios/091-plugin-webhooks/) |
 | 92 | Can a plugin run scheduled jobs? | No | Base | | ⛔ Blocked | |
 
 ## BFF / API
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 93 | Can I add a new BFF layer or call any new API? | Yes | Check | PDP Deliver to ZIP: browser -> spp-commerce route delivery-estimate -> zippopotam.us (server) -> date | ✅ Done | [notes](093-new-bff-layer/) |
-| 94 | Can I create a new BFF API? | Yes | Check | theme route store-status: support hours + ship cutoff + notice in one call, cached 60 s; used by the trust strip | ✅ Done | [notes](094-new-bff-api/) |
-| 95 | Can a plugin call the Znode API with the store's headers? | Yes | Check | route sku-lookup: context.znode published-products/sku with store headers (direct call without them: 401); portal codes via v2/portals | ✅ Done | [notes](095-znode-api-store-headers/) |
-| 96 | Can a plugin call an external API from the server? | Yes | Check | Yes; externalNetwork is a check-time permission only (install without it works); plugin outbound rules: host allow-list, timeout, size cap | ✅ Done | [notes](096-external-api-server/) |
+| 93 | Can I add a new BFF layer or call any new API? | Yes | Check | PDP Deliver to ZIP: browser -> spp-commerce route delivery-estimate -> zippopotam.us (server) -> date | ✅ Done | [notes](docs/scenarios/093-new-bff-layer/) |
+| 94 | Can I create a new BFF API? | Yes | Check | theme route store-status: support hours + ship cutoff + notice in one call, cached 60 s; used by the trust strip | ✅ Done | [notes](docs/scenarios/094-new-bff-api/) |
+| 95 | Can a plugin call the Znode API with the store's headers? | Yes | Check | route sku-lookup: context.znode published-products/sku with store headers (direct call without them: 401); portal codes via v2/portals | ✅ Done | [notes](docs/scenarios/095-znode-api-store-headers/) |
+| 96 | Can a plugin call an external API from the server? | Yes | Check | Yes; externalNetwork is a check-time permission only (install without it works); plugin outbound rules: host allow-list, timeout, size cap | ✅ Done | [notes](docs/scenarios/096-external-api-server/) |
 | 97 | Can a plugin call an external API from the browser? | No | Base | | ⛔ Blocked | |
-| 98 | Can I wrap an existing store API route (change its input or output)? | Yes | Check | overrides typeahead: original() + synonym and sourcing entries; query cannot be changed through original() | ✅ Done | [notes](098-wrap-store-route/) |
-| 99 | Can I replace an existing store API route completely? | Yes | Check | overrides /api/contact-us without original(): quote request routed to the rep, store envelope kept; Request a quote widget | ✅ Done | [notes](099-replace-store-route/) |
-| 100 | Is a route override applied only for the stores the plugin is enabled for? | Yes | Check | Yes: POCSppDemo overridden, MaxwellsHardware store route, direct plugin route 404; off/on via registry, no deploy | ✅ Done | [notes](100-override-enabled-stores-only/) |
-| 101 | Are request bodies to plugin routes size-limited? | Yes | Check | 65,536 bytes OK, 65,537 -> 413 (also taken-over routes, webhooks, 5 MB); quote form limit made visible | ✅ Done | [notes](101-body-size-limit/) |
+| 98 | Can I wrap an existing store API route (change its input or output)? | Yes | Check | overrides typeahead: original() + synonym and sourcing entries; query cannot be changed through original() | ✅ Done | [notes](docs/scenarios/098-wrap-store-route/) |
+| 99 | Can I replace an existing store API route completely? | Yes | Check | overrides /api/contact-us without original(): quote request routed to the rep, store envelope kept; Request a quote widget | ✅ Done | [notes](docs/scenarios/099-replace-store-route/) |
+| 100 | Is a route override applied only for the stores the plugin is enabled for? | Yes | Check | Yes: POCSppDemo overridden, MaxwellsHardware store route, direct plugin route 404; off/on via registry, no deploy | ✅ Done | [notes](docs/scenarios/100-override-enabled-stores-only/) |
+| 101 | Are request bodies to plugin routes size-limited? | Yes | Check | 65,536 bytes OK, 65,537 -> 413 (also taken-over routes, webhooks, 5 MB); quote form limit made visible | ✅ Done | [notes](docs/scenarios/101-body-size-limit/) |
 
 ## Agents
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 102 | Can I extend or update existing agent logic? | Partial | Check | around the agents: input/output hooks, cart actions, overrides (refuse, wrap, replace), context.znode; map of rows | ✅ Done | [notes](102-extend-agent-logic/) |
-| 103 | Can I update an agent with a runtime package? | Partial | Check | same adds with spp-commerce off/on: agent input and cart state change live, no build/deploy/restart | ✅ Done | [notes](103-update-agent-runtime-package/) |
+| 102 | Can I extend or update existing agent logic? | Partial | Check | around the agents: input/output hooks, cart actions, overrides (refuse, wrap, replace), context.znode; map of rows | ✅ Done | [notes](docs/scenarios/102-extend-agent-logic/) |
+| 103 | Can I update an agent with a runtime package? | Partial | Check | same adds with spp-commerce off/on: agent input and cart state change live, no build/deploy/restart | ✅ Done | [notes](docs/scenarios/103-update-agent-runtime-package/) |
 | 104 | Can I update an agent with an SWC build-time theme? | Yes | Outside | Store repo | ➖ Outside | |
 | 105 | Can I change agents called during server rendering? | No | Base | | ⛔ Blocked | |
-| 106 | Can I change add-to-cart logic? | Yes | UI | beforeAddToCart: superseded SKU 200341843 -> 81DRL before case packs; a hook cannot refuse an add | ✅ Done | [notes](106-change-add-to-cart/) |
-| 107 | Can I change place-order logic? | Partial | Check | override /api/place-order: order under minOrderValue ($25, from Znode's cart) refused in the store's shape; rest via original({ body }) | ✅ Done | [notes](107-place-order-logic/) |
+| 106 | Can I change add-to-cart logic? | Yes | UI | beforeAddToCart: superseded SKU 200341843 -> 81DRL before case packs; a hook cannot refuse an add | ✅ Done | [notes](docs/scenarios/106-change-add-to-cart/) |
+| 107 | Can I change place-order logic? | Partial | Check | override /api/place-order: order under minOrderValue ($25, from Znode's cart) refused in the store's shape; rest via original({ body }) | ✅ Done | [notes](docs/scenarios/107-place-order-logic/) |
 | 108 | Can I change pricing, tax or promotion calculation? | No | Base | | ⛔ Blocked | |
-| 109 | Can I change inventory checks? | Partial | Check | override /api/add-to-cart: ERP-held items refused, rest via original({ body }); original() sends no body unless passed | ✅ Done | [notes](109-inventory-checks/) |
+| 109 | Can I change inventory checks? | Partial | Check | override /api/add-to-cart: ERP-held items refused, rest via original({ body }); original() sends no body unless passed | ✅ Done | [notes](docs/scenarios/109-inventory-checks/) |
 
 ## Middleware
 
@@ -234,21 +234,21 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 112 | Can I change the cart page? | Partial | UI | content and look only (no cart slot): mapCartItems adds per-line delivery dates from the spp_zip cookie + production days | ✅ Done | [notes](112-change-cart-page/) |
-| 113 | Can a plugin add or remove cart items automatically? | Yes | UI | onCartChanged: ID holder brings its lanyard, removed with it (a free item needs a Znode promotion) | ✅ Done | [notes](113-auto-add-remove/) |
-| 114 | Can a plugin enforce cart rules (minimums, bundles)? | Yes | UI | onCartChanged: minimum 25 on Y1448_001 (with limit, case packs, companion: 4 rules) | ✅ Done | [notes](114-cart-rules/) |
+| 112 | Can I change the cart page? | Partial | UI | content and look only (no cart slot): mapCartItems adds per-line delivery dates from the spp_zip cookie + production days | ✅ Done | [notes](docs/scenarios/112-change-cart-page/) |
+| 113 | Can a plugin add or remove cart items automatically? | Yes | UI | onCartChanged: ID holder brings its lanyard, removed with it (a free item needs a Znode promotion) | ✅ Done | [notes](docs/scenarios/113-auto-add-remove/) |
+| 114 | Can a plugin enforce cart rules (minimums, bundles)? | Yes | UI | onCartChanged: minimum 25 on Y1448_001 (with limit, case packs, companion: 4 rules) | ✅ Done | [notes](docs/scenarios/114-cart-rules/) |
 
 ## Checkout
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 115 | Can I change the checkout? | Partial | UI | Covered by 116-117 | ⬜ Not started | |
-| 116 | Can I change the checkout address step? | Yes | UI | checkout.address wraps the store's form: PO Box warning + save stopped (capture phase), delivery date for the ZIP | ✅ Done | [notes](116-checkout-address-step/) |
+| 116 | Can I change the checkout address step? | Yes | UI | checkout.address wraps the store's form: PO Box warning + save stopped (capture phase), delivery date for the ZIP | ✅ Done | [notes](docs/scenarios/116-checkout-address-step/) |
 | 117 | Can I filter or change shipping methods? | Yes | UI | slot built and deployed (no rush methods for decorated items), rule tested; live list blocked: guest checkout here gets no user id from Znode, needs a buyer login | 🟡 In progress | [notes](117-shipping-options/) |
 | 118 | Can I change the payment step UI? | No | Base | | ⛔ Blocked | |
 | 119 | Can I change the payment gateway? | No | Base | | ⛔ Blocked | |
 | 120 | Can I add custom data to the order? | Yes | Check | Override of place-order adding custom data | ⬜ Not started | |
-| 121 | Can I add a complete new module (e.g. quick checkout) without touching base? | Partial | UI | Event kits at /event-kits: server page + routes + settings + browser part via layout.header; adds go through the store's add-to-cart | ✅ Done | [notes](121-new-module-event-kits/) |
+| 121 | Can I add a complete new module (e.g. quick checkout) without touching base? | Partial | UI | Event kits at /event-kits: server page + routes + settings + browser part via layout.header; adds go through the store's add-to-cart | ✅ Done | [notes](docs/scenarios/121-new-module-event-kits/) |
 | 122 | Does guest checkout work on the test environment? | No | Outside | Test environment, not this repo | ➖ Outside | |
 
 ## Orders
@@ -272,7 +272,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 130 | Can I change the login and registration pages? | Partial | UI | login: theme login.page server slot (B2B frame, in HTML); signup has no slot: CSS only | ✅ Done | [notes](130-login-page/) |
+| 130 | Can I change the login and registration pages? | Partial | UI | login: theme login.page server slot (B2B frame, in HTML); signup has no slot: CSS only | ✅ Done | [notes](docs/scenarios/130-login-page/) |
 | 131 | Can I add a custom login provider (SSO)? | No | Base | | ⛔ Blocked | |
 | 132 | Can I change password rules? | No | Base | | ⛔ Blocked | |
 
@@ -280,8 +280,8 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 133 | Can I change SEO and meta tags per theme? | No | Base | re-checked: a theme adds head tags (in server HTML): og/twitter/app/verification; page title and description stay the CMS's | ✅ Done | [notes](133-seo-meta-per-theme/) |
-| 134 | Can I add structured data (JSON-LD) per store? | No | Base | re-checked: yes, spp-commerce prints a per-store BreadcrumbList on product pages (literal script in server HTML); store's own blocks cannot be changed | ✅ Done | [notes](134-json-ld-per-store/) |
+| 133 | Can I change SEO and meta tags per theme? | No | Base | re-checked: a theme adds head tags (in server HTML): og/twitter/app/verification; page title and description stay the CMS's | ✅ Done | [notes](docs/scenarios/133-seo-meta-per-theme/) |
+| 134 | Can I add structured data (JSON-LD) per store? | No | Base | re-checked: yes, spp-commerce prints a per-store BreadcrumbList on product pages (literal script in server HTML); store's own blocks cannot be changed | ✅ Done | [notes](docs/scenarios/134-json-ld-per-store/) |
 | 135 | Can I change the sitemap or robots rules? | No | Base | | ⛔ Blocked | |
 | 136 | Is the webstore AEO and GEO compatible? | Not tested | Outside | Webstore-wide audit | ➖ Outside | |
 
@@ -290,14 +290,14 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 137 | Does the webstore reach a AAA accessibility rating? | Not tested | Outside | Webstore-wide audit | ➖ Outside | |
-| 138 | Do package widgets work with the keyboard and screen readers? | Partial | UI | npm run a11y (axe WCAG 2.1 A/AA + Tab walk): contrast fixed (accent-strong token); 4 pages clean, all focus visible | ✅ Done | [notes](138-widget-accessibility/) |
+| 138 | Do package widgets work with the keyboard and screen readers? | Partial | UI | npm run a11y (axe WCAG 2.1 A/AA + Tab walk): contrast fixed (accent-strong token); 4 pages clean, all focus visible | ✅ Done | [notes](docs/scenarios/138-widget-accessibility/) |
 
 ## Languages
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 139 | Can labels be translated per language? | Yes | UI | yes, by the package: one labels file for all languages; fr under its own key, picked from the URL (browser) and NEXT_LOCALE (hooks) | ✅ Done | [notes](139-labels-per-language/) |
-| 140 | Do right-to-left languages work? | Not tested | Check | dir=rtl: store mirrors; our 23 physical left/right declarations now logical (inset-inline, margin-inline, ...); LTR unchanged | ✅ Done | [notes](140-right-to-left/) |
+| 139 | Can labels be translated per language? | Yes | UI | yes, by the package: one labels file for all languages; fr under its own key, picked from the URL (browser) and NEXT_LOCALE (hooks) | ✅ Done | [notes](docs/scenarios/139-labels-per-language/) |
+| 140 | Do right-to-left languages work? | Not tested | Check | dir=rtl: store mirrors; our 23 physical left/right declarations now logical (inset-inline, margin-inline, ...); LTR unchanged | ✅ Done | [notes](docs/scenarios/140-right-to-left/) |
 
 ## Performance
 
@@ -305,12 +305,12 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | --- | --- | --- | --- | --- | --- | --- |
 | 141 | Can I avoid performance degradation if I create more themes? | Yes | Outside | Platform measurement | ➖ Outside | |
 | 142 | Was performance checked with 5 heavy themes? | Yes | Outside | Platform measurement | ➖ Outside | |
-| 143 | Does only the active theme load on a page? | Yes | Check | npm run page-files: a page loads its theme chain + its store's plugins only (Maxwells: apex, 6 files; POCSppDemo: redpanda/spp-base + 6 plugins) | ✅ Done | [notes](143-only-active-theme-loads/) |
+| 143 | Does only the active theme load on a page? | Yes | Check | npm run page-files: a page loads its theme chain + its store's plugins only (Maxwells: apex, 6 files; POCSppDemo: redpanda/spp-base + 6 plugins) | ✅ Done | [notes](docs/scenarios/143-only-active-theme-loads/) |
 | 144 | Is the package registry cached between requests? | Yes | Outside | Store code | ➖ Outside | |
-| 145 | Are package files cached in the browser until they change? | Yes | Check | immutable 1 year + ?v=: redeploy refetches only that package; assets had no ?v=: now ?v=<version>, deploy guards it | ✅ Done | [notes](145-browser-cache/) |
+| 145 | Are package files cached in the browser until they change? | Yes | Check | immutable 1 year + ?v=: redeploy refetches only that package; assets had no ?v=: now ?v=<version>, deploy guards it | ✅ Done | [notes](docs/scenarios/145-browser-cache/) |
 | 146 | Does the SPP listing card avoid one request per card? | No | Outside | spp-base package, not this repo | ➖ Outside | |
-| 147 | Has a Lighthouse or Core Web Vitals score been measured? | Not tested | Check | Measured with npm run vitals: theme CLS 0.000 (0.006 throttled), LCP 2.1 s (4.6 s throttled); store theme CLS 0.154 | ✅ Done | [notes](147-web-vitals/) |
-| 148 | Is layout shift from late-loading package UI measured? | Not tested | Check | CLS 0.277 on a phone (store header swap, preview bar) fixed: 0.000, 0.006 throttled | ✅ Done | [notes](148-layout-shift/) |
+| 147 | Has a Lighthouse or Core Web Vitals score been measured? | Not tested | Check | Measured with npm run vitals: theme CLS 0.000 (0.006 throttled), LCP 2.1 s (4.6 s throttled); store theme CLS 0.154 | ✅ Done | [notes](docs/scenarios/147-web-vitals/) |
+| 148 | Is layout shift from late-loading package UI measured? | Not tested | Check | CLS 0.277 on a phone (store header swap, preview bar) fixed: 0.000, 0.006 throttled | ✅ Done | [notes](docs/scenarios/148-layout-shift/) |
 
 ## Scale
 
@@ -326,26 +326,26 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 153 | Can I serve 10 stores with different theme, style, functionality and business logic? | Yes, with one limit | Outside | Platform | ➖ Outside | |
-| 154 | Can each store have different plugins? | Yes | Config | Six stores, each its own plugins; spp-promos rolled out to StaplesPromo; npm run registry -- store <code> | ✅ Done | [notes](154-plugins-per-store/) |
+| 154 | Can each store have different plugins? | Yes | Config | Six stores, each its own plugins; spp-promos rolled out to StaplesPromo; npm run registry -- store <code> | ✅ Done | [notes](docs/scenarios/154-plugins-per-store/) |
 | 155 | Can each store have different page content? | Yes | Outside | Content packages per store | ➖ Outside | |
-| 156 | Can settings differ per store? | Partial | Config | Installation records merged over the package settings: POCSppDemo and StaplesPromo run spp-promos with different sales; previewed themes use package settings | ✅ Done | [notes](156-settings-per-store/) |
-| 157 | Can several stores share one theme? | Yes | Config | Live on MaxwellsHardware and POCKalles from one install, each its own brand (records); a preview shows package settings; restored to preview-only | ✅ Done | [notes](157-two-stores-one-theme/) |
+| 156 | Can settings differ per store? | Partial | Config | Installation records merged over the package settings: POCSppDemo and StaplesPromo run spp-promos with different sales; previewed themes use package settings | ✅ Done | [notes](docs/scenarios/156-settings-per-store/) |
+| 157 | Can several stores share one theme? | Yes | Config | Live on MaxwellsHardware and POCKalles from one install, each its own brand (records); a preview shows package settings; restored to preview-only | ✅ Done | [notes](docs/scenarios/157-two-stores-one-theme/) |
 | 158 | Are the 3 new stores (KLRT, Lands And Cotes, GE) started? | No | Outside | Store setup | ➖ Outside | |
 
 ## Security
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 159 | Do secrets stay on the server? | Yes | Check | Only browser:true settings reach the page (23 checked); dev server copies plugins.json into the first page after a change; secrets can be env:NAME | ✅ Done | [notes](159-secrets-on-the-server/) |
-| 160 | Are server bundles blocked from download? | Yes | Check | All 32 server parts on disk (old versions, maps) refused, also as other spellings; npm run probe-files | ✅ Done | [notes](160-server-bundles-blocked/) |
-| 161 | Is the registry (plugins.json) blocked from download? | Yes | Check | plugins.json, its temp file, lock, .history and .versions refused; a dev server copies it into a page (159) | ✅ Done | [notes](161-registry-blocked/) |
-| 162 | Are file paths checked so nothing outside the package folder is served? | Yes | Check | Ten ways out of the folder (raw, %2F, %5C, %2e, double-encoded, absolute, UNC, file:) to a served-type file: all refused | ✅ Done | [notes](162-paths-checked/) |
-| 163 | Is the preview switch off in production by default? | Yes | Check | Off unless NODE_ENV is not production or RUNTIME_THEME_PREVIEW=true; open redirect in the preview route while on (store); probe checks it | ✅ Done | [notes](163-preview-off-in-production/) |
-| 164 | Can a browser skip a route override? | No | Base | No: 105 path spellings and bypass-header guesses on 5 overridden routes; none reached the store's route (npm run overrides --probe) | ✅ Done | [notes](164-route-override-not-skippable/) |
-| 165 | Is partner code sandboxed? | No | Base | Opt-in "sandbox": true: no env secrets, no .env, writes, programs or network; crash contained. But it reads the whole plugin folder (plugins.json, other bundles) | ✅ Done | [notes](165-partner-code-sandbox/) |
-| 166 | Are plugin routes rate-limited? | No | Base | Yes, 120/min per address, store and plugin (429, Retry-After 60); keyed on a client-set header; account bar calls 18 to 5 | ✅ Done | [notes](166-route-rate-limit/) |
-| 167 | Do plugin routes check who the shopper is? | Partial | Check | Partial: context.user given, nothing enforced. activity leaked cart numbers (sequential; cart-summary trusts them): now staff-only; my-quotes 401 for guests | ✅ Done | [notes](167-routes-check-the-caller/) |
-| 168 | Are SVG files from packages blocked from running script? | Partial | Check | Yes: a test SVG with script ran in none of 6 ways (direct, iframe, object, embed, img, inlined); a no-CSP control ran | ✅ Done | [notes](168-svg-no-script/) |
+| 159 | Do secrets stay on the server? | Yes | Check | Only browser:true settings reach the page (23 checked); dev server copies plugins.json into the first page after a change; secrets can be env:NAME | ✅ Done | [notes](docs/scenarios/159-secrets-on-the-server/) |
+| 160 | Are server bundles blocked from download? | Yes | Check | All 32 server parts on disk (old versions, maps) refused, also as other spellings; npm run probe-files | ✅ Done | [notes](docs/scenarios/160-server-bundles-blocked/) |
+| 161 | Is the registry (plugins.json) blocked from download? | Yes | Check | plugins.json, its temp file, lock, .history and .versions refused; a dev server copies it into a page (159) | ✅ Done | [notes](docs/scenarios/161-registry-blocked/) |
+| 162 | Are file paths checked so nothing outside the package folder is served? | Yes | Check | Ten ways out of the folder (raw, %2F, %5C, %2e, double-encoded, absolute, UNC, file:) to a served-type file: all refused | ✅ Done | [notes](docs/scenarios/162-paths-checked/) |
+| 163 | Is the preview switch off in production by default? | Yes | Check | Off unless NODE_ENV is not production or RUNTIME_THEME_PREVIEW=true; open redirect in the preview route while on (store); probe checks it | ✅ Done | [notes](docs/scenarios/163-preview-off-in-production/) |
+| 164 | Can a browser skip a route override? | No | Base | No: 105 path spellings and bypass-header guesses on 5 overridden routes; none reached the store's route (npm run overrides --probe) | ✅ Done | [notes](docs/scenarios/164-route-override-not-skippable/) |
+| 165 | Is partner code sandboxed? | No | Base | Opt-in "sandbox": true: no env secrets, no .env, writes, programs or network; crash contained. But it reads the whole plugin folder (plugins.json, other bundles) | ✅ Done | [notes](docs/scenarios/165-partner-code-sandbox/) |
+| 166 | Are plugin routes rate-limited? | No | Base | Yes, 120/min per address, store and plugin (429, Retry-After 60); keyed on a client-set header; account bar calls 18 to 5 | ✅ Done | [notes](docs/scenarios/166-route-rate-limit/) |
+| 167 | Do plugin routes check who the shopper is? | Partial | Check | Partial: context.user given, nothing enforced. activity leaked cart numbers (sequential; cart-summary trusts them): now staff-only; my-quotes 401 for guests | ✅ Done | [notes](docs/scenarios/167-routes-check-the-caller/) |
+| 168 | Are SVG files from packages blocked from running script? | Partial | Check | Yes: a test SVG with script ran in none of 6 ways (direct, iframe, object, embed, img, inlined); a no-CSP control ran | ✅ Done | [notes](docs/scenarios/168-svg-no-script/) |
 
 ## Production
 
@@ -355,15 +355,15 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 170 | Has the production server been run end to end? | Not tested | Outside | Production run | ➖ Outside | |
 | 171 | Does this work with several servers in production? | Partial | Outside | Production setup | ➖ Outside | |
 | 172 | Can package files be stored in shared or blob storage? | No | Base | | ⛔ Blocked | |
-| 173 | Can packages be updated with zero downtime? | Yes | Check | Yes: 0 failed requests in a release under traffic; the previous version's browser files are now kept, so pages served just before still load | ✅ Done | [notes](173-zero-downtime-release/) |
+| 173 | Can packages be updated with zero downtime? | Yes | Check | Yes: 0 failed requests in a release under traffic; the previous version's browser files are now kept, so pages served just before still load | ✅ Done | [notes](docs/scenarios/173-zero-downtime-release/) |
 | 174 | Is there a memory cost for many hot updates? | Partial | Outside | Platform measurement | ➖ Outside | |
-| 175 | Are package errors logged on the server? | Yes | Check | Yes, with package, route, error and bundle line; but written ten at a time (a crash surfaced 30 min later); npm run store-log | ✅ Done | [notes](175-package-errors-logged/) |
+| 175 | Are package errors logged on the server? | Yes | Check | Yes, with package, route, error and bundle line; but written ten at a time (a crash surfaced 30 min later); npm run store-log | ✅ Done | [notes](docs/scenarios/175-package-errors-logged/) |
 | 176 | Is package activity monitored (New Relic)? | Not tested | Outside | Monitoring setup | ➖ Outside | |
 | 177 | Is there an audit log of package changes? | No | Base | (`.history` keeps plugins.json copies) | ⛔ Blocked | |
 | 178 | Is the registry backed up? | No | Base | | ⛔ Blocked | |
 | 179 | Does the Docker image include the runtime package folder? | Not tested | Outside | Store Docker image | ➖ Outside | |
 | 180 | Can package files be served from a CDN? | Partial | Outside | Hosting | ➖ Outside | |
-| 181 | Is the work committed and pushed? | Partial | Check | This repo on GitHub | ⬜ Not started | |
+| 181 | Is the work committed and pushed? | Partial | Check | Yes: every Done row has its folder, README, images and pushed commit (npm run scenario-check); 57 broken notes links fixed | ✅ Done | [notes](docs/scenarios/181-committed-and-pushed/) |
 
 ## Developer experience
 

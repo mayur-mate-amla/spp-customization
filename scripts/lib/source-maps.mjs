@@ -106,8 +106,17 @@ export function sourceAt(pluginFolder, bundle, line, column) {
   return { source: original.source, line: original.line, column: original.column + 1, text: (content.split(/\r?\n/)[original.line - 1] || "").trim() };
 }
 
-/** A stack line's bundle position ("…/<bundle>.mjs?v=…:98:19") → { bundle, line, column }, or null. */
+/** A stack line's bundle position ("…/<bundle>.mjs?v=<file time>:98:19") → { bundle, built, line, column }, or null.
+ *  built: the file time the store loaded the bundle with (?v=), "" when the line has none. */
 export function bundlePosition(text) {
-  const match = /([a-z0-9-]+-\d+\.\d+\.\d+\.(?:server|browser)\.mjs)(?:\?[^:)\s]*)?:(\d+):(\d+)/.exec(text || "");
-  return match ? { bundle: match[1], line: Number(match[2]), column: Number(match[3]) } : null;
+  const match = /([a-z0-9-]+-\d+\.\d+\.\d+\.(?:server|browser)\.mjs)(?:\?v=([0-9.]+))?(?:\?[^:)\s]*)?:(\d+):(\d+)/.exec(text || "");
+  return match ? { bundle: match[1], built: match[2] || "", line: Number(match[3]), column: Number(match[4]) } : null;
+}
+
+/** Whether the installed bundle is the build a stack line came from: "same", "rebuilt", "gone", or "" (cannot tell). */
+export function sameBuild(pluginFolder, position) {
+  if (!position?.built) return "";
+  const file = path.join(pluginFolder, position.bundle);
+  if (!fs.existsSync(file)) return "gone";
+  return Math.abs(fs.statSync(file).mtimeMs - Number(position.built)) < 1 ? "same" : "rebuilt";
 }

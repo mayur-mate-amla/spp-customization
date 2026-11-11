@@ -1,0 +1,40 @@
+# Row 185: is the page safe if a plugin crashes?  (2026-11-11, POCSppDemo at http://sppdemo.localhost:3000)
+# spp-sandbox-probe 1.0.0 on POCSppDemo; plugins.json settings.failIn names the parts that throw.
+
+$ npx znode check spp-sandbox-probe.znode-package.json
+check spp-sandbox-probe@1.0.0: 0 errors, 0 warnings
+$ npm run deploy -- spp-sandbox-probe.znode-package.json
+installed plugin spp-sandbox-probe@1.0.0 (was 1.0.0): 5 files, enabled for ["POCSppDemo"]
+
+## HTTP status of the page (curl, three calls each)
+failIn []                 /      200 200 200      /cart 200 200
+failIn ["serverSlot"]     /      200 200 200      /cart 200 200 200   (HTML complete, no error text in it)
+failIn ["browserSlot"]    /      500 500 500      /cart 500           (page still shown: the browser renders it again)
+failIn []  (afterwards)   /      200 200          /cart 200 200
+
+## failIn ["browserSlot"]: what the 500 HTML holds (development server)
+<meta name="robots" content="noindex"/>
+<template data-next-error-message="spp-sandbox-probe browser slot failure (row 185)" data-next-error-digest="2704855265"
+  data-next-error-stack="Error: spp-sandbox-probe browser slot failure (row 185)
+    at ProbeHeader (D:\runtime-plugins-store\spp-sandbox-probe-1.0.0.browser.mjs:14:15)
+    at Object.react_stack_bottom_frame (...\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js:2:308269)
+    at renderWithHooks (...)
+
+## failIn ["hook"]: Add to Cart on /product/103809 (browser)
+POST /api/add-to-cart -> 200
+{"status":"success","message":"Request successful","data":{"addToCartStatus":true,"cartCount":1, ...}}
+
+## npm run store-log -- --package spp-sandbox-probe   (excerpts)
+2026-11-11 13:13:31  Error  Runtime plugin spp-sandbox-probe failed to render server slot layout.root. Error: spp-sandbox-probe server slot failure (row 185)
+    at layout.root (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794382091949.465:105:23)
+      -> spp-sandbox-probe/src/sandbox-probe/server.ts:114  if (failing(context.settings, "serverSlot")) throw new Error("spp-sandbox-probe server slot failure (row 185)");
+2026-11-11 13:11:29  Error  Runtime plugin spp-sandbox-probe failed to render. (in the browser) Error: spp-sandbox-probe browser slot failure (row 185)
+    at ProbeHeader (http://sppdemo.localhost:3000/api/extensions/files/spp-sandbox-probe-1.0.0.browser.mjs?v=1794382091949:12:15)
+      -> spp-sandbox-probe/src/sandbox-probe/browser.tsx:11  if (failing("browserSlot")) throw new Error("spp-sandbox-probe browser slot failure (row 185)");
+2026-11-11 12:45:25  Error  Runtime plugin spp-sandbox-probe beforeAddToCart failed. Error: spp-sandbox-probe cart hook failure (row 184)
+    at beforeAddToCart (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794381133761.7842:98:23)
+      -> (logged from an earlier build of spp-sandbox-probe-1.0.0.server.mjs: not mapped; see the zip kept in .versions/)
+# the 13:14 add-to-cart failure was still in the add-to-cart route's buffer (written ten at a time, row 175);
+# the 12:45 entries are the same hook from the first run, before the probe was rebuilt.
+# The server render that failed with the browser slot (the 500) is not in the store's log: only the
+# development server's console has it. The log has the browser's report, sent later to /api/log.

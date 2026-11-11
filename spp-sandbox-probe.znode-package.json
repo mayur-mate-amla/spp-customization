@@ -5,13 +5,35 @@
   "apiVersion": 1,
   "label": "SPP sandbox probe (test package)",
   "publisher": "Spp Customization team",
-  "description": "A test package for row 165: one route reports what its server code can reach (environment, files, programs, network), in the webstore process or in the store's sandbox. Also a test SVG with script in it (row 168). Installed only for the checks.",
+  "description": "A test package: one route reports what its server code can reach (row 165), a test SVG with script (row 168), a route that throws (row 175), and parts that throw when the failIn setting names them (rows 184-185). Installed only for the checks.",
   "license": "proprietary",
-  "keywords": ["plugin", "test", "security"],
-  "permissions": ["routes", "znodeApi", "externalNetwork"],
-  "compatibility": { "webstore": ">=10.0.0" },
-  "build": {
-    "server": "src/sandbox-probe/server.ts"
+  "keywords": [
+    "plugin",
+    "test",
+    "security"
+  ],
+  "permissions": [
+    "routes",
+    "cartHooks",
+    "znodeApi",
+    "externalNetwork"
+  ],
+  "compatibility": {
+    "webstore": ">=10.0.0"
   },
-  "assets": ["src/sandbox-probe/*.svg"]
+  "build": {
+    "server": "src/sandbox-probe/server.ts",
+    "browser": "src/sandbox-probe/browser.tsx"
+  },
+  "assets": [
+    "src/sandbox-probe/*.svg"
+  ],
+  "settingsSchema": {
+    "failIn": {
+      "type": "list",
+      "label": "Parts that throw, for rows 184-185: serverSlot, hook, browserSlot (empty: none)",
+      "browser": true,
+      "default": []
+    }
+  }
 }

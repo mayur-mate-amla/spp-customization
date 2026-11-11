@@ -1,4 +1,4 @@
-import type { IPluginRouteContext, IPluginRouteRequest, IRuntimePlugin } from "znode-plugin/types/extension-api";
+import type { IPluginRouteContext, IPluginRouteRequest, IRuntimeData, IRuntimeHookContext, IRuntimePlugin, IServerSlotContext } from "znode-plugin/types/extension-api";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -13,6 +13,8 @@ import { fileURLToPath } from "node:url";
 // installed on one store for the check, then uninstalled.
 //   GET .../probe?heap=1   also allocates memory until the process runs out (the sandbox's heap limit)
 //   GET .../fail?n=3       throws an error with that number in its message (row 175: is it in the store's log?)
+// Rows 184-185: with the setting failIn (a list), more parts throw: "serverSlot" (layout.root, around every page),
+// "hook" (beforeAddToCart), "browserSlot" (browser.tsx, layout.header). Does the page survive, and is it logged?
 
 type ICheck = { check: string; ok: boolean; detail: string };
 
@@ -96,10 +98,23 @@ async function probe(request: IPluginRouteRequest, context: IPluginRouteContext)
   return { package: "spp-sandbox-probe", store: context.store.code, checks };
 }
 
+const failing = (settings: Record<string, unknown>, where: string) => Array.isArray(settings.failIn) && settings.failIn.includes(where);
+
 const plugin: IRuntimePlugin = {
   name: "spp-sandbox-probe",
   apiVersion: 1,
-  hooks: {},
+  hooks: {
+    beforeAddToCart: async (request: IRuntimeData, context: IRuntimeHookContext) => {
+      if (failing(context.settings, "hook")) throw new Error("spp-sandbox-probe cart hook failure (row 184)");
+      return request;
+    },
+  },
+  serverSlots: {
+    "layout.root": (props: { children?: unknown }, context: IServerSlotContext) => {
+      if (failing(context.settings, "serverSlot")) throw new Error("spp-sandbox-probe server slot failure (row 185)");
+      return props.children;
+    },
+  },
   routes: {
     probe,
     fail: async (request: IPluginRouteRequest) => {

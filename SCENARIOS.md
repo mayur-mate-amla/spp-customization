@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 122 |
+| ✅ Done | 123 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 18 |
+| ⬜ Not started | 17 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -372,7 +372,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 182 | Is debugging working? | Partial | Check | Yes: a breakpoint on TrustStrip.tsx:27 paused in a real page with its values; store-log shows each error frame's src/ line | ✅ Done | [notes](docs/scenarios/182-debugging/) |
 | 183 | Are there source maps for package code? | No | Check | Yes now: maps were built but stopped at the SDK's compiled JS; npm run deploy chains them to src/ (devtools shows .tsx; stack lines map to source) | ✅ Done | [notes](docs/scenarios/183-source-maps/) |
 | 184 | Do package errors show in the logs? | Yes | Check | Same as 175 | ⬜ Not started | |
-| 185 | Is the page safe if a plugin crashes? | Yes | UI | A slot that throws: page still renders | ⬜ Not started | |
+| 185 | Is the page safe if a plugin crashes? | Yes | Check | Partial: a server slot or cart hook that throws is contained and logged (200); a browser slot that throws fails the server render, so every page with it answers 500 (noindex) and the browser renders it again | ✅ Done | [notes](docs/scenarios/185-page-survives-plugin-crash/) |
 | 186 | Is there hot reload while developing a package? | Partial | Check | `npm run dev`: save, refresh | ⬜ Not started | |
 | 187 | Can I write packages in TypeScript? | Yes | Check | This repo (`.tsx`) | ⬜ Not started | |
 | 188 | Are packages type-checked against the public API when built? | Yes | Check | A wrong prop type: build fails | ⬜ Not started | |

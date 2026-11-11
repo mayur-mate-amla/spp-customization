@@ -399,9 +399,10 @@ repository joins it. Commits are on `main` of this repository.
 | 188 | Type-checked build: wrong types against the public API stop it (TS2353, TS2322) | db5a1c2 | the store checks only `name` and `apiVersion` | §1 build step 1: `typeCheck` (tsc --noEmit) | – (errors made for the check and undone) |
 | 189 | Build time: 6-11.5 s per package, deploy 7.5 s | c6591d3 | no store build | §1 build step 1 | – |
 | 190 | npm run lint (store's rules); found and fixed the row 173 cleanup regex | 2ef41f5 | – | §1 before the build | eslint.config.mjs, package.json, scripts/lib/store.mjs, scripts/source-at.mjs, scripts/shot.mjs |
-| 191 | npm test: 36 unit tests (commerce rules, quotes, store clock, deploy tooling) | (this commit) | – | §6 B, §7 B: the functions the hooks and routes call | test/*.test.ts, package.json, eslint.config.mjs, README.md |
+| 191 | npm test: 36 unit tests (commerce rules, quotes, store clock, deploy tooling) | 13ad70b | – | §6 B, §7 B: the functions the hooks and routes call | test/*.test.ts, package.json, eslint.config.mjs, README.md |
 | 193 | Local store with these packages; each store on its own host; npm run local-check | 521ff8b | host → store (§2 A); `RUNTIME_PLUGINS_DIR` | §1 install into the same folder; §2 B.2 placement | scripts/local-check.mjs, package.json, README.md |
 | 195 | Extension API version 1: checked at install and on server bundles; browser parts and compatibility.webstore not | 86f175f | `registry.server.ts:89` apiVersion check; `client/runtime.ts:76` passes it to browser parts | §1 install; §3 B.2 browser setup | scripts/bad-packages.mjs |
+| 199 | No base code edits: 0 store commits, config only | (this commit) | the runtime package system as it is | §1, §2: packages only | – |
 | 202 | A package change needs no store build: label deployed, same store process, store files unchanged | 37036b0 | `readRegistry` by mtime, bundles under a new `?v=` | §1 step 3; §3 B.7 labels; §8 B account bar | – (label changed for the check and restored) |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

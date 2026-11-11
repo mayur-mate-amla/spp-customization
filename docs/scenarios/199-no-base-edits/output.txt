@@ -1,0 +1,30 @@
+# Row 199: edits to the store's code that the scenarios here needed
+# store repo: /d/znode/znode-webstore10x-page-builder
+
+$ git log -1   (store repo)
+9ffeb48da 2026-11-10 Azharuddin Mulla
+$ git log --since="2026-11-10 12:50:49 +0530" --oneline | wc -l      (since this repository's first commit)
+0
+
+$ git status --porcelain   (store repo)
+ M apps/page-builder/.env
+ M apps/page-builder/next-env.d.ts
+ M apps/webstore/.env
+
+# apps/page-builder/next-env.d.ts: written by Next.js itself ("This file should not be edited")
+-import "./.next/types/routes.d.ts";
++import "./.next/dev/types/routes.d.ts";
+# the two .env files: configuration only (keys changed; values not shown)
+  apps/webstore/.env: API_URL API_DOMAIN API_KEY RUNTIME_PLUGINS_DIR 
+  apps/page-builder/.env: API_URL API_DOMAIN API_KEY 
+  (API_URL, API_DOMAIN, API_KEY: which Znode API this machine uses; RUNTIME_PLUGINS_DIR: the plugin folder)
+
+# this repository: 145 commits, every file inside D:\spp-customization
+$ grep -c '✅ Done' rows in SCENARIOS.md:  132
+$ grep -c '⛔ Blocked' rows:               34   (each would need the store to change; none was changed from here)
+
+# READMEs with a request to the store team (found by the scenarios, not made)
+  159-secrets-on-the-server
+  167-routes-check-the-caller
+  175-package-errors-logged
+  185-page-survives-plugin-crash

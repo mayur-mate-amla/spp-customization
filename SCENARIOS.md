@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 132 |
+| ✅ Done | 133 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 8 |
+| ⬜ Not started | 7 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -396,7 +396,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
-| 199 | How many base code edits does all this need? | 0 | Check | Every scenario here: no store-repo edit | ⬜ Not started | |
+| 199 | How many base code edits does all this need? | 0 | Check | 0: no store commit since this repo began; its uncommitted changes are .env configuration and a Next-generated file; 34 rows stay Blocked rather than patch the store | ✅ Done | [notes](docs/scenarios/199-no-base-edits/) |
 
 ## Approaches
 

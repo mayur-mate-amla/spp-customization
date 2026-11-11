@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 124 |
+| ✅ Done | 125 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 16 |
+| ⬜ Not started | 15 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -375,7 +375,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 185 | Is the page safe if a plugin crashes? | Yes | Check | Partial: a server slot or cart hook that throws is contained and logged (200); a browser slot that throws fails the server render, so every page with it answers 500 (noindex) and the browser renders it again | ✅ Done | [notes](docs/scenarios/185-page-survives-plugin-crash/) |
 | 186 | Is there hot reload while developing a package? | Partial | Check | `npm run dev`: save, refresh | ⬜ Not started | |
 | 187 | Can I write packages in TypeScript? | Yes | Check | Yes: all five packages are TypeScript (17 .ts, 40 .tsx, no .js in src/ but one script asset); every manifest builds from .ts/.tsx entry points | ✅ Done | [notes](docs/scenarios/187-typescript/) |
-| 188 | Are packages type-checked against the public API when built? | Yes | Check | A wrong prop type: build fails | ⬜ Not started | |
+| 188 | Are packages type-checked against the public API when built? | Yes | Check | Yes: znode build runs tsc first; a key IBrowserPlugin lacks and a hook returning a string both stopped the build (exit 1). One shared tsconfig: an error in one package stops every package's build | ✅ Done | [notes](docs/scenarios/188-type-checked-build/) |
 | 189 | Does a package build quickly (seconds)? | Yes | Check | Timed `npm run build` | ⬜ Not started | |
 | 190 | Can I lint a package? | No | Check | Add ESLint to this repo (`npm run lint`) | ⬜ Not started | |
 | 191 | Can I unit test a package? | No | Check | Add unit tests to this repo (`npm test`) | ⬜ Not started | |

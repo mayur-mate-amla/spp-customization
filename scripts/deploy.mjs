@@ -12,6 +12,27 @@ const target = process.argv[2] || ".";
 const manifestFile = target === "." ? "znode-package.json" : target;
 const { name, version } = JSON.parse(fs.readFileSync(manifestFile, "utf8"));
 
+// asset versions (row 145): every ?v=<version> in the theme's sources must be this release's version, or a changed
+// asset would keep its old URL and stay cached in shoppers' browsers for up to a year
+if (manifestFile === "znode-package.json") {
+  const stale = [];
+  const walk = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const file = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(file);
+      else if (/\.(tsx?|css|json)$/.test(entry.name)) {
+        const text = fs.readFileSync(file, "utf8");
+        for (const match of text.matchAll(/(?:\?v=|ASSET_VERSION = ")(\d+\.\d+\.\d+)/g)) if (match[1] !== version) stale.push(`${file}: ${match[0]}`);
+      }
+    }
+  };
+  walk("src");
+  if (stale.length) {
+    console.error(`asset versions differ from znode-package.json (${version}); update them first:\n  ${stale.join("\n  ")}`);
+    process.exit(1);
+  }
+}
+
 const result = spawnSync(`npx znode deploy ${target}`, { stdio: "inherit", shell: true });
 if (result.status !== 0) process.exit(result.status ?? 1);
 

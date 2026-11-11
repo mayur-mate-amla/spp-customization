@@ -1,4 +1,5 @@
 import { settings } from "../lib/host.js";
+import { asset } from "../lib/assets.js";
 
 // Slot layout.head: tags for the document <head> of every page (React places <meta>, <link> and <script async src> in
 // the head, on the server render too: they are in the HTML search engines and link previews read):
@@ -11,7 +12,6 @@ import { settings } from "../lib/host.js";
 //     siteVerification, set per store). A page's own <title> and description stay the CMS's (each page's SEO fields,
 //     through Next.js metadata): a theme adds tags, it does not replace those.
 
-const FILES = "/api/extensions/files";
 const clean = (value: unknown) => String(value || "").replace(/[<>"]/g, "").trim();
 
 export function HeadTags(props: { store?: { code?: string } }) {
@@ -21,9 +21,9 @@ export function HeadTags(props: { store?: { code?: string } }) {
   return (
     <>
       <meta name="theme-color" content={color} />
-      <link rel="icon" type="image/svg+xml" href={`${FILES}/spp-customization-favicon.svg`} />
+      <link rel="icon" type="image/svg+xml" href={asset("spp-customization-favicon.svg")} />
       <link rel="preconnect" href="https://imagelab.artifi.net" />
-      <script async src={`${FILES}/spp-customization-analytics.mjs`} data-store={props.store?.code || ""} />
+      <script async src={asset("spp-customization-analytics.mjs")} data-store={props.store?.code || ""} />
       {brand && (
         <>
           <meta property="og:site_name" content={brand} />

@@ -1,0 +1,56 @@
+# 1. every package file: public, max-age=31536000, immutable; a second visit takes all of them from the browser cache
+> npm run page-files -- --path / --store http://sppdemo.localhost:3000 --again --pause 150
+http://sppdemo.localhost:3000/: 16 package files
+  ?                  sppdemo-navigate-logo.svg                          4 KB  v=-          public, max-age=31536000, immutable
+  artifi             artifi-1.1.4.browser.mjs                          27 KB  v=1794292242 public, max-age=31536000, immutable
+  countdown-banner   countdown-banner-1.0.1.browser.mjs                 4 KB  v=1794292242 public, max-age=31536000, immutable
+  delivery-preference delivery-preference-1.1.1.browser.mjs             17 KB  v=1794292242 public, max-age=31536000, immutable
+  redpanda           redpanda-1.0.0.css                                 2 KB  v=1794292242 public, max-age=31536000, immutable
+  redpanda           redpanda-Montserrat-300.woff2                     37 KB  v=-          public, max-age=31536000, immutable
+  redpanda           redpanda-Montserrat-400.woff2                     37 KB  v=-          public, max-age=31536000, immutable
+  redpanda           redpanda-Montserrat-600.woff2                     37 KB  v=-          public, max-age=31536000, immutable
+  spp-base           spp-base-1.2.1.browser.mjs                       113 KB  v=1794292243 public, max-age=31536000, immutable
+  spp-base           spp-base-1.2.1.css                                74 KB  v=1794292243 public, max-age=31536000, immutable
+  spp-commerce       spp-commerce-1.0.0.browser.mjs                    35 KB  v=1794318442 public, max-age=31536000, immutable
+  spp-commerce       spp-commerce-1.0.0.css                             9 KB  v=1794318442 public, max-age=31536000, immutable
+  spp-promos         spp-promos-1.0.0.browser.mjs                       2 KB  v=1794299209 public, max-age=31536000, immutable
+  spp-promos         spp-promos-1.0.0.css                               0 KB  v=1794299209 public, max-age=31536000, immutable
+  spp-widgets        spp-widgets-1.0.0.browser.mjs                      5 KB  v=1794318448 public, max-age=31536000, immutable
+  spp-widgets        spp-widgets-1.0.0.css                              2 KB  v=1794318448 public, max-age=31536000, immutable
+packages loaded: ?, artifi, countdown-banner, delivery-preference, redpanda, spp-base, spp-commerce, spp-promos, spp-widgets
+packages in the registry not loaded: sort-order, spp-content-staplespromo, spp-content-nvidia, spp-content-lol, spp-content-navigate, spp-customization, salmonsalmon, purpleplatypus, sageserpent, apple, neon-noir, staples-basic, kalles, kalles-content, small-order, apex, demo-theme, my-apex, ppui, promo-supply
+waiting 150 s before the second visit...
+second visit: 16 files, 14 from the browser cache; asked again: spp-promos-1.0.0.browser.mjs (200), spp-promos-1.0.0.css (200)
+
+# 2. ... until they change: spp-promos redeployed during the pause (npm run deploy -- spp-promos.znode-package.json, no code change)
+#    its files got a new ?v= (install time): only those two were asked again
+  fetched again: spp-promos-1.0.0.browser.mjs v=1794375379897 (200)
+  fetched again: spp-promos-1.0.0.css v=1794375379905 (200)
+
+# 3. found: assets had no ?v= (fonts, images, the analytics script): a changed asset under the same name would stay
+#    cached for up to a year. Now every asset of the theme carries ?v=<package version>:
+> npm run page-files -- --path / --store http://localhost:3000 --theme spp-customization --again
+﻿http://localhost:3000/ (theme spp-customization previewed): 16 package files
+  redpanda           redpanda-1.0.0.css                                 2 KB  v=1794292242 public, max-age=31536000, immutable
+  redpanda           redpanda-Montserrat-400.woff2                     37 KB  v=-          public, max-age=31536000, immutable
+  redpanda           redpanda-Montserrat-600.woff2                     37 KB  v=-          public, max-age=31536000, immutable
+  spp-base           spp-base-1.2.1.browser.mjs                       113 KB  v=1794292243 public, max-age=31536000, immutable
+  spp-base           spp-base-1.2.1.css                                74 KB  v=1794292243 public, max-age=31536000, immutable
+  spp-customization  spp-customization-1.0.2.browser.mjs               51 KB  v=1794375603 public, max-age=31536000, immutable
+  spp-customization  spp-customization-1.0.2.css                       41 KB  v=1794375603 public, max-age=31536000, immutable
+  spp-customization  spp-customization-analytics.mjs                    1 KB  v=1.0.2      public, max-age=31536000, immutable
+  spp-customization  spp-customization-campaign-hero.svg                1 KB  v=1.0.2      public, max-age=31536000, immutable
+  spp-customization  spp-customization-cobrand-logo.svg                 0 KB  v=1.0.2      public, max-age=31536000, immutable
+  spp-customization  spp-customization-favicon.svg                      0 KB  v=1.0.2      public, max-age=31536000, immutable
+  spp-customization  spp-customization-geist-latin.woff2               28 KB  v=1.0.2      public, max-age=31536000, immutable
+  spp-customization  spp-customization-tile-electrical.svg              0 KB  v=1.0.2      public, max-age=31536000, immutable
+  spp-customization  spp-customization-tile-plumbing.svg                0 KB  v=1.0.2      public, max-age=31536000, immutable
+  spp-customization  spp-customization-tile-tools.svg                   0 KB  v=1.0.2      public, max-age=31536000, immutable
+  spp-customization  spp-customization-tile-workwear.svg                0 KB  v=1.0.2      public, max-age=31536000, immutable
+packages loaded: redpanda, spp-base, spp-customization
+second visit: 15 files, 15 from the browser cache
+
+# 4. npm run deploy refuses a stale asset version (ASSET_VERSION set to 1.0.1 for the test, then back to 1.0.2)
+> node scripts/deploy.mjs
+asset versions differ from znode-package.json (1.0.2); update them first:
+  src\lib\assets.ts: ASSET_VERSION = "1.0.1

@@ -1,3 +1,4 @@
+import { asset } from "../lib/assets.js";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -37,7 +38,7 @@ export const HERO_EDITOR = {
   defaultProps: {
     heading: "Made for your business",
     text: "Tell buyers what makes this store worth their time.",
-    image: "/api/extensions/files/spp-customization-hero.svg",
+    image: asset("spp-customization-hero.svg"),
     buttonText: "Shop now",
     buttonUrl: "/",
   },

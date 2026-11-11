@@ -56,7 +56,14 @@ try {
   console.log(`packages in the registry not loaded: ${entries.map((entry) => entry.name).filter((name) => !loaded.has(name)).join(", ")}`);
 
   if (args.includes("--again")) {
+    // --pause <seconds>: wait before the second visit (to redeploy a package meanwhile: row 145)
+    const pause = Number(arg("pause", 0));
+    if (pause) {
+      console.log(`waiting ${pause} s before the second visit...`);
+      await new Promise((resolve) => setTimeout(resolve, pause * 1000));
+    }
     const second = await visit();
+    for (const file of second) if (!file.cached) console.log(`  fetched again: ${file.name} v=${file.version} (${file.status})`);
     const fromCache = second.filter((file) => file.cached);
     console.log(`second visit: ${second.length} files, ${fromCache.length} from the browser cache${fromCache.length < second.length ? `; asked again: ${second.filter((file) => !file.cached).map((file) => `${file.name} (${file.status})`).join(", ")}` : ""}`);
   }

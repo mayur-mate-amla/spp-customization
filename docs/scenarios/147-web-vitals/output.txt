@@ -1,0 +1,44 @@
+# npm run vitals (scripts/vitals.mjs), median of 3 page loads each, Edge headless, phone viewport 412x823
+
+## As first measured (before row 148's fix)
+$ npm run vitals -- --path / --runs 3
+http://localhost:3000/, 3 runs, no throttling, phone viewport
+  FCP 2300 ms   LCP 4032 ms   CLS 0.000   TBT 36 ms
+
+$ npm run vitals -- --path / --theme spp-customization --runs 3
+http://localhost:3000/ (theme spp-customization), 3 runs, no throttling, phone viewport
+  FCP 1636 ms   LCP 1636 ms   CLS 0.277   TBT 14 ms
+  shift 0.150 at 2437 ms: div.spp-customization-layout (ours), div.spp-customization-announcement (ours), ul.spp-customization-trust.flex (ours)
+  shift 0.127 at 2748 ms: div.spp-customization-layout (ours), ul.spp-customization-trust.flex (ours)
+  shift 0.000 at 2772 ms: div.spp-customization-layout (ours)
+  shift 0.000 at 2759 ms: div.spp-customization-layout (ours)
+
+$ npm run vitals -- --store http://sppdemo.localhost:3000 --path / --runs 3
+http://sppdemo.localhost:3000/, 3 runs, no throttling, phone viewport
+  FCP 3212 ms   LCP 4988 ms   CLS 0.005   TBT 217 ms
+  shift 0.003 at 4461 ms: div.flex.flex-col, p
+  shift 0.002 at 7441 ms: div.spp-promos-sale (ours)
+
+## After row 148's fix
+$ npm run vitals -- --path / --theme spp-customization --runs 3
+http://localhost:3000/ (theme spp-customization), 3 runs, no throttling, phone viewport
+  FCP 2052 ms   LCP 2052 ms   CLS 0.000   TBT 0 ms
+  shift 0.000 at 2834 ms: div.text-lg.relative 177→177px
+  shift 0.000 at 2826 ms: div.flex.items-center 239→239px
+  shift 0.000 at 2871 ms: svg 176→176px
+
+$ npm run vitals -- --path / --theme spp-customization --runs 3 --throttle
+http://localhost:3000/ (theme spp-customization), 3 runs, phone on 4G (CPU 4x, 150 ms, 1.6 Mbps), phone viewport
+  FCP 4576 ms   LCP 4576 ms   CLS 0.006   TBT 2850 ms
+  shift 0.004 at 5934 ms: (gone), li.spp-customization-trust__item.flex (ours) 315→315px
+  shift 0.002 at 6234 ms: (gone)
+  shift 0.000 at 15981 ms: div.text-lg.relative 177→177px
+  shift 0.000 at 15850 ms: div.flex.items-center 239→239px
+  shift 0.000 at 5998 ms: div.spp-customization-announcement (ours) 65→65px
+  shift 0.000 at 15545 ms: svg 176→176px
+
+$ npm run vitals -- --path / --runs 3 --throttle
+http://localhost:3000/, 3 runs, phone on 4G (CPU 4x, 150 ms, 1.6 Mbps), phone viewport
+  FCP 3340 ms   LCP 18168 ms   CLS 0.154   TBT 3911 ms
+  shift 0.154 at 17730 ms: div.flex-1.pl-4 152→307px
+  shift 0.000 at 3240 ms: div.absolute.top-1 80→80px

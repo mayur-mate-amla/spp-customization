@@ -28,6 +28,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run release-watch -- -- <command>` | Requests a page and a route without pause while a command runs (a deploy or rollback), then checks every bundle and stylesheet those pages named still loads (`scripts/release-watch.mjs`) |
 | `npm run store-log [-- --package <name>] [--date YYYY-MM-DD] [--all-lines]` | Package errors from the store's own log file: failed routes, hooks, slots, pages, packages skipped at load (`scripts/store-log.mjs`) |
 | `npm run scenario-check [-- --fix-links]` | Every Done row of SCENARIOS.md: its notes folder, README ("How it renders"), images, RENDER-FLOW row and commit, pushed; and nothing uncommitted or unpushed (`scripts/scenario-check.mjs`) |
+| `npm run local-check [-- <store URL> ...]` | The local store set up for these packages: the same plugin folder as the store's `.env`, each package installed (version, on/off, stores), and which of them each store URL loads (`scripts/local-check.mjs`) |
 | `npm run source-at -- <bundle>.mjs:<line>:<col>` / `--sources <bundle>.mjs` | Where a position in an installed bundle (a stack line) comes from in `src/`, through its source map; a map's sources (`scripts/source-at.mjs`) |
 | `npm run debug-break -- --file <src/...tsx> --find <text> --eval <expr,...>` | A breakpoint on a TypeScript line in a real page (through the source map); prints where it paused and the values (`scripts/debug-break.mjs`) |
 

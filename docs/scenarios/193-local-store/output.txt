@@ -1,0 +1,29 @@
+# Row 193: the store running on this machine, with this repository's packages
+# store repo D:\znode\znode-webstore10x-page-builder (Next.js, development mode), plugin folder D:\runtime-plugins-store
+
+## The store's processes (in the store repo: npx nx dev webstore; the page builder: npm run page-builder:dev)
+37428  nx dev webstore        -> listening on :3000
+30812  nx dev page-builder    -> listening on :3001
+
+## The store's apps/webstore/.env (runtime lines)
+LOGGING_METHOD="FILE"   # or "API"
+CACHE_MEMORY="FILE" # or "REDIS"
+ENABLE_CACHE=true
+RUNTIME_PLUGINS_DIR="D:/runtime-plugins-store"
+
+$ npm run local-check -- http://sppdemo.localhost:3000 http://localhost:3000
+plugin folder (this repo): D:\runtime-plugins-store
+plugin folder (the store's apps/webstore/.env): D:/runtime-plugins-store
+packages from this repository in plugins.json:
+  spp-commerce         plugin  1.0.0  on   stores: POCSppDemo
+  spp-promos           plugin  1.0.0  on   stores: POCSppDemo, POCStaplesPromo
+  spp-sandbox-probe    plugin  1.0.0  on   stores: POCSppDemo
+  spp-widgets          widget  1.0.0  on   stores: POCSppDemo
+  spp-customization    theme   1.0.3  off  stores: none  (a theme can also be seen with the preview)
+http://sppdemo.localhost:3000: HTTP 200, "Navigate Brand Store"
+  packages the page loads: spp-base, artifi, countdown-banner, delivery-preference, spp-promos, spp-commerce, spp-widgets, spp-sandbox-probe
+  from this repository: spp-promos, spp-commerce, spp-widgets, spp-sandbox-probe
+http://localhost:3000: HTTP 200, "Acme Manufacturing"
+  packages the page loads: apex
+  from this repository: none: this host is another store (each store has its own host name), or nothing is placed on it
+no problems

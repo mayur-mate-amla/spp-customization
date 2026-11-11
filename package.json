@@ -27,7 +27,8 @@
     "store-log": "node scripts/store-log.mjs",
     "scenario-check": "node scripts/scenario-check.mjs",
     "source-at": "node scripts/source-at.mjs",
-    "debug-break": "node scripts/debug-break.mjs"
+    "debug-break": "node scripts/debug-break.mjs",
+    "local-check": "node scripts/local-check.mjs"
   },
   "devDependencies": {
     "@types/react": "19.2.13",

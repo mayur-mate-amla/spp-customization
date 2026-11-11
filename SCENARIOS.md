@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 129 |
+| ✅ Done | 130 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 11 |
+| ⬜ Not started | 10 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -380,7 +380,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 190 | Can I lint a package? | No | Check | Add ESLint to this repo (`npm run lint`) | ⬜ Not started | |
 | 191 | Can I unit test a package? | No | Check | Add unit tests to this repo (`npm test`) | ⬜ Not started | |
 | 192 | Are there end-to-end tests for packages? | No | Check | Add a browser test with `scripts/` + puppeteer | ⬜ Not started | |
-| 193 | Can I run the store locally with packages? | Yes | Check | Local store at localhost:3000 with this theme | ⬜ Not started | |
+| 193 | Can I run the store locally with packages? | Yes | Check | Yes: the store repo in dev mode on :3000 with RUNTIME_PLUGINS_DIR; POCSppDemo (sppdemo.localhost:3000) loads four packages from here; each store has its own host (localhost:3000 is another store); npm run local-check checks the setup | ✅ Done | [notes](docs/scenarios/193-local-store/) |
 
 ## Upgrades
 

@@ -41,6 +41,7 @@ try {
     // a command's output as a terminal-like card: the evidence image of a scenario with nothing to see on a page
     const escape = (value) => String(value).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
     const title = arg("title", path.basename(textFile));
+    // eslint-disable-next-line no-control-regex -- strips terminal colour codes (ESC [ … m)
     const text = fs.readFileSync(textFile, "utf8").replace(/\x1b\[[0-9;]*m/g, "");
     await page.setViewport({ width: 1100, height: 200 });
     await page.setContent(

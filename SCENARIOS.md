@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 130 |
+| ✅ Done | 131 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 10 |
+| ⬜ Not started | 9 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -377,7 +377,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 187 | Can I write packages in TypeScript? | Yes | Check | Yes: all five packages are TypeScript (17 .ts, 40 .tsx, no .js in src/ but one script asset); every manifest builds from .ts/.tsx entry points | ✅ Done | [notes](docs/scenarios/187-typescript/) |
 | 188 | Are packages type-checked against the public API when built? | Yes | Check | Yes: znode build runs tsc first; a key IBrowserPlugin lacks and a hook returning a string both stopped the build (exit 1). One shared tsconfig: an error in one package stops every package's build | ✅ Done | [notes](docs/scenarios/188-type-checked-build/) |
 | 189 | Does a package build quickly (seconds)? | Yes | Check | Yes: 6-11.5 s per package (three runs each), a full deploy 7.5 s; the type check is 5.7 s of it | ✅ Done | [notes](docs/scenarios/189-build-time/) |
-| 190 | Can I lint a package? | No | Check | Add ESLint to this repo (`npm run lint`) | ⬜ Not started | |
+| 190 | Can I lint a package? | No | Check | Yes here: npm run lint (ESLint with the store's versions and rules, plus Next.js and hooks rules); src/ was clean; the first run found a real bug in keepPreviousBrowserFiles (older versions' files never removed), fixed | ✅ Done | [notes](docs/scenarios/190-lint/) |
 | 191 | Can I unit test a package? | No | Check | Add unit tests to this repo (`npm test`) | ⬜ Not started | |
 | 192 | Are there end-to-end tests for packages? | No | Check | Add a browser test with `scripts/` + puppeteer | ⬜ Not started | |
 | 193 | Can I run the store locally with packages? | Yes | Check | Yes: the store repo in dev mode on :3000 with RUNTIME_PLUGINS_DIR; POCSppDemo (sppdemo.localhost:3000) loads four packages from here; each store has its own host (localhost:3000 is another store); npm run local-check checks the setup | ✅ Done | [notes](docs/scenarios/193-local-store/) |

@@ -6,12 +6,9 @@
 // Prints the source file, line and column, and that line of the source.
 import fs from "node:fs";
 import path from "node:path";
-import { createRequire } from "node:module";
 import { pluginsDir } from "./lib/store.mjs";
 import { bundlePosition, sourceAt } from "./lib/source-maps.mjs";
 
-const require = createRequire(path.resolve("package.json"));
-const { SourceMapConsumer } = require("source-map");
 const args = process.argv.slice(2);
 const listSources = args[0] === "--sources";
 const input = listSources ? args[1] : args.join(" ");
@@ -20,7 +17,6 @@ if (!match) throw new Error("usage: node scripts/source-at.mjs <bundle>.mjs:<lin
 const mapFile = path.join(pluginsDir(), `${match[1]}.map`);
 if (!fs.existsSync(mapFile)) throw new Error(`no source map: ${mapFile}`);
 const map = JSON.parse(fs.readFileSync(mapFile, "utf8"));
-const consumer = new SourceMapConsumer(map);
 if (listSources) {
   console.log(`${match[1]}.map: ${map.sources.length} sources, text included: ${map.sourcesContent?.filter(Boolean).length || 0}`);
   for (const source of map.sources) console.log(`  ${source}`);

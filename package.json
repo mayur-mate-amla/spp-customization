@@ -28,15 +28,21 @@
     "scenario-check": "node scripts/scenario-check.mjs",
     "source-at": "node scripts/source-at.mjs",
     "debug-break": "node scripts/debug-break.mjs",
-    "local-check": "node scripts/local-check.mjs"
+    "local-check": "node scripts/local-check.mjs",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@eslint/js": "9.39.3",
+    "@next/eslint-plugin-next": "16.1.6",
     "@types/react": "19.2.13",
     "@types/react-dom": "19.2.3",
+    "eslint": "9.39.3",
+    "eslint-plugin-react-hooks": "5.2.0",
     "next": "16.1.6",
     "puppeteer-core": "^23.11.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "typescript-eslint": "8.56.1",
     "znode-plugin": "^0.1.2"
   }
 }

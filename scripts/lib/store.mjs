@@ -77,8 +77,11 @@ export function placementsFor(registry, storeCode) {
 // put the previous version's browser files back from its kept zip (.versions/), and remove those of any version before
 // it. The store serves them by file name, so they keep working; they are browser code only, no server part.
 export function keepPreviousBrowserFiles(packageName, current, previous, dir = pluginsDir()) {
-  const browserFile = (version) => new RegExp(`^${packageName.replace(/-/g, "\-")}-${version.replace(/\./g, "\.")}\.(browser\.mjs|css)$`);
-  const anyVersion = new RegExp(`^${packageName.replace(/-/g, "\-")}-(\d+\.\d+\.\d+)\.(browser\.mjs|css)$`);
+  // escaped for a RegExp source: in a template literal "\d" is just "d" and "\." just "." (row 190 found it: the
+  // pattern of older versions never matched a real file name, so nothing was ever removed)
+  const literal = (text) => text.replace(/[.*+?^${}()|[\]\\-]/g, "\\$&");
+  const browserFile = (version) => new RegExp(`^${literal(packageName)}-${literal(version)}\\.(browser\\.mjs|css)$`);
+  const anyVersion = new RegExp(`^${literal(packageName)}-(\\d+\\.\\d+\\.\\d+)\\.(browser\\.mjs|css)$`);
   const kept = [];
   const removed = [];
   if (previous && previous !== current) {

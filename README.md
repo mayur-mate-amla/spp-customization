@@ -7,6 +7,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 
 | Command | What it does |
 | --- | --- |
+| `npm run lint` | ESLint on the packages (`src/`, the store's own rules plus Next.js and React hooks rules) and on `scripts/` (`eslint.config.mjs`) |
 | `npm run dev [-- <manifest>]` | Deploy now, then again on every save in the package's folder (the theme by default); refresh the store page to see it |
 | `npm run build` | Type-check against the store, then build into `dist/` |
 | `npm run check` | The marketplace review: metadata, permissions against the code, sizes |

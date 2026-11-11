@@ -1,0 +1,45 @@
+# Row 190: npm run lint (eslint.config.mjs, new)
+# eslint 9.39.3, typescript-eslint 8.56.1, eslint-plugin-react-hooks 5.2.0, @next/eslint-plugin-next 16.1.6
+# (the store repo's versions; its rules: double quotes, semicolons, no console, no any, hooks)
+
+## 1. First run, before any fix: 24 problems in 9 of 87 files
+src/ (the packages): no real problem; 2 x "Definition for rule '@next/next/no-img-element' was not found"
+     (eslint-disable comments in AddedToCart.tsx:49 and ProductListing.tsx:44 for a rule nothing loaded)
+scripts/:
+  scripts/lib/store.mjs:80-81                   12 x no-useless-escape: \- \. \d inside template literals  <- a real bug, below
+  scripts/quotes-check.mts, secrets-check.mts   parsing errors (TypeScript read as JavaScript: config)
+  scripts/svg-check.mjs, vitals.mjs             no-undef self, PerformanceObserver (code run in the page: config)
+  scripts/shot.mjs:44                           no-control-regex \x1b (meant: strips terminal colours)
+  scripts/source-at.mjs:23                      'consumer' is assigned a value but never used
+
+## 2. The bug: keepPreviousBrowserFiles (row 173) never removed older versions' browser files
+-  const anyVersion = new RegExp(`^${packageName.replace(/-/g, "\-")}-(\d+\.\d+\.\d+)\.(browser\.mjs|css)$`);
+   in a template literal "\d" is just "d": the pattern was  ^spp-customization-(d+.d+.d+).(browser.mjs|css)$
++  const literal = (text) => text.replace(/[.*+?^${}()|[\]\\-]/g, "\\$&");
++  const anyVersion = new RegExp(`^${literal(packageName)}-(\\d+\\.\\d+\\.\\d+)\\.(browser\\.mjs|css)$`);
+
+# a scratch folder with 1.0.1, 1.0.2 (previous) and 1.0.3 (current) files:
+# keepPreviousBrowserFiles("spp-customization", "1.0.3", "1.0.2", dir)
+before the fix:  { kept: [], removed: [] }       (1.0.1.browser.mjs and 1.0.1.css stay)
+after the fix:   { kept: [], removed: [ 'spp-customization-1.0.1.browser.mjs', 'spp-customization-1.0.1.css' ] }
+(no harm so far: 1.0.3 was the first release with this code; at 1.0.4 the 1.0.2 files would have stayed)
+
+## 3. After the fixes
+$ npm run lint
+(no output)
+exit 0
+
+## 4. It catches mistakes: src/promos/LintProbe.tsx, written for the check and deleted
+$ npx eslint src/promos/LintProbe.tsx
+   4:57  error    Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+   5:3   error    Unexpected var, use let or const instead                                     no-var
+   7:21  error    React Hook "useState" is called conditionally. React Hooks must be called in
+                  the exact same order in every component render                               react-hooks/rules-of-hooks
+   8:5   error    'count' is assigned a value but never used                                   @typescript-eslint/no-unused-vars
+  11:5   error    Unexpected console statement                                                 no-console
+  11:17  error    Strings must use doublequote                                                 quotes
+  12:6   warning  React Hook useEffect has a missing dependency: 'props.data'                  react-hooks/exhaustive-deps
+  13:10  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider
+                  using `<Image />` from `next/image` ...                                      @next/next/no-img-element
+✖ 8 problems (6 errors, 2 warnings)
+exit 1

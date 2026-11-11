@@ -6,6 +6,8 @@
 - a notes folder whose README has a "How it renders" section, and whose images exist;
 - a row in the `docs/RENDER-FLOW.md` table naming its commit.
 
+![evidence](evidence.png)
+
 The first run of the new check found one real problem: **57 of the "notes" links in `SCENARIOS.md` were broken**
 (`[notes](023-complex-theme/)`, which leads nowhere from the repository root). They are fixed.
 

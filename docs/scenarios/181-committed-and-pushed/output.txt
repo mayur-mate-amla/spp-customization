@@ -1,0 +1,8 @@
+$ npm run scenario-check   (after, with 301b477 pushed)
+120 rows done; 132 commits, all on origin/main: yes
+rows whose commit is "(this commit)" in RENDER-FLOW (filled in by the next commit): 181
+everything done is committed, documented and pushed
+exit 0
+
+$ git ls-remote origin main / git rev-parse HEAD
+origin main: 301b477   local HEAD: 301b477

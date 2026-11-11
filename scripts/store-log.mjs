@@ -9,6 +9,8 @@
 // here minutes later, or (after a restart) never. See docs/scenarios/175-package-errors-logged.
 import fs from "node:fs";
 import path from "node:path";
+import { pluginsDir } from "./lib/store.mjs";
+import { bundlePosition, sourceAt } from "./lib/source-maps.mjs";
 
 const args = process.argv.slice(2);
 const arg = (name, fallback) => (args.includes(`--${name}`) ? args[args.indexOf(`--${name}`) + 1] : fallback);
@@ -39,7 +41,12 @@ console.log(`${file}: ${entries.length} entries, ${about.length} about runtime p
 for (const entry of about) {
   const [first, ...stack] = entry.message.split(/\r?\n/);
   console.log(`${entry.at}  ${entry.level.padEnd(5)}  ${first}`);
-  const where = stack.find((line) => /runtime-plugins|\.server\.mjs/.test(line));
-  if (args.includes("--all-lines")) for (const line of stack) console.log(`    ${line.trim()}`);
-  else if (where) console.log(`    ${where.trim()}`);
+  // each frame in a package bundle, with the source line it comes from (row 182, through the maps of row 183)
+  const frames = args.includes("--all-lines") ? stack : stack.filter((line) => bundlePosition(line)).slice(0, 3);
+  for (const frame of frames) {
+    console.log(`    ${frame.trim()}`);
+    const position = bundlePosition(frame);
+    const found = position && sourceAt(pluginsDir(), position.bundle, position.line, position.column);
+    if (found) console.log(`      -> ${found.source}:${found.line}  ${found.text}`);
+  }
 }

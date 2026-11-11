@@ -94,3 +94,20 @@ export function chainSourceMaps(manifestFile, pluginFolder) {
   zip?.writeZip(zipFile);
   return results;
 }
+
+/** Where a position in an installed bundle comes from: { source, line, column, text } or null (rows 182-183). */
+export function sourceAt(pluginFolder, bundle, line, column) {
+  const mapFile = path.join(pluginFolder, `${bundle}.map`);
+  if (!fs.existsSync(mapFile)) return null;
+  const consumer = new SourceMapConsumer(JSON.parse(fs.readFileSync(mapFile, "utf8")));
+  const original = consumer.originalPositionFor({ line, column: column - 1 });
+  if (original.line == null) return null;
+  const content = consumer.sourceContentFor(original.source, true) || "";
+  return { source: original.source, line: original.line, column: original.column + 1, text: (content.split(/\r?\n/)[original.line - 1] || "").trim() };
+}
+
+/** A stack line's bundle position ("…/<bundle>.mjs?v=…:98:19") → { bundle, line, column }, or null. */
+export function bundlePosition(text) {
+  const match = /([a-z0-9-]+-\d+\.\d+\.\d+\.(?:server|browser)\.mjs)(?:\?[^:)\s]*)?:(\d+):(\d+)/.exec(text || "");
+  return match ? { bundle: match[1], line: Number(match[2]), column: Number(match[3]) } : null;
+}

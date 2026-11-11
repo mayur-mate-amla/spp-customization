@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { pluginsDir } from "./lib/store.mjs";
+import { bundlePosition, sourceAt } from "./lib/source-maps.mjs";
 
 const require = createRequire(path.resolve("package.json"));
 const { SourceMapConsumer } = require("source-map");
@@ -25,14 +26,11 @@ if (listSources) {
   for (const source of map.sources) console.log(`  ${source}`);
   process.exit(0);
 }
-const line = Number(match[2]);
-const column = Number(match[3]) - 1;
-const original = consumer.originalPositionFor({ line, column });
-if (original.line == null) {
-  console.log(`${match[1]}:${line}:${column + 1}: no mapping`);
+const position = bundlePosition(input);
+const found = position && sourceAt(pluginsDir(), position.bundle, position.line, position.column);
+if (!found) {
+  console.log(`${input}: no mapping`);
   process.exit(1);
 }
-const content = consumer.sourceContentFor(original.source, true) || "";
-const text = content.split(/\r?\n/)[original.line - 1] || "";
-console.log(`${match[1]}:${line}:${column + 1}  ->  ${original.source}:${original.line}:${original.column + 1}`);
-console.log(`  ${original.line} | ${text.trim()}`);
+console.log(`${position.bundle}:${position.line}:${position.column}  ->  ${found.source}:${found.line}:${found.column}`);
+console.log(`  ${found.line} | ${found.text}`);

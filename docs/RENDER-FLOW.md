@@ -391,6 +391,7 @@ repository joins it. Commits are on `main` of this repository.
 | 173 | Zero-downtime release: previous browser files kept (release 1.0.3) | adecb12 | `znode install` deletes the previous version's files | §1 install and registry; §3 B.1 files by name | scripts/lib/store.mjs, scripts/deploy.mjs, scripts/rollback.mjs, scripts/release-watch.mjs |
 | 175 | Package errors in the store log (written ten at a time); npm run store-log | cabc249 | `logServer` buffers 10 entries per module, then the log file | §7 B.4 `runPluginRoute` catch and log | scripts/store-log.mjs |
 | 181 | Work committed and pushed, checked by npm run scenario-check (57 links fixed) | 301b477, ca09a98 | – | §10 this table | scripts/scenario-check.mjs, SCENARIOS.md |
-| 183 | Source maps chained to the TypeScript (devtools and stack lines) | (this commit) | SDK: transpile without maps, rollup maps to `.build/` | §3 B.1 files route serves `.map` | scripts/lib/source-maps.mjs, scripts/deploy.mjs, scripts/source-at.mjs |
+| 182 | Debugging by the TypeScript: store-log maps frames, browser breakpoint on a .tsx line | (this commit) | browser follows sourceMappingURL; server errors in the store log | §3 B.1 files route maps; §8 B trust strip | scripts/store-log.mjs, scripts/debug-break.mjs, scripts/lib/source-maps.mjs |
+| 183 | Source maps chained to the TypeScript (devtools and stack lines) | c3749f1 | SDK: transpile without maps, rollup maps to `.build/` | §3 B.1 files route serves `.map` | scripts/lib/source-maps.mjs, scripts/deploy.mjs, scripts/source-at.mjs |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

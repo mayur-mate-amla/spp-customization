@@ -26,7 +26,8 @@
     "release-watch": "node scripts/release-watch.mjs",
     "store-log": "node scripts/store-log.mjs",
     "scenario-check": "node scripts/scenario-check.mjs",
-    "source-at": "node scripts/source-at.mjs"
+    "source-at": "node scripts/source-at.mjs",
+    "debug-break": "node scripts/debug-break.mjs"
   },
   "devDependencies": {
     "@types/react": "19.2.13",

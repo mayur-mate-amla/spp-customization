@@ -29,6 +29,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run store-log [-- --package <name>] [--date YYYY-MM-DD] [--all-lines]` | Package errors from the store's own log file: failed routes, hooks, slots, pages, packages skipped at load (`scripts/store-log.mjs`) |
 | `npm run scenario-check [-- --fix-links]` | Every Done row of SCENARIOS.md: its notes folder, README ("How it renders"), images, RENDER-FLOW row and commit, pushed; and nothing uncommitted or unpushed (`scripts/scenario-check.mjs`) |
 | `npm run source-at -- <bundle>.mjs:<line>:<col>` / `--sources <bundle>.mjs` | Where a position in an installed bundle (a stack line) comes from in `src/`, through its source map; a map's sources (`scripts/source-at.mjs`) |
+| `npm run debug-break -- --file <src/...tsx> --find <text> --eval <expr,...>` | A breakpoint on a TypeScript line in a real page (through the source map); prints where it paused and the values (`scripts/debug-break.mjs`) |
 
 ## Use-case scenarios
 

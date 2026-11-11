@@ -1,0 +1,21 @@
+## Server: a package error in the store's log, with its source line
+$ npm run store-log
+D:\znode\znode-webstore10x-page-builder\apps\webstore\logs\logs-2026-11-11.txt: 495 entries, 16 about runtime packages
+2026-11-11 11:59:36  Error  Runtime plugin spp-sandbox-probe route probe failed. Error: sandbox ended (exit 134)
+2026-11-11 12:29:08  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 1 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+      -> spp-sandbox-probe/src/sandbox-probe/server.ts:106  throw new Error(`spp-sandbox-probe test failure ${String(request.query.n || "1").replace(/[^0-9]/g, "")} (row 175)`);
+2026-11-11 12:29:12  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 2 (row 175)
+  ...
+
+  before (row 175): the frame only, a line in the built bundle
+
+## Browser: a breakpoint on a line of the theme's .tsx, in a real page
+$ npm run debug-break -- --file src/slots/TrustStrip.tsx --find "setStatus(data)" --eval data,live
+breakpoint: spp-customization/src/slots/TrustStrip.tsx:27  .then((data) => live && data && setStatus(data))
+  = spp-customization-1.0.3.browser.mjs:47:45 (through spp-customization-1.0.3.browser.mjs.map)
+paused: other in (anonymous) at spp-customization-1.0.3.browser.mjs:47:45
+  = spp-customization/src/slots/TrustStrip.tsx:27  .then((data) => live && data && setStatus(data))
+  data = {"support":{"open":false,"label":"Customer service opens today at 8am","phone":"1-800-555-0199"},"shipping":{"shipsToday":true,"minutesLeft":772,"shipDay":"today","label":"Order within 12h 52m to ship today"},"notice":"Holiday shipping: order by Dec 17 for delivery before Dec 25. Our warehouse is closed Dec 24-26.","date":"2026-11-11","timeZone":"America/New_York"}
+  live = true
+  scopes: local, closure, closure

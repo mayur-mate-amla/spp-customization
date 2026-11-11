@@ -1,0 +1,21 @@
+# Three builds of each package, one after the other (npx znode build <manifest>), wall clock
+# Windows 11, 12 logical CPUs, Node v26.4.0, the store running on :3000
+
+znode-package.json                     11.5 s  11.3 s  11.3 s   built theme spp-customization@1.0.3: 18 files
+spp-commerce.znode-package.json        7.3 s  7.2 s  7.4 s   built plugin spp-commerce@1.0.0: 8 files
+spp-promos.znode-package.json          5.8 s  5.9 s  5.8 s   built plugin spp-promos@1.0.0: 4 files
+spp-widgets.znode-package.json         5.8 s  5.8 s  5.8 s   built widget spp-widgets@1.0.0: 4 files
+spp-sandbox-probe.znode-package.json   6.6 s  6.5 s  7.0 s   built plugin spp-sandbox-probe@1.0.0: 6 files
+tsc --noEmit (whole repo, the check step alone): 5.7 s
+
+# Build + pack + install + versions copy:
+$ npm run deploy -- spp-promos.znode-package.json      7.5 s
+packed spp-promos-1.0.0.zpkg.zip (3617 bytes)
+installed plugin spp-promos@1.0.0 (was 1.0.0): 3 files, enabled for ["POCSppDemo"]
+source map: spp-promos-1.0.0.browser.mjs.map: 1 sources mapped to TypeScript (323 mappings)
+kept spp-promos-1.0.0.zpkg.zip in .versions\spp-promos (1 version on disk: 1.0.0)
+
+# What the time is spent on
+- tsc --noEmit over the whole repo (one tsconfig for the five packages): 5.7 s of every build
+- the theme only: dedupeStyles (css-dedupe.mjs) loads a store page (STORE_URL) to drop rules the store already has
+  css-dedupe: 8 rules the store already has dropped, 42933 bytes kept (6 store stylesheets)

@@ -1,0 +1,69 @@
+## The change: extend the holiday sale on POCSppDemo only
+$ node scripts/registry.mjs install POCSppDemo --package spp-promos "saleEndsAt=2026-11-22T23:59:00-05:00"
+{
+  "name": "spp-promos",
+  "version": "1.0.0",
+  "enabled": true,
+  "stores": "(ignored: placed by its installations) [\"POCSppDemo\"]",
+  "settings": {
+    "saleText": "Holiday sale: 20% off drinkware",
+    "saleEndsAt": "2026-11-15T23:59:00-05:00"
+  },
+  "installations": [
+    {
+      "package": "spp-promos",
+      "store": "POCStaplesPromo",
+      "settings": {
+        "saleText": "Back to school: 15% off notebooks and binders",
+        "saleEndsAt": "2026-11-30T23:59:00-05:00"
+      }
+    },
+    {
+      "package": "spp-promos",
+      "store": "POCSppDemo",
+      "settings": {
+        "saleEndsAt": "2026-11-22T23:59:00-05:00"
+      }
+    }
+  ]
+}
+
+## Each store, as the store resolves it (node scripts/registry.mjs store <code>)
+POCSppDemo:
+  parent   spp-base@1.2.1
+  theme    redpanda@1.0.0
+  plugin   artifi@1.1.4
+  content  spp-content-navigate@1.0.0
+  plugin   countdown-banner@1.0.1
+  plugin   delivery-preference@1.1.1
+  plugin   spp-promos@1.0.0               settings for this store: {"saleEndsAt":"2026-11-22T23:59:00-05:00"}
+  plugin   spp-commerce@1.0.0
+  plugin   spp-widgets@1.0.0
+POCStaplesPromo:
+  parent   spp-base@1.2.1
+  parent   redpanda@1.0.0
+  theme    salmonsalmon@1.0.1
+  plugin   artifi@1.1.4
+  content  spp-content-staplespromo@1.0.0
+  plugin   countdown-banner@1.0.1
+  plugin   spp-promos@1.0.0               settings for this store: {"saleText":"Back to school: 15% off notebooks and binders","saleEndsAt":"2026-11-30T23:59:00-05:00"}
+POCNvidia:
+  parent   spp-base@1.2.1
+  theme    sageserpent@1.0.1
+  plugin   artifi@1.1.4
+  content  spp-content-nvidia@1.0.0
+  plugin   countdown-banner@1.0.1
+
+## What each store's page receives (server HTML and the settings sent to the browser)
+sppdemo.localhost:3000/
+  saleEndsAt = 2026-11-22T23:59:00-05:00
+  saleText = Holiday sale: 20% off drinkware
+staplespromo.localhost:3000/
+  saleEndsAt = 2026-11-30T23:59:00-05:00
+  saleText = Back to school: 15% off notebooks and binders
+nvidia.localhost:3000/
+  (no spp-promos settings)
+
+## A redeploy keeps the installation records (npm run deploy -- spp-promos.znode-package.json)
+installed plugin spp-promos@1.0.0 (was 1.0.0): 3 files, enabled for ["POCSppDemo"]
+installations after the deploy: POCSppDemo, POCStaplesPromo (with its settings), unchanged

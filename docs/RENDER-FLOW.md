@@ -375,6 +375,7 @@ repository joins it. Commits are on `main` of this repository.
 | 145 | Browser cache until files change (assets versioned) | 508834c | Next.js hashed build | §3 B.1 files route `immutable` + `?v=`; assets versioned by the theme | src/lib/assets.ts, scripts/deploy.mjs |
 | 147 | Core Web Vitals measured (FCP, LCP, CLS, TBT) | cb70a77 | the store's own theme: CLS 0.154, LCP 18.2 s on a throttled phone | §3 B.1 package CSS and bundles, §4 slots after hydration | scripts/vitals.mjs |
 | 148 | No layout shift on phones (header space held, preview bar floats) | 0809f35 | Header.tsx swaps desktop → phone header after loading (CLS 0.277 with the theme) | §3 B.1 theme CSS before first paint; `layout.root` sets `--spp-header-reserve` | src/styles/header.css, src/server/ThemeLayout.tsx, src/styles/theme.css |
-| 154 | Different plugins per store (spp-promos rolled out to StaplesPromo) | (this commit) | one webstore, one plugin folder, six stores | §2 B.2 `resolveStoreEntries` (installations, stores, every-store) | scripts/registry.mjs |
+| 154 | Different plugins per store (spp-promos rolled out to StaplesPromo) | 399d79d | one webstore, one plugin folder, six stores | §2 B.2 `resolveStoreEntries` (installations, stores, every-store) | scripts/registry.mjs |
+| 156 | Settings per store (installation records merged over package settings) | (this commit) | one settings object per package | §2 B.2 `resolveStoreEntries` + `mergeSettings`; server `context.settings`, browser `settings` | plugins.json installations (store configuration) |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

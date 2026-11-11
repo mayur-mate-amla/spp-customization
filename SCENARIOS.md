@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 105 |
+| ✅ Done | 106 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 32 |
+| ⬜ Not started | 31 |
 | ⛔ Blocked | 37 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -328,7 +328,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 153 | Can I serve 10 stores with different theme, style, functionality and business logic? | Yes, with one limit | Outside | Platform | ➖ Outside | |
 | 154 | Can each store have different plugins? | Yes | Config | Six stores, each its own plugins; spp-promos rolled out to StaplesPromo; npm run registry -- store <code> | ✅ Done | [notes](154-plugins-per-store/) |
 | 155 | Can each store have different page content? | Yes | Outside | Content packages per store | ➖ Outside | |
-| 156 | Can settings differ per store? | Partial | Config | `installations` with per-store settings | ⬜ Not started | |
+| 156 | Can settings differ per store? | Partial | Config | Installation records merged over the package settings: POCSppDemo and StaplesPromo run spp-promos with different sales; previewed themes use package settings | ✅ Done | [notes](156-settings-per-store/) |
 | 157 | Can several stores share one theme? | Yes | Config | Two store codes in `"stores"` | ⬜ Not started | |
 | 158 | Are the 3 new stores (KLRT, Lands And Cotes, GE) started? | No | Outside | Store setup | ➖ Outside | |
 

@@ -1,0 +1,32 @@
+## 1. Headers of the store's files route for an SVG (npm run probe-files, section 168)
+168     SVG apex-layout-banner.svg: default-src 'none'; style-src 'unsafe-inline'; sandbox
+ok   168     content-type image/svg+xml
+ok   168     Content-Security-Policy with sandbox
+ok   168     Content-Security-Policy default-src 'none' (no script)
+ok   168     X-Content-Type-Options: nosniff
+
+## 2. An SVG with script in it (src/sandbox-probe/spp-sandbox-probe-script.svg), in Edge
+$ npm run svg-check
+http://sppdemo.localhost:3000/api/extensions/files/spp-sandbox-probe-script.svg
+ok   direct   did not run; document origin null; CSP default-src 'none'; style-src 'unsafe-inline'; sandbox
+ok   iframe   did not run; document origin null
+ok   object   did not run; document origin null
+ok   embed    did not run; document origin null
+ok   img      an image: browsers never run script in <img>
+ok   inline   did not run (the page's own CSP: a nonce, so 'unsafe-inline' is ignored)
+ok   control  ran (onload, title "SVG ONLOAD RAN"): the check sees a run (same markup, a page with no CSP)
+browser console:
+  Blocked script execution in 'http://sppdemo.localhost:3000/api/extensions/files/spp-sandbox-probe-script.svg' because the document's frame is sandboxed and the 
+  Executing inline event handler violates the following Content Security Policy directive 'script-src blob: 'self' api.ipify.org *.hsforms.net *.hsforms.com *.azu
+the SVG's script ran in none of them
+
+$ npm run svg-check -- --store http://localhost:3000
+  Executing inline event handler violates the following Content Security Policy directive 'script-src blob: 'self' api.ipify.org *.hsforms.net *.hsforms.com *.azu
+the SVG's script ran in none of them
+
+## 3. This theme's own SVGs
+favicon (<link rel=icon>), hero and tiles (<img> / CSS url()), co-brand logo (CSS url()): images, no script context;
+its icons are JSX (TrustStrip, footer), not fetched markup
+
+## 4. Removed afterwards
+npm run uninstall -- --package spp-sandbox-probe --purge: 3 files deleted; the test SVG answers 404

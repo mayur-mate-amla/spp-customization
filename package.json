@@ -21,7 +21,8 @@
     "registry": "node scripts/registry.mjs",
     "secrets-check": "node scripts/secrets-check.mts",
     "quotes-check": "node scripts/quotes-check.mts",
-    "probe-files": "node scripts/probe-files.mjs"
+    "probe-files": "node scripts/probe-files.mjs",
+    "svg-check": "node scripts/svg-check.mjs"
   },
   "devDependencies": {
     "@types/react": "19.2.13",

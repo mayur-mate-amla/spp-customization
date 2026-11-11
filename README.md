@@ -24,6 +24,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run secrets-check` | Checks the secret-setting resolver (`env:NAME` references, `src/commerce/secrets.ts`) |
 | `npm run quotes-check` | Checks that a signed-in buyer sees only their own quote requests (`quotesFor`, `src/commerce/quotes.ts`) |
 | `npm run probe-files [-- --host <store host>]` | What the store's package-files route refuses: server bundles (every version on disk, other spellings), the registry and its copies, `../` in every encoding; an SVG's headers (`scripts/probe-files.mjs`) |
+| `npm run svg-check [-- --file <svg> --store <url>]` | Whether script inside a package's SVG runs in the browser: opened directly, in iframe/object/embed/img, inlined with innerHTML, plus a no-CSP control (`scripts/svg-check.mjs`) |
 
 ## Use-case scenarios
 

@@ -1,0 +1,55 @@
+## Before: release 1.0.3 with the installer as it was
+$ node scripts/release-watch.mjs -- npm run deploy
+3.0 s: running npm run deploy
+  | > spp-customization@1.0.3 deploy
+  | > node scripts/deploy.mjs
+  | css-dedupe: 8 rules the store already has dropped, 42933 bytes kept (6 store stylesheets)
+  | built theme spp-customization@1.0.3: 18 files
+  | packed spp-customization-1.0.3.zpkg.zip (98079 bytes)
+  | installed theme spp-customization@1.0.3 (was 1.0.2): 17 files, disabled for []
+  | kept spp-customization-1.0.3.zpkg.zip in .versions\spp-customization (3 versions on disk: 1.0.1, 1.0.2, 1.0.3)
+10.4 s: the command ended (exit 0); watching 6 s more
+page  20 requests: 20 x 200; slowest 2880 ms
+route 49 requests: 49 x 200; slowest 465 ms
+theme version the pages named: 1.0.2 (from 2.7 s) -> 1.0.3 (from 10.8 s)
+files named by pages during the run: 7; no longer loading: 2
+  /api/extensions/files/spp-customization-1.0.2.css?v=1794376265739 (named by pages from 2.7 s): 404
+  /api/extensions/files/spp-customization-1.0.2.browser.mjs?v=1794376265739 (named by pages from 2.7 s): 404
+NOT zero downtime: 0 failed request(s), 2 file(s) gone
+
+a page served just before, loading its files just after:
+before-old-page.png: theme files 404 /api/extensions/files/spp-customization-1.0.2.browser.mjs
+
+## After: the previous version's browser files kept (scripts/lib/store.mjs keepPreviousBrowserFiles)
+$ node scripts/release-watch.mjs -- npm run rollback -- 1.0.2
+3.0 s: running npm run rollback -- 1.0.2
+  | > spp-customization@1.0.3 rollback
+  | > node scripts/rollback.mjs 1.0.2
+  | installed theme spp-customization@1.0.2 (was 1.0.3): 17 files, disabled for []
+  | kept the previous version's browser files for pages served before the rollback: spp-customization-1.0.3.browser.mjs, spp-customization-1.0.3.css
+4.9 s: the command ended (exit 0); watching 6 s more
+page  14 requests: 14 x 200; slowest 2221 ms
+route 35 requests: 35 x 200; slowest 595 ms
+theme version the pages named: 1.0.3 (from 2.2 s) -> 1.0.2 (from 5.3 s)
+files named by pages during the run: 7; no longer loading: 0
+zero downtime: no failed request, every file still loads
+
+$ node scripts/release-watch.mjs -- npm run deploy
+3.0 s: running npm run deploy
+  | > spp-customization@1.0.3 deploy
+  | > node scripts/deploy.mjs
+  | css-dedupe: 8 rules the store already has dropped, 42933 bytes kept (6 store stylesheets)
+  | built theme spp-customization@1.0.3: 18 files
+  | packed spp-customization-1.0.3.zpkg.zip (98079 bytes)
+  | installed theme spp-customization@1.0.3 (was 1.0.2): 17 files, disabled for []
+  | kept spp-customization-1.0.3.zpkg.zip in .versions\spp-customization (3 versions on disk: 1.0.1, 1.0.2, 1.0.3)
+  | kept the previous version's browser files for pages served before this install: spp-customization-1.0.2.browser.mjs, spp-customization-1.0.2.css
+12.5 s: the command ended (exit 0); watching 6 s more
+page  22 requests: 22 x 200; slowest 2268 ms
+route 47 requests: 47 x 200; slowest 1041 ms
+theme version the pages named: 1.0.2 (from 1.7 s) -> 1.0.3 (from 13.3 s)
+files named by pages during the run: 7; no longer loading: 0
+zero downtime: no failed request, every file still loads
+
+a page served just before, loading its files just after:
+after-old-page.png: theme files 200 /api/extensions/files/spp-customization-1.0.2.css, 200 /api/extensions/files/spp-customization-1.0.2.browser.mjs

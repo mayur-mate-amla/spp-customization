@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 117 |
+| ✅ Done | 118 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 23 |
+| ⬜ Not started | 22 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -355,7 +355,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 170 | Has the production server been run end to end? | Not tested | Outside | Production run | ➖ Outside | |
 | 171 | Does this work with several servers in production? | Partial | Outside | Production setup | ➖ Outside | |
 | 172 | Can package files be stored in shared or blob storage? | No | Base | | ⛔ Blocked | |
-| 173 | Can packages be updated with zero downtime? | Yes | Check | Shown with 8 (no restart) | ⬜ Not started | |
+| 173 | Can packages be updated with zero downtime? | Yes | Check | Yes: 0 failed requests in a release under traffic; the previous version's browser files are now kept, so pages served just before still load | ✅ Done | [notes](173-zero-downtime-release/) |
 | 174 | Is there a memory cost for many hot updates? | Partial | Outside | Platform measurement | ➖ Outside | |
 | 175 | Are package errors logged on the server? | Yes | Check | Route that throws: store log line | ⬜ Not started | |
 | 176 | Is package activity monitored (New Relic)? | Not tested | Outside | Monitoring setup | ➖ Outside | |

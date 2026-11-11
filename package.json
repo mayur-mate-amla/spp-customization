@@ -1,6 +1,6 @@
 {
   "name": "spp-customization",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "type": "module",
   "scripts": {
@@ -22,7 +22,8 @@
     "secrets-check": "node scripts/secrets-check.mts",
     "quotes-check": "node scripts/quotes-check.mts",
     "probe-files": "node scripts/probe-files.mjs",
-    "svg-check": "node scripts/svg-check.mjs"
+    "svg-check": "node scripts/svg-check.mjs",
+    "release-watch": "node scripts/release-watch.mjs"
   },
   "devDependencies": {
     "@types/react": "19.2.13",

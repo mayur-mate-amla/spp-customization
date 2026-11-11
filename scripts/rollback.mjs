@@ -6,7 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { name, pluginsDir, versionsDir } from "./lib/store.mjs";
+import { installedVersion, keepPreviousBrowserFiles, name, pluginsDir, versionsDir } from "./lib/store.mjs";
 
 const places = [versionsDir(pluginsDir()), "releases"];
 const versions = new Map();
@@ -27,5 +27,10 @@ if (!zip) {
   console.error(`version ${version} is not on disk; kept: ${[...versions.keys()].join(", ") || "none"}`);
   process.exit(1);
 }
+const previous = installedVersion(name);
 const result = spawnSync(`npx znode install "${zip}"`, { stdio: "inherit", shell: true });
-process.exit(result.status ?? 1);
+if (result.status !== 0) process.exit(result.status ?? 1);
+// zero downtime (row 173): pages served just before the rollback still name the version rolled back from
+const { kept, removed } = keepPreviousBrowserFiles(name, version, previous);
+if (kept.length) console.log(`kept the previous version's browser files for pages served before the rollback: ${kept.join(", ")}`);
+if (removed.length) console.log(`removed older versions' browser files: ${removed.join(", ")}`);

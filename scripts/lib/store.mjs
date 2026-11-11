@@ -1,6 +1,7 @@
 // Shared by the scripts: this package's name and version, the store's plugin folder, and the registry lock.
 import fs from "node:fs";
 import path from "node:path";
+import { createRequire } from "node:module";
 
 export const manifest = JSON.parse(fs.readFileSync("znode-package.json", "utf8"));
 export const name = manifest.name;
@@ -68,4 +69,43 @@ export function placementsFor(registry, storeCode) {
   placed.sort((a, b) => a.order - b.order || Number(b.own) - Number(a.own));
   const once = new Set();
   return placed.filter((item) => !once.has(item.entry) && once.add(item.entry));
+}
+
+// Zero downtime (row 173): installing a version deletes the previous version's code, its browser bundle and stylesheet
+// included. A page served a moment before the install still names those files, and its browser asks for them a moment
+// after, so they would answer 404 and the page would show without the package's styles and scripts. After an install,
+// put the previous version's browser files back from its kept zip (.versions/), and remove those of any version before
+// it. The store serves them by file name, so they keep working; they are browser code only, no server part.
+export function keepPreviousBrowserFiles(packageName, current, previous, dir = pluginsDir()) {
+  const browserFile = (version) => new RegExp(`^${packageName.replace(/-/g, "\-")}-${version.replace(/\./g, "\.")}\.(browser\.mjs|css)$`);
+  const anyVersion = new RegExp(`^${packageName.replace(/-/g, "\-")}-(\d+\.\d+\.\d+)\.(browser\.mjs|css)$`);
+  const kept = [];
+  const removed = [];
+  if (previous && previous !== current) {
+    const zip = path.join(dir, ".versions", packageName, `${packageName}-${previous}.zpkg.zip`);
+    if (fs.existsSync(zip)) {
+      const require = createRequire(path.resolve("node_modules/znode-plugin/package.json"));
+      const AdmZip = require("adm-zip");
+      for (const entry of new AdmZip(zip).getEntries()) {
+        if (!browserFile(previous).test(entry.entryName)) continue;
+        const target = path.join(dir, entry.entryName);
+        if (!fs.existsSync(target)) fs.writeFileSync(target, entry.getData());
+        kept.push(entry.entryName);
+      }
+    }
+  }
+  for (const file of fs.readdirSync(dir)) {
+    const version = anyVersion.exec(file)?.[1];
+    if (version && version !== current && version !== previous) {
+      fs.rmSync(path.join(dir, file), { force: true });
+      removed.push(file);
+    }
+  }
+  return { kept, removed };
+}
+
+// the version of a package the registry has installed now ("" if none)
+export function installedVersion(packageName, dir = pluginsDir()) {
+  const registry = JSON.parse(fs.readFileSync(path.join(dir, "plugins.json"), "utf8"));
+  return registry.plugins.find((entry) => entry.name === packageName)?.version || "";
 }

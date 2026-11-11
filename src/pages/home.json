@@ -9,7 +9,7 @@
       "type": "HeroBanner",
       "props": {
         "id": "HeroBanner-spp-customization-spring-pro",
-        "image": "/api/extensions/files/spp-customization-campaign-hero.svg?v=1.0.2",
+        "image": "/api/extensions/files/spp-customization-campaign-hero.svg?v=1.0.3",
         "imageAlt": "",
         "frame": "",
         "height": 420,
@@ -56,22 +56,22 @@
         "cards": [
           {
             "title": "Power tools",
-            "image": "/api/extensions/files/spp-customization-tile-tools.svg?v=1.0.2",
+            "image": "/api/extensions/files/spp-customization-tile-tools.svg?v=1.0.3",
             "url": "/tools"
           },
           {
             "title": "Electrical",
-            "image": "/api/extensions/files/spp-customization-tile-electrical.svg?v=1.0.2",
+            "image": "/api/extensions/files/spp-customization-tile-electrical.svg?v=1.0.3",
             "url": "/electrical"
           },
           {
             "title": "Plumbing",
-            "image": "/api/extensions/files/spp-customization-tile-plumbing.svg?v=1.0.2",
+            "image": "/api/extensions/files/spp-customization-tile-plumbing.svg?v=1.0.3",
             "url": "/plumbing"
           },
           {
             "title": "Workwear",
-            "image": "/api/extensions/files/spp-customization-tile-workwear.svg?v=1.0.2",
+            "image": "/api/extensions/files/spp-customization-tile-workwear.svg?v=1.0.3",
             "url": "/workwear"
           }
         ]

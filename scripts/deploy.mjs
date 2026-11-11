@@ -6,7 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { pluginsDir } from "./lib/store.mjs";
+import { installedVersion, keepPreviousBrowserFiles, pluginsDir } from "./lib/store.mjs";
 
 const target = process.argv[2] || ".";
 const manifestFile = target === "." ? "znode-package.json" : target;
@@ -33,6 +33,7 @@ if (manifestFile === "znode-package.json") {
   }
 }
 
+const previous = installedVersion(name);
 const result = spawnSync(`npx znode deploy ${target}`, { stdio: "inherit", shell: true });
 if (result.status !== 0) process.exit(result.status ?? 1);
 
@@ -42,3 +43,8 @@ fs.mkdirSync(kept, { recursive: true });
 fs.copyFileSync(zip, path.join(kept, path.basename(zip)));
 const all = fs.readdirSync(kept).filter((file) => file.endsWith(".zpkg.zip")).sort();
 console.log(`kept ${path.basename(zip)} in ${path.join(".versions", name)} (${all.length} version${all.length === 1 ? "" : "s"} on disk: ${all.map((file) => file.slice(name.length + 1, -".zpkg.zip".length)).join(", ")})`);
+
+// zero downtime (row 173): pages served just before this install still name the previous version's files
+const { kept: previousKept, removed } = keepPreviousBrowserFiles(name, version, previous);
+if (previousKept.length) console.log(`kept the previous version's browser files for pages served before this install: ${previousKept.join(", ")}`);
+if (removed.length) console.log(`removed older versions' browser files: ${removed.join(", ")}`);

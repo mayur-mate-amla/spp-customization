@@ -1,0 +1,49 @@
+## 1. The limit, live (GET .../spp-commerce/activity on POCSppDemo, one call after another)
+130 calls, X-Forwarded-For: 203.0.113.7 (one shopper)      119 x 200, 11 x 429; first 429 at call 120, Retry-After: 60 (7.0 s)
+130 calls, a new X-Forwarded-For each time (203.0.114.N)   130 x 200 (7.6 s)
+5 calls, X-Forwarded-For: 198.51.100.9 (another shopper)   5 x 200 (0.3 s)
+130 calls, no X-Forwarded-For / X-Real-IP header           118 x 200, 12 x 429; first 429 at call 119, Retry-After: 60 (7.1 s)
+5 calls, no header (a second client, same bucket)          5 x 429; first 429 at call 1, Retry-After: 60 (0.3 s)
+(the first burst's 429 came at call 120: one earlier test call from the same address counted; the no-header bucket had two)
+
+store code (packages/extensions/src/routes.server.ts):
+  RATE_PER_MINUTE = 120 (RUNTIME_PLUGIN_ROUTE_RATE; 0 = off), per server instance
+  key = clientAddress(request) | store | plugin
+  clientAddress = first X-Forwarded-For entry || X-Real-IP || "local"
+
+## 2. This repo's calls, one tab: 5 pages as a guest, add one product, 4 more pages
+### before
+guest, empty cart:
+  /                        1 call(s): GET spp-commerce/my-order
+  /event-kits              2 call(s): GET spp-commerce/sku-lookup, GET spp-commerce/my-order
+  /ordering-information    1 call(s): GET spp-commerce/my-order
+  /                        1 call(s): GET spp-commerce/my-order
+  /product/103809          2 call(s): GET spp-commerce/my-order, GET spp-commerce/stock-holds
+add product 103809 x 1 (the product page's button):
+  (add to cart)             2 call(s): POST /api/add-to-cart, GET spp-commerce/my-order
+one item in the cart:
+  /                        2 call(s): GET spp-commerce/my-order, GET spp-commerce/my-order
+  /event-kits              3 call(s): GET spp-commerce/sku-lookup, GET spp-commerce/my-order, GET spp-commerce/my-order
+  /ordering-information    2 call(s): GET spp-commerce/my-order, GET spp-commerce/my-order
+  /                        2 call(s): GET spp-commerce/my-order, GET spp-commerce/my-order
+total: 18 calls for 9 page views and one add (guest browsing: 7)
+### after (account bar: no call for a guest with an empty cart; one answer reused for 30 s)
+guest, empty cart:
+  /                        0 call(s)
+  /event-kits              1 call(s): GET spp-commerce/sku-lookup
+  /ordering-information    0 call(s)
+  /                        0 call(s)
+  /product/103809          1 call(s): GET spp-commerce/stock-holds
+add product 103809 x 1 (the product page's button):
+  (add to cart)             2 call(s): POST /api/add-to-cart, GET spp-commerce/my-order
+one item in the cart:
+  /                        0 call(s)
+  /event-kits              1 call(s): GET spp-commerce/sku-lookup
+  /ordering-information    0 call(s)
+  /                        0 call(s)
+total: 5 calls for 9 page views and one add (guest browsing: 2)
+
+## 3. The account bar when my-order is refused (429)
+bar-refused-no-answer.png: Sign in to see your contract pricing1 item in your order
+bar-answer.png: Sign in to see your contract pricing$45.00 in your order · add $55.00 for free shipping
+bar-refused-kept.png: Sign in to see your contract pricing$45.00 in your order · add $55.00 for free shipping

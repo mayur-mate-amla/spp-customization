@@ -384,6 +384,7 @@ repository joins it. Commits are on `main` of this repository.
 | 162 | Paths out of the plugin folder refused (ten encodings) | b453f5a | `readServedFile` bare-name check, `fileInDir` | §3 B.1 files route | scripts/probe-files.mjs |
 | 163 | Preview switch off in production; open redirect while on (store) | 0d3fbc0 | `isThemePreviewEnabled`: NODE_ENV or RUNTIME_THEME_PREVIEW=true | §2 B.2 preview cookie read only when on | scripts/probe-files.mjs |
 | 164 | Route overrides can't be skipped (105 path and header variants) | 4730efa | proxy `findRouteOverride` on the exact pathname | §7 B.4 override, `original()` token | scripts/overrides.mjs, scripts/lib/store.mjs |
-| 165 | Partner code sandbox: opt-in, routes only; can still read the whole plugin folder | (this commit) | `sandbox.server.ts`: child process, permission model, empty env | §7 B routes in the webstore process or `runSandboxedRoute` | src/sandbox-probe/server.ts, scripts/registry.mjs, scripts/uninstall.mjs |
+| 165 | Partner code sandbox: opt-in, routes only; can still read the whole plugin folder | 4893bf8 | `sandbox.server.ts`: child process, permission model, empty env | §7 B routes in the webstore process or `runSandboxedRoute` | src/sandbox-probe/server.ts, scripts/registry.mjs, scripts/uninstall.mjs |
+| 166 | Plugin routes rate-limited (120/min per address); account bar calls 18 → 5 | (this commit) | `runPluginRoute` `overRate` keyed on X-Forwarded-For | §7 B.4 plugin routes and overrides; §8 account bar | src/commerce/slots/AccountBar.tsx |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

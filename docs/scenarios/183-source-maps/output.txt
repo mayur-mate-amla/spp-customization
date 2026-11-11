@@ -1,0 +1,76 @@
+## Before: the maps the SDK builds stop at its compiled JavaScript (.build/, deleted after the build)
+$ node scripts/source-at.mjs spp-sandbox-probe-1.0.0.server.mjs:98:19   (the line in the store log, row 175)
+spp-sandbox-probe-1.0.0.server.mjs:98:19  ->  ../.build/server.js:97:19
+  97 | throw new Error(`spp-sandbox-probe test failure ${String(request.query.n || "1").replace(/[^0-9]/g, "")} (row 175)`);
+
+$ node scripts/source-at.mjs --sources spp-customization-1.0.3.browser.mjs
+spp-customization-1.0.3.browser.mjs.map: 22 sources, text included: 22
+  ../.build/lib/host.js
+  ../.build/slots/TrustStrip.js
+  ../.build/slots/PreviewBanner.js
+  ../.build/slots/HeaderScrollState.js
+  ../.build/slots/AnnouncementBar.js
+  ../.build/slots/ProductBadge.js
+  ../.build/slots/SearchWithPopular.js
+
+## The change: npm run deploy chains the maps to the TypeScript (scripts/lib/source-maps.mjs)
+installed plugin spp-sandbox-probe@1.0.0 (was 1.0.0): 3 files, enabled for ["POCSppDemo"]
+source map: spp-sandbox-probe-1.0.0.server.mjs.map: 1 sources mapped to TypeScript (982 mappings)
+installed theme spp-customization@1.0.3 (was 1.0.3): 17 files, disabled for []
+source map: spp-customization-1.0.3.server.mjs.map: 9 sources mapped to TypeScript (2189 mappings)
+source map: spp-customization-1.0.3.browser.mjs.map: 22 sources mapped to TypeScript (8570 mappings)
+installed plugin spp-commerce@1.0.0 (was 1.0.0): 7 files, enabled for ["POCSppDemo"]
+source map: spp-commerce-1.0.0.server.mjs.map: 8 sources mapped to TypeScript (9423 mappings)
+source map: spp-commerce-1.0.0.browser.mjs.map: 15 sources mapped to TypeScript (6376 mappings)
+installed plugin spp-promos@1.0.0 (was 1.0.0): 3 files, enabled for ["POCSppDemo"]
+source map: spp-promos-1.0.0.browser.mjs.map: 1 sources mapped to TypeScript (323 mappings)
+installed widget spp-widgets@1.0.0 (was 1.0.0): 3 files, enabled for ["POCSppDemo"]
+source map: spp-widgets-1.0.0.browser.mjs.map: 2 sources mapped to TypeScript (964 mappings)
+
+## After
+$ node scripts/source-at.mjs spp-sandbox-probe-1.0.0.server.mjs:98:19
+spp-sandbox-probe-1.0.0.server.mjs:98:19  ->  spp-sandbox-probe/src/sandbox-probe/server.ts:106:13
+  106 | throw new Error(`spp-sandbox-probe test failure ${String(request.query.n || "1").replace(/[^0-9]/g, "")} (row 175)`);
+
+$ node scripts/source-at.mjs --sources spp-customization-1.0.3.browser.mjs
+spp-customization-1.0.3.browser.mjs.map: 22 sources, text included: 22
+  spp-customization/src/lib/host.ts
+  spp-customization/src/slots/TrustStrip.tsx
+  spp-customization/src/slots/PreviewBanner.tsx
+  spp-customization/src/slots/HeaderScrollState.tsx
+  spp-customization/src/slots/AnnouncementBar.tsx
+  spp-customization/src/slots/ProductBadge.tsx
+  spp-customization/src/slots/SearchWithPopular.tsx
+  ...
+
+the kept zip (.versions/spp-customization/spp-customization-1.0.3.zpkg.zip):
+  browser map sources: spp-customization/src/lib/host.ts, spp-customization/src/slots/TrustStrip.tsx, spp-customization/src/slots/PreviewBanner.tsx ...
+
+## What browser devtools get (Debugger.scriptParsed, then the map as the page fetches it)
+spp-base-1.2.1.browser.mjs  sourceMappingURL=
+  script url: http://localhost:3000/api/extensions/files/spp-base-1.2.1.browser.mjs?v=1794292243045
+  map url: http://localhost:3000/api/extensions/files/spp-base-1.2.1.browser.mjs?v=1794292243045
+  answer starts: // The store's React, bound in setup (browser.tsx). Every module of the plugin i
+  map: HTTP 200 text/javascript; charset=utf-8; undefined sources: undefined ...
+spp-customization-1.0.3.browser.mjs  sourceMappingURL=spp-customization-1.0.3.browser.mjs.map
+  script url: http://localhost:3000/api/extensions/files/spp-customization-1.0.3.browser.mjs?v=1794380726305
+  map url: http://localhost:3000/api/extensions/files/spp-customization-1.0.3.browser.mjs.map
+  map: HTTP 200 application/json; charset=utf-8; 22 sources: spp-customization/src/lib/host.ts, spp-customization/src/slots/TrustStrip.tsx, spp-customization/src/slots/PreviewBanner.tsx ...
+spp-base-1.2.1.browser.mjs  sourceMappingURL=
+  script url: http://sppdemo.localhost:3000/api/extensions/files/spp-base-1.2.1.browser.mjs?v=1794292243045
+  map url: http://sppdemo.localhost:3000/api/extensions/files/spp-base-1.2.1.browser.mjs?v=1794292243045
+  answer starts: // The store's React, bound in setup (browser.tsx). Every module of the plugin i
+  map: HTTP 200 text/javascript; charset=utf-8; undefined sources: undefined ...
+spp-promos-1.0.0.browser.mjs  sourceMappingURL=spp-promos-1.0.0.browser.mjs.map
+  script url: http://sppdemo.localhost:3000/api/extensions/files/spp-promos-1.0.0.browser.mjs?v=1794380734564
+  map url: http://sppdemo.localhost:3000/api/extensions/files/spp-promos-1.0.0.browser.mjs.map
+  map: HTTP 200 application/json; charset=utf-8; 1 sources: spp-promos/src/promos/browser.tsx ...
+spp-commerce-1.0.0.browser.mjs  sourceMappingURL=spp-commerce-1.0.0.browser.mjs.map
+  script url: http://sppdemo.localhost:3000/api/extensions/files/spp-commerce-1.0.0.browser.mjs?v=1794380730700
+  map url: http://sppdemo.localhost:3000/api/extensions/files/spp-commerce-1.0.0.browser.mjs.map
+  map: HTTP 200 application/json; charset=utf-8; 15 sources: spp-commerce/src/commerce/host.ts, spp-commerce/src/commerce/i18n.ts, spp-commerce/src/commerce/slots/AccountBar.tsx ...
+spp-widgets-1.0.0.browser.mjs  sourceMappingURL=spp-widgets-1.0.0.browser.mjs.map
+  script url: http://sppdemo.localhost:3000/api/extensions/files/spp-widgets-1.0.0.browser.mjs?v=1794380738512
+  map url: http://sppdemo.localhost:3000/api/extensions/files/spp-widgets-1.0.0.browser.mjs.map
+  map: HTTP 200 application/json; charset=utf-8; 2 sources: spp-widgets/src/shared-widgets/FooterBadges.tsx, spp-widgets/src/shared-widgets/browser.tsx ...
+(spp-base is not this repo's package: it is built without a map)

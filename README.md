@@ -11,7 +11,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run build` | Type-check against the store, then build into `dist/` |
 | `npm run check` | The marketplace review: metadata, permissions against the code, sizes |
 | `npm run pack` | Build and zip into `releases/spp-customization-<version>.zpkg.zip` |
-| `npm run deploy` | Pack and install into the store's plugin folder |
+| `npm run deploy` | Pack and install into the store's plugin folder; source maps chained to `src/` (row 183), the previous version's browser files kept (row 173) |
 | `npm run uninstall [-- --package <name>] [--purge]` | Remove a package of this repo from the store cleanly: its registry entry and records, its files, older versions' leftovers; `--purge` also the kept versions (`scripts/uninstall.mjs`) |
 | `npm run link-store -- <store repo>` | Use the store's real types (writes `tsconfig.store.json`) |
 | `npm run shot -- --path / --out <file.png>` | Screenshot a store page with this theme previewed (`scripts/shot.mjs`; `--theme none` for the store's own) |
@@ -28,6 +28,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run release-watch -- -- <command>` | Requests a page and a route without pause while a command runs (a deploy or rollback), then checks every bundle and stylesheet those pages named still loads (`scripts/release-watch.mjs`) |
 | `npm run store-log [-- --package <name>] [--date YYYY-MM-DD] [--all-lines]` | Package errors from the store's own log file: failed routes, hooks, slots, pages, packages skipped at load (`scripts/store-log.mjs`) |
 | `npm run scenario-check [-- --fix-links]` | Every Done row of SCENARIOS.md: its notes folder, README ("How it renders"), images, RENDER-FLOW row and commit, pushed; and nothing uncommitted or unpushed (`scripts/scenario-check.mjs`) |
+| `npm run source-at -- <bundle>.mjs:<line>:<col>` / `--sources <bundle>.mjs` | Where a position in an installed bundle (a stack line) comes from in `src/`, through its source map; a map's sources (`scripts/source-at.mjs`) |
 
 ## Use-case scenarios
 

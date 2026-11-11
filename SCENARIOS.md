@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 120 |
+| ✅ Done | 121 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 20 |
+| ⬜ Not started | 19 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -370,7 +370,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 182 | Is debugging working? | Partial | Check | Source maps + server log | ⬜ Not started | |
-| 183 | Are there source maps for package code? | No | Check | Re-check: `.mjs.map` files are built (see notes) | ⬜ Not started | |
+| 183 | Are there source maps for package code? | No | Check | Yes now: maps were built but stopped at the SDK's compiled JS; npm run deploy chains them to src/ (devtools shows .tsx; stack lines map to source) | ✅ Done | [notes](docs/scenarios/183-source-maps/) |
 | 184 | Do package errors show in the logs? | Yes | Check | Same as 175 | ⬜ Not started | |
 | 185 | Is the page safe if a plugin crashes? | Yes | UI | A slot that throws: page still renders | ⬜ Not started | |
 | 186 | Is there hot reload while developing a package? | Partial | Check | `npm run dev`: save, refresh | ⬜ Not started | |

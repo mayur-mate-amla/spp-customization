@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { installedVersion, keepPreviousBrowserFiles, pluginsDir } from "./lib/store.mjs";
+import { chainSourceMaps } from "./lib/source-maps.mjs";
 
 const target = process.argv[2] || ".";
 const manifestFile = target === "." ? "znode-package.json" : target;
@@ -36,6 +37,9 @@ if (manifestFile === "znode-package.json") {
 const previous = installedVersion(name);
 const result = spawnSync(`npx znode deploy ${target}`, { stdio: "inherit", shell: true });
 if (result.status !== 0) process.exit(result.status ?? 1);
+
+// source maps back to the TypeScript (row 183), in dist/, the release zip and the plugin folder, before the zip is kept
+for (const line of chainSourceMaps(manifestFile, pluginsDir())) console.log(`source map: ${line}`);
 
 const zip = path.join("releases", `${name}-${version}.zpkg.zip`);
 const kept = path.join(pluginsDir(), ".versions", name);

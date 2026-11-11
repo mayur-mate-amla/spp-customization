@@ -1,0 +1,35 @@
+# Row 202: a package change, deployed, shows on the next request; the store is not built, restarted or touched
+# POCSppDemo at http://sppdemo.localhost:3000, store = D:\znode\znode-webstore10x-page-builder (Next.js dev server)
+
+## The store before
+store process 27876 node started 2026-11-11 13:03:21          (Get-Process; the process listening on :3000)
+apps/webstore/.next last written 2026-10-28 15:12:23
+store repo: 3 changed files of its own, by content hash:
+apps/page-builder/.env 8751cb9fe019dd96353464892eed12a525c0a7b6
+apps/page-builder/next-env.d.ts c4b7818fbb2c2c34c24feb1b627ee824507c5600
+apps/webstore/.env 55e7c0353c94885d2f8670e3cdb8729eac5bf2c5
+
+## The change: one label of spp-commerce (src/commerce/i18n/labels.json)
+-      "toSeePricing": "to see your contract pricing",
++      "toSeePricing": "to see your contract pricing (changed for row 202, no store build)",
+
+$ npm run deploy -- spp-commerce.znode-package.json        (13:34:08 -> 13:34:17)
+packed spp-commerce-1.0.0.zpkg.zip (78348 bytes)
+installed plugin spp-commerce@1.0.0 (was 1.0.0): 7 files, enabled for ["POCSppDemo"]
+source map: spp-commerce-1.0.0.server.mjs.map: 8 sources mapped to TypeScript (9423 mappings)
+source map: spp-commerce-1.0.0.browser.mjs.map: 15 sources mapped to TypeScript (6376 mappings)
+kept spp-commerce-1.0.0.zpkg.zip in .versions\spp-commerce (1 version on disk: 1.0.0)
+deploy took 9.2 s
+
+$ curl -s http://sppdemo.localhost:3000/ | grep -o "changed for row 202[^<]*"
+changed for row 202, no store build)
+
+## The store after
+store process 27876 started 2026-11-11 13:03:21               (the same process: no restart)
+apps/webstore/.next last written 2026-10-28 15:12:23           (no store build)
+store repo: the same 3 files, the same hashes:
+apps/page-builder/.env 8751cb9fe019dd96353464892eed12a525c0a7b6
+apps/page-builder/next-env.d.ts c4b7818fbb2c2c34c24feb1b627ee824507c5600
+apps/webstore/.env 55e7c0353c94885d2f8670e3cdb8729eac5bf2c5
+
+## Undone: labels.json restored (git status: clean), deployed again; the page says "to see your contract pricing"

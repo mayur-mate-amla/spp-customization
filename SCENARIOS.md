@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 127 |
+| ✅ Done | 128 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 13 |
+| ⬜ Not started | 12 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -404,7 +404,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | --- | --- | --- | --- | --- | --- | --- |
 | 200 | Does the SWC build-time approach still work alongside runtime packages? | Yes | Outside | Store repo | ➖ Outside | |
 | 201 | Does an SWC build-time change need a build and deploy? | Yes | Outside | Store repo | ➖ Outside | |
-| 202 | Does a runtime package change need a build or deploy? | No | Check | Shown with 8 (no store build) | ⬜ Not started | |
+| 202 | Does a runtime package change need a build or deploy? | No | Check | No store build or deploy: a spp-commerce label changed and deployed (9.2 s) showed on the next request; the same store process, .next untouched, store files unchanged | ✅ Done | [notes](docs/scenarios/202-no-store-build/) |
 | 203 | Can a customer use only SWC build-time themes? | Yes | Outside | Store repo | ➖ Outside | |
 | 204 | Can a customer use only runtime packages? | Yes | Outside | Store setup | ➖ Outside | |
 

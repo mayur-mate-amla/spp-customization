@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 131 |
+| ✅ Done | 132 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 9 |
+| ⬜ Not started | 8 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -378,7 +378,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 188 | Are packages type-checked against the public API when built? | Yes | Check | Yes: znode build runs tsc first; a key IBrowserPlugin lacks and a hook returning a string both stopped the build (exit 1). One shared tsconfig: an error in one package stops every package's build | ✅ Done | [notes](docs/scenarios/188-type-checked-build/) |
 | 189 | Does a package build quickly (seconds)? | Yes | Check | Yes: 6-11.5 s per package (three runs each), a full deploy 7.5 s; the type check is 5.7 s of it | ✅ Done | [notes](docs/scenarios/189-build-time/) |
 | 190 | Can I lint a package? | No | Check | Yes here: npm run lint (ESLint with the store's versions and rules, plus Next.js and hooks rules); src/ was clean; the first run found a real bug in keepPreviousBrowserFiles (older versions' files never removed), fixed | ✅ Done | [notes](docs/scenarios/190-lint/) |
-| 191 | Can I unit test a package? | No | Check | Add unit tests to this repo (`npm test`) | ⬜ Not started | |
+| 191 | Can I unit test a package? | No | Check | Yes here: npm test (Vitest), 36 tests in test/ for spp-commerce's rules and quotes, the theme's clock and the deploy tooling; under a second, no store; shown to fail on row 190's bug and on a broken case-pack rule | ✅ Done | [notes](docs/scenarios/191-unit-tests/) |
 | 192 | Are there end-to-end tests for packages? | No | Check | Add a browser test with `scripts/` + puppeteer | ⬜ Not started | |
 | 193 | Can I run the store locally with packages? | Yes | Check | Yes: the store repo in dev mode on :3000 with RUNTIME_PLUGINS_DIR; POCSppDemo (sppdemo.localhost:3000) loads four packages from here; each store has its own host (localhost:3000 is another store); npm run local-check checks the setup | ✅ Done | [notes](docs/scenarios/193-local-store/) |
 

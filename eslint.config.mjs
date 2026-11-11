@@ -39,9 +39,9 @@ export default tseslint.config(
     extends: [js.configs.recommended],
     languageOptions: { globals: { ...NODE, ...IN_PAGE } },
   },
-  // the two checks written in TypeScript (node --experimental-strip-types): parsed as TypeScript
+  // the two checks written in TypeScript (node --experimental-strip-types) and the unit tests (npm test, row 191)
   {
-    files: ["scripts/**/*.mts"],
+    files: ["scripts/**/*.mts", "test/**/*.ts"],
     extends: [...tseslint.configs.recommended],
   }
 );

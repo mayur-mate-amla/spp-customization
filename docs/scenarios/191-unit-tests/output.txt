@@ -1,0 +1,35 @@
+# Row 191: npm test (Vitest 3.2.4, test/*.test.ts, new)
+
+$ npm test
+ ✓ test/commerce-rules.test.ts (16 tests)     spp-commerce: minimums, limits, case packs, line notes (en/fr),
+                                              companions, pinned products, replaced SKUs, shipping choices (row 117)
+ ✓ test/quotes.test.ts (8 tests)              spp-commerce: quote request validation, rep, limits (rows 099, 101),
+                                              a buyer's own quotes only (row 167), the store's envelope
+ ✓ test/store-clock.test.ts (8 tests)         the theme: shipping cutoff, customer service hours, dated notice,
+                                              in the warehouse's time zone (America/New_York), not the machine's
+ ✓ test/scripts-lib.test.ts (4 tests)         the deploy tooling: release cleanup (row 173), stack lines (rows 182-185)
+ Test Files  4 passed (4)
+      Tests  36 passed (36)
+   Duration  688ms
+
+## The tests can fail: two changes made for the check, then undone (git status: clean)
+
+# 1. scripts/lib/store.mjs as it was before row 190's fix
+$ npx vitest run test/scripts-lib.test.ts
+   × keepPreviousBrowserFiles (row 173) > removes browser files of versions older than the previous one (the bug row 190 found)
+     → expected [] to deeply equal [ …(2) ]
+   ✓ keepPreviousBrowserFiles (row 173) > matches versions exactly: no wildcard dots, no other package
+   ✓ bundlePosition and sameBuild (rows 182-185) > reads the bundle, its build time and the position from a stack line
+   ✓ bundlePosition and sameBuild (rows 182-185) > tells whether the installed bundle is the build that logged the line
+
+# 2. src/commerce/rules.ts, caseQuantity rounding down instead of up
+-  return pack > 1 && quantity > 0 ? Math.ceil(quantity / pack) * pack : quantity;
++  return pack > 1 && quantity > 0 ? Math.floor(quantity / pack) * pack : quantity;
+$ npx vitest run test/commerce-rules.test.ts
+   × case packs > rounds an add up to whole cases
+     → expected 10 to be 20 // Object.is equality
+      Tests  1 failed | 15 passed (16)
+
+## Lint covers the tests too
+$ npm run lint
+exit 0

@@ -23,7 +23,8 @@
     "quotes-check": "node scripts/quotes-check.mts",
     "probe-files": "node scripts/probe-files.mjs",
     "svg-check": "node scripts/svg-check.mjs",
-    "release-watch": "node scripts/release-watch.mjs"
+    "release-watch": "node scripts/release-watch.mjs",
+    "store-log": "node scripts/store-log.mjs"
   },
   "devDependencies": {
     "@types/react": "19.2.13",

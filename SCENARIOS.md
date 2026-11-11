@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 118 |
+| ✅ Done | 119 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 22 |
+| ⬜ Not started | 21 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -357,7 +357,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 172 | Can package files be stored in shared or blob storage? | No | Base | | ⛔ Blocked | |
 | 173 | Can packages be updated with zero downtime? | Yes | Check | Yes: 0 failed requests in a release under traffic; the previous version's browser files are now kept, so pages served just before still load | ✅ Done | [notes](173-zero-downtime-release/) |
 | 174 | Is there a memory cost for many hot updates? | Partial | Outside | Platform measurement | ➖ Outside | |
-| 175 | Are package errors logged on the server? | Yes | Check | Route that throws: store log line | ⬜ Not started | |
+| 175 | Are package errors logged on the server? | Yes | Check | Yes, with package, route, error and bundle line; but written ten at a time (a crash surfaced 30 min later); npm run store-log | ✅ Done | [notes](175-package-errors-logged/) |
 | 176 | Is package activity monitored (New Relic)? | Not tested | Outside | Monitoring setup | ➖ Outside | |
 | 177 | Is there an audit log of package changes? | No | Base | (`.history` keeps plugins.json copies) | ⛔ Blocked | |
 | 178 | Is the registry backed up? | No | Base | | ⛔ Blocked | |

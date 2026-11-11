@@ -1,0 +1,49 @@
+## A plugin route that throws (spp-sandbox-probe: GET .../fail?n=<n>), and the store's log file
+store log: <store>/apps/webstore/logs/logs-<date>.txt (LOGGING_METHOD=FILE)
+
+call 1:  {"error":"Plugin route failed"} [HTTP 500]
+  log lines with 'test failure': 0
+calls 2-9: log lines with 'test failure': 5
+call 10: log lines with 'test failure': 5
+12:30:33: failures 1-10 made (12:29); in the log: 5
+12:30:36: failures 11-14 made; in the log: 5
+12:30:40: failure 15 made; in the log: 15 (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 )
+
+$ npm run store-log
+D:\znode\znode-webstore10x-page-builder\apps\webstore\logs\logs-2026-11-11.txt: 485 entries, 16 about runtime packages
+2026-11-11 11:59:36  Error  Runtime plugin spp-sandbox-probe route probe failed. Error: sandbox ended (exit 134)
+2026-11-11 12:29:08  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 1 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:29:12  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 2 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:29:12  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 3 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:29:12  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 4 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:29:12  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 5 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:29:12  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 6 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:29:12  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 7 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:29:12  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 8 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:29:12  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 9 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:29:16  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 10 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:30:33  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 11 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:30:33  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 12 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:30:33  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 13 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:30:33  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 14 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+2026-11-11 12:30:36  Error  Runtime plugin spp-sandbox-probe route fail failed. Error: spp-sandbox-probe test failure 15 (row 175)
+    at fail (file:///D:/runtime-plugins-store/spp-sandbox-probe-1.0.0.server.mjs?v=1794380340814.8918:98:19)
+
+## The logger (packages/logger/src/log-manager/server-logger.ts)
+  log(): push to an in-memory buffer; every 10th entry flushes the buffer (logThreshold = 10, config/index.ts)
+  flush: POST {WEBSTORE_DOMAIN_NAME}/api/send-log-to-file -> appends to logs/logs-<date>.txt (or Znode API with LOGGING_METHOD=API)
+  each server module has its own buffer: the sandbox crash at 11:59:36 reached the file at 12:29

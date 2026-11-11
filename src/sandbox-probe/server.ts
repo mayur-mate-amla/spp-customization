@@ -12,6 +12,7 @@ import { fileURLToPath } from "node:url";
 // read worked (and, for the registry, whether another package's secret setting name was in it). It is a test package:
 // installed on one store for the check, then uninstalled.
 //   GET .../probe?heap=1   also allocates memory until the process runs out (the sandbox's heap limit)
+//   GET .../fail?n=3       throws an error with that number in its message (row 175: is it in the store's log?)
 
 type ICheck = { check: string; ok: boolean; detail: string };
 
@@ -99,7 +100,12 @@ const plugin: IRuntimePlugin = {
   name: "spp-sandbox-probe",
   apiVersion: 1,
   hooks: {},
-  routes: { probe },
+  routes: {
+    probe,
+    fail: async (request: IPluginRouteRequest) => {
+      throw new Error(`spp-sandbox-probe test failure ${String(request.query.n || "1").replace(/[^0-9]/g, "")} (row 175)`);
+    },
+  },
 };
 
 export default plugin;

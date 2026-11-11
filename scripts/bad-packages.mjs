@@ -1,4 +1,4 @@
-﻿// Makes broken copies of this package's zip, to show what `znode install` refuses (scenarios 006, 007 and 017).
+﻿// Makes broken copies of this package's zip, to show what `znode install` refuses (scenarios 006, 007, 017 and 195).
 //   node scripts/bad-packages.mjs <good.zpkg.zip> <outDir>
 // Each case changes one thing in the manifest or the files; install them into a scratch plugin folder, never a store's.
 import fs from "node:fs";
@@ -15,6 +15,8 @@ const cases = {
   "bad-version": (m) => void (m.version = "1.0"),
   "bad-name": (m) => void (m.name = "Spp Customization"),
   "bad-api-version": (m) => void (m.apiVersion = 99),
+  // asks for a webstore that does not exist yet; install does not compare it with anything (scenario 195)
+  "future-webstore": (m) => void (m.compatibility = { webstore: ">=99.0.0" }),
   "bad-kind": (m) => void (m.kind = "skin"),
   "missing-file": (m) => void (m.files.browser = "spp-customization-1.0.0.missing.mjs"),
   "file-type": (_m, zip) => zip.addFile("install.exe", Buffer.from("MZ")),

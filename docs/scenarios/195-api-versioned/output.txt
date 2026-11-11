@@ -1,0 +1,40 @@
+# One number, version 1, in four places
+$ grep EXTENSION_API_VERSION  <store>/packages/extensions/src/types.ts
+7:export const EXTENSION_API_VERSION = 1;
+$ grep API_VERSION  node_modules/znode-plugin/lib/znode-package.mjs   (the SDK: a constant, not read from the store)
+65:const API_VERSION = 1;
+$ head -1 node_modules/znode-plugin/types/extension-api.d.ts
+// Znode runtime extension API, version 1: what a theme, plugin or widget package builds against.
+# the packages: manifest "apiVersion" and the server part's apiVersion
+  znode-package.json: 1
+  spp-commerce.znode-package.json: 1
+  spp-promos.znode-package.json: 1
+  spp-sandbox-probe.znode-package.json: 1
+  spp-widgets.znode-package.json: 1
+  src/server.tsx:26:  apiVersion: 1,
+  src/commerce/server.ts:519:  apiVersion: 1,
+  src/sandbox-probe/server.ts:105:  apiVersion: 1,
+
+# Who compares it
+  znode install (manifest):   101:  if (manifest.apiVersion !== API_VERSION) fail(`${where}: apiVersion ${manifest.apiVersion} isn't supported (this store runs ${API_VERSION})`);
+  store, server bundle:       registry.server.ts:89  const plugin = loaded && loaded.apiVersion === EXTENSION_API_VERSION && loaded.name === entry.name ? loaded : null;
+  store, browser bundle:      client/runtime.ts:76  passes it to the package, checks nothing
+                              const plugin = await module.default({ apiVersion: EXTENSION_API_VERSION, React, ReactDOM, store: manifest.store, theme: manifest.theme, settings, stor
+  IBrowserPlugin (what a browser part returns) has no apiVersion field:
+    export interface IBrowserPlugin {
+      slots?: Record<string, (props: any) => unknown>;
+      transforms?: Record<string, (value: any) => unknown>;
+      widgets?: Record<string, ((props: any) => unknown) | IEditorWidget>;
+    }
+
+# compatibility.webstore: written in the manifest, never compared
+$ node scripts/bad-packages.mjs releases/spp-sandbox-probe-1.0.0.zpkg.zip <scratch>/bad
+$ npx znode install <scratch>/bad/bad-api-version.zpkg.zip <scratch>/plugins      (an empty scratch plugin folder)
+znode-package: package: apiVersion 99 isn't supported (this store runs 1)
+$ npx znode install <scratch>/bad/future-webstore.zpkg.zip <scratch>/plugins      ("compatibility": { "webstore": ">=99.0.0" })
+installed plugin spp-sandbox-probe@1.0.0: 5 files, disabled for []
+$ grep -c compatibility <scratch>/plugins/plugins.json
+0
+$ grep -n compatibility node_modules/znode-plugin/lib/znode-package.mjs
+35://   marketplace: "license", "keywords", "homepage", "compatibility": { "webstore": ">=10.0.0" },
+548:  for (const key of ["license", "compatibility"]) if (!manifest[key]) warnings.push(`"${key}" is missing`);

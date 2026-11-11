@@ -396,6 +396,7 @@ repository joins it. Commits are on `main` of this repository.
 | 185 | A package that throws: server slot and cart hook contained (200); a browser slot fails the server render (500, page rebuilt in the browser) | cb9f8ee | `RuntimeServerSlot` and `request-hooks.server.ts` catch and log; `SlotBoundary` catches only in the browser | §3 B.4 `layout.root`; §8 B `layout.header`; §6 B `beforeAddToCart` | src/sandbox-probe/, scripts/store-log.mjs, scripts/lib/source-maps.mjs |
 | 187 | Packages written in TypeScript (17 .ts, 40 .tsx), compiled by npm run build | d29f949 | the store loads built `.mjs` only | §1 build: tsc check, transpile, rollup | tsconfig.json, *znode-package.json (build) |
 | 188 | Type-checked build: wrong types against the public API stop it (TS2353, TS2322) | db5a1c2 | the store checks only `name` and `apiVersion` | §1 build step 1: `typeCheck` (tsc --noEmit) | – (errors made for the check and undone) |
-| 189 | Build time: 6-11.5 s per package, deploy 7.5 s | (this commit) | no store build | §1 build step 1 | – |
+| 189 | Build time: 6-11.5 s per package, deploy 7.5 s | c6591d3 | no store build | §1 build step 1 | – |
+| 195 | Extension API version 1: checked at install and on server bundles; browser parts and compatibility.webstore not | (this commit) | `registry.server.ts:89` apiVersion check; `client/runtime.ts:76` passes it to browser parts | §1 install; §3 B.2 browser setup | scripts/bad-packages.mjs |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

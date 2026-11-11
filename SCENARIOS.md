@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 126 |
+| ✅ Done | 127 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 14 |
+| ⬜ Not started | 13 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -387,7 +387,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 194 | Can I upgrade base without breaking packages? | Partial | Outside | Store upgrade | ➖ Outside | |
-| 195 | Is the extension API versioned? | Yes | Check | `apiVersion` (17) | ⬜ Not started | |
+| 195 | Is the extension API versioned? | Yes | Check | Yes, one number (1), checked at install and for server bundles; browser parts are not checked, the SDK's number is its own, compatibility.webstore is never compared (>=99.0.0 installed), no ranges | ✅ Done | [notes](docs/scenarios/195-api-versioned/) |
 | 196 | Are breaking API changes detected automatically? | No | Base | | ⛔ Blocked | |
 | 197 | Is the webstore on Next 16? | Yes | Outside | Store repo | ➖ Outside | |
 | 198 | Do the hook points need regenerating after a base upgrade? | Yes | Outside | Store repo | ➖ Outside | |

@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 115 |
+| ✅ Done | 116 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 25 |
+| ⬜ Not started | 24 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -344,7 +344,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 164 | Can a browser skip a route override? | No | Base | No: 105 path spellings and bypass-header guesses on 5 overridden routes; none reached the store's route (npm run overrides --probe) | ✅ Done | [notes](164-route-override-not-skippable/) |
 | 165 | Is partner code sandboxed? | No | Base | Opt-in "sandbox": true: no env secrets, no .env, writes, programs or network; crash contained. But it reads the whole plugin folder (plugins.json, other bundles) | ✅ Done | [notes](165-partner-code-sandbox/) |
 | 166 | Are plugin routes rate-limited? | No | Base | Yes, 120/min per address, store and plugin (429, Retry-After 60); keyed on a client-set header; account bar calls 18 to 5 | ✅ Done | [notes](166-route-rate-limit/) |
-| 167 | Do plugin routes check who the shopper is? | Partial | Check | Route answering 401 without `context.user` | ⬜ Not started | |
+| 167 | Do plugin routes check who the shopper is? | Partial | Check | Partial: context.user given, nothing enforced. activity leaked cart numbers (sequential; cart-summary trusts them): now staff-only; my-quotes 401 for guests | ✅ Done | [notes](167-routes-check-the-caller/) |
 | 168 | Are SVG files from packages blocked from running script? | Partial | Check | Response headers of this theme's SVG | ⬜ Not started | |
 
 ## Production

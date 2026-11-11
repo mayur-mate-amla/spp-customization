@@ -20,6 +20,7 @@
     "vitals": "node scripts/vitals.mjs",
     "registry": "node scripts/registry.mjs",
     "secrets-check": "node scripts/secrets-check.mts",
+    "quotes-check": "node scripts/quotes-check.mts",
     "probe-files": "node scripts/probe-files.mjs"
   },
   "devDependencies": {

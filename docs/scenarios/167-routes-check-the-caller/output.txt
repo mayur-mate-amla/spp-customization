@@ -1,0 +1,23 @@
+## Before
+GET .../activity, no key, no cookie:  HTTP 200, 3 adds, fields at, sku, asked, added, rule, cartNumber, ok; cart numbers like C-99999999-9999
+GET .../my-quotes, no cookie:          HTTP 404 (no such route yet)
+
+what a leaked cart number gives (one of this check's own test carts; no cookie):
+  GET /api/cart/cart-summary?cartNumber=<the number from .../activity>&isCart=true
+  -> 200: cartId, subTotal, total, costs, discounts, shippingCost, taxCost ... (subtotal 45, total 45)
+cart numbers of three test carts made minutes apart: shape C-99999999-9999, numeric parts differ by 1, 1 (sequential)
+
+## After
+GET .../activity, no key, no cookie:   {"error":"Staff only"} [HTTP 401]
+GET .../activity, wrong key:           {"error":"Staff only"} [HTTP 401]
+GET .../activity, staff key:           HTTP 200, 1 add(s), fields at, sku, asked, added, rule, ok, cart; last: {"at":"2026-11-11T06:46:05.922Z","sku":"817NK_25","asked":1,"added":1,"rule":"","ok":true,"cart":"014c5e05"}
+GET .../my-quotes, no cookie (guest):  {"error":"Sign in to see your quote requests"} [HTTP 401]
+
+$ npm run quotes-check
+ok   quotesFor("ana@buyer.example") = ["Q-1","Q-3"]
+ok   quotesFor("  ANA@buyer.example ") = ["Q-1","Q-3"]
+ok   quotesFor("ben@other.example") = ["Q-2"]
+ok   quotesFor("carl@buyer.example") = []
+ok   quotesFor("") = []
+ok   quotesFor("buyer.example") = []
+all 6 passed

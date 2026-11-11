@@ -22,6 +22,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run vitals -- --path / [--theme <name>] [--runs 3] [--throttle] [--film out.png]` | Core Web Vitals of a page (FCP, LCP, CLS with what moved, TBT), median of several loads, optionally on a throttled phone, with a filmstrip (`scripts/vitals.mjs`) |
 | `npm run registry -- store <code>` / `install <stores> [key=value ...]` / `remove <stores>` `[--package <name>]` | What a store gets (theme chain, plugins, its setting overrides); place a package on stores with their own settings (`installations`), or take it off (`scripts/registry.mjs`; also `show`, `set`, `enable`, `sandbox`, `stores`, `themes`, `before`) |
 | `npm run secrets-check` | Checks the secret-setting resolver (`env:NAME` references, `src/commerce/secrets.ts`) |
+| `npm run quotes-check` | Checks that a signed-in buyer sees only their own quote requests (`quotesFor`, `src/commerce/quotes.ts`) |
 | `npm run probe-files [-- --host <store host>]` | What the store's package-files route refuses: server bundles (every version on disk, other spellings), the registry and its copies, `../` in every encoding; an SVG's headers (`scripts/probe-files.mjs`) |
 
 ## Use-case scenarios

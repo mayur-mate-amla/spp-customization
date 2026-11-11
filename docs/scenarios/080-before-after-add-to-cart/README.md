@@ -18,7 +18,7 @@ Promotional products are often sold by the case. The spp-commerce plugin:
   to whole packs **before the request goes to Znode**: 1 → 10, 11 → 20. Znode prices and stores the corrected line
   ($12.50, cart count 10).
 - **`afterAddToCart`**: Znode's answer (`addToCartStatus`, `cartNumber`, `cartCount`) completes an activity record of
-  what was asked, what was added and why, readable at `GET /api/extensions/plugins/spp-commerce/activity`:
+  what was asked, what was added and why, readable (staff only since row 167: `X-Staff-Key`) at `GET /api/extensions/plugins/spp-commerce/activity`:
 
   ```json
   {"sku":"81DRL","asked":1,"added":10,"rule":"case pack of 10","cartNumber":"C-10112026-1095","ok":true}

@@ -59,6 +59,13 @@ export function readQuoteRequest(body: unknown, reps: Record<string, unknown>, n
   };
 }
 
+/** A signed-in buyer's own quote requests (row 167): those sent with the email they sign in with (Znode's user name),
+ *  case-insensitive. Nobody else's, and none for an empty name. */
+export function quotesFor(list: IQuoteRequest[], userName: string): IQuoteRequest[] {
+  const name = userName.trim().toLowerCase();
+  return name ? list.filter((quote) => quote.email.toLowerCase() === name) : [];
+}
+
 /** The store's answer envelope (sendSuccess), so the store's own forms read it as they read the original route's. */
 export function envelope(data: Record<string, unknown>, message = "") {
   return { status: "success", message, data };

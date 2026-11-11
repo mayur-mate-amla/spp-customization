@@ -3,8 +3,9 @@ import { companionChanges, lineNotes, noteLanguage, quantityRule, replacedBy, wi
 import { OrderingInfoPage } from "./OrderingInfoPage";
 import { EventKitsPage } from "./EventKitsPage";
 import { arrivalDate, lookupZip, transitDays, type IPlace } from "./delivery";
-import { envelope, readQuoteRequest, type IQuoteRequest } from "./quotes";
+import { envelope, quotesFor, readQuoteRequest, type IQuoteRequest } from "./quotes";
 import { secretSetting } from "./secrets";
+import { createHash, randomBytes } from "node:crypto";
 
 // spp-commerce, server part (runs on the store's server only).
 //   beforeAddToCart  superseded item numbers go to their current item (setting replacedSkus, row 106); case packs: an item sold in packs (setting casePacks: { "<sku>": <pack size> }) is rounded up to
@@ -18,7 +19,9 @@ import { secretSetting } from "./secrets";
 //   mapCartItems     line notes (setting lineNotes), and each line's delivery date with the shopper's ZIP (row 112): "Sold in cases of 10", "Minimum order 25", "Limit 5 per order"
 //                    under the lines they apply to, on the cart page and checkout
 //   serverPages      /event-kits: kits for events (row 121); /ordering-information: the ordering policies, written from these settings (OrderingInfoPage.tsx)
-//   routes.activity  GET /api/extensions/plugins/spp-commerce/activity: the store's last 20 adds and cart changes
+//   routes.activity  GET /api/extensions/plugins/spp-commerce/activity: the store's last 20 adds and cart changes, for
+//                    staff (X-Staff-Key, row 167); each entry names its cart by a tag, never the cart number
+//   routes.my-quotes GET .../my-quotes: the signed-in buyer's own quote requests; 401 without a signed-in buyer (row 167)
 //   routes.rep       GET .../rep?code=JR&to=/category/1674: a sales rep's link. Sets the spp_rep cookie (30 days) for a
 //                    known rep (setting salesReps) and redirects; the account bar names the rep, adds are credited
 //   routes.erp-stock POST, a signed webhook from the ERP: stock holds ("out until Dec 1"); routes.stock-holds lists them
@@ -35,7 +38,7 @@ import { secretSetting } from "./secrets";
 // { cartNumber, lines: [{ id, sku, quantity, totalPrice, personalization }] } and actions addItem / removeLine.
 
 type ISkuLine = { sku?: string; quantity?: string | number };
-type IActivity = { at: string; sku: string; asked: number; added: number; rule: string; cartNumber?: string; ok?: boolean; rep?: string };
+type IActivity = { at: string; sku: string; asked: number; added: number; rule: string; cartNumber?: string; cart?: string; ok?: boolean; rep?: string };
 
 // the sales rep a shopper came through (routes.rep sets it from the rep's link; the browser and the cart hooks read it)
 const REP_COOKIE = "spp_rep";
@@ -51,9 +54,15 @@ const companionsAdded = new Map<string, Record<string, string>>();
 // the adds of the request in flight, completed by afterAddToCart
 const pending = new Map<string, IActivity[]>();
 
+// Row 167: a cart number is the only key to a guest cart (the store's /api/cart/cart-summary?cartNumber= answers anyone
+// who has it, and the numbers are sequential), so the activity list never keeps one: an entry names its cart by a tag,
+// a hash with a key made at start-up, enough to tell one cart's entries from another's and useless outside this process.
+const CART_TAG_KEY = randomBytes(16).toString("hex");
+const cartTag = (cartNumber: string) => (cartNumber ? createHash("sha256").update(`${CART_TAG_KEY}:${cartNumber}`).digest("hex").slice(0, 8) : "");
+
 function record(store: string, entries: IActivity[]) {
   const list = activity.get(store) || [];
-  list.push(...entries);
+  list.push(...entries.map(({ cartNumber, ...entry }) => ({ ...entry, ...(cartNumber ? { cart: cartTag(cartNumber) } : {}) })));
   activity.set(store, list.slice(-20));
 }
 
@@ -389,6 +398,21 @@ async function quoteRequestList(request: IPluginRouteRequest, context: IPluginRo
   return { store: context.store.code, requests: quoteRequests.get(context.store.code) || [] };
 }
 
+// Row 167: routes decide for themselves who may call them; the store passes the signed-in buyer (context.user, from
+// the server-side session: a browser cannot make it up) and checks nothing. The activity list is for staff (the staff
+// key, as the quote list); the buyer's own quote requests need a signed-in buyer.
+const unauthorized = (error: string) => new Response(JSON.stringify({ error }), { status: 401, headers: { "Content-Type": "application/json" } });
+
+async function activityList(request: IPluginRouteRequest, context: IPluginRouteContext) {
+  if (!sameSecret(request.headers["x-staff-key"] || "", secretSetting(context.settings.staffKey))) return unauthorized("Staff only");
+  return { store: context.store.code, adds: activity.get(context.store.code) || [] };
+}
+
+async function myQuotes(_request: IPluginRouteRequest, context: IPluginRouteContext) {
+  if (!context.user) return unauthorized("Sign in to see your quote requests");
+  return { store: context.store.code, requests: quotesFor(quoteRequests.get(context.store.code) || [], context.user.userName) };
+}
+
 // ---- Search typeahead: a store route wrapped (row 098) -------------------------------------------------------------
 // "overrides": { "/api/search/search-hydrated-typeahead": "search-typeahead" }: for the stores this plugin runs on, the
 // proxy sends the header search's typeahead here. The route asks the store's own route (context.original(): the same
@@ -507,7 +531,8 @@ const plugin: IRuntimePlugin = {
     },
   },
   routes: {
-    activity: async (_request: IPluginRouteRequest, context: IPluginRouteContext) => ({ store: context.store.code, adds: activity.get(context.store.code) || [] }),
+    activity: activityList,
+    "my-quotes": myQuotes,
     "my-order": myOrder,
     rep: repRoute,
     "erp-stock": erpStock,

@@ -1,0 +1,124 @@
+$ npm run overrides -- POCSppDemo --probe sppdemo.localhost:3000
+POCSppDemo: 5 store route(s) taken over
+  /api/store-locator  ->  /api/extensions/plugins/delivery-preference/store-locator
+  /api/search/search-hydrated-typeahead  ->  /api/extensions/plugins/spp-commerce/search-typeahead
+  /api/contact-us  ->  /api/extensions/plugins/spp-commerce/quote-request
+  /api/add-to-cart  ->  /api/extensions/plugins/spp-commerce/add-to-cart
+  /api/place-order  ->  /api/extensions/plugins/spp-commerce/place-order
+
+sppdemo.localhost:3000 (POCSppDemo): /api/store-locator
+  ok   as the store calls it        /api/store-locator                               the plugin (override applied)
+  ok   trailing slash               /api/store-locator/                              redirect to /api/store-locator?probe=1
+  ok   upper case                   /API/STORE-LOCATOR                               200: no route (a store page)
+  ok   one letter upper case        /api/Store-locator                               200: no route (a store page)
+  ok   double slash at the start    //api/store-locator                              redirect to /api/store-locator?probe=1
+  ok   double slash inside          /api//store-locator                              redirect to /api/store-locator?probe=1
+  ok   dot segment /./              /api/./store-locator                             the plugin (override applied)
+  ok   dot-dot segment              /api/x/../store-locator                          the plugin (override applied)
+  ok   encoded letter (%61 for a)   /%61pi/store-locator                             200: no route (a store page)
+  ok   encoded slash %2F            /api%2Fstore-locator                             200: no route (a store page)
+  ok   encoded dash %2D             /api/store%2Dlocator                             200: no route (a store page)
+  ok   semicolon parameter ;x       /api/store-locator;x                             200: no route (a store page)
+  ok   trailing %20                 /api/store-locator%20                            200: no route (a store page)
+  ok   trailing dot                 /api/store-locator.                              200: no route (a store page)
+  ok   backslash                    /api\store-locator                               redirect to /api/store-locator?probe=1
+  ok   locale prefix /en-US         /en-US/api/store-locator                         redirect to /api/store-locator?probe=1
+  ok   locale prefix /fr-FR         /fr-FR/api/store-locator                         200: no route (a store page)
+  ok   bypass header: 1             /api/store-locator                               the plugin (override applied)
+  ok   bypass header: true          /api/store-locator                               the plugin (override applied)
+  ok   bypass header: spp-commerce  /api/store-locator                               the plugin (override applied)
+  ok   bypass header: the no-secret token /api/store-locator                               the plugin (override applied)
+
+sppdemo.localhost:3000 (POCSppDemo): /api/search/search-hydrated-typeahead
+  ok   as the store calls it        /api/search/search-hydrated-typeahead            the plugin (override applied)
+  ok   trailing slash               /api/search/search-hydrated-typeahead/           redirect to /api/search/search-hydrated-typeahead?probe=1
+  ok   upper case                   /API/SEARCH/SEARCH-HYDRATED-TYPEAHEAD            200: no route (a store page)
+  ok   one letter upper case        /api/search/Search-hydrated-typeahead            400: no route (the sign-in handler)
+  ok   double slash at the start    //api/search/search-hydrated-typeahead           redirect to /api/search/search-hydrated-typeahead?probe=1
+  ok   double slash inside          /api//search/search-hydrated-typeahead           redirect to /api/search/search-hydrated-typeahead?probe=1
+  ok   dot segment /./              /api/./search/search-hydrated-typeahead          the plugin (override applied)
+  ok   dot-dot segment              /api/x/../search/search-hydrated-typeahead       the plugin (override applied)
+  ok   encoded letter (%61 for a)   /%61pi/search/search-hydrated-typeahead          200: no route (a store page)
+  ok   encoded slash %2F            /api%2Fsearch%2Fsearch-hydrated-typeahead        200: no route (a store page)
+  ok   encoded dash %2D             /api/search/search%2Dhydrated-typeahead          400: no route (the sign-in handler)
+  ok   semicolon parameter ;x       /api/search/search-hydrated-typeahead;x          400: no route (the sign-in handler)
+  ok   trailing %20                 /api/search/search-hydrated-typeahead%20         400: no route (the sign-in handler)
+  ok   trailing dot                 /api/search/search-hydrated-typeahead.           400: no route (the sign-in handler)
+  ok   backslash                    /api\search/search-hydrated-typeahead            redirect to /api/search/search-hydrated-typeahead?probe=1
+  ok   locale prefix /en-US         /en-US/api/search/search-hydrated-typeahead      redirect to /api/search/search-hydrated-typeahead?probe=1
+  ok   locale prefix /fr-FR         /fr-FR/api/search/search-hydrated-typeahead      200: no route (a store page)
+  ok   bypass header: 1             /api/search/search-hydrated-typeahead            the plugin (override applied)
+  ok   bypass header: true          /api/search/search-hydrated-typeahead            the plugin (override applied)
+  ok   bypass header: spp-commerce  /api/search/search-hydrated-typeahead            the plugin (override applied)
+  ok   bypass header: the no-secret token /api/search/search-hydrated-typeahead            the plugin (override applied)
+
+sppdemo.localhost:3000 (POCSppDemo): /api/contact-us
+  ok   as the store calls it        /api/contact-us                                  the plugin (override applied)
+  ok   trailing slash               /api/contact-us/                                 redirect to /api/contact-us?probe=1
+  ok   upper case                   /API/CONTACT-US                                  200: no route (a store page)
+  ok   one letter upper case        /api/Contact-us                                  200: no route (a store page)
+  ok   double slash at the start    //api/contact-us                                 redirect to /api/contact-us?probe=1
+  ok   double slash inside          /api//contact-us                                 redirect to /api/contact-us?probe=1
+  ok   dot segment /./              /api/./contact-us                                the plugin (override applied)
+  ok   dot-dot segment              /api/x/../contact-us                             the plugin (override applied)
+  ok   encoded letter (%61 for a)   /%61pi/contact-us                                200: no route (a store page)
+  ok   encoded slash %2F            /api%2Fcontact-us                                200: no route (a store page)
+  ok   encoded dash %2D             /api/contact%2Dus                                200: no route (a store page)
+  ok   semicolon parameter ;x       /api/contact-us;x                                200: no route (a store page)
+  ok   trailing %20                 /api/contact-us%20                               200: no route (a store page)
+  ok   trailing dot                 /api/contact-us.                                 200: no route (a store page)
+  ok   backslash                    /api\contact-us                                  redirect to /api/contact-us?probe=1
+  ok   locale prefix /en-US         /en-US/api/contact-us                            redirect to /api/contact-us?probe=1
+  ok   locale prefix /fr-FR         /fr-FR/api/contact-us                            200: no route (a store page)
+  ok   bypass header: 1             /api/contact-us                                  the plugin (override applied)
+  ok   bypass header: true          /api/contact-us                                  the plugin (override applied)
+  ok   bypass header: spp-commerce  /api/contact-us                                  the plugin (override applied)
+  ok   bypass header: the no-secret token /api/contact-us                                  the plugin (override applied)
+
+sppdemo.localhost:3000 (POCSppDemo): /api/add-to-cart
+  ok   as the store calls it        /api/add-to-cart                                 the plugin (override applied)
+  ok   trailing slash               /api/add-to-cart/                                redirect to /api/add-to-cart?probe=1
+  ok   upper case                   /API/ADD-TO-CART                                 200: no route (a store page)
+  ok   one letter upper case        /api/Add-to-cart                                 200: no route (a store page)
+  ok   double slash at the start    //api/add-to-cart                                redirect to /api/add-to-cart?probe=1
+  ok   double slash inside          /api//add-to-cart                                redirect to /api/add-to-cart?probe=1
+  ok   dot segment /./              /api/./add-to-cart                               the plugin (override applied)
+  ok   dot-dot segment              /api/x/../add-to-cart                            the plugin (override applied)
+  ok   encoded letter (%61 for a)   /%61pi/add-to-cart                               200: no route (a store page)
+  ok   encoded slash %2F            /api%2Fadd-to-cart                               200: no route (a store page)
+  ok   encoded dash %2D             /api/add%2Dto-cart                               200: no route (a store page)
+  ok   semicolon parameter ;x       /api/add-to-cart;x                               200: no route (a store page)
+  ok   trailing %20                 /api/add-to-cart%20                              200: no route (a store page)
+  ok   trailing dot                 /api/add-to-cart.                                200: no route (a store page)
+  ok   backslash                    /api\add-to-cart                                 redirect to /api/add-to-cart?probe=1
+  ok   locale prefix /en-US         /en-US/api/add-to-cart                           redirect to /api/add-to-cart?probe=1
+  ok   locale prefix /fr-FR         /fr-FR/api/add-to-cart                           200: no route (a store page)
+  ok   bypass header: 1             /api/add-to-cart                                 the plugin (override applied)
+  ok   bypass header: true          /api/add-to-cart                                 the plugin (override applied)
+  ok   bypass header: spp-commerce  /api/add-to-cart                                 the plugin (override applied)
+  ok   bypass header: the no-secret token /api/add-to-cart                                 the plugin (override applied)
+
+sppdemo.localhost:3000 (POCSppDemo): /api/place-order
+  ok   as the store calls it        /api/place-order                                 the plugin (override applied)
+  ok   trailing slash               /api/place-order/                                redirect to /api/place-order?probe=1
+  ok   upper case                   /API/PLACE-ORDER                                 200: no route (a store page)
+  ok   one letter upper case        /api/Place-order                                 200: no route (a store page)
+  ok   double slash at the start    //api/place-order                                redirect to /api/place-order?probe=1
+  ok   double slash inside          /api//place-order                                redirect to /api/place-order?probe=1
+  ok   dot segment /./              /api/./place-order                               the plugin (override applied)
+  ok   dot-dot segment              /api/x/../place-order                            the plugin (override applied)
+  ok   encoded letter (%61 for a)   /%61pi/place-order                               200: no route (a store page)
+  ok   encoded slash %2F            /api%2Fplace-order                               200: no route (a store page)
+  ok   encoded dash %2D             /api/place%2Dorder                               200: no route (a store page)
+  ok   semicolon parameter ;x       /api/place-order;x                               200: no route (a store page)
+  ok   trailing %20                 /api/place-order%20                              200: no route (a store page)
+  ok   trailing dot                 /api/place-order.                                200: no route (a store page)
+  ok   backslash                    /api\place-order                                 redirect to /api/place-order?probe=1
+  ok   locale prefix /en-US         /en-US/api/place-order                           redirect to /api/place-order?probe=1
+  ok   locale prefix /fr-FR         /fr-FR/api/place-order                           200: no route (a store page)
+  ok   bypass header: 1             /api/place-order                                 the plugin (override applied)
+  ok   bypass header: true          /api/place-order                                 the plugin (override applied)
+  ok   bypass header: spp-commerce  /api/place-order                                 the plugin (override applied)
+  ok   bypass header: the no-secret token /api/place-order                                 the plugin (override applied)
+
+105 requests on sppdemo.localhost: none reached the store's own route

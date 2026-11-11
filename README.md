@@ -15,7 +15,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run link-store -- <store repo>` | Use the store's real types (writes `tsconfig.store.json`) |
 | `npm run shot -- --path / --out <file.png>` | Screenshot a store page with this theme previewed (`scripts/shot.mjs`; `--theme none` for the store's own) |
 | `npm run inventory [-- <manifest>]` | What the built package carries: slots, widgets, routes, hooks, settings, assets (`scripts/inventory.mjs`) |
-| `npm run overrides [-- <store> ...]` | Which store API routes are taken over on each store, by which plugin (`scripts/overrides.mjs`) |
+| `npm run overrides [-- <store> ...] [--probe <host>]` | Which store API routes are taken over, on which store, by which plugin; with `--probe`, whether a browser can reach an overridden store route by spelling its path another way (`scripts/overrides.mjs`) |
 | `npm run a11y -- --path / [--theme none] [--store <url>]` | Accessibility check of this repo's parts on a page: axe (WCAG 2.1 A/AA) and the keyboard (`scripts/a11y.mjs`) |
 | `npm run page-files -- --path / [--store <url>] [--theme <name>] [--again]` | Which package files a page loads, by package, with size and cache headers (`scripts/page-files.mjs`) |
 | `npm run vitals -- --path / [--theme <name>] [--runs 3] [--throttle] [--film out.png]` | Core Web Vitals of a page (FCP, LCP, CLS with what moved, TBT), median of several loads, optionally on a throttled phone, with a filmstrip (`scripts/vitals.mjs`) |

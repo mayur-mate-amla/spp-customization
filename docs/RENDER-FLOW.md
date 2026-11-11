@@ -382,6 +382,7 @@ repository joins it. Commits are on `main` of this repository.
 | 160 | Server bundles refused by the files route (every version, other spellings) | 2ede4d7 | `readServedFile`: browser types only, `.server.mjs` refused | §3 B.1 files route; server parts loaded from disk only | scripts/probe-files.mjs |
 | 161 | plugins.json and its copies refused (.history, .versions, temp, lock) | 0dda8c4 | registry read on the server only | §2 B registry never linked; files route types and bare names | scripts/probe-files.mjs |
 | 162 | Paths out of the plugin folder refused (ten encodings) | b453f5a | `readServedFile` bare-name check, `fileInDir` | §3 B.1 files route | scripts/probe-files.mjs |
-| 163 | Preview switch off in production; open redirect while on (store) | (this commit) | `isThemePreviewEnabled`: NODE_ENV or RUNTIME_THEME_PREVIEW=true | §2 B.2 preview cookie read only when on | scripts/probe-files.mjs |
+| 163 | Preview switch off in production; open redirect while on (store) | 0d3fbc0 | `isThemePreviewEnabled`: NODE_ENV or RUNTIME_THEME_PREVIEW=true | §2 B.2 preview cookie read only when on | scripts/probe-files.mjs |
+| 164 | Route overrides can't be skipped (105 path and header variants) | (this commit) | proxy `findRouteOverride` on the exact pathname | §7 B.4 override, `original()` token | scripts/overrides.mjs, scripts/lib/store.mjs |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

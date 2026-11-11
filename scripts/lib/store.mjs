@@ -44,3 +44,28 @@ export function changeRegistry(dir, change) {
     fs.rmSync(lock, { recursive: true, force: true });
   }
 }
+
+// Where each package is placed, as registry-index.ts reads it: a package with installation records is placed by them
+// (each enabled one, on its store, its list or "*"), and its own "stores" is ignored; any other package by its "stores"
+// (none or "*": every store). Returns a store's placements in registry order, each package once (a store's own
+// placement before an every-store one), with that placement's settings overrides.
+export function placementsFor(registry, storeCode) {
+  const lower = (text) => String(text).toLowerCase();
+  const code = lower(storeCode);
+  const installations = Array.isArray(registry.installations) ? registry.installations : [];
+  const installed = new Set(installations.map((item) => lower(item.package)));
+  const placed = [];
+  registry.plugins.forEach((entry, order) => {
+    if (installed.has(lower(entry.name))) {
+      for (const item of installations.filter((record) => lower(record.package) === lower(entry.name) && record.enabled !== false)) {
+        const stores = item.store === "*" || item.stores === "*" ? ["*"] : [...(item.store ? [item.store] : []), ...(Array.isArray(item.stores) ? item.stores : [])];
+        if (stores.some((store) => lower(store) === code)) placed.push({ order, own: true, entry, overrides: item.settings });
+        else if (stores.includes("*")) placed.push({ order, own: false, entry, overrides: item.settings });
+      }
+    } else if (!entry.stores || entry.stores === "*") placed.push({ order, own: false, entry });
+    else if (Array.isArray(entry.stores) && entry.stores.some((store) => lower(store) === code)) placed.push({ order, own: true, entry });
+  });
+  placed.sort((a, b) => a.order - b.order || Number(b.own) - Number(a.own));
+  const once = new Set();
+  return placed.filter((item) => !once.has(item.entry) && once.add(item.entry));
+}

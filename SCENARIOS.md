@@ -64,10 +64,10 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 112 |
+| ✅ Done | 113 |
 | 🟡 In progress | 1 |
 | ⬜ Not started | 25 |
-| ⛔ Blocked | 37 |
+| ⛔ Blocked | 36 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
 
@@ -341,7 +341,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 161 | Is the registry (plugins.json) blocked from download? | Yes | Check | plugins.json, its temp file, lock, .history and .versions refused; a dev server copies it into a page (159) | ✅ Done | [notes](161-registry-blocked/) |
 | 162 | Are file paths checked so nothing outside the package folder is served? | Yes | Check | Ten ways out of the folder (raw, %2F, %5C, %2e, double-encoded, absolute, UNC, file:) to a served-type file: all refused | ✅ Done | [notes](162-paths-checked/) |
 | 163 | Is the preview switch off in production by default? | Yes | Check | Off unless NODE_ENV is not production or RUNTIME_THEME_PREVIEW=true; open redirect in the preview route while on (store); probe checks it | ✅ Done | [notes](163-preview-off-in-production/) |
-| 164 | Can a browser skip a route override? | No | Base | (No is the safe answer here) | ⛔ Blocked | |
+| 164 | Can a browser skip a route override? | No | Base | No: 105 path spellings and bypass-header guesses on 5 overridden routes; none reached the store's route (npm run overrides --probe) | ✅ Done | [notes](164-route-override-not-skippable/) |
 | 165 | Is partner code sandboxed? | No | Base | Re-check: `"sandbox": true` (see notes) | ⛔ Blocked | |
 | 166 | Are plugin routes rate-limited? | No | Base | Re-check: 120 calls a minute (see notes) | ⛔ Blocked | |
 | 167 | Do plugin routes check who the shopper is? | Partial | Check | Route answering 401 without `context.user` | ⬜ Not started | |

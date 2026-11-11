@@ -17,7 +17,8 @@
     "overrides": "node scripts/overrides.mjs",
     "a11y": "node scripts/a11y.mjs",
     "page-files": "node scripts/page-files.mjs",
-    "vitals": "node scripts/vitals.mjs"
+    "vitals": "node scripts/vitals.mjs",
+    "registry": "node scripts/registry.mjs"
   },
   "devDependencies": {
     "@types/react": "19.2.13",

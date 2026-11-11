@@ -1,0 +1,81 @@
+## Before: what each store gets (node scripts/registry.mjs store <code>)
+POCSppDemo:
+  parent   spp-base@1.2.1
+  theme    redpanda@1.0.0
+  plugin   artifi@1.1.4
+  content  spp-content-navigate@1.0.0
+  plugin   countdown-banner@1.0.1
+  plugin   delivery-preference@1.1.1
+  plugin   spp-promos@1.0.0
+  plugin   spp-commerce@1.0.0
+  plugin   spp-widgets@1.0.0
+POCStaplesPromo:
+  parent   spp-base@1.2.1
+  parent   redpanda@1.0.0
+  theme    salmonsalmon@1.0.1
+  plugin   artifi@1.1.4
+  content  spp-content-staplespromo@1.0.0
+  plugin   countdown-banner@1.0.1
+POCNvidia:
+  parent   spp-base@1.2.1
+  theme    sageserpent@1.0.1
+  plugin   artifi@1.1.4
+  content  spp-content-nvidia@1.0.0
+  plugin   countdown-banner@1.0.1
+POCLandOLakes:
+  parent   spp-base@1.2.1
+  parent   redpanda@1.0.0
+  theme    purpleplatypus@1.0.0
+  plugin   artifi@1.1.4
+  content  spp-content-lol@1.0.0
+  plugin   countdown-banner@1.0.1
+POCKalles:
+  theme    apex@1.0.19
+MaxwellsHardware:
+  theme    apex@1.0.19
+
+## The change
+$ node scripts/registry.mjs install POCStaplesPromo --package spp-promos "saleText=Back to school: 15% off notebooks and binders" "saleEndsAt=2026-11-30T23:59:00-05:00"
+moved "stores" ["POCSppDemo"] into installation records
+
+## After
+POCSppDemo:
+  parent   spp-base@1.2.1
+  theme    redpanda@1.0.0
+  plugin   artifi@1.1.4
+  content  spp-content-navigate@1.0.0
+  plugin   countdown-banner@1.0.1
+  plugin   delivery-preference@1.1.1
+  plugin   spp-promos@1.0.0
+  plugin   spp-commerce@1.0.0
+  plugin   spp-widgets@1.0.0
+POCStaplesPromo:
+  parent   spp-base@1.2.1
+  parent   redpanda@1.0.0
+  theme    salmonsalmon@1.0.1
+  plugin   artifi@1.1.4
+  content  spp-content-staplespromo@1.0.0
+  plugin   countdown-banner@1.0.1
+  plugin   spp-promos@1.0.0               settings for this store: {"saleText":"Back to school: 15% off notebooks and binders","saleEndsAt":"2026-11-30T23:59:00-05:00"}
+POCNvidia:
+  parent   spp-base@1.2.1
+  theme    sageserpent@1.0.1
+  plugin   artifi@1.1.4
+  content  spp-content-nvidia@1.0.0
+  plugin   countdown-banner@1.0.1
+
+## In the browser: npm run page-files -- --store http://staplespromo.localhost:3000 --path /
+http://staplespromo.localhost:3000/: 11 package files
+  artifi             artifi-1.1.4.browser.mjs                          27 KB  v=1794292242 public, max-age=31536000, immutable
+  countdown-banner   countdown-banner-1.0.1.browser.mjs                 4 KB  v=1794292242 public, max-age=31536000, immutable
+  redpanda           redpanda-1.0.0.css                                 2 KB  v=1794292242 public, max-age=31536000, immutable
+  salmonsalmon       salmonsalmon-1.0.1.css                             2 KB  v=1794292243 public, max-age=31536000, immutable
+  salmonsalmon       salmonsalmon-StaplesNormsPro-Bold.woff2           65 KB  v=-          public, max-age=31536000, immutable
+  salmonsalmon       salmonsalmon-StaplesNormsPro-ExtraBold.woff2      65 KB  v=-          public, max-age=31536000, immutable
+  salmonsalmon       salmonsalmon-StaplesNormsPro-Regular.woff2        65 KB  v=-          public, max-age=31536000, immutable
+  spp-base           spp-base-1.2.1.browser.mjs                       113 KB  v=1794292243 public, max-age=31536000, immutable
+  spp-base           spp-base-1.2.1.css                                74 KB  v=1794292243 public, max-age=31536000, immutable
+  spp-promos         spp-promos-1.0.0.browser.mjs                       2 KB  v=1794376882 public, max-age=31536000, immutable
+  spp-promos         spp-promos-1.0.0.css                               0 KB  v=1794376882 public, max-age=31536000, immutable
+packages loaded: artifi, countdown-banner, redpanda, salmonsalmon, spp-base, spp-promos
+packages in the registry not loaded: sort-order, spp-content-staplespromo, spp-content-nvidia, spp-content-lol, spp-content-navigate, spp-customization, purpleplatypus, sageserpent, apple, neon-noir, staples-basic, delivery-preference, kalles, kalles-content, small-order, apex, demo-theme, my-apex, ppui, promo-supply, spp-commerce, spp-widgets

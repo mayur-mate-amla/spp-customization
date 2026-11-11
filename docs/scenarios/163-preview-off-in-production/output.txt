@@ -1,0 +1,34 @@
+## 1. The switch, evaluated exactly as the store writes it (packages/extensions/src/route-overrides.server.ts:43)
+store code: isThemePreviewEnabled = () => process.env.NODE_ENV !== "production" || process.env.RUNTIME_THEME_PREVIEW === "true"
+off  next build + next start (production)
+ON   production, RUNTIME_THEME_PREVIEW=true
+off  production, RUNTIME_THEME_PREVIEW=1 (not "true")
+off  production, RUNTIME_THEME_PREVIEW=TRUE
+ON   next dev (this store)
+ON   tests
+ON   NODE_ENV unset (a custom server that does not set it)
+
+used in three places (all three ignore the preview when it is off):
+  apps/webstore/src/app/api/extensions/preview/route.ts:10   the preview route answers 404
+  apps/webstore/src/proxy.ts:133                              route overrides: the cookie is not read
+  packages/extensions/src/registry.server.ts:114              the store's packages: the cookie is not read
+
+## 2. This store (next dev): npm run probe-files, preview section
+163     preview switch: ON on this host (200): a development store, or RUNTIME_THEME_PREVIEW=true
+ok   163     to=/category/1            307 -> http://sppdemo.localhost:3000/category/1
+ok   163     to=//evil.example/        307 -> http://sppdemo.localhost:3000/
+ok   163     to=https://evil.example/  307 -> http://sppdemo.localhost:3000/
+FAIL 163     to=/%5Cevil.example/      307 -> http://evil.example/   <-- leaves the store: open redirect
+FAIL 163     to=/%5C%5Cevil.example/   307 -> http://evil.example/   <-- leaves the store: open redirect
+FAIL 163     to=/%09/evil.example/     307 -> http://evil.example/   <-- leaves the store: open redirect
+FAIL 163     to=/%0A/evil.example/     307 -> http://evil.example/   <-- leaves the store: open redirect
+69 checks on sppdemo.localhost:3000, plugin folder D:\runtime-plugins-store (no 8.3 short names on this volume): 4 FAILED
+
+## 3. This repo's own redirect (spp-commerce rep route, repRedirect), the same targets
+rep?code=X&to=/category/1            -> 302 Location: (this store)/category/1
+rep?code=X&to=//evil.example/        -> 302 Location: (this store)/
+rep?code=X&to=https://evil.example/  -> 302 Location: (this store)/
+rep?code=X&to=/%5Cevil.example/      -> 302 Location: (this store)/
+rep?code=X&to=/%5C%5Cevil.example/   -> 302 Location: (this store)/
+rep?code=X&to=/%09/evil.example/     -> 302 Location: (this store)/
+rep?code=X&to=/%0A/evil.example/     -> 302 Location: (this store)/

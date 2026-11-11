@@ -381,6 +381,7 @@ repository joins it. Commits are on `main` of this repository.
 | 159 | Secrets stay on the server (env:NAME references); dev server copies plugins.json into a page | 3a525c9 | `next dev`: React debug info carries `readRegistry`'s file text | §2 B.2 settings per package; §3 B.1 only `browser: true` settings sent | src/commerce/secrets.ts, src/commerce/server.ts |
 | 160 | Server bundles refused by the files route (every version, other spellings) | 2ede4d7 | `readServedFile`: browser types only, `.server.mjs` refused | §3 B.1 files route; server parts loaded from disk only | scripts/probe-files.mjs |
 | 161 | plugins.json and its copies refused (.history, .versions, temp, lock) | 0dda8c4 | registry read on the server only | §2 B registry never linked; files route types and bare names | scripts/probe-files.mjs |
-| 162 | Paths out of the plugin folder refused (ten encodings) | (this commit) | `readServedFile` bare-name check, `fileInDir` | §3 B.1 files route | scripts/probe-files.mjs |
+| 162 | Paths out of the plugin folder refused (ten encodings) | b453f5a | `readServedFile` bare-name check, `fileInDir` | §3 B.1 files route | scripts/probe-files.mjs |
+| 163 | Preview switch off in production; open redirect while on (store) | (this commit) | `isThemePreviewEnabled`: NODE_ENV or RUNTIME_THEME_PREVIEW=true | §2 B.2 preview cookie read only when on | scripts/probe-files.mjs |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

@@ -1,4 +1,5 @@
-// What the store's package-files route serves and refuses (rows 160-162, 168), checked with raw requests:
+// What the store's package-files route serves and refuses (rows 160-162, 168) and the preview switch (163), checked
+// with raw requests:
 //   npm run probe-files [-- --host sppdemo.localhost:3000] [--json out.json]
 // GET /api/extensions/files/<name> is the only way a browser reads the plugin folder. It must serve the browser parts
 // of packages and refuse everything else:
@@ -8,6 +9,7 @@
 //   162  paths out of the plugin folder: ../ in every encoding (raw, %2F, %5C, %2e, double-encoded), absolute paths,
 //        a UNC path, to a real file with a served type (this repo's scripts/shot.mjs)
 //   168  an SVG's headers (no script when opened directly): Content-Security-Policy with sandbox, nosniff
+//   163  the theme preview switch: off (404) in production; where it is on, its "to" must not redirect off the store
 // Two controls (a browser bundle and an image) must load, so a refusal is not the route being down. The requests go to
 // 127.0.0.1 with the store's Host header and the path exactly as written (Node does not normalize it), as a hostile
 // client would send them. Exit code 1 if anything is served that should not be.
@@ -114,7 +116,31 @@ const svgChecks = [
 console.log(`168     SVG ${svg}: ${csp}`);
 for (const [label, ok] of svgChecks) console.log(`${ok ? "ok  " : "FAIL"} 168     ${label}`);
 
-const failed = results.filter((result) => !result.ok).length + svgChecks.filter(([, ok]) => !ok).length;
-console.log(`${results.length + svgChecks.length} checks on ${host}, plugin folder ${dir}${shortNames.length ? "" : " (no 8.3 short names on this volume)"}: ${failed ? `${failed} FAILED` : "all passed"}`);
+// 163: the theme preview switch (/api/extensions/preview). Off (404) in a production build unless
+// RUNTIME_THEME_PREVIEW=true. Where it is on, its "to" must only lead back to this store: a redirect to another host
+// from the store's own domain is an open redirect (a link that looks like the store and lands on a phishing page).
+const preview = await get("/api/extensions/preview?list");
+const previewChecks = [];
+if (preview.status === 404) {
+  console.log("163     preview switch: off on this host (404)");
+} else {
+  console.log(`163     preview switch: ON on this host (${preview.status}): a development store, or RUNTIME_THEME_PREVIEW=true`);
+  for (const to of ["/category/1", "//evil.example/", "https://evil.example/", "/%5Cevil.example/", "/%5C%5Cevil.example/", "/%09/evil.example/", "/%0A/evil.example/"]) {
+    const response = await get(`/api/extensions/preview?to=${to}`);
+    const location = String(response.headers.location || "");
+    let target = "";
+    try {
+      target = new URL(location, `http://${host}`).host;
+    } catch {
+      target = "(unparsable)";
+    }
+    const ok = !location || target === host;
+    previewChecks.push(ok);
+    console.log(`${ok ? "ok  " : "FAIL"} 163     to=${to.padEnd(22)} ${response.status} -> ${location || "(no redirect)"}${ok ? "" : "   <-- leaves the store: open redirect"}`);
+  }
+}
+
+const failed = results.filter((result) => !result.ok).length + svgChecks.filter(([, ok]) => !ok).length + previewChecks.filter((ok) => !ok).length;
+console.log(`${results.length + svgChecks.length + previewChecks.length} checks on ${host}, plugin folder ${dir}${shortNames.length ? "" : " (no 8.3 short names on this volume)"}: ${failed ? `${failed} FAILED` : "all passed"}`);
 if (out) fs.writeFileSync(out, JSON.stringify({ host, results, svg: { file: svg, headers: svgResponse.headers } }, null, 2));
 process.exit(failed ? 1 : 0);

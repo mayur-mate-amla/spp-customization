@@ -1,0 +1,68 @@
+## Before: both stores on apex
+$ npm run registry -- themes MaxwellsHardware   ->  1. apex: on
+$ npm run registry -- themes POCKalles          ->  1. apex: on
+
+## The change
+$ npm run registry -- install MaxwellsHardware --package spp-customization accentColor="#c2410c" brandName="Maxwell's Hardware" announcement="Contractor pricing on every order over $250" logoUrl=""
+$ npm run registry -- install POCKalles --package spp-customization accentColor="#0f766e" brandName="Kalles Outfitters" announcement="Members save 10% on outdoor gear this week" logoUrl=""
+$ npm run registry -- enable true --package spp-customization
+  -> "enabled": true, "stores" ignored, two installation records (each store's settings)
+
+$ npm run registry -- themes MaxwellsHardware
+1. spp-customization (parent redpanda): on
+2. apex: on
+$ npm run registry -- themes POCKalles
+1. spp-customization (parent redpanda): on
+2. apex: on
+
+MaxwellsHardware:
+  parent   spp-base@1.2.1
+  parent   redpanda@1.0.0
+  theme    spp-customization@1.0.2        settings for this store: {"accentColor":"#c2410c","brandName":"Maxwell's Hardware","announcement":"Contractor pricing on every order over $250","logoUrl":""}
+POCKalles:
+  parent   spp-base@1.2.1
+  parent   redpanda@1.0.0
+  theme    spp-customization@1.0.2        settings for this store: {"accentColor":"#0f766e","brandName":"Kalles Outfitters","announcement":"Members save 10% on outdoor gear this week","logoUrl":""}
+POCNvidia:
+  parent   spp-base@1.2.1
+  theme    sageserpent@1.0.1
+  plugin   artifi@1.1.4
+  content  spp-content-nvidia@1.0.0
+  plugin   countdown-banner@1.0.1
+
+## Server HTML of each store (curl, no preview cookie)
+localhost:3000/
+  --theme-accent:#c2410c
+  <meta name="application-name" content="Maxwell&#x27;s Hardware"/>
+  <meta name="theme-color" content="#c2410c"/>
+  <meta property="og:site_name" content="Maxwell&#x27;s Hardware"/>
+  spp-customization-announcement" data-test-selector="divAnnouncement"><span>Contractor pricing on every order over $250
+kalles.localhost:3000/
+  --theme-accent:#0f766e
+  <meta name="application-name" content="Kalles Outfitters"/>
+  <meta name="theme-color" content="#0f766e"/>
+  <meta property="og:site_name" content="Kalles Outfitters"/>
+  spp-customization-announcement" data-test-selector="divAnnouncement"><span>Members save 10% on outdoor gear this week
+
+## Same files on both stores (npm run page-files)
+http://localhost:3000/: 15 package files
+  spp-customization  spp-customization-1.0.2.browser.mjs               51 KB  v=1794376265 public, max-age=31536000, immutable
+  spp-customization  spp-customization-1.0.2.css                       42 KB  v=1794376265 public, max-age=31536000, immutable
+packages loaded: redpanda, spp-base, spp-customization
+http://kalles.localhost:3000/: 15 package files
+  spp-customization  spp-customization-1.0.2.browser.mjs               51 KB  v=1794376265 public, max-age=31536000, immutable
+  spp-customization  spp-customization-1.0.2.css                       42 KB  v=1794376265 public, max-age=31536000, immutable
+packages loaded: redpanda, spp-base, spp-customization
+
+## Previewing the theme on MaxwellsHardware: package settings, not the store's record
+announcement 'Free shipping on orders over $100', accent #f26b1d, co-brand logo (preview-maxwells.png)
+
+## Restored afterwards (the theme stays preview-only on this dev store)
+$ npm run registry -- remove MaxwellsHardware,POCKalles --package spp-customization
+  "enabled": true,
+  "stores": [],
+$ npm run registry -- enable false --package spp-customization
+  "enabled": false,
+  "stores": [],
+1. apex: on
+1. apex: on

@@ -370,6 +370,7 @@ repository joins it. Commits are on `main` of this repository.
 | 134 | JSON-LD per store (BreadcrumbList) | 1dc919b | layout and product page JSON-LD | §5 B `product.addToCart` (server-rendered) | src/commerce/slots/ProductJsonLd.tsx |
 | 138 | Widget accessibility (axe + keyboard, contrast fixed) | d2686dc | – | §9 B.2 widgets, §4 B slots (the package's own markup) | scripts/a11y.mjs, src/styles/tokens.css |
 | 139 | Labels per language (French), safer cart rule | beb8794 | §3 A messages per locale | §3 B.7 one merged file; `usePathname` and `NEXT_LOCALE` pick the language | src/commerce/i18n.ts, src/commerce/i18n/labels.json |
-| 140 | Right-to-left (logical CSS properties) | (this commit) | `<html lang="en">`, no dir | §3 B.1 package CSS, direction-proof | src/styles/*.css, src/commerce/styles/commerce.css, src/shared-widgets/shared-widgets.css |
+| 140 | Right-to-left (logical CSS properties) | 3616418 | `<html lang="en">`, no dir | §3 B.1 package CSS, direction-proof | src/styles/*.css, src/commerce/styles/commerce.css, src/shared-widgets/shared-widgets.css |
+| 143 | Only the active theme loads | (this commit) | the store's own build | §2 B `resolveStoreEntries`, §3 B.1 styles and bundles | scripts/page-files.mjs |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

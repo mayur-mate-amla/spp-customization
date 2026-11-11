@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 100 |
+| ✅ Done | 101 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 37 |
+| ⬜ Not started | 36 |
 | ⛔ Blocked | 37 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -305,7 +305,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | --- | --- | --- | --- | --- | --- | --- |
 | 141 | Can I avoid performance degradation if I create more themes? | Yes | Outside | Platform measurement | ➖ Outside | |
 | 142 | Was performance checked with 5 heavy themes? | Yes | Outside | Platform measurement | ➖ Outside | |
-| 143 | Does only the active theme load on a page? | Yes | Check | Page's package files: only this theme's | ⬜ Not started | |
+| 143 | Does only the active theme load on a page? | Yes | Check | npm run page-files: a page loads its theme chain + its store's plugins only (Maxwells: apex, 6 files; POCSppDemo: redpanda/spp-base + 6 plugins) | ✅ Done | [notes](143-only-active-theme-loads/) |
 | 144 | Is the package registry cached between requests? | Yes | Outside | Store code | ➖ Outside | |
 | 145 | Are package files cached in the browser until they change? | Yes | Check | `?v=` on file URLs and cache headers | ⬜ Not started | |
 | 146 | Does the SPP listing card avoid one request per card? | No | Outside | spp-base package, not this repo | ➖ Outside | |

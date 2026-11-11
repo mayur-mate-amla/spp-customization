@@ -1,0 +1,58 @@
+> npm run page-files -- --path / --store http://localhost:3000
+﻿http://localhost:3000/: 6 package files
+  apex               apex-1.0.19-font-poppins-b5189264-1.woff2          8 KB  v=-          public, max-age=31536000, immutable
+  apex               apex-1.0.19-font-poppins-b5189264-2.woff2          8 KB  v=-          public, max-age=31536000, immutable
+  apex               apex-1.0.19-font-poppins-b5189264-3.woff2          8 KB  v=-          public, max-age=31536000, immutable
+  apex               apex-1.0.19.browser.mjs                           53 KB  v=1794292242 public, max-age=31536000, immutable
+  apex               apex-1.0.19.css                                    8 KB  v=1794292242 public, max-age=31536000, immutable
+  apex               apex-layout-banner.svg                             1 KB  v=-          public, max-age=31536000, immutable
+packages loaded: apex
+packages in the registry not loaded: artifi, sort-order, spp-content-staplespromo, spp-content-nvidia, spp-content-lol, spp-content-navigate, spp-base, spp-customization, redpanda, salmonsalmon, purpleplatypus, sageserpent, apple, neon-noir, staples-basic, countdown-banner, delivery-preference, kalles, kalles-content, small-order, demo-theme, my-apex, ppui, promo-supply, spp-promos, spp-commerce, spp-widgets
+
+> npm run page-files -- --path / --store http://sppdemo.localhost:3000
+﻿http://sppdemo.localhost:3000/: 16 package files
+  ?                  sppdemo-navigate-logo.svg                          4 KB  v=-          public, max-age=31536000, immutable
+  artifi             artifi-1.1.4.browser.mjs                          27 KB  v=1794292242 public, max-age=31536000, immutable
+  countdown-banner   countdown-banner-1.0.1.browser.mjs                 4 KB  v=1794292242 public, max-age=31536000, immutable
+  delivery-preference delivery-preference-1.1.1.browser.mjs             17 KB  v=1794292242 public, max-age=31536000, immutable
+  redpanda           redpanda-1.0.0.css                                 2 KB  v=1794292242 public, max-age=31536000, immutable
+  redpanda           redpanda-Montserrat-300.woff2                     37 KB  v=-          public, max-age=31536000, immutable
+  redpanda           redpanda-Montserrat-400.woff2                     37 KB  v=-          public, max-age=31536000, immutable
+  redpanda           redpanda-Montserrat-600.woff2                     37 KB  v=-          public, max-age=31536000, immutable
+  spp-base           spp-base-1.2.1.browser.mjs                       113 KB  v=1794292243 public, max-age=31536000, immutable
+  spp-base           spp-base-1.2.1.css                                74 KB  v=1794292243 public, max-age=31536000, immutable
+  spp-commerce       spp-commerce-1.0.0.browser.mjs                    35 KB  v=1794318442 public, max-age=31536000, immutable
+  spp-commerce       spp-commerce-1.0.0.css                             9 KB  v=1794318442 public, max-age=31536000, immutable
+  spp-promos         spp-promos-1.0.0.browser.mjs                       2 KB  v=1794299209 public, max-age=31536000, immutable
+  spp-promos         spp-promos-1.0.0.css                               0 KB  v=1794299209 public, max-age=31536000, immutable
+  spp-widgets        spp-widgets-1.0.0.browser.mjs                      5 KB  v=1794318448 public, max-age=31536000, immutable
+  spp-widgets        spp-widgets-1.0.0.css                              2 KB  v=1794318448 public, max-age=31536000, immutable
+packages loaded: ?, artifi, countdown-banner, delivery-preference, redpanda, spp-base, spp-commerce, spp-promos, spp-widgets
+packages in the registry not loaded: sort-order, spp-content-staplespromo, spp-content-nvidia, spp-content-lol, spp-content-navigate, spp-customization, salmonsalmon, purpleplatypus, sageserpent, apple, neon-noir, staples-basic, kalles, kalles-content, small-order, apex, demo-theme, my-apex, ppui, promo-supply
+
+> npm run page-files -- --path / --store http://sppdemo.localhost:3000 --theme spp-customization
+﻿http://sppdemo.localhost:3000/ (theme spp-customization previewed): 22 package files
+  ?                  sppdemo-navigate-logo.svg                          4 KB  v=-          public, max-age=31536000, immutable
+  artifi             artifi-1.1.4.browser.mjs                          27 KB  v=1794292242 public, max-age=31536000, immutable
+  countdown-banner   countdown-banner-1.0.1.browser.mjs                 4 KB  v=1794292242 public, max-age=31536000, immutable
+  delivery-preference delivery-preference-1.1.1.browser.mjs             17 KB  v=1794292242 public, max-age=31536000, immutable
+  redpanda           redpanda-1.0.0.css                                 2 KB  v=1794292242 public, max-age=31536000, immutable
+  redpanda           redpanda-Montserrat-300.woff2                     37 KB  v=-          public, max-age=31536000, immutable
+  redpanda           redpanda-Montserrat-400.woff2                     37 KB  v=-          public, max-age=31536000, immutable
+  redpanda           redpanda-Montserrat-600.woff2                     37 KB  v=-          public, max-age=31536000, immutable
+  spp-base           spp-base-1.2.1.browser.mjs                       113 KB  v=1794292243 public, max-age=31536000, immutable
+  spp-base           spp-base-1.2.1.css                                74 KB  v=1794292243 public, max-age=31536000, immutable
+  spp-commerce       spp-commerce-1.0.0.browser.mjs                    35 KB  v=1794318442 public, max-age=31536000, immutable
+  spp-commerce       spp-commerce-1.0.0.css                             9 KB  v=1794318442 public, max-age=31536000, immutable
+  spp-customization  spp-customization-1.0.2.browser.mjs               50 KB  v=1794318435 public, max-age=31536000, immutable
+  spp-customization  spp-customization-1.0.2.css                       41 KB  v=1794318435 public, max-age=31536000, immutable
+  spp-customization  spp-customization-analytics.mjs                    1 KB  v=-          public, max-age=31536000, immutable
+  spp-customization  spp-customization-cobrand-logo.svg                 0 KB  v=-          public, max-age=31536000, immutable
+  spp-customization  spp-customization-favicon.svg                      0 KB  v=-          public, max-age=31536000, immutable
+  spp-customization  spp-customization-geist-latin.woff2               28 KB  v=-          public, max-age=31536000, immutable
+  spp-promos         spp-promos-1.0.0.browser.mjs                       2 KB  v=1794299209 public, max-age=31536000, immutable
+  spp-promos         spp-promos-1.0.0.css                               0 KB  v=1794299209 public, max-age=31536000, immutable
+  spp-widgets        spp-widgets-1.0.0.browser.mjs                      5 KB  v=1794318448 public, max-age=31536000, immutable
+  spp-widgets        spp-widgets-1.0.0.css                              2 KB  v=1794318448 public, max-age=31536000, immutable
+packages loaded: ?, artifi, countdown-banner, delivery-preference, redpanda, spp-base, spp-commerce, spp-customization, spp-promos, spp-widgets
+packages in the registry not loaded: sort-order, spp-content-staplespromo, spp-content-nvidia, spp-content-lol, spp-content-navigate, salmonsalmon, purpleplatypus, sageserpent, apple, neon-noir, staples-basic, kalles, kalles-content, small-order, apex, demo-theme, my-apex, ppui, promo-supply

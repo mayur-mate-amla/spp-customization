@@ -17,6 +17,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run inventory [-- <manifest>]` | What the built package carries: slots, widgets, routes, hooks, settings, assets (`scripts/inventory.mjs`) |
 | `npm run overrides [-- <store> ...]` | Which store API routes are taken over on each store, by which plugin (`scripts/overrides.mjs`) |
 | `npm run a11y -- --path / [--theme none] [--store <url>]` | Accessibility check of this repo's parts on a page: axe (WCAG 2.1 A/AA) and the keyboard (`scripts/a11y.mjs`) |
+| `npm run page-files -- --path / [--store <url>] [--theme <name>] [--again]` | Which package files a page loads, by package, with size and cache headers (`scripts/page-files.mjs`) |
 
 ## Use-case scenarios
 

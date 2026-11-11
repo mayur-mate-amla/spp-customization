@@ -1,0 +1,12 @@
+$ npm run probe-files   (host sppdemo.localhost:3000; GET /api/extensions/files/<name>, raw paths)
+ok   control 200  a browser bundle (must load)
+ok   control 200  an image (must load)
+ok   161     404  plugins.json
+ok   161     404  PLUGINS.JSON
+ok   161     404  plugins.json with a served type (.css after a null byte)
+ok   161     404  plugins.json.map (served type .map)
+ok   161     404  a write's temp file
+ok   161     404  the lock folder
+ok   161     404  .history/plugins-2026-11-11T06-12-16-276Z-37004.json
+ok   161     404  .versions/spp-commerce/spp-commerce-1.0.0.zpkg.zip
+62 checks on sppdemo.localhost:3000, plugin folder D:\runtime-plugins-store (no 8.3 short names on this volume): all passed

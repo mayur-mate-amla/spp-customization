@@ -25,7 +25,7 @@ guards and the quote-request handling. None of it is meant for shoppers.
 - **every `*.server.mjs` and `*.server.mjs.map` in the plugin folder**, read from disk. There are 32 here: apex 1.0.7
   to 1.0.19, artifi, delivery-preference, demo-theme, my-apex, ppui, promo-supply, small-order, spp-commerce and this
   theme 1.0.0 to 1.0.2.
-- **other spellings** of one: `SPP-COMMERCE-1.0.0.SERVER.MJS`, `….server.mjs.`, `….server.mjs `,
+- **other spellings** of one (`apex-1.0.19.server.mjs`): upper case, `….server.mjs.`, `….server.mjs `,
   `….server.mjs::$DATA`, `%2E` for each dot, the name encoded twice. It also tries Windows 8.3 short names (`SPP-CO~1.MJS`)
   when the volume makes them. This one does not (`dir /x` shows none).
 - **two controls** that must load (a browser bundle, an image). Without them, a 404 everywhere could just mean the

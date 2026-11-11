@@ -379,6 +379,7 @@ repository joins it. Commits are on `main` of this repository.
 | 156 | Settings per store (installation records merged over package settings) | 9a247ac | one settings object per package | §2 B.2 `resolveStoreEntries` + `mergeSettings`; server `context.settings`, browser `settings` | plugins.json installations (store configuration) |
 | 157 | Two stores share one theme, each with its own brand | 70d2b61 | each store its built-in theme (apex on both) | §2 B.2 same theme chain per store, record overrides on the active theme only; §3 B.1 `layout.root` CSS variables | plugins.json installations (store configuration) |
 | 159 | Secrets stay on the server (env:NAME references); dev server copies plugins.json into a page | 3a525c9 | `next dev`: React debug info carries `readRegistry`'s file text | §2 B.2 settings per package; §3 B.1 only `browser: true` settings sent | src/commerce/secrets.ts, src/commerce/server.ts |
-| 160 | Server bundles refused by the files route (every version, other spellings) | (this commit) | `readServedFile`: browser types only, `.server.mjs` refused | §3 B.1 files route; server parts loaded from disk only | scripts/probe-files.mjs |
+| 160 | Server bundles refused by the files route (every version, other spellings) | 2ede4d7 | `readServedFile`: browser types only, `.server.mjs` refused | §3 B.1 files route; server parts loaded from disk only | scripts/probe-files.mjs |
+| 161 | plugins.json and its copies refused (.history, .versions, temp, lock) | (this commit) | registry read on the server only | §2 B registry never linked; files route types and bare names | scripts/probe-files.mjs |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 110 |
+| ✅ Done | 111 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 27 |
+| ⬜ Not started | 26 |
 | ⛔ Blocked | 37 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -339,7 +339,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 159 | Do secrets stay on the server? | Yes | Check | Only browser:true settings reach the page (23 checked); dev server copies plugins.json into the first page after a change; secrets can be env:NAME | ✅ Done | [notes](159-secrets-on-the-server/) |
 | 160 | Are server bundles blocked from download? | Yes | Check | All 32 server parts on disk (old versions, maps) refused, also as other spellings; npm run probe-files | ✅ Done | [notes](160-server-bundles-blocked/) |
 | 161 | Is the registry (plugins.json) blocked from download? | Yes | Check | plugins.json, its temp file, lock, .history and .versions refused; a dev server copies it into a page (159) | ✅ Done | [notes](161-registry-blocked/) |
-| 162 | Are file paths checked so nothing outside the package folder is served? | Yes | Check | `../` file requests: refused | ⬜ Not started | |
+| 162 | Are file paths checked so nothing outside the package folder is served? | Yes | Check | Ten ways out of the folder (raw, %2F, %5C, %2e, double-encoded, absolute, UNC, file:) to a served-type file: all refused | ✅ Done | [notes](162-paths-checked/) |
 | 163 | Is the preview switch off in production by default? | Yes | Check | Store code (`NODE_ENV`, `RUNTIME_THEME_PREVIEW`) | ⬜ Not started | |
 | 164 | Can a browser skip a route override? | No | Base | (No is the safe answer here) | ⛔ Blocked | |
 | 165 | Is partner code sandboxed? | No | Base | Re-check: `"sandbox": true` (see notes) | ⛔ Blocked | |

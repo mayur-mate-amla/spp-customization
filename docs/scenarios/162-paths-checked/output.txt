@@ -1,0 +1,15 @@
+$ npm run probe-files   (host sppdemo.localhost:3000; GET /api/extensions/files/<name>, raw paths)
+(the target: D:\spp-customization\scripts\shot.mjs, a real file outside the plugin folder with a type the route serves, .mjs)
+ok   control 200  a browser bundle (must load)
+ok   control 200  an image (must load)
+ok   162     400  ../ raw
+ok   162     404  ..%2F
+ok   162     404  ..%5C (backslash)
+ok   162     404  %2e%2e%2f
+ok   162     404  double-encoded %252e%252e%252f
+ok   162     404  ....// (filter evasion)
+ok   162     404  absolute path
+ok   162     404  absolute path, forward slashes
+ok   162     404  UNC path
+ok   162     404  file: URL
+62 checks on sppdemo.localhost:3000, plugin folder D:\runtime-plugins-store (no 8.3 short names on this volume): all passed

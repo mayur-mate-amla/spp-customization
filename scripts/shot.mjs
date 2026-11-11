@@ -64,6 +64,15 @@ try {
         : `${store}/api/extensions/preview?theme=${encodeURIComponent(theme)}&to=${encodeURIComponent(pagePath)}`;
   await page.goto(start, { waitUntil: "load", timeout: 120000 });
   await new Promise((resolve) => setTimeout(resolve, wait));
+  // --dir rtl: the page as a right-to-left language shows it (the store ships none; row 140)
+  const dir = arg("dir");
+  if (dir && dir !== true) {
+    await page.evaluate((value) => {
+      document.documentElement.dir = value;
+      document.documentElement.lang = value === "rtl" ? "ar" : document.documentElement.lang;
+    }, String(dir));
+    await new Promise((resolve) => setTimeout(resolve, 800));
+  }
   // --scroll <px>: scroll the page first (lazy parts load); --hover <selector>: hold the mouse over an element
   const scroll = Number(arg("scroll", 0));
   if (scroll) {

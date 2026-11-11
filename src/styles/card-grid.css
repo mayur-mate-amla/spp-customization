@@ -24,9 +24,9 @@ html[data-theme] .card-grid-widget [data-test-selector^="divCard"] > span:first-
 }
 html[data-theme] .card-grid-widget [data-test-selector^="divCard"] > span:last-child {
   position: absolute;
-  right: 0;
+  inset-inline-end: 0;
   bottom: 0;
-  left: 0;
+  inset-inline-start: 0;
   margin: 0;
   padding: 28px 16px 14px;
   font-size: 17px;

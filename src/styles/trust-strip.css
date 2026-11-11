@@ -16,8 +16,8 @@
 /* the component (kept: only this theme has it) */
 .spp-customization-trust {
   margin: 0;
-  padding-right: 16px;
-  padding-left: 16px;
+  padding-inline-end: 16px;
+  padding-inline-start: 16px;
   list-style: none;
   color: var(--primary, rgb(11, 37, 69));
   background: rgb(244, 246, 249);

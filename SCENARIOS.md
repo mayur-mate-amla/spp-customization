@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 99 |
+| ✅ Done | 100 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 38 |
+| ⬜ Not started | 37 |
 | ⛔ Blocked | 37 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -297,7 +297,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 139 | Can labels be translated per language? | Yes | UI | yes, by the package: one labels file for all languages; fr under its own key, picked from the URL (browser) and NEXT_LOCALE (hooks) | ✅ Done | [notes](139-labels-per-language/) |
-| 140 | Do right-to-left languages work? | Not tested | Check | `dir="rtl"` on this theme's parts, screenshot | ⬜ Not started | |
+| 140 | Do right-to-left languages work? | Not tested | Check | dir=rtl: store mirrors; our 23 physical left/right declarations now logical (inset-inline, margin-inline, ...); LTR unchanged | ✅ Done | [notes](140-right-to-left/) |
 
 ## Performance
 

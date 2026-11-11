@@ -5,10 +5,10 @@
 @media (min-width: 768px) { .spp-widgets-showroom__card { grid-template-columns: 1fr 1fr; } }
 .spp-widgets-showroom__name { margin: 0 0 6px; font-size: 18px; font-weight: 700; }
 .spp-widgets-showroom__address { margin: 0 0 10px; font-style: normal; white-space: pre-line; }
-.spp-widgets-showroom__phone, .spp-widgets-showroom__directions { display: inline-block; margin-right: 16px; font-weight: 600; text-decoration: underline; }
+.spp-widgets-showroom__phone, .spp-widgets-showroom__directions { display: inline-block; margin-inline-end: 16px; font-weight: 600; text-decoration: underline; }
 .spp-widgets-showroom__hours { width: 100%; border-collapse: collapse; }
-.spp-widgets-showroom__hours caption { margin-bottom: 6px; font-weight: 700; text-align: left; }
-.spp-widgets-showroom__hours th, .spp-widgets-showroom__hours td { padding: 6px 0; text-align: left; border-bottom: 1px solid rgb(226, 232, 240); }
+.spp-widgets-showroom__hours caption { margin-bottom: 6px; font-weight: 700; text-align: start; }
+.spp-widgets-showroom__hours th, .spp-widgets-showroom__hours td { padding: 6px 0; text-align: start; border-bottom: 1px solid rgb(226, 232, 240); }
 .spp-widgets-showroom__hours th { font-weight: 600; }
 
 /* SppFooterBadges: memberships and guarantees, for the footer (and header) layout pages */

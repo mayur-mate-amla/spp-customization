@@ -11,7 +11,7 @@
     position: sticky;
     top: 150px;
     align-self: flex-start;
-    margin-left: 0;
+    margin-inline-start: 0;
     padding: 28px;
     background: #fff;
     border: 1px solid var(--card-border, rgb(226, 232, 240));
@@ -28,6 +28,6 @@
 .spp-customization-facts__list dt { font-size: 12.5px; color: rgb(100, 116, 139); }
 .spp-customization-facts__list dd { margin: 0; font-size: 14.5px; font-weight: 600; }
 .spp-customization-facts__tiers { width: 100%; margin-top: 14px; font-size: 14px; border-collapse: collapse; }
-.spp-customization-facts__tiers caption { margin-bottom: 6px; font-weight: 700; text-align: left; }
-.spp-customization-facts__tiers th, .spp-customization-facts__tiers td { padding: 6px 10px; text-align: left; border-bottom: 1px solid var(--card-border, rgb(226, 232, 240)); }
+.spp-customization-facts__tiers caption { margin-bottom: 6px; font-weight: 700; text-align: start; }
+.spp-customization-facts__tiers th, .spp-customization-facts__tiers td { padding: 6px 10px; text-align: start; border-bottom: 1px solid var(--card-border, rgb(226, 232, 240)); }
 .spp-customization-facts__tiers th { font-size: 12.5px; color: rgb(100, 116, 139); background: rgb(248, 250, 252); }

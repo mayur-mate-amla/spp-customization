@@ -3,7 +3,7 @@
 .spp-commerce-account strong { color: #fff; }
 .spp-commerce-account__link { color: #fff; font-weight: 700; text-decoration: underline; }
 .spp-commerce-account__cart { color: rgb(148, 163, 184); }
-.spp-commerce-account__rep { margin-right: auto; padding-left: 16px; border-left: 1px solid rgba(255, 255, 255, 0.25); }
+.spp-commerce-account__rep { margin-inline-end: auto; padding-inline-start: 16px; border-inline-start: 1px solid rgba(255, 255, 255, 0.25); }
 .spp-commerce-account__order { display: flex; align-items: center; gap: 10px; color: rgb(226, 232, 240); }
 .spp-commerce-account__meter { display: inline-block; width: 120px; height: 6px; overflow: hidden; background: rgba(255, 255, 255, 0.18); border-radius: 999px; }
 .spp-commerce-account__meter span { display: block; height: 100%; background: rgb(74, 222, 128); border-radius: inherit; }
@@ -27,7 +27,7 @@
 
 /* product cards: the ordering rules (product.card slot), over the card's top edge */
 .spp-commerce-rules-card { position: relative; height: 100%; }
-.spp-commerce-rules-card__tags { position: absolute; top: 8px; left: 8px; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.spp-commerce-rules-card__tags { position: absolute; top: 8px; inset-inline-start: 8px; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin: 0; padding: 0; list-style: none; pointer-events: none; }
 .spp-commerce-rules-card__tags li.spp-commerce-rules-card__hold { color: rgb(146, 64, 14); background: rgb(254, 243, 199); border-color: rgb(253, 230, 138); }
 .spp-commerce-rules-card__tags li { padding: 2px 8px; font-size: 12px; font-weight: 700; color: rgb(30, 64, 175); background: rgb(219, 234, 254); border: 1px solid rgb(191, 219, 254); border-radius: 6px; }
 
@@ -37,10 +37,10 @@
 .spp-commerce-info__title { margin: 0 0 6px; font-size: 32px; font-weight: 800; color: rgb(15, 23, 42); }
 .spp-commerce-info__lead { margin: 0 0 28px; font-size: 17px; color: rgb(71, 85, 105); }
 .spp-commerce-info h2 { margin: 28px 0 10px; font-size: 20px; font-weight: 700; color: rgb(15, 23, 42); }
-.spp-commerce-info ul { margin: 0; padding-left: 20px; list-style: disc; }
+.spp-commerce-info ul { margin: 0; padding-inline-start: 20px; list-style: disc; }
 .spp-commerce-info a { text-decoration: underline; }
 .spp-commerce-info__table { width: 100%; border-collapse: collapse; }
-.spp-commerce-info__table th, .spp-commerce-info__table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid rgb(226, 232, 240); }
+.spp-commerce-info__table th, .spp-commerce-info__table td { padding: 10px 12px; text-align: start; border-bottom: 1px solid rgb(226, 232, 240); }
 .spp-commerce-info__table thead th { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(100, 116, 139); }
 .spp-commerce-info__note { margin-top: 10px; font-size: 14px; color: rgb(100, 116, 139); }
 .spp-commerce-info__reps li { margin-bottom: 6px; }

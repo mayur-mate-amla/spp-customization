@@ -4,7 +4,7 @@
 .spp-customization-layout { flex: 1 0 auto; display: flex; flex-direction: column; width: 100%; }
 
 /* layout.root: skip link (hidden until focused) and the dated notice */
-.spp-customization-skip { position: absolute; top: 8px; left: 8px; z-index: 100; padding: 10px 16px; font-weight: 700; color: #fff; background: var(--primary, #0b2545); border-radius: 6px; transform: translateY(-200%); }
+.spp-customization-skip { position: absolute; top: 8px; inset-inline-start: 8px; z-index: 100; padding: 10px 16px; font-weight: 700; color: #fff; background: var(--primary, #0b2545); border-radius: 6px; transform: translateY(-200%); }
 .spp-customization-skip:focus { transform: none; outline: 3px solid var(--accent, #f26b1d); outline-offset: 2px; }
 .spp-customization-skip-target { display: block; height: 0; }
 .spp-customization-skip-target:focus { outline: none; }
@@ -27,7 +27,7 @@
 
 /* header.search: the store's search box, popular searches under it (absolutely placed, so the header keeps its height) */
 .spp-customization-search { position: relative; width: 100%; }
-.spp-customization-search__popular { position: absolute; top: calc(100% + 4px); left: 0; display: flex; flex-wrap: nowrap; gap: 6px; align-items: center; overflow: hidden; max-width: 100%; font-size: 12px; white-space: nowrap; }
+.spp-customization-search__popular { position: absolute; top: calc(100% + 4px); inset-inline-start: 0; display: flex; flex-wrap: nowrap; gap: 6px; align-items: center; overflow: hidden; max-width: 100%; font-size: 12px; white-space: nowrap; }
 .spp-customization-search__label { color: rgb(100, 116, 139); }
 .spp-customization-search__term { padding: 1px 8px; color: var(--primary, #0b2545); background: rgb(241, 245, 249); border-radius: 999px; }
 .spp-customization-search__term:hover, .spp-customization-search__term:focus-visible { color: #fff; background: var(--accent, #f26b1d); }
@@ -39,7 +39,7 @@
 .spp-customization-customize__button:hover, .spp-customization-customize__button:focus-visible { background: var(--hover, #d6540a); }
 
 .spp-customization-card { position: relative; }
-.spp-customization-badge { position: absolute; top: 8px; left: 8px; z-index: 1; padding: 2px 8px; font-size: 12px; font-weight: 700; color: #fff; background: var(--theme-accent, var(--accent, #f26b1d)); border-radius: 2px; }
+.spp-customization-badge { position: absolute; top: 8px; inset-inline-start: 8px; z-index: 1; padding: 2px 8px; font-size: 12px; font-weight: 700; color: #fff; background: var(--theme-accent, var(--accent, #f26b1d)); border-radius: 2px; }
 
 .spp-customization-hero { position: relative; margin: 24px 0; overflow: hidden; border-radius: 8px; background: #f3f4f6; }
 .spp-customization-hero__image { display: block; width: 100%; height: auto; }
@@ -59,7 +59,7 @@
 .spp-customization-login__intro h1 { margin: 0 0 4px; font-size: 30px; font-weight: 800; }
 .spp-customization-login__intro p { margin: 0 0 18px; opacity: 0.85; }
 .spp-customization-login__benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
-.spp-customization-login__benefits li { padding: 14px 16px; background: rgba(255, 255, 255, 0.08); border-left: 3px solid var(--accent, #f26b1d); border-radius: 8px; }
+.spp-customization-login__benefits li { padding: 14px 16px; background: rgba(255, 255, 255, 0.08); border-inline-start: 3px solid var(--accent, #f26b1d); border-radius: 8px; }
 .spp-customization-login__benefits strong { display: block; margin-bottom: 2px; }
 .spp-customization-login__benefits span { font-size: 14px; opacity: 0.85; }
 .spp-customization-login__business { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 20px; margin: 8px 0 40px; padding: 16px 20px; background: rgb(244, 246, 249); border-radius: 10px; }

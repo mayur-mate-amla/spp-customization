@@ -20,6 +20,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run page-files -- --path / [--store <url>] [--theme <name>] [--again]` | Which package files a page loads, by package, with size and cache headers (`scripts/page-files.mjs`) |
 | `npm run vitals -- --path / [--theme <name>] [--runs 3] [--throttle] [--film out.png]` | Core Web Vitals of a page (FCP, LCP, CLS with what moved, TBT), median of several loads, optionally on a throttled phone, with a filmstrip (`scripts/vitals.mjs`) |
 | `npm run registry -- store <code>` / `install <stores> [key=value ...]` / `remove <stores>` `[--package <name>]` | What a store gets (theme chain, plugins, its setting overrides); place a package on stores with their own settings (`installations`), or take it off (`scripts/registry.mjs`; also `show`, `set`, `enable`, `stores`, `themes`, `before`) |
+| `npm run secrets-check` | Checks the secret-setting resolver (`env:NAME` references, `src/commerce/secrets.ts`) |
 
 ## Use-case scenarios
 

@@ -1,0 +1,74 @@
+## 1. Which spp-commerce settings reach the page (POCSppDemo home, a normal request)
+replacedSkus       browser:true  in page:true
+casePacks          browser:true  in page:true
+orderLimits        browser:true  in page:true
+minimums           browser:true  in page:true
+companions         browser:false in page:false
+lineNotes          browser:false in page:false
+cardTags           browser:true  in page:true
+pinnedSkus         browser:true  in page:true
+freeShippingOver   browser:true  in page:true
+minOrderValue      browser:true  in page:true
+salesReps          browser:true  in page:true
+showAccountBar     browser:true  in page:true
+erpWebhookSecret   browser:false in page:false
+shipCutoffHour     browser:false in page:false
+productionDays     browser:true  in page:true
+searchSynonyms     browser:false in page:false
+sourcingLink       browser:true  in page:true
+staffKey           browser:false in page:false
+noPoBoxes          browser:true  in page:true
+eventKits          browser:false in page:false
+rushShipping       browser:true  in page:true
+siteUrl            browser:true  in page:true
+storeName          browser:true  in page:true
+all 23: in the page exactly when "browser": true
+
+## 2. The routes have them (GET .../spp-commerce/quote-requests)
+right key: 200    wrong key: 401 {"error":"Staff only"}    no key: 401
+
+## 3. Development server: the first page after plugins.json changes
+normal request:              erpWebhookSecret value x0, staffKey value x0
+first request after a write: erpWebhookSecret value x2, staffKey value x2 (the whole plugins.json, every package and store)
+
+excerpt (secrets masked here):
+<script nonce="38000c19-08f5-4c27-b297-e35e50a9cc8e">self.__next_f.push([1,"{\n  \"plugins\": [\n    {\n      \"name\": \"artifi\",\n      \"kind\": \"plugin\",\n      \" ...
+... l\"\n        },\n        \"showAccountBar\": true,\n        \"erpWebhookSecret\": \"<erpWebhookSecret: the real 48-character secret>\",\n        \"shipCutoffHour\": 14,\n ...
+... : \"/specialorder\",\n        \"staffKey\": \"<staffKey: the real 36-character key>\",\n        \"noPoBoxes\": true,\n    ...
+
+cause:
+  packages/extensions/src/registry.server.ts:77  readRegistry: JSON.parse(await fs.readFile(file, "utf8")) while rendering
+  next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.development.js:
+    emitIOInfoChunk: the awaited value of async I/O, serialized into the page as debug info (for React DevTools)
+  ...server.node.production.js: no emitIOInfoChunk (0 matches): a production build sends no such data
+
+## 4. The fix: secret settings by reference (src/commerce/secrets.ts)
+resolver checks (node, secrets.ts):
+  ok   secretSetting("abc") = "abc"
+  ok   secretSetting("  abc ") = "abc"
+  ok   secretSetting("env:SPP_STAFF_KEY") = "k-123"
+  ok   secretSetting("env:MISSING") = ""
+  ok   secretSetting("env:EMPTY") = ""
+  ok   secretSetting("env:lower") = "env:lower"
+  ok   secretSetting("env:A B") = "env:A B"
+  ok   secretSetting(undefined) = ""
+  ok   secretSetting(42) = ""
+  ok   secretSetting("") = ""
+  all 10 passed
+
+live, in the running store (POCSppDemo):
+$ npm run registry -- set staffKey=env:RUNTIME_PLUGINS_DIR --package spp-commerce
+    "staffKey": "env:RUNTIME_PLUGINS_DIR",
+X-Staff-Key = the old inline key:              401
+X-Staff-Key = env:RUNTIME_PLUGINS_DIR (name):  401
+X-Staff-Key = the variable's value:           200
+
+$ npm run registry -- set staffKey=env:SPP_STAFF_KEY --package spp-commerce     (a variable the store does not have)
+    "staffKey": "env:SPP_STAFF_KEY",
+X-Staff-Key = the old inline key:              401
+X-Staff-Key = (empty):                        401
+
+first page after that change (development server):
+  staffKey value x0, 'env:SPP_STAFF_KEY' x1 (only the name)
+
+restored afterwards: staffKey inline again (this dev store has no SPP_STAFF_KEY), settings as before, staff list 200

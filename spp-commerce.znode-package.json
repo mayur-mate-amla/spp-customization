@@ -136,7 +136,7 @@
     },
     "erpWebhookSecret": {
       "type": "string",
-      "label": "Shared secret the ERP signs its stock webhooks with (X-Erp-Signature: sha256=<HMAC of the body>); empty: the webhook takes nothing",
+      "label": "Shared secret the ERP signs its stock webhooks with (X-Erp-Signature: sha256=<HMAC of the body>); empty: the webhook takes nothing. Or env:NAME, an environment variable of the store server, so plugins.json holds no secret",
       "default": ""
     },
     "shipCutoffHour": {
@@ -170,7 +170,7 @@
     },
     "staffKey": {
       "type": "string",
-      "label": "Key staff send (X-Staff-Key) to list quote requests at .../quote-requests; empty: the list is closed",
+      "label": "Key staff send (X-Staff-Key) to list quote requests at .../quote-requests; empty: the list is closed. Or env:NAME, an environment variable of the store server",
       "default": ""
     },
     "noPoBoxes": {

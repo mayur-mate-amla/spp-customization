@@ -4,6 +4,7 @@ import { OrderingInfoPage } from "./OrderingInfoPage";
 import { EventKitsPage } from "./EventKitsPage";
 import { arrivalDate, lookupZip, transitDays, type IPlace } from "./delivery";
 import { envelope, readQuoteRequest, type IQuoteRequest } from "./quotes";
+import { secretSetting } from "./secrets";
 
 // spp-commerce, server part (runs on the store's server only).
 //   beforeAddToCart  superseded item numbers go to their current item (setting replacedSkus, row 106); case packs: an item sold in packs (setting casePacks: { "<sku>": <pack size> }) is rounded up to
@@ -309,7 +310,8 @@ export function readStockEvent(body: unknown): { sku: string; available: boolean
 async function erpStock(request: IPluginRouteRequest, context: IPluginRouteContext) {
   const json = (status: number, data: unknown) => new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json" } });
   if (request.method !== "POST") return json(405, { error: "POST only" });
-  const secret = String(context.settings.erpWebhookSecret || "");
+  // the secret itself, or "env:NAME" read from the store server's environment (secrets.ts, row 159)
+  const secret = secretSetting(context.settings.erpWebhookSecret);
   if (!context.verifySignature(request.rawBody, request.headers["x-erp-signature"], secret, { prefix: "sha256=" })) return json(401, { error: "Bad signature" });
   const event = readStockEvent(request.body);
   if (!event) return json(400, { error: "Expected { sku, available, backOn?, note? }" });
@@ -381,7 +383,7 @@ async function quoteRequest(request: IPluginRouteRequest, context: IPluginRouteC
 }
 
 async function quoteRequestList(request: IPluginRouteRequest, context: IPluginRouteContext) {
-  if (!sameSecret(request.headers["x-staff-key"] || "", String(context.settings.staffKey || ""))) {
+  if (!sameSecret(request.headers["x-staff-key"] || "", secretSetting(context.settings.staffKey))) {
     return new Response(JSON.stringify({ error: "Staff only" }), { status: 401, headers: { "Content-Type": "application/json" } });
   }
   return { store: context.store.code, requests: quoteRequests.get(context.store.code) || [] };

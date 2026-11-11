@@ -1,0 +1,26 @@
+$ find src -name "*.ts" -o -name "*.tsx" | wc -l      (and .js / .jsx / .mjs outside assets)
+17 .ts, 40 .tsx, 0 JavaScript
+
+# every manifest builds from TypeScript entry points
+znode-package.json                     {"server":"src/server.tsx","browser":"src/browser.tsx"}
+spp-commerce.znode-package.json        {"server":"src/commerce/server.ts","browser":"src/commerce/browser.tsx"}
+spp-promos.znode-package.json          {"browser":"src/promos/browser.tsx"}
+spp-sandbox-probe.znode-package.json   {"server":"src/sandbox-probe/server.ts","browser":"src/sandbox-probe/browser.tsx"}
+spp-widgets.znode-package.json         {"browser":"src/shared-widgets/browser.tsx"}
+
+$ cat tsconfig.json
+{
+  "extends": "./tsconfig.store.json",
+  "include": ["src", "znode-env.d.ts"]
+}
+
+$ npm run build
+css-dedupe: 8 rules the store already has dropped, 42933 bytes kept (6 store stylesheets)
+built theme spp-customization@1.0.3: 18 files
+
+$ ls dist/   (TypeScript compiled to ES modules; npm run deploy chains the maps back to src/, row 183)
+spp-customization-1.0.3.browser.mjs
+spp-customization-1.0.3.browser.mjs.map
+spp-customization-1.0.3.server.mjs
+spp-customization-1.0.3.server.mjs.map
+spp-customization-analytics.mjs

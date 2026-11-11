@@ -12,6 +12,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run check` | The marketplace review: metadata, permissions against the code, sizes |
 | `npm run pack` | Build and zip into `releases/spp-customization-<version>.zpkg.zip` |
 | `npm run deploy` | Pack and install into the store's plugin folder |
+| `npm run uninstall [-- --package <name>] [--purge]` | Remove a package of this repo from the store cleanly: its registry entry and records, its files, older versions' leftovers; `--purge` also the kept versions (`scripts/uninstall.mjs`) |
 | `npm run link-store -- <store repo>` | Use the store's real types (writes `tsconfig.store.json`) |
 | `npm run shot -- --path / --out <file.png>` | Screenshot a store page with this theme previewed (`scripts/shot.mjs`; `--theme none` for the store's own) |
 | `npm run inventory [-- <manifest>]` | What the built package carries: slots, widgets, routes, hooks, settings, assets (`scripts/inventory.mjs`) |
@@ -19,7 +20,7 @@ for the stores it is enabled for: no fork of the store, no webstore rebuild.
 | `npm run a11y -- --path / [--theme none] [--store <url>]` | Accessibility check of this repo's parts on a page: axe (WCAG 2.1 A/AA) and the keyboard (`scripts/a11y.mjs`) |
 | `npm run page-files -- --path / [--store <url>] [--theme <name>] [--again]` | Which package files a page loads, by package, with size and cache headers (`scripts/page-files.mjs`) |
 | `npm run vitals -- --path / [--theme <name>] [--runs 3] [--throttle] [--film out.png]` | Core Web Vitals of a page (FCP, LCP, CLS with what moved, TBT), median of several loads, optionally on a throttled phone, with a filmstrip (`scripts/vitals.mjs`) |
-| `npm run registry -- store <code>` / `install <stores> [key=value ...]` / `remove <stores>` `[--package <name>]` | What a store gets (theme chain, plugins, its setting overrides); place a package on stores with their own settings (`installations`), or take it off (`scripts/registry.mjs`; also `show`, `set`, `enable`, `stores`, `themes`, `before`) |
+| `npm run registry -- store <code>` / `install <stores> [key=value ...]` / `remove <stores>` `[--package <name>]` | What a store gets (theme chain, plugins, its setting overrides); place a package on stores with their own settings (`installations`), or take it off (`scripts/registry.mjs`; also `show`, `set`, `enable`, `sandbox`, `stores`, `themes`, `before`) |
 | `npm run secrets-check` | Checks the secret-setting resolver (`env:NAME` references, `src/commerce/secrets.ts`) |
 | `npm run probe-files [-- --host <store host>]` | What the store's package-files route refuses: server bundles (every version on disk, other spellings), the registry and its copies, `../` in every encoding; an SVG's headers (`scripts/probe-files.mjs`) |
 

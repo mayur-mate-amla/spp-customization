@@ -383,6 +383,7 @@ repository joins it. Commits are on `main` of this repository.
 | 161 | plugins.json and its copies refused (.history, .versions, temp, lock) | 0dda8c4 | registry read on the server only | §2 B registry never linked; files route types and bare names | scripts/probe-files.mjs |
 | 162 | Paths out of the plugin folder refused (ten encodings) | b453f5a | `readServedFile` bare-name check, `fileInDir` | §3 B.1 files route | scripts/probe-files.mjs |
 | 163 | Preview switch off in production; open redirect while on (store) | 0d3fbc0 | `isThemePreviewEnabled`: NODE_ENV or RUNTIME_THEME_PREVIEW=true | §2 B.2 preview cookie read only when on | scripts/probe-files.mjs |
-| 164 | Route overrides can't be skipped (105 path and header variants) | (this commit) | proxy `findRouteOverride` on the exact pathname | §7 B.4 override, `original()` token | scripts/overrides.mjs, scripts/lib/store.mjs |
+| 164 | Route overrides can't be skipped (105 path and header variants) | 4730efa | proxy `findRouteOverride` on the exact pathname | §7 B.4 override, `original()` token | scripts/overrides.mjs, scripts/lib/store.mjs |
+| 165 | Partner code sandbox: opt-in, routes only; can still read the whole plugin folder | (this commit) | `sandbox.server.ts`: child process, permission model, empty env | §7 B routes in the webstore process or `runSandboxedRoute` | src/sandbox-probe/server.ts, scripts/registry.mjs, scripts/uninstall.mjs |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

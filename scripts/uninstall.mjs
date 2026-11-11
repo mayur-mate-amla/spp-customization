@@ -3,15 +3,19 @@
 // another package's entry names are never touched. The zips kept for rollback (.versions/) stay unless --purge.
 //   npm run uninstall
 //   npm run uninstall -- --purge
+//   npm run uninstall -- --package spp-sandbox-probe [--purge]   another package of this repo (a test package)
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
-import { changeRegistry, name, pluginsDir, versionsDir } from "./lib/store.mjs";
+import { changeRegistry, name as ownName, pluginsDir } from "./lib/store.mjs";
 
 const require = createRequire(path.resolve("node_modules/znode-plugin/package.json"));
 const AdmZip = require("adm-zip");
 const dir = pluginsDir();
 const purge = process.argv.includes("--purge");
+const at = process.argv.indexOf("--package");
+const name = at === -1 ? ownName : process.argv[at + 1];
+const versionsDir = (folder) => path.join(folder, ".versions", name);
 const filesOf = (entry) =>
   [entry.file, entry.browser, entry.messages, ...(entry.styles || []), ...(entry.assets || []), ...Object.values(entry.pages || {})].filter(
     (item) => typeof item === "string" && item === path.basename(item)

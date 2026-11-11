@@ -3,6 +3,7 @@
 //   node scripts/registry.mjs show                         this package's entry (version, enabled, stores, settings)
 //   node scripts/registry.mjs set announcement="Hello"     one setting (JSON values: true, 12, "text"; else a string)
 //   node scripts/registry.mjs enable true|false            switch it on or off for its stores
+//   node scripts/registry.mjs sandbox true|false           run its server part in the store's sandbox (row 165)
 //   node scripts/registry.mjs stores StoreA,StoreB         the stores it runs for ("" for none, "*" for every store)
 //   node scripts/registry.mjs themes StoreA                which themes are placed for a store, in the order the store
 //                                                          picks them (the first enabled one is the store's theme)
@@ -39,7 +40,7 @@ const entryOf = (registry) => {
 };
 const show = (entry) => {
   const installations = (read().installations || []).filter((item) => item.package === entry.name);
-  console.log(JSON.stringify({ name: entry.name, version: entry.version, enabled: entry.enabled, stores: installations.length ? `(ignored: placed by its installations) ${JSON.stringify(entry.stores)}` : entry.stores, parent: entry.parent, settings: entry.settings, ...(installations.length ? { installations } : {}) }, null, 2));
+  console.log(JSON.stringify({ name: entry.name, version: entry.version, enabled: entry.enabled, ...(entry.sandbox ? { sandbox: true } : {}), stores: installations.length ? `(ignored: placed by its installations) ${JSON.stringify(entry.stores)}` : entry.stores, parent: entry.parent, settings: entry.settings, ...(installations.length ? { installations } : {}) }, null, 2));
 };
 
 if (!command || command === "show") {
@@ -90,6 +91,11 @@ const entry = changeRegistry(dir, (registry) => {
     entry.settings = { ...(entry.settings || {}), [value.slice(0, eq)]: parsed };
   } else if (command === "enable") {
     entry.enabled = value === "true";
+  } else if (command === "sandbox") {
+    // row 165: the package's server part runs in the store's sandbox (a child process with Node's permission model,
+    // an empty environment, routes and overrides only), or back in the webstore process
+    if (value === "true") entry.sandbox = true;
+    else delete entry.sandbox;
   } else if (command === "stores") {
     entry.stores = value === "*" ? "*" : String(value || "").split(",").map((item) => item.trim()).filter(Boolean);
   } else if (command === "install" || command === "remove") {

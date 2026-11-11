@@ -1,0 +1,45 @@
+# spp-sandbox-probe: GET /api/extensions/plugins/spp-sandbox-probe/probe on POCSppDemo
+
+## 1. A normal package (in the webstore process)
+  YES  where it runs                                  pid 21432, no permission model
+  YES  environment variables                          145 visible, 8 named like secrets (ACCESS_SECRET, API_KEY, CLIENT_SECRET, NEXTAUTH_SECRET)
+  YES  read its own bundle                            4848 bytes
+  YES  read plugins.json (every package's settings)   74526 bytes; another package's secret setting in it: yes
+  YES  read another package's server bundle           apex-1.0.19.server.mjs: 11788 bytes
+  YES  read the store's .env                          2450 bytes (D:\znode\znode-webstore10x-page-builder\apps\webstore\.env)
+  YES  write a file                                   wrote and removed %TEMP%\spp-sandbox-probe-21432.txt
+  YES  write into the plugin folder                   wrote and removed a file next to plugins.json
+  YES  start a program                                exit 0
+  YES  call an outside server                         HTTP 200
+  YES  context.znode() (the store's API, its keys)    HTTP 200
+
+## 2. The same package with "sandbox": true (npm run registry -- sandbox true --package spp-sandbox-probe)
+  YES  where it runs                                  pid 2952, Node permission model on
+  YES  environment variables                          12 visible, 0 named like secrets ()
+  YES  read its own bundle                            4936 bytes
+  YES  read plugins.json (every package's settings)   74549 bytes; another package's secret setting in it: yes
+  YES  read another package's server bundle           apex-1.0.19.server.mjs: 11788 bytes
+  no   read the store's .env                          ERR_ACCESS_DENIED
+  no   write a file                                   ERR_ACCESS_DENIED
+  no   write into the plugin folder                   ERR_ACCESS_DENIED
+  no   start a program                                ERR_ACCESS_DENIED
+  no   call an outside server                         fetch failed: ERR_ACCESS_DENIED
+  YES  context.znode() (the store's API, its keys)    HTTP 200
+
+## 3. A crash in the sandbox
+GET .../probe?heap=1 (allocate until out of memory):
+{"error":"Plugin route failed"}
+  -> HTTP 500 in 1.424753s
+GET .../probe right after:
+  -> HTTP 200 in 0.472315s (a new child)
+GET / (a store page) right after:
+  -> HTTP 200 (the webstore is unaffected)
+
+## 4. A redeploy drops the flag
+after npm run deploy -- spp-sandbox-probe.znode-package.json: {"enabled":true,"stores":["POCSppDemo"]}   (no "sandbox")
+
+## 5. The marketplace review
+npx znode check spp-sandbox-probe.znode-package.json: 0 errors, 0 warnings   (fs reads and writes, child_process, the network)
+
+## 6. Removed afterwards
+npm run uninstall -- --package spp-sandbox-probe --purge: entry removed, 2 files deleted, .versions/ removed; the route answers 404

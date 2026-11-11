@@ -1,0 +1,16 @@
+{
+  "name": "spp-sandbox-probe",
+  "version": "1.0.0",
+  "kind": "plugin",
+  "apiVersion": 1,
+  "label": "SPP sandbox probe (test package)",
+  "publisher": "Spp Customization team",
+  "description": "A test package for row 165: one route reports what its server code can reach (environment, files, programs, network), in the webstore process or in the store's sandbox. Installed only for the check.",
+  "license": "proprietary",
+  "keywords": ["plugin", "test", "security"],
+  "permissions": ["routes", "znodeApi", "externalNetwork"],
+  "compatibility": { "webstore": ">=10.0.0" },
+  "build": {
+    "server": "src/sandbox-probe/server.ts"
+  }
+}

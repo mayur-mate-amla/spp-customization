@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 103 |
+| ✅ Done | 104 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 34 |
+| ⬜ Not started | 33 |
 | ⛔ Blocked | 37 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -310,7 +310,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 145 | Are package files cached in the browser until they change? | Yes | Check | immutable 1 year + ?v=: redeploy refetches only that package; assets had no ?v=: now ?v=<version>, deploy guards it | ✅ Done | [notes](145-browser-cache/) |
 | 146 | Does the SPP listing card avoid one request per card? | No | Outside | spp-base package, not this repo | ➖ Outside | |
 | 147 | Has a Lighthouse or Core Web Vitals score been measured? | Not tested | Check | Measured with npm run vitals: theme CLS 0.000 (0.006 throttled), LCP 2.1 s (4.6 s throttled); store theme CLS 0.154 | ✅ Done | [notes](147-web-vitals/) |
-| 148 | Is layout shift from late-loading package UI measured? | Not tested | Check | CLS from the same Lighthouse run | ⬜ Not started | |
+| 148 | Is layout shift from late-loading package UI measured? | Not tested | Check | CLS 0.277 on a phone (store header swap, preview bar) fixed: 0.000, 0.006 throttled | ✅ Done | [notes](148-layout-shift/) |
 
 ## Scale
 

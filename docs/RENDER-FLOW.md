@@ -373,6 +373,7 @@ repository joins it. Commits are on `main` of this repository.
 | 140 | Right-to-left (logical CSS properties) | 3616418 | `<html lang="en">`, no dir | §3 B.1 package CSS, direction-proof | src/styles/*.css, src/commerce/styles/commerce.css, src/shared-widgets/shared-widgets.css |
 | 143 | Only the active theme loads | d9f39b2 | the store's own build | §2 B `resolveStoreEntries`, §3 B.1 styles and bundles | scripts/page-files.mjs |
 | 145 | Browser cache until files change (assets versioned) | 508834c | Next.js hashed build | §3 B.1 files route `immutable` + `?v=`; assets versioned by the theme | src/lib/assets.ts, scripts/deploy.mjs |
-| 147 | Core Web Vitals measured (FCP, LCP, CLS, TBT) | (this commit) | the store's own theme: CLS 0.154, LCP 18.2 s on a throttled phone | §3 B.1 package CSS and bundles, §4 slots after hydration | scripts/vitals.mjs |
+| 147 | Core Web Vitals measured (FCP, LCP, CLS, TBT) | cb70a77 | the store's own theme: CLS 0.154, LCP 18.2 s on a throttled phone | §3 B.1 package CSS and bundles, §4 slots after hydration | scripts/vitals.mjs |
+| 148 | No layout shift on phones (header space held, preview bar floats) | (this commit) | Header.tsx swaps desktop → phone header after loading (CLS 0.277 with the theme) | §3 B.1 theme CSS before first paint; `layout.root` sets `--spp-header-reserve` | src/styles/header.css, src/server/ThemeLayout.tsx, src/styles/theme.css |
 
 Rows not listed are blocked, outside a theme repository, or not done yet (see `SCENARIOS.md`).

@@ -50,6 +50,12 @@
       "default": "",
       "attribute": "ThemeLogoUrl"
     },
+    "mobileHeaderHeight": {
+      "type": "number",
+      "label": "Height of the store header on phones and tablets, in px (kept from the first paint so the page does not jump when the header switches to its phone layout; 0: no reserve)",
+      "default": 199,
+      "attribute": "ThemeMobileHeaderHeight"
+    },
     "supportPhone": {
       "type": "string",
       "label": "Customer service phone, shown in the announcement bar (required)",

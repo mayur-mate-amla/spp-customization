@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
 // While this theme is being previewed (/api/extensions/preview?theme=spp-customization sets the runtimeThemePreview
-// cookie in this browser only), a bar at the very top says so and offers to leave the preview, so nobody mistakes a
-// preview for the live store. Shoppers never see it: they have no preview cookie. The cookie is read after the page
-// loads (the server render has no document), so the first render is the same on the server and in the browser.
+// cookie in this browser only), a bar floating over the bottom of the window says so and offers to leave the preview,
+// so nobody mistakes a preview for the live store (row 148: floating, it no longer pushes the page down). Shoppers
+// never see it: they have no preview cookie. The cookie is read after the page loads (the server render has no
+// document), so the first render is the same on the server and in the browser.
 
 const PREVIEW_COOKIE = "runtimeThemePreview";
 const THEME = "spp-customization";

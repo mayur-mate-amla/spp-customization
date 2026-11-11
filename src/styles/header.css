@@ -3,6 +3,16 @@
    compact row (.spp-header-compact: logo, menu, search, account, cart), which spp-base otherwise only uses on phones.
    At the top of the page nothing changes. */
 
+/* Row 148, no jump on phones and tablets: the store renders its desktop header on the server, then after loading
+   switches to its phone header under 1024 px (Header.tsx, checkIsMobile), and the phone header fills in a moment
+   later. Every switch moved this theme's trust strip and the page under it (layout shift 0.277 on a phone). Under
+   1024 px the desktop header is hidden from the first paint and the header keeps the phone header's final height
+   (setting mobileHeaderHeight, --spp-header-reserve on the theme's layout), so the page starts where it ends up. */
+@media (max-width: 1023.98px) {
+  .spp-customization-layout #webstore-header { min-height: var(--spp-header-reserve, 0px); }
+  .spp-customization-layout #webstore-header > .desktop-header { display: none; }
+}
+
 @media (min-width: 1024px) {
   html[data-spp-scrolled] .spp-header .spp-header-wide { display: none; }
   html[data-spp-scrolled] .spp-header .spp-header-compact { display: block; padding-top: 4px; padding-bottom: 4px; background: var(--header-bg, #fff); box-shadow: 0 6px 16px rgba(11, 37, 69, 0.12); }

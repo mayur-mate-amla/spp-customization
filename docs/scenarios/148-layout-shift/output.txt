@@ -1,0 +1,36 @@
+# npm run vitals -- --path / --theme spp-customization (phone, 412 px)
+
+## Before
+http://localhost:3000/ (theme spp-customization), 1 runs, no throttling, phone viewport
+  FCP 2088 ms   LCP 2088 ms   CLS 0.277   TBT 0 ms
+  shift 0.150 at 2625 ms: div.flex-1.pl-4 386→238px, div.spp-customization-announcement (ours) 57→92px, ul.spp-customization-trust.flex (ours) 353→205px
+  shift 0.127 at 2956 ms: div.flex-1.pl-4 238→377px, ul.spp-customization-trust.flex (ours) 205→344px
+
+## Height of each part of the store header during the load (before; header-heights trace)
+2085 ms: div.desktop-header = 198 px          (server-rendered desktop header)
+3545 ms: div.desktop-header = 243 px
+4904 ms: ticker = 52 px | div.mobile-header = 0 px      (switched to the phone header: Header.tsx checkIsMobile, < 1024 px)
+5259 ms: ticker = 52 px | div.mobile-header = 139 px    (phone header filled in)
+         preview bar (36 px) inserted above the announcement at the same time
+
+## After
+http://localhost:3000/ (theme spp-customization), 3 runs, no throttling, phone viewport
+  FCP 2052 ms   LCP 2052 ms   CLS 0.000   TBT 0 ms
+  shift 0.000 at 2834 ms: div.text-lg.relative 177→177px
+  shift 0.000 at 2826 ms: div.flex.items-center 239→239px
+  shift 0.000 at 2871 ms: svg 176→176px
+
+http://localhost:3000/ (theme spp-customization), 3 runs, phone on 4G (CPU 4x, 150 ms, 1.6 Mbps), phone viewport
+  FCP 4576 ms   LCP 4576 ms   CLS 0.006   TBT 2850 ms
+  shift 0.004 at 5934 ms: (gone), li.spp-customization-trust__item.flex (ours) 315→315px
+  shift 0.002 at 6234 ms: (gone)
+  shift 0.000 at 15981 ms: div.text-lg.relative 177→177px
+  shift 0.000 at 15850 ms: div.flex.items-center 239→239px
+  shift 0.000 at 5998 ms: div.spp-customization-announcement (ours) 65→65px
+  shift 0.000 at 15545 ms: svg 176→176px
+
+## Header height by width after loading (the reserve is 199 px)
+375 px: header 199 px, its content 191 px
+412 px: header 199 px, its content 191 px
+768 px: header 199 px, its content 171 px (ticker on one line: 20 px spare)
+1000 px: header 199 px, its content 171 px

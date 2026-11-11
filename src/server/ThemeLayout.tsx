@@ -42,6 +42,10 @@ export function ThemeLayout(props: { children?: ReactNode; settings: Record<stri
   const logo = String(props.settings.logoUrl || "").trim();
   const safeLogo = /^(\/|https:\/\/)[^"'()\s]+$/.test(logo) ? logo : "";
   if (safeLogo) style["--spp-logo"] = `url("${safeLogo}")`;
+  // mobileHeaderHeight (row 148): the store header's height on phones and tablets, reserved from the first paint
+  // (header.css), so the page does not jump when the header switches to its phone layout after loading
+  const reserve = Number(props.settings.mobileHeaderHeight ?? 199);
+  if (Number.isFinite(reserve) && reserve >= 0 && reserve <= 600) style["--spp-header-reserve"] = `${Math.round(reserve)}px`;
   const notice = datedNotice(props.settings);
   return (
     <div className="spp-customization-layout" data-test-selector="divThemeLayout" data-logo={safeLogo ? "custom" : undefined} style={style}>

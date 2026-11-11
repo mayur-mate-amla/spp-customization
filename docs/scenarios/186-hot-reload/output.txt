@@ -1,0 +1,52 @@
+# Row 186: save -> deployed -> refresh.  POCSppDemo, http://sppdemo.localhost:3000
+
+## 1. npm run dev (then: znode dev .) on the theme; TrustStrip.tsx line 15 saved at 13:36:38
+-  { id: "secure", text: "Secure checkout", ...
++  { id: "secure", text: "Secure checkout (saved for row 186)", ...
+znode dev: src\slots\TrustStrip.tsx changed, deploying
+css-dedupe: 8 rules the store already has dropped, 42933 bytes kept (6 store stylesheets)
+built theme spp-customization@1.0.3: 18 files
+packed spp-customization-1.0.3.zpkg.zip (98100 bytes)
+installed theme spp-customization@1.0.3 (was 1.0.3): 17 files, disabled for []
+znode dev: src\slots\TrustStrip.tsx changed, deploying
+css-dedupe: 8 rules the store already has dropped, 42933 bytes kept (6 store stylesheets)
+built theme spp-customization@1.0.3: 18 files
+packed spp-customization-1.0.3.zpkg.zip (98079 bytes)
+installed theme spp-customization@1.0.3 (was 1.0.3): 17 files, disabled for []
+installed at 13:36:49, 10.6 s after the save
+
+# the page open in a browser since before the save (window.__row186 set on it), 5 s after the install:
+{ "sameDocument": true,  "strip": ["Secure checkout"] }                       <- not reloaded, old text
+# the same tab, refreshed:
+{ "sameDocument": false, "strip": ["Secure checkout (saved for row 186)"],
+  "bundle": ".../spp-customization-1.0.3.browser.mjs?v=1794384408842" }        <- new ?v=, new text
+
+## 2. znode dev with a companion manifest deploys the theme
+$ npx znode dev spp-promos.znode-package.json
+css-dedupe: 8 rules the store already has dropped, 42933 bytes kept (6 store stylesheets)
+built theme spp-customization@1.0.3: 18 files
+packed spp-customization-1.0.3.zpkg.zip (98079 bytes)
+installed theme spp-customization@1.0.3 (was 1.0.3): 17 files, disabled for []
+znode dev: watching D:\spp-customization (Ctrl+C to stop)
+
+## 3. npm run dev -- spp-promos.znode-package.json  (scripts/dev.mjs, new)
+1:39:47 pm  start: deploying spp-promos
+built plugin spp-promos@1.0.0: 4 files
+packed spp-promos-1.0.0.zpkg.zip (3617 bytes)
+installed plugin spp-promos@1.0.0 (was 1.0.0): 3 files, enabled for ["POCSppDemo"]
+source map: spp-promos-1.0.0.browser.mjs.map: 1 sources mapped to TypeScript (323 mappings)
+kept spp-promos-1.0.0.zpkg.zip in .versions\spp-promos (1 version on disk: 1.0.0)
+deployed in 6.4 s: refresh the page
+watching src\promos\ and spp-promos.znode-package.json (Ctrl+C to stop)
+$ touch src/slots/TrustStrip.tsx        (a theme file)  -> no deploy
+# src/promos/browser.tsx: "ends in {left(end, now)}" -> "ends in {left(end, now)} (row 186)"
+1:40:11 pm  src\promos\browser.tsx changed: deploying spp-promos
+built plugin spp-promos@1.0.0: 4 files
+packed spp-promos-1.0.0.zpkg.zip (3644 bytes)
+installed plugin spp-promos@1.0.0 (was 1.0.0): 3 files, enabled for ["POCSppDemo"]
+source map: spp-promos-1.0.0.browser.mjs.map: 1 sources mapped to TypeScript (325 mappings)
+kept spp-promos-1.0.0.zpkg.zip in .versions\spp-promos (1 version on disk: 1.0.0)
+deployed in 7.3 s: refresh the page
+saved -> deployed: 8.0 s; refreshed page: "ends in 11d 20h 48m (row 186)", spp-promos-1.0.0.browser.mjs?v=1794384618764
+
+## Both files restored (git status src/: clean) and deployed again; the watchers stopped

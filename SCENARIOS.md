@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 128 |
+| ✅ Done | 129 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 12 |
+| ⬜ Not started | 11 |
 | ⛔ Blocked | 34 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -373,7 +373,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | 183 | Are there source maps for package code? | No | Check | Yes now: maps were built but stopped at the SDK's compiled JS; npm run deploy chains them to src/ (devtools shows .tsx; stack lines map to source) | ✅ Done | [notes](docs/scenarios/183-source-maps/) |
 | 184 | Do package errors show in the logs? | Yes | Check | Same as 175 | ⬜ Not started | |
 | 185 | Is the page safe if a plugin crashes? | Yes | Check | Partial: a server slot or cart hook that throws is contained and logged (200); a browser slot that throws fails the server render, so every page with it answers 500 (noindex) and the browser renders it again | ✅ Done | [notes](docs/scenarios/185-page-survives-plugin-crash/) |
-| 186 | Is there hot reload while developing a package? | Partial | Check | `npm run dev`: save, refresh | ⬜ Not started | |
+| 186 | Is there hot reload while developing a package? | Partial | Check | Partial: npm run dev deploys on save (8-11 s), then refresh (no live reload). znode dev always deployed the theme and skipped scripts/deploy.mjs; npm run dev -- <manifest> (scripts/dev.mjs) now watches each package's folder | ✅ Done | [notes](docs/scenarios/186-hot-reload/) |
 | 187 | Can I write packages in TypeScript? | Yes | Check | Yes: all five packages are TypeScript (17 .ts, 40 .tsx, no .js in src/ but one script asset); every manifest builds from .ts/.tsx entry points | ✅ Done | [notes](docs/scenarios/187-typescript/) |
 | 188 | Are packages type-checked against the public API when built? | Yes | Check | Yes: znode build runs tsc first; a key IBrowserPlugin lacks and a hook returning a string both stopped the build (exit 1). One shared tsconfig: an error in one package stops every package's build | ✅ Done | [notes](docs/scenarios/188-type-checked-build/) |
 | 189 | Does a package build quickly (seconds)? | Yes | Check | Yes: 6-11.5 s per package (three runs each), a full deploy 7.5 s; the type check is 5.7 s of it | ✅ Done | [notes](docs/scenarios/189-build-time/) |

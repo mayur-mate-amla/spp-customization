@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "znode dev .",
+    "dev": "node scripts/dev.mjs",
     "build": "znode build .",
     "check": "znode check .",
     "pack": "znode pack .",

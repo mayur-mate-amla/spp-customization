@@ -64,9 +64,9 @@ one-command rollback, kept versions and clean uninstall are implemented in this 
 
 | Progress | Rows |
 | --- | --- |
-| ✅ Done | 108 |
+| ✅ Done | 109 |
 | 🟡 In progress | 1 |
-| ⬜ Not started | 29 |
+| ⬜ Not started | 28 |
 | ⛔ Blocked | 37 |
 | ➖ Outside | 42 |
 | **Total** | **217** |
@@ -337,7 +337,7 @@ shown in this package. A separate `kind: plugin` package can be added to this re
 | # | Use case | Listed | How | Plan in this repo | Progress | Commit |
 | --- | --- | --- | --- | --- | --- | --- |
 | 159 | Do secrets stay on the server? | Yes | Check | Only browser:true settings reach the page (23 checked); dev server copies plugins.json into the first page after a change; secrets can be env:NAME | ✅ Done | [notes](159-secrets-on-the-server/) |
-| 160 | Are server bundles blocked from download? | Yes | Check | GET of this theme's `.server.mjs`: refused | ⬜ Not started | |
+| 160 | Are server bundles blocked from download? | Yes | Check | All 32 server parts on disk (old versions, maps) refused, also as other spellings; npm run probe-files | ✅ Done | [notes](160-server-bundles-blocked/) |
 | 161 | Is the registry (plugins.json) blocked from download? | Yes | Check | GET of `plugins.json`: refused | ⬜ Not started | |
 | 162 | Are file paths checked so nothing outside the package folder is served? | Yes | Check | `../` file requests: refused | ⬜ Not started | |
 | 163 | Is the preview switch off in production by default? | Yes | Check | Store code (`NODE_ENV`, `RUNTIME_THEME_PREVIEW`) | ⬜ Not started | |

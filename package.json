@@ -19,7 +19,8 @@
     "page-files": "node scripts/page-files.mjs",
     "vitals": "node scripts/vitals.mjs",
     "registry": "node scripts/registry.mjs",
-    "secrets-check": "node scripts/secrets-check.mts"
+    "secrets-check": "node scripts/secrets-check.mts",
+    "probe-files": "node scripts/probe-files.mjs"
   },
   "devDependencies": {
     "@types/react": "19.2.13",

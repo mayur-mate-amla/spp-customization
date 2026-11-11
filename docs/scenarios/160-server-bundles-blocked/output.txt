@@ -1,0 +1,45 @@
+$ npm run probe-files   (host sppdemo.localhost:3000; GET /api/extensions/files/<name>, raw paths)
+ok   control 200  a browser bundle (must load)
+ok   control 200  an image (must load)
+ok   160     404  server part on disk: apex-1.0.10.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.11.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.12.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.13.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.14.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.15.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.16.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.17.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.18.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.19.server.mjs
+ok   160     404  server part on disk: apex-1.0.19.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.7.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.8.server.mjs.map
+ok   160     404  server part on disk: apex-1.0.9.server.mjs.map
+ok   160     404  server part on disk: artifi-1.1.4.server.mjs
+ok   160     404  server part on disk: delivery-preference-1.1.1.server.mjs
+ok   160     404  server part on disk: demo-theme-1.0.0.server.mjs
+ok   160     404  server part on disk: demo-theme-1.0.0.server.mjs.map
+ok   160     404  server part on disk: my-apex-1.0.0.server.mjs
+ok   160     404  server part on disk: my-apex-1.0.0.server.mjs.map
+ok   160     404  server part on disk: ppui-1.0.0.server.mjs
+ok   160     404  server part on disk: ppui-1.0.0.server.mjs.map
+ok   160     404  server part on disk: promo-supply-1.0.0.server.mjs
+ok   160     404  server part on disk: promo-supply-1.0.0.server.mjs.map
+ok   160     404  server part on disk: small-order-1.0.0.server.mjs
+ok   160     404  server part on disk: small-order-1.0.0.server.mjs.map
+ok   160     404  server part on disk: spp-commerce-1.0.0.server.mjs
+ok   160     404  server part on disk: spp-commerce-1.0.0.server.mjs.map
+ok   160     404  server part on disk: spp-customization-1.0.0.server.mjs.map
+ok   160     404  server part on disk: spp-customization-1.0.1.server.mjs.map
+ok   160     404  server part on disk: spp-customization-1.0.2.server.mjs
+ok   160     404  server part on disk: spp-customization-1.0.2.server.mjs.map
+ok   160     404  upper case
+ok   160     404  trailing dot
+ok   160     404  trailing space
+ok   160     404  NTFS stream ::$DATA
+ok   160     404  dot encoded (%2E)
+ok   160     404  double-encoded name
+62 checks on sppdemo.localhost:3000, plugin folder D:\runtime-plugins-store (no 8.3 short names on this volume): all passed
+
+$ npm run probe-files -- --host localhost:3000
+62 checks on localhost:3000, plugin folder D:\runtime-plugins-store (no 8.3 short names on this volume): all passed
